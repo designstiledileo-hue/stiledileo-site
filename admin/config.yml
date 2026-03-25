@@ -1,0 +1,98 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+locale: 'en'
+publish_mode: simple
+
+collections:
+  - name: "site"
+    label: "Site Content"
+    files:
+      - label: "Main Site Content"
+        name: "site_content"
+        file: "data/site.json"
+        format: "json"
+        fields:
+          - label: "Analytics"
+            name: "analytics"
+            widget: "object"
+            fields:
+              - {label: "GA4 Measurement ID", name: "ga_measurement_id", widget: "string", required: false}
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Tagline", name: "tagline", widget: "string"}
+              - {label: "Title HTML", name: "title_html", widget: "text"}
+              - {label: "Subtitle", name: "subtitle", widget: "text"}
+              - {label: "Primary CTA", name: "primary_cta_text", widget: "string"}
+              - {label: "Secondary CTA", name: "secondary_cta_text", widget: "string"}
+          - label: "About"
+            name: "about"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Heading HTML", name: "heading_html", widget: "text"}
+              - {label: "Paragraph 1", name: "paragraph_1", widget: "text"}
+              - {label: "Paragraph 2", name: "paragraph_2", widget: "text"}
+          - label: "Contact"
+            name: "contact"
+            widget: "object"
+            fields:
+              - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+              - {label: "Heading HTML", name: "heading_html", widget: "text"}
+              - {label: "Subtext", name: "subtext", widget: "text"}
+              - {label: "Phone Display", name: "phone_display", widget: "string"}
+              - {label: "Phone Link", name: "phone_link", widget: "string"}
+              - {label: "Email", name: "email", widget: "string"}
+              - {label: "Location", name: "location", widget: "string"}
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Copyright", name: "copyright", widget: "string"}
+              - label: "Social Links"
+                name: "socials"
+                widget: "list"
+                fields:
+                  - {label: "Label", name: "label", widget: "string"}
+                  - {label: "URL", name: "url", widget: "string", required: false}
+          - label: "Blog Cards"
+            name: "blog_cards"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "Date", name: "date", widget: "string"}
+              - {label: "Meta", name: "meta", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Excerpt", name: "excerpt", widget: "text"}
+              - {label: "Alt Text", name: "alt", widget: "string", required: false}
+              - {label: "Image Key", name: "image_key", widget: "select", options: [hero, venetian, black_marble, golden_veins, luxury_spa, fireplace_grey, black_gold, white_marble, column, column2, ceiling, tex_warm, tex_silver, tex_grey, tex_pearl, tex_graphite, tex_cream], required: false}
+              - {label: "Body HTML", name: "body_html", widget: "markdown"}
+          - label: "Image Overrides"
+            name: "images"
+            widget: "object"
+            collapsed: true
+            fields:
+              - {label: "Hero Background", name: "hero", widget: "image", required: false}
+              - {label: "About / Blog Post 1", name: "venetian", widget: "image", required: false}
+              - {label: "Black Marble", name: "black_marble", widget: "image", required: false}
+              - {label: "Golden Veins", name: "golden_veins", widget: "image", required: false}
+              - {label: "Luxury Spa", name: "luxury_spa", widget: "image", required: false}
+              - {label: "Fireplace Grey", name: "fireplace_grey", widget: "image", required: false}
+              - {label: "Black Gold CTA", name: "black_gold", widget: "image", required: false}
+              - {label: "White Marble", name: "white_marble", widget: "image", required: false}
+              - {label: "Column", name: "column", widget: "image", required: false}
+              - {label: "Column 2", name: "column2", widget: "image", required: false}
+              - {label: "Ceiling", name: "ceiling", widget: "image", required: false}
+              - {label: "Texture Warm", name: "tex_warm", widget: "image", required: false}
+              - {label: "Texture Silver", name: "tex_silver", widget: "image", required: false}
+              - {label: "Texture Grey", name: "tex_grey", widget: "image", required: false}
+              - {label: "Texture Pearl", name: "tex_pearl", widget: "image", required: false}
+              - {label: "Texture Graphite", name: "tex_graphite", widget: "image", required: false}
+              - {label: "Texture Cream", name: "tex_cream", widget: "image", required: false}

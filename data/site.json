@@ -1,0 +1,75 @@
+{
+  "analytics": {
+    "ga_measurement_id": "G-P7VJ8MQNKS"
+  },
+  "hero": {
+    "tagline": "Vancouver, BC \u00b7 Venetian Plaster & Decorative Walls",
+    "title_html": "Walls Become<br><em>Works of Art</em>",
+    "subtitle": "Handcrafted mineral finishes, Venetian plaster and decorative stone \u2014 designed to transform any interior into a luxury statement.",
+    "primary_cta_text": "View Our Work",
+    "secondary_cta_text": "Start a Project"
+  },
+  "about": {
+    "eyebrow": "Our Story",
+    "heading_html": "Rooted in Craft,<br>Built on <em>Artistry</em>",
+    "paragraph_1": "At Stile di Leo, we transform walls into timeless works of art. Inspired by the elegance of Venetian plaster, natural stone, and modern design, every surface becomes a reflection of luxury and intention.",
+    "paragraph_2": "We specialize in custom decorative walls, mineral-based plaster finishes, and handcrafted stone textures \u2014 bringing European-inspired artistry to homes and commercial spaces across Vancouver and British Columbia."
+  },
+  "contact": {
+    "eyebrow": "Ready to Transform Your Space?",
+    "heading_html": "Let's Create Something<br><em>Extraordinary</em>",
+    "subtext": "Based in Vancouver, serving the Greater Vancouver Area and all of BC. Every project begins with a free consultation.",
+    "phone_display": "+1 (604) 773-2298",
+    "phone_link": "tel:+16047732298",
+    "email": "designstiledileo@gmail.com",
+    "location": "Vancouver, BC, Canada"
+  },
+  "footer": {
+    "description": "Decorative walls and Venetian plaster artistry, handcrafted for discerning interiors across Vancouver and British Columbia.",
+    "copyright": "\u00a9 2026 Stile di Leo. All Rights Reserved. Vancouver, BC.",
+    "socials": [
+      {
+        "label": "Instagram",
+        "url": "#"
+      },
+      {
+        "label": "Houzz",
+        "url": "#"
+      },
+      {
+        "label": "HomeStars",
+        "url": "#"
+      }
+    ]
+  },
+  "blog_cards": [
+    {
+      "date": "March 2026",
+      "meta": "March 2026 \u00b7 Venetian Plaster",
+      "title": "Venetian Plaster vs Paint: What Vancouver Homeowners Need to Know",
+      "excerpt": "Thinking about upgrading your walls? Here's why Venetian plaster is becoming the top choice for luxury homes across Vancouver and the Lower Mainland.",
+      "alt": "Venetian Plaster vs Paint",
+      "image_key": "venetian",
+      "body_html": "<p>Thinking about upgrading your walls? Venetian plaster is becoming one of the most desirable finishes in Vancouver homes \u2014 not just because it looks beautiful, but because it creates depth, texture and permanence that regular paint simply cannot match.</p><h2>What Makes Venetian Plaster Different?</h2><p>Unlike flat paint, Venetian plaster reflects light with movement and richness. It creates a mineral surface with natural variation, subtle depth and a high-end finish that feels architectural rather than decorative.</p><h2>Is It Worth the Cost?</h2><p>Yes, Venetian plaster costs more than paint upfront. But when you factor in longevity, uniqueness and the value it adds to a property, many homeowners find it to be a better investment. A well-applied plaster wall can last 20\u201330 years without repainting.</p><p>Ready to explore what Venetian plaster could look like in your home? Contact Stile di Leo for a free consultation in Vancouver.</p>"
+    },
+    {
+      "date": "February 2026",
+      "meta": "February 2026 \u00b7 Pricing Guide",
+      "title": "How Much Does Decorative Plaster Cost in Vancouver?",
+      "excerpt": "A transparent breakdown of pricing for Venetian plaster, stone textures and metallic finishes in the Vancouver area \u2014 from consultation to completion.",
+      "alt": "Decorative Plaster Cost",
+      "image_key": "column",
+      "body_html": "<p>One of the most common questions we receive at Stile di Leo is about pricing. The honest answer is that decorative plaster costs vary widely depending on the finish, the complexity of the space, and the materials involved. Here's a transparent breakdown.</p><h2>Factors That Affect Price</h2><p>The main variables are: surface preparation required, the type of finish (Venetian plaster, stone texture, metallic), the size of the area, and accessibility. A simple feature wall in a standard room will cost significantly less than a full fireplace surround with custom stone effects.</p><h2>Typical Price Ranges in Vancouver</h2><p>For standard Venetian plaster on a feature wall, expect to invest in the range of $15\u201325 per square foot including labour and materials. Custom stone and marble effects for fireplaces tend to be project-priced based on scope. We always provide a detailed quote after a free in-home consultation.</p><h2>What's Included</h2><p>Every Stile di Leo project includes surface preparation, on-site samples, all materials, professional application, and a quality walkthrough at completion. No hidden costs.</p><p>Contact us for a free, no-obligation consultation and quote for your Vancouver home.</p>"
+    },
+    {
+      "date": "January 2026",
+      "meta": "January 2026 \u00b7 Design Trends",
+      "title": "Top 5 Wall Texture Trends in Vancouver Homes Right Now",
+      "excerpt": "Vancouver's interior design scene is always evolving. Here are the five decorative wall finishes we're seeing most in high-end homes across the city right now.",
+      "alt": "Wall Texture Trends",
+      "image_key": "golden_veins",
+      "body_html": "<p>Vancouver's interior design scene is always evolving. Here are the five decorative wall finishes we're seeing most in high-end homes across the city right now.</p><h2>1. Dark Marble Fireplace Surrounds</h2><p>Black and dark grey marble-effect plaster for fireplace surrounds is at the peak of its popularity. The drama it creates in a living room is unmatched, especially when paired with LED backlighting.</p><h2>2. Warm Venetian Plaster Feature Walls</h2><p>Warm cream and gold-toned Venetian plaster is replacing paint in bedrooms and living rooms across West Vancouver and Yaletown. The depth and warmth it adds to a space is simply not achievable with any painted surface.</p><h2>3. Metallic Ceiling Finishes</h2><p>We're seeing more requests for silver and gold metallic plaster on ceilings \u2014 particularly in dining rooms and entryways. The effect is stunning, especially with natural light.</p><h2>4. Stone-Textured Columns</h2><p>Structural columns wrapped in dark marble plaster have become a signature feature in open-plan Vancouver homes. They add architectural drama without requiring any structural work.</p><h2>5. Cream and Gold Marble Walls</h2><p>Light-toned marble with gold veining is having a major moment in Vancouver bathrooms and spas. Luxurious and timeless, it works equally well in residential and commercial spaces.</p><p>Interested in bringing any of these trends into your home? Contact Stile di Leo for a free consultation.</p>"
+    }
+  ],
+  "images": {}
+}
