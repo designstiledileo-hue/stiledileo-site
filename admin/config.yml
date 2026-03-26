@@ -18,23 +18,8 @@ collections:
     format: "frontmatter"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Slug", name: "slug", widget: "string", hint: "example: luxury-trends-2026" }
+      - { label: "Slug", name: "slug", widget: "string" }
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Cover Image", name: "cover_image", widget: "image", required: false }
-      - { label: "Meta Title", name: "meta_title", widget: "string", required: false }
-      - { label: "Meta Description", name: "meta_description", widget: "text", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
-
-  - name: "site"
-    label: "Site Settings"
-    files:
-      - label: "Homepage Content"
-        name: "homepage"
-        file: "data/site.json"
-        fields:
-          - { label: "Site Title", name: "site_title", widget: "string" }
-          - { label: "Hero Title", name: "hero_title", widget: "string" }
-          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
-          - { label: "Contact Email", name: "contact_email", widget: "string" }
-          - { label: "Contact Phone", name: "contact_phone", widget: "string", required: false }
