@@ -1,37 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <style>
+<style>
 
-.clean-blog-grid{
+.blog-grid{
   display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:28px;
-  margin-top:28px;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
 }
 
-.clean-blog-card{
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(212,175,55,.18);
-  overflow:hidden;
+.blog-card{
+  border:1px solid rgba(212,175,55,0.2);
+  background:#111;
+  transition:0.3s;
 }
 
-.blog-visual{
-  min-height:300px;
+.blog-card:hover{
+  transform:translateY(-5px);
+  border-color:#d4af37;
+}
+
+.blog-card a{
+  text-decoration:none;
+  color:inherit;
+  display:block;
+}
+
+.blog-img{
+  height:280px;
   background-size:cover;
   background-position:center;
 }
 
-.blog-visual-1{
-  background:url('/uploads/venetianplaster2.png') center/cover no-repeat;
+.blog-body{
+  padding:20px;
 }
 
-.blog-visual-2{
-  background:url('/uploads/venetianplaster3.png') center/cover no-repeat;
+.blog-date{
+  font-size:12px;
+  letter-spacing:2px;
+  color:#aaa;
+  margin-bottom:10px;
 }
 
-.blog-visual-3{
-  background:url('/uploads/venetianplaster4.png') center/cover no-repeat;
+.blog-title{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+.blog-excerpt{
+  font-size:14px;
+  color:#aaa;
+  margin-bottom:15px;
+}
+
+.blog-read{
+  color:#d4af37;
+  font-size:13px;
+}
+
+</style>
+
+
+
 }
 
 </style>
@@ -451,54 +482,53 @@ document.addEventListener('DOMContentLoaded', function() {
     <h2 class="sec-h rv d1" style="text-align:center">From Our <em>Blog</em></h2>
   </div>
 
-  <div class="blog-grid clean-blog-grid">
-    <article class="blog-card clean-blog-card rv d1">
-      <a href="/blog-luxury-trends.html" class="blog-card-link">
-        <div class="blog-visual blog-visual-1">
-          <span class="blog-tag">Luxury Interiors</span>
-        </div>
-        <div class="blog-body">
-          <div class="blog-date">April 2026</div>
-          <div class="blog-title">Top 5 Luxury Home Decor Trends Defining Vancouver Homes in 2026</div>
-          <div class="blog-excerpt">
-            Discover the five defining interior directions shaping premium Vancouver homes, from sculptural minimalism to biophilic design and artisanal finishes.
-          </div>
-          <span class="blog-read">Read Article →</span>
-        </div>
-      </a>
-    </article>
+  <div class="blog-grid">
 
-    <article class="blog-card clean-blog-card rv d2">
-      <a href="/blog-staging-vs-design.html" class="blog-card-link">
-        <div class="blog-visual blog-visual-2">
-          <span class="blog-tag">Seller Guide</span>
+    <!-- CARD 1 -->
+    <div class="blog-card rv d1" onclick="location.href='/blog-luxury-trends.html'">
+      <div class="blog-img" style="background-image:url('/uploads/venetianplaster2.png')">
+        <span class="blog-tag">Luxury Interiors</span>
+      </div>
+      <div class="blog-body">
+        <div class="blog-date">April 2026</div>
+        <div class="blog-title">Top 5 Luxury Home Decor Trends Defining Vancouver Homes in 2026</div>
+        <div class="blog-excerpt">
+          Discover the five defining interior directions shaping premium Vancouver homes, from sculptural minimalism to biophilic design and artisanal finishes.
         </div>
-        <div class="blog-body">
-          <div class="blog-date">March 2026</div>
-          <div class="blog-title">Home Staging vs Interior Design: What Vancouver Sellers Actually Need</div>
-          <div class="blog-excerpt">
-            A clear guide to choosing the right approach before listing a Yaletown condo, West Vancouver home, or luxury property anywhere in Metro Vancouver.
-          </div>
-          <span class="blog-read">Read Article →</span>
-        </div>
-      </a>
-    </article>
+        <span class="blog-read">Read Article →</span>
+      </div>
+    </div>
 
-    <article class="blog-card clean-blog-card rv d3">
-      <a href="/blog-yaletown-condo.html" class="blog-card-link">
-        <div class="blog-visual blog-visual-3">
-          <span class="blog-tag">Yaletown Living</span>
+    <!-- CARD 2 -->
+    <div class="blog-card rv d2" onclick="location.href='/blog-staging-vs-design.html'">
+      <div class="blog-img" style="background-image:url('/uploads/venetianplaster3.png')">
+        <span class="blog-tag">Seller Guide</span>
+      </div>
+      <div class="blog-body">
+        <div class="blog-date">March 2026</div>
+        <div class="blog-title">Home Staging vs Interior Design: What Vancouver Sellers Actually Need</div>
+        <div class="blog-excerpt">
+          A clear guide to choosing the right approach before listing a Yaletown condo, West Vancouver home, or luxury property anywhere in Metro Vancouver.
         </div>
-        <div class="blog-body">
-          <div class="blog-date">March 2026</div>
-          <div class="blog-title">How to Style a $2M Condo in Yaletown: The Art of Urban Luxury</div>
-          <div class="blog-excerpt">
-            Learn how to style a premium Yaletown condo with restraint, statement pieces, layered materials, and a sharper sense of urban luxury.
-          </div>
-          <span class="blog-read">Read Article →</span>
+        <span class="blog-read">Read Article →</span>
+      </div>
+    </div>
+
+    <!-- CARD 3 -->
+    <div class="blog-card rv d3" onclick="location.href='/blog-yaletown-condo.html'">
+      <div class="blog-img" style="background-image:url('/uploads/venetianplaster4.png')">
+        <span class="blog-tag">Yaletown Living</span>
+      </div>
+      <div class="blog-body">
+        <div class="blog-date">March 2026</div>
+        <div class="blog-title">How to Style a $2M Condo in Yaletown: The Art of Urban Luxury</div>
+        <div class="blog-excerpt">
+          Learn how to style a premium Yaletown condo with restraint, statement pieces, layered materials, and a sharper sense of urban luxury.
         </div>
-      </a>
-    </article>
+        <span class="blog-read">Read Article →</span>
+      </div>
+    </div>
+
   </div>
 </section>
 <!-- PROCESS -->
