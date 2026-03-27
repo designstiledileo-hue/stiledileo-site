@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stile di Leo — Venetian Plaster & Decorative Walls | Vancouver, BC</title>
+
+  <link href="https://fonts.googleapis.com/..." rel="stylesheet"/>
+
+  <style>
 
 /* BLOG FIX */
 
@@ -661,8 +667,173 @@ footer{background:#0a0907;padding:80px 60px 36px}
   .diamond-cursor.active{width:28px;height:28px;background:rgba(212,176,122,.08);}
   .diamond-cursor.hidden{opacity:0;}
 }
+.hidden-field{
+      display:none;
+    }
 
-</style>
+    .luxury-form-wrap{
+      margin-top:40px;
+      border:1px solid rgba(209,168,92,.18);
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      padding:34px;
+      width:100%;
+      max-width:980px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .luxury-form-intro{
+      margin-bottom:28px;
+      text-align:center;
+    }
+
+    .luxury-form-kicker{
+      margin:0 0 10px;
+      color:#cfae55;
+      font-size:12px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    .luxury-form-title{
+      margin:0 0 12px;
+      font-size:34px;
+      line-height:1.1;
+      font-weight:400;
+      color:#fff;
+    }
+
+    .luxury-form-text{
+      margin:0 auto;
+      color:#b8aea0;
+      font-size:15px;
+      line-height:1.8;
+      max-width:760px;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    .luxury-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:18px;
+    }
+
+    .luxury-field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .luxury-field-full{
+      grid-column:1 / -1;
+    }
+
+    .luxury-field label{
+      color:#d7c4a0;
+      font-size:12px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    .luxury-field input,
+    .luxury-field select,
+    .luxury-field textarea{
+      width:100%;
+      background:#0d0b09;
+      color:#f2ede6;
+      border:1px solid rgba(209,168,92,.18);
+      padding:16px 18px;
+      font-size:15px;
+      font-family:Arial, Helvetica, sans-serif;
+      outline:none;
+      transition:border-color .25s ease, box-shadow .25s ease, background .25s ease;
+      box-sizing:border-box;
+    }
+
+    .luxury-field input::placeholder,
+    .luxury-field textarea::placeholder{
+      color:#7f7669;
+    }
+
+    .luxury-field input:focus,
+    .luxury-field select:focus,
+    .luxury-field textarea:focus{
+      border-color:#cfae55;
+      box-shadow:0 0 0 1px rgba(207,174,85,.18);
+      background:#100d0a;
+    }
+
+    .luxury-field textarea{
+      resize:vertical;
+      min-height:180px;
+    }
+
+    .luxury-form-footer{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-top:24px;
+    }
+
+    .luxury-submit{
+      background:linear-gradient(135deg, #cfae55, #b8963b);
+      color:#090806;
+      border:none;
+      padding:15px 30px;
+      font-size:12px;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      cursor:pointer;
+      transition:all .3s ease;
+      font-weight:600;
+    }
+
+    .luxury-submit:hover{
+      transform:translateY(-2px);
+      background:linear-gradient(135deg, #e0bf68, #c79d42);
+    }
+
+    .luxury-response-note{
+      margin:0;
+      color:#9c9182;
+      font-size:13px;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    .nav-cta.secondary{
+      background:transparent;
+      border:1px solid #cfae55;
+      color:#cfae55;
+    }
+
+    .nav-cta.secondary:hover{
+      background:#cfae55;
+      color:#000;
+    }
+
+    @media (max-width: 900px){
+      .luxury-grid{
+        grid-template-columns:1fr;
+      }
+
+      .luxury-form-wrap{
+        padding:24px;
+      }
+
+      .luxury-form-title{
+        font-size:28px;
+      }
+
+      .luxury-form-footer{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+  </style>
 </head>
 <body>
 <div class="diamond-cursor hidden" id="diamond-cursor" aria-hidden="true"></div>
