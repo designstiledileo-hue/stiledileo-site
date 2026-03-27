@@ -38,7 +38,67 @@
   font-size:12px;
   letter-spacing:1px;
 }
+.lead-form{
+  margin-top:22px;
+}
 
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  margin-bottom:16px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.field label{
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:.78rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:#d8c8b2;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid rgba(209,168,92,.22);
+  background:#0f0c09;
+  color:#f2ede6;
+  padding:14px 16px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:.95rem;
+  outline:none;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:#d1a85c;
+  box-shadow:0 0 0 1px rgba(209,168,92,.28);
+}
+
+.field textarea{
+  resize:vertical;
+  min-height:150px;
+}
+
+.hidden-field{
+  display:none;
+}
+
+@media (max-width: 900px){
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 
 
@@ -542,6 +602,83 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 
 <!-- CTA -->
+  <div class="contact-card">
+  <h3>Request a Consultation</h3>
+  <p>Tell us about your space, finish preferences, and timeline. We’ll get back to you with the next steps.</p>
+
+  <form
+    name="project-inquiry"
+    method="POST"
+    data-netlify="true"
+    netlify-honeypot="bot-field"
+    action="/thank-you.html"
+    class="lead-form"
+  >
+    <input type="hidden" name="form-name" value="project-inquiry" />
+
+    <p class="hidden-field">
+      <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+    </p>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input id="name" name="name" type="text" required />
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" required />
+      </div>
+
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" />
+      </div>
+
+      <div class="field">
+        <label for="location">Project Location</label>
+        <input id="location" name="location" type="text" placeholder="Vancouver, West Vancouver, Yaletown..." />
+      </div>
+
+      <div class="field">
+        <label for="project-type">Project Type</label>
+        <select id="project-type" name="project_type">
+          <option value="">Select one</option>
+          <option>Venetian Plaster Wall</option>
+          <option>Fireplace Wall</option>
+          <option>Feature Wall</option>
+          <option>Luxury Decorative Finish</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="budget">Estimated Budget</label>
+        <select id="budget" name="budget">
+          <option value="">Select one</option>
+          <option>Under $2,000</option>
+          <option>$2,000 – $5,000</option>
+          <option>$5,000 – $10,000</option>
+          <option>$10,000+</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="message">Project Details</label>
+      <textarea
+        id="message"
+        name="message"
+        rows="6"
+        placeholder="Tell us what kind of finish you want, what room it is, whether it’s a fireplace / feature wall, approximate size, and when you’d like to start."
+        required
+      ></textarea>
+    </div>
+
+    <button class="cta" type="submit">Send Inquiry</button>
+  </form>
+</div>
 <section class="cta" id="contact">
   <div class="cta-bg" id="cta-bg"></div>
   <div class="cta-overlay"></div>
@@ -833,4 +970,4 @@ document.querySelectorAll('.blog-page').forEach(p=>{
 </script>
 
 </body>
-</html>
+</html>аа
