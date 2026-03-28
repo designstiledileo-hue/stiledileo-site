@@ -767,143 +767,156 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <script>
-// Nav scroll
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('s', scrollY > 60), {passive:true});
-
-// Reveal
-const rvEls = document.querySelectorAll('.rv');
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target);} });
-}, {threshold:0.1});
-rvEls.forEach(el => io.observe(el));
-
-<script>
-(async function(){
-  const isFinePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
-  const cursor = document.getElementById('diamond-cursor');
-
-  if (isFinePointer && cursor) {
-    let raf = null, targetX = 0, targetY = 0, currentX = 0, currentY = 0;
-
-    const tick = () => {
-      currentX += (targetX - currentX) * 0.22;
-      currentY += (targetY - currentY) * 0.22;
-      cursor.style.transform = `translate(${currentX}px, ${currentY}px) rotate(45deg)`;
-      raf = requestAnimationFrame(tick);
-    };
-
-    document.addEventListener('mousemove', (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-      cursor.classList.remove('hidden');
-      if (!raf) tick();
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('s', window.scrollY > 60);
     }, { passive: true });
+  }
 
-    document.addEventListener('mouseleave', () => cursor.classList.add('hidden'));
-
-    document.querySelectorAll('a, button, .p-item, .p2-item, .tex-card, .srv-card, .blog-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+  // Reveal
+  const rvEls = document.querySelectorAll('.rv');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('v');
+        io.unobserve(e.target);
+      }
     });
-  }
+  }, { threshold: 0.1 });
+  rvEls.forEach(el => io.observe(el));
 
-  function setText(selector, value){
-    const el = document.querySelector(selector);
-    if (el && typeof value === 'string') el.textContent = value;
-  }
+  (async function(){
+    const isFinePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
+    const cursor = document.getElementById('diamond-cursor');
 
-  function setHTML(selector, value){
-    const el = document.querySelector(selector);
-    if (el && typeof value === 'string') el.innerHTML = value;
-  }
+    if (isFinePointer && cursor) {
+      let raf = null, targetX = 0, targetY = 0, currentX = 0, currentY = 0;
 
-  try {
-    const res = await fetch('/data/site.json', { cache: 'no-store' });
-    if (!res.ok) return;
+      const tick = () => {
+        currentX += (targetX - currentX) * 0.22;
+        currentY += (targetY - currentY) * 0.22;
+        cursor.style.transform = `translate(${currentX}px, ${currentY}px) rotate(45deg)`;
+        raf = requestAnimationFrame(tick);
+      };
 
-    const data = await res.json();
+      document.addEventListener('mousemove', (e) => {
+        targetX = e.clientX;
+        targetY = e.clientY;
+        cursor.classList.remove('hidden');
+        if (!raf) tick();
+      }, { passive: true });
 
-    if (data.analytics && data.analytics.ga_measurement_id && typeof gtag === 'function') {
-      gtag('config', data.analytics.ga_measurement_id);
+      document.addEventListener('mouseleave', () => cursor.classList.add('hidden'));
+
+      document.querySelectorAll('a, button, .p-item, .p2-item, .tex-card, .srv-card, .blog-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('active'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
+      });
     }
 
-    if (data.hero) {
-      setText('.hero-tag', data.hero.tagline);
-      setHTML('.hero-h1', data.hero.title_html);
-      setText('.hero-sub', data.hero.subtitle);
-
-      const heroPrimary = document.querySelector('.hero-btns .btn-p');
-      const heroSecondary = document.querySelector('.hero-btns .btn-g');
-
-      if (heroPrimary && data.hero.primary_cta_text) heroPrimary.textContent = data.hero.primary_cta_text;
-      if (heroSecondary && data.hero.secondary_cta_text) heroSecondary.textContent = data.hero.secondary_cta_text;
+    function setText(selector, value){
+      const el = document.querySelector(selector);
+      if (el && typeof value === 'string') el.textContent = value;
     }
 
-    if (data.about) {
-      setText('#about .sec-label', data.about.eyebrow);
-      setHTML('#about .sec-h', data.about.heading_html);
-
-      const aboutPs = document.querySelectorAll('#about .sec-p');
-      if (aboutPs[0] && data.about.paragraph_1) aboutPs[0].textContent = data.about.paragraph_1;
-      if (aboutPs[1] && data.about.paragraph_2) aboutPs[1].textContent = data.about.paragraph_2;
+    function setHTML(selector, value){
+      const el = document.querySelector(selector);
+      if (el && typeof value === 'string') el.innerHTML = value;
     }
 
-    if (data.contact) {
-      setText('#contact .cta-eye', data.contact.eyebrow);
-      setHTML('#contact .cta-h', data.contact.heading_html);
-      setText('#contact .cta-sub', data.contact.subtext);
+    function setAttr(selector, attr, value){
+      const el = document.querySelector(selector);
+      if (el && typeof value === 'string') el.setAttribute(attr, value);
+    }
 
-      const phoneBtn = document.querySelector('#contact .btn-p');
-      const emailBtn = document.querySelector('#contact .btn-g');
+    try {
+      const res = await fetch('/data/site.json', { cache: 'no-store' });
+      if (!res.ok) return;
 
-      if (phoneBtn && data.contact.phone_display) phoneBtn.textContent = data.contact.phone_display;
-      if (phoneBtn && data.contact.phone_link) phoneBtn.href = data.contact.phone_link;
+      const data = await res.json();
 
-      if (emailBtn && data.contact.email) {
-        emailBtn.textContent = data.contact.email;
-        emailBtn.href = 'mailto:' + data.contact.email;
+      if (data.analytics && data.analytics.ga_measurement_id && typeof gtag === 'function') {
+        gtag('config', data.analytics.ga_measurement_id);
       }
 
-      const footerPs = document.querySelectorAll('footer .foot-top > div:last-child p');
-      if (footerPs[0] && data.contact.location) footerPs[0].textContent = data.contact.location;
+      if (data.hero) {
+        setText('.hero-tag', data.hero.tagline);
+        setHTML('.hero-h1', data.hero.title_html);
+        setText('.hero-sub', data.hero.subtitle);
 
-      if (footerPs[1] && footerPs[1].querySelector('a')) {
-        footerPs[1].querySelector('a').textContent = data.contact.phone_display || '';
-        footerPs[1].querySelector('a').href = data.contact.phone_link || '#';
+        const heroPrimary = document.querySelector('.hero-btns .btn-p');
+        const heroSecondary = document.querySelector('.hero-btns .btn-g');
+
+        if (heroPrimary && data.hero.primary_cta_text) heroPrimary.textContent = data.hero.primary_cta_text;
+        if (heroSecondary && data.hero.secondary_cta_text) heroSecondary.textContent = data.hero.secondary_cta_text;
       }
 
-      if (footerPs[2] && footerPs[2].querySelector('a')) {
-        footerPs[2].querySelector('a').textContent = data.contact.email || '';
-        footerPs[2].querySelector('a').href = data.contact.email ? 'mailto:' + data.contact.email : '#';
+      if (data.about) {
+        setText('#about .sec-label', data.about.eyebrow);
+        setHTML('#about .sec-h', data.about.heading_html);
+
+        const aboutPs = document.querySelectorAll('#about .sec-p');
+        if (aboutPs[0] && data.about.paragraph_1) aboutPs[0].textContent = data.about.paragraph_1;
+        if (aboutPs[1] && data.about.paragraph_2) aboutPs[1].textContent = data.about.paragraph_2;
       }
+
+      if (data.contact) {
+        setText('#contact .cta-eye', data.contact.eyebrow);
+        setHTML('#contact .cta-h', data.contact.heading_html);
+        setText('#contact .cta-sub', data.contact.subtext);
+
+        const phoneBtn = document.querySelector('#contact .btn-p');
+        const emailBtn = document.querySelector('#contact .btn-g');
+
+        if (phoneBtn && data.contact.phone_display) phoneBtn.textContent = data.contact.phone_display;
+        if (phoneBtn && data.contact.phone_link) phoneBtn.href = data.contact.phone_link;
+
+        if (emailBtn && data.contact.email) {
+          emailBtn.textContent = data.contact.email;
+          emailBtn.href = 'mailto:' + data.contact.email;
+        }
+
+        const footerPs = document.querySelectorAll('footer .foot-top > div:last-child p');
+        if (footerPs[0] && data.contact.location) footerPs[0].textContent = data.contact.location;
+
+        if (footerPs[1] && footerPs[1].querySelector('a')) {
+          footerPs[1].querySelector('a').textContent = data.contact.phone_display || '';
+          footerPs[1].querySelector('a').href = data.contact.phone_link || '#';
+        }
+
+        if (footerPs[2] && footerPs[2].querySelector('a')) {
+          footerPs[2].querySelector('a').textContent = data.contact.email || '';
+          footerPs[2].querySelector('a').href = data.contact.email ? 'mailto:' + data.contact.email : '#';
+        }
+      }
+
+      if (data.footer) {
+        const desc = document.querySelector('.foot-desc');
+        if (desc && data.footer.description) desc.textContent = data.footer.description;
+
+        const copy = document.querySelector('.foot-copy');
+        if (copy && data.footer.copyright) copy.textContent = data.footer.copyright;
+
+        const socials = document.querySelectorAll('.foot-social a');
+        if (Array.isArray(data.footer.socials)) {
+          socials.forEach((a, i) => {
+            const s = data.footer.socials[i];
+            if (!s) return;
+            a.textContent = s.label || a.textContent;
+            a.href = s.url || '#';
+            if (s.url) {
+              a.target = '_blank';
+              a.rel = 'noopener';
+            }
+          });
+        }
+      }
+    } catch (e) {
+      console.warn('site.json not loaded', e);
     }
-
-    if (data.footer) {
-      const desc = document.querySelector('.foot-desc');
-      if (desc && data.footer.description) desc.textContent = data.footer.description;
-
-      const copy = document.querySelector('.foot-copy');
-      if (copy && data.footer.copyright) copy.textContent = data.footer.copyright;
-
-      const socials = document.querySelectorAll('.foot-social a');
-      if (Array.isArray(data.footer.socials)) {
-        socials.forEach((a, i) => {
-          const s = data.footer.socials[i];
-          if (!s) return;
-          a.textContent = s.label || a.textContent;
-          a.href = s.url || '#';
-          if (s.url) {
-            a.target = '_blank';
-            a.rel = 'noopener';
-          }
-        });
-      }
-    }
-  } catch (e) {
-    console.warn('site.json not loaded', e);
-  }
-})();
+  })();
 </script>
 </body>
 </html>
