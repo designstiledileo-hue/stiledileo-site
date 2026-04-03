@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- MAIN -->
   <url>
     <loc>https://stiledileo.com/</loc>
     <lastmod>2026-03-31</lastmod>
     <priority>1.0</priority>
   </url>
- 
+
   <url>
     <loc>https://stiledileo.com/blog.html</loc>
     <lastmod>2026-03-31</lastmod>
     <priority>0.9</priority>
   </url>
 
-</urlset>
   <!-- BLOG -->
   <url>
     <loc>https://stiledileo.com/blog-luxury-trends.html</loc>
@@ -33,7 +33,7 @@
     <priority>0.8</priority>
   </url>
 
-  <!-- CORE SERVICES -->
+  <!-- CORE -->
   <url>
     <loc>https://stiledileo.com/venetian-plaster-vancouver.html</loc>
     <lastmod>2026-03-31</lastmod>
@@ -64,7 +64,7 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- LOCATION PAGES -->
+  <!-- LOCATION -->
   <url>
     <loc>https://stiledileo.com/venetian-plaster-surrey.html</loc>
     <lastmod>2026-03-31</lastmod>
@@ -83,7 +83,7 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- SPECIAL PAGES -->
+  <!-- SPECIAL -->
   <url>
     <loc>https://stiledileo.com/venetian-plaster-bathroom-vancouver.html</loc>
     <lastmod>2026-03-31</lastmod>
