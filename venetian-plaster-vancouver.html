@@ -1,126 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Venetian Plaster Vancouver: Complete Guide | Stile di Leo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venetian Plaster Vancouver: Complete Guide | Stile di Leo</title>
+  <meta name="description" content="Complete guide to Venetian plaster in Vancouver. Learn costs, finishes, fireplace walls, and luxury design ideas.">
 
-<meta name="description" content="Complete guide to Venetian plaster in Vancouver. Learn costs, finishes, fireplace walls, and luxury design ideas.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f0d0b;
+      --panel:#161310;
+      --text:#f0ebe4;
+      --muted:#b8aea0;
+      --gold:#cfae55;
+      --gold-light:#ddb969;
+      --line:rgba(207,174,85,.18);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Montserrat',sans-serif;
+      line-height:1.85;
+    }
+
+    .hero{
+      position:relative;
+      min-height:68vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:80px 24px;
+      background:url('/images/venetianplaster2.png') center/cover no-repeat;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(15,13,11,.22), rgba(15,13,11,.62));
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      max-width:920px;
+    }
+
+    .hero-kicker{
+      margin:0 0 14px;
+      font-size:10px;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      color:var(--gold);
+    }
+
+    .hero h1{
+      margin:0 0 18px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(48px,7vw,88px);
+      font-weight:300;
+      line-height:1;
+      color:#fff;
+    }
+
+    .hero p{
+      max-width:700px;
+      margin:0 auto;
+      color:rgba(240,235,228,.82);
+      font-size:15px;
+    }
+
+    .wrap{
+      max-width:1080px;
+      margin:0 auto;
+      padding:80px 24px 110px;
+    }
+
+    .intro{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:40px;
+      align-items:center;
+      margin-bottom:56px;
+    }
+
+    .intro-copy p,
+    .section p{
+      margin:0 0 18px;
+      font-size:15px;
+      color:var(--muted);
+    }
+
+    .intro-image img,
+    .gallery img{
+      width:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    .intro-image img{
+      height:520px;
+    }
+
+    h2{
+      margin:0 0 18px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(30px,4vw,46px);
+      font-weight:300;
+      line-height:1.15;
+      color:var(--text);
+    }
+
+    .section{
+      margin-bottom:46px;
+    }
+
+    .section ul{
+      margin:0;
+      padding-left:20px;
+      color:var(--muted);
+    }
+
+    .section li{
+      margin-bottom:8px;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin:12px 0 52px;
+    }
+
+    .gallery img{
+      height:360px;
+    }
+
+    a{
+      color:var(--gold);
+      text-decoration:none;
+    }
+
+    a:hover{
+      color:var(--gold-light);
+    }
+
+    .related{
+      margin-top:56px;
+      padding-top:36px;
+      border-top:1px solid var(--line);
+    }
+
+    .related ul{
+      margin:0;
+      padding-left:20px;
+    }
+
+    .cta{
+      margin-top:64px;
+      padding:44px 34px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      text-align:center;
+    }
+
+    .cta p{
+      max-width:680px;
+      margin:0 auto 18px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .btn{
+      display:inline-block;
+      margin-top:10px;
+      padding:14px 30px;
+      background:var(--gold);
+      color:#0f0d0b;
+      font-size:11px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      text-decoration:none;
+      transition:all .25s ease;
+    }
+
+    .btn:hover{
+      background:var(--gold-light);
+      color:#0f0d0b;
+      transform:translateY(-1px);
+    }
+
+    @media (max-width: 900px){
+      .hero{
+        min-height:54vh;
+        padding:60px 20px;
+      }
+
+      .wrap{
+        padding:64px 20px 90px;
+      }
+
+      .intro{
+        grid-template-columns:1fr;
+        gap:24px;
+      }
+
+      .intro-image img{
+        height:320px;
+      }
+
+      .gallery{
+        grid-template-columns:1fr;
+      }
+
+      .gallery img{
+        height:240px;
+      }
+
+      .cta{
+        padding:34px 22px;
+      }
+    }
+  </style>
 </head>
+<body>
 
-<body style="background:#0d0b09;color:#f2ede6;font-family:Arial, sans-serif;line-height:1.7;max-width:900px;margin:auto;padding:40px">
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">Vancouver Decorative Walls</p>
+      <h1>Venetian Plaster<br>Vancouver</h1>
+      <p>
+        A complete guide to luxury Venetian plaster finishes, fireplace walls, feature walls, and custom decorative surfaces across Vancouver and the Lower Mainland.
+      </p>
+    </div>
+  </section>
 
-<h1>Venetian Plaster Vancouver: Complete Guide for Luxury Interiors</h1>
+  <div class="wrap">
 
-<p>
-Venetian plaster has become one of the most sought-after wall finishes in Vancouver, especially for homeowners looking to create a refined, high-end interior. Unlike traditional paint, Venetian plaster adds depth, texture, and a natural stone-like appearance that elevates any space.
-</p>
+    <div class="intro">
+      <div class="intro-copy">
+        <p>
+          Venetian plaster has become one of the most sought-after wall finishes in Vancouver, especially for homeowners looking to create a refined, high-end interior. Unlike traditional paint, Venetian plaster adds depth, texture, and a natural stone-like appearance that elevates any space.
+        </p>
 
-<p>
-At Stile di Leo, we specialize in handcrafted Venetian plaster walls, fireplace features, and custom decorative finishes across Vancouver, West Vancouver, North Vancouver, and Surrey.
-</p>
+        <p>
+          At Stile di Leo, we specialize in handcrafted Venetian plaster walls, fireplace features, and custom decorative finishes across Vancouver, West Vancouver, North Vancouver, and Surrey.
+        </p>
+      </div>
 
-<img src="/images/microcement-vancouver3.png" alt="Venetian plaster wall Vancouver">
+      <div class="intro-image">
+        <img src="/images/microcement-vancouver3.png" alt="Venetian plaster wall Vancouver">
+      </div>
+    </div>
 
-<h2>What is Venetian Plaster?</h2>
+    <div class="section">
+      <h2>What is Venetian Plaster?</h2>
+      <p>
+        Venetian plaster is a natural mineral-based finish made from lime, marble dust, and pigments. It is applied in multiple layers and polished to create a smooth or textured surface that mimics natural stone.
+      </p>
+      <p>
+        This technique has been used for centuries in European architecture and is now widely used in luxury homes across Vancouver.
+      </p>
+    </div>
 
-<p>
-Venetian plaster is a natural mineral-based finish made from lime, marble dust, and pigments. It is applied in multiple layers and polished to create a smooth or textured surface that mimics natural stone.
-</p>
+    <div class="gallery">
+      <img src="/images/Fire-Place-vancouver1.png" alt="Venetian plaster fireplace Vancouver">
+      <img src="/images/venetianplaster4.png" alt="Luxury Venetian plaster finish in Vancouver home">
+    </div>
 
-<p>
-This technique has been used for centuries in European architecture and is now widely used in luxury homes across Vancouver.
-</p>
+    <div class="section">
+      <h2>Why Homeowners in Vancouver Choose Venetian Plaster</h2>
+      <p>
+        Modern homes in Vancouver demand more than flat paint. Venetian plaster offers a premium aesthetic that reflects light, creates movement, and brings depth to walls.
+      </p>
+      <p>Homeowners choose Venetian plaster because it:</p>
+      <ul>
+        <li>Creates a luxury, high-end finish</li>
+        <li>Is more durable than paint</li>
+        <li>Works perfectly with modern and minimalist interiors</li>
+        <li>Enhances property value</li>
+      </ul>
+    </div>
 
-<h2>Why Homeowners in Vancouver Choose Venetian Plaster</h2>
+    <div class="section">
+      <h2>Venetian Plaster for Fireplace Walls</h2>
+      <p>
+        One of the most popular applications in Vancouver homes is the fireplace feature wall. Venetian plaster can create a marble-like or stone-inspired finish that transforms a fireplace into the focal point of the room.
+      </p>
+      <p>
+        Explore our dedicated guide:
+        <a href="/fireplace-wall-vancouver.html">Fireplace Wall Vancouver</a>
+      </p>
+    </div>
 
-<p>
-Modern homes in Vancouver demand more than flat paint. Venetian plaster offers a premium aesthetic that reflects light, creates movement, and brings depth to walls.
-</p>
+    <div class="section">
+      <h2>Cost of Venetian Plaster in Vancouver</h2>
+      <p>
+        The cost of Venetian plaster in Vancouver depends on the finish, complexity, and size of the project. On average, premium Venetian plaster ranges between $18–$35 per square foot.
+      </p>
+      <p>
+        Custom marble effects, high-gloss finishes, and detailed work can increase the price due to additional layers and craftsmanship.
+      </p>
+      <p>
+        See also:
+        <a href="/venetian-plaster-cost-vancouver.html">Venetian Plaster Cost Vancouver</a>
+      </p>
+    </div>
 
-<p>
-Homeowners choose Venetian plaster because it:
-</p>
+    <div class="section">
+      <h2>Where Venetian Plaster Works Best</h2>
+      <p>Venetian plaster can be used in a variety of spaces:</p>
+      <ul>
+        <li>Living room feature walls</li>
+        <li>Fireplace surrounds</li>
+        <li>Bedrooms</li>
+        <li>Dining areas</li>
+        <li>Luxury bathrooms with proper sealing</li>
+      </ul>
+      <p>
+        In Vancouver homes, it is especially popular in modern condos, high-end houses, and custom-built interiors.
+      </p>
+    </div>
 
-<ul>
-<li>Creates a luxury, high-end finish</li>
-<li>Is more durable than paint</li>
-<li>Works perfectly with modern and minimalist interiors</li>
-<li>Enhances property value</li>
-</ul>
+    <div class="section">
+      <h2>Is Venetian Plaster Better Than Paint?</h2>
+      <p>
+        While paint is cheaper, Venetian plaster offers a completely different level of design. It is not just a finish — it is a statement.
+      </p>
+      <p>Unlike paint, Venetian plaster:</p>
+      <ul>
+        <li>Has texture and depth</li>
+        <li>Reflects light beautifully</li>
+        <li>Does not look flat</li>
+        <li>Lasts for decades</li>
+      </ul>
+    </div>
 
-<img src="/images/Fire-Place-vancouver1.png" alt="Venetian plaster fireplace Vancouver">
+    <div class="section">
+      <h2>Work with a Venetian Plaster Specialist in Vancouver</h2>
+      <p>
+        Choosing the right contractor is essential. Venetian plaster is an artisanal process that requires experience, precision, and an understanding of design.
+      </p>
+      <p>
+        At Stile di Leo, every wall is handcrafted to match your space, lighting, and interior style.
+      </p>
+    </div>
 
-<h2>Venetian Plaster for Fireplace Walls</h2>
+    <div class="section related">
+      <h2>Related Services</h2>
+      <ul>
+        <li><a href="/feature-wall-vancouver.html">Feature Wall Vancouver</a></li>
+        <li><a href="/fireplace-wall-vancouver.html">Fireplace Wall Vancouver</a></li>
+        <li><a href="/venetian-plaster-cost-vancouver.html">Venetian Plaster Cost Vancouver</a></li>
+        <li><a href="/venetian-plaster-bathroom-vancouver.html">Venetian Plaster Bathroom Vancouver</a></li>
+        <li><a href="/microcement-vancouver.html">Microcement Vancouver</a></li>
+      </ul>
+    </div>
 
-<p>
-One of the most popular applications in Vancouver homes is the fireplace feature wall. Venetian plaster can create a marble-like or stone-inspired finish that transforms a fireplace into the focal point of the room.
-</p>
+    <div class="cta">
+      <h2>Ready to transform your walls?</h2>
+      <p>
+        Request a consultation and get a custom Venetian plaster design tailored for your home in Vancouver.
+      </p>
+      <a href="/#contact" class="btn">Request a Consultation</a>
+    </div>
 
-<p>
-Explore our dedicated guide:
-<a href="/fireplace-wall-vancouver.html">fireplace wall designs in Vancouver</a>
-</p>
+  </div>
 
-<h2>Cost of Venetian Plaster in Vancouver</h2>
-
-<p>
-The cost of Venetian plaster in Vancouver depends on the finish, complexity, and size of the project. On average, premium Venetian plaster ranges between $18–$35 per square foot.
-</p>
-
-<p>
-Custom marble effects, high-gloss finishes, and detailed work can increase the price due to additional layers and craftsmanship.
-</p>
-
-<h2>Where Venetian Plaster Works Best</h2>
-
-<p>
-Venetian plaster can be used in a variety of spaces:
-</p>
-
-<ul>
-<li>Living room feature walls</li>
-<li>Fireplace surrounds</li>
-<li>Bedrooms</li>
-<li>Dining areas</li>
-<li>Luxury bathrooms (with proper sealing)</li>
-</ul>
-
-<p>
-In Vancouver homes, it is especially popular in modern condos, high-end houses, and custom-built interiors.
-</p>
-
-<h2>Is Venetian Plaster Better Than Paint?</h2>
-
-<p>
-While paint is cheaper, Venetian plaster offers a completely different level of design. It is not just a finish — it is a statement.
-</p>
-
-<p>
-Unlike paint, Venetian plaster:
-</p>
-
-<ul>
-<li>Has texture and depth</li>
-<li>Reflects light beautifully</li>
-<li>Does not look flat</li>
-<li>Lasts for decades</li>
-</ul>
-
-<h2>Work with a Venetian Plaster Specialist in Vancouver</h2>
-
-<p>
-Choosing the right contractor is essential. Venetian plaster is an artisanal process that requires experience, precision, and an understanding of design.
-</p>
-
-<p>
-At Stile di Leo, every wall is handcrafted to match your space, lighting, and interior style.
-</p>
-
-<div class="cta">
-  <h2>Ready to transform your walls?</h2>
-  <p>
-  Request a consultation and get a custom Venetian plaster design tailored for your home in Vancouver.
-  </p>
-  <a href="/#contact" class="btn-g">Request a consultation</a>
-</div>
+</body>
+</html>
