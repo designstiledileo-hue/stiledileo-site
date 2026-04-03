@@ -1,212 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature Wall Vancouver | Luxury Decorative Walls | Stile di Leo</title>
+  <meta name="description" content="Custom feature walls in Vancouver using Venetian plaster and luxury finishes. Fireplace walls, marble effects, modern textures.">
 
-<title>Feature Wall Vancouver | Luxury Decorative Walls | Stile di Leo</title>
-<meta name="description" content="Custom feature walls in Vancouver using Venetian plaster and luxury finishes. Fireplace walls, marble effects, modern textures.">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f0d0b;
+      --panel:#161310;
+      --text:#f0ebe4;
+      --muted:#b8aea0;
+      --gold:#cfae55;
+      --gold-light:#ddb969;
+      --line:rgba(207,174,85,.18);
+    }
 
-<style>
-body{
-  background:#0f0d0b;
-  color:#e8e8e8;
-  font-family:'Montserrat',sans-serif;
-  margin:0;
-}
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Montserrat',sans-serif;
+      line-height:1.85;
+    }
 
-/* HERO */
-.hero{
-  height:70vh;
-  background:url('/images/venetianplaster2.png') center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  position:relative;
-}
+    .hero{
+      position:relative;
+      min-height:68vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:80px 24px;
+      background:url('/images/venetianplaster2.png') center/cover no-repeat;
+    }
 
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,.45);
-}
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(15,13,11,.22), rgba(15,13,11,.62));
+    }
 
-.hero h1{
-  position:relative;
-  z-index:2;
-  font-family:'Cormorant Garamond',serif;
-  font-size:64px;
-  font-weight:300;
-  color:#fff;
-}
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      max-width:920px;
+    }
 
-/* CONTENT */
-.container{
-  max-width:900px;
-  margin:0 auto;
-  padding:70px 24px;
-}
+    .hero-kicker{
+      margin:0 0 14px;
+      font-size:10px;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      color:var(--gold);
+    }
 
-h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:32px;
-  margin-top:50px;
-  margin-bottom:16px;
-  color:#d4b07a;
-}
+    .hero h1{
+      margin:0 0 18px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(48px,7vw,88px);
+      font-weight:300;
+      line-height:1;
+      color:#fff;
+    }
 
-p{
-  line-height:1.9;
-  color:#bdbdbd;
-  font-size:15px;
-}
+    .hero p{
+      max-width:700px;
+      margin:0 auto;
+      color:rgba(240,235,228,.82);
+      font-size:15px;
+    }
 
-ul{
-  padding-left:20px;
-  line-height:1.9;
-  color:#bdbdbd;
-}
+    .wrap{
+      max-width:1080px;
+      margin:0 auto;
+      padding:80px 24px 110px;
+    }
 
-/* IMAGE */
-.main-image{
-  margin:40px 0;
-}
+    .intro{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:40px;
+      align-items:center;
+      margin-bottom:56px;
+    }
 
-.main-image img{
-  width:100%;
-  height:420px;
-  object-fit:cover;
-}
+    .intro-copy p,
+    .section p{
+      margin:0 0 18px;
+      font-size:15px;
+      color:var(--muted);
+    }
 
-/* GALLERY */
-.gallery{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-  margin:40px 0;
-}
+    .intro-image img,
+    .gallery img{
+      width:100%;
+      display:block;
+      object-fit:cover;
+    }
 
-.gallery img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-}
+    .intro-image img{
+      height:520px;
+    }
 
-/* CTA */
-.cta{
-  margin-top:70px;
-  padding:50px;
-  border:1px solid rgba(184,150,90,.2);
-  text-align:center;
-}
+    h2{
+      margin:0 0 18px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(30px,4vw,46px);
+      font-weight:300;
+      line-height:1.15;
+      color:var(--text);
+    }
 
-.cta h2{
-  margin-top:0;
-}
+    .section{
+      margin-bottom:46px;
+    }
 
-.cta a{
-  display:inline-block;
-  margin-top:20px;
-  padding:14px 28px;
-  background:#b8965a;
-  color:#000;
-  text-decoration:none;
-  font-size:11px;
-  letter-spacing:2px;
-}
+    .section ul{
+      margin:0;
+      padding-left:20px;
+      color:var(--muted);
+    }
 
-/* MOBILE */
-@media(max-width:800px){
-  .hero{
-    height:55vh;
-  }
+    .section li{
+      margin-bottom:8px;
+    }
 
-  .hero h1{
-    font-size:42px;
-  }
+    .gallery{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin:12px 0 52px;
+    }
 
-  .gallery{
-    grid-template-columns:1fr;
-  }
+    .gallery img{
+      height:360px;
+    }
 
-  .main-image img{
-    height:280px;
-  }
-}
-</style>
+    a{
+      color:var(--gold);
+      text-decoration:none;
+    }
+
+    a:hover{
+      color:var(--gold-light);
+    }
+
+    .related{
+      margin-top:56px;
+      padding-top:36px;
+      border-top:1px solid var(--line);
+    }
+
+    .related ul{
+      margin:0;
+      padding-left:20px;
+    }
+
+    .cta{
+      margin-top:64px;
+      padding:44px 34px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      text-align:center;
+    }
+
+    .cta p{
+      max-width:680px;
+      margin:0 auto 18px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .btn{
+      display:inline-block;
+      margin-top:10px;
+      padding:14px 30px;
+      background:var(--gold);
+      color:#0f0d0b;
+      font-size:11px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      text-decoration:none;
+      transition:all .25s ease;
+    }
+
+    .btn:hover{
+      background:var(--gold-light);
+      color:#0f0d0b;
+      transform:translateY(-1px);
+    }
+
+    @media (max-width: 900px){
+      .hero{
+        min-height:54vh;
+        padding:60px 20px;
+      }
+
+      .wrap{
+        padding:64px 20px 90px;
+      }
+
+      .intro{
+        grid-template-columns:1fr;
+        gap:24px;
+      }
+
+      .intro-image img{
+        height:320px;
+      }
+
+      .gallery{
+        grid-template-columns:1fr;
+      }
+
+      .gallery img{
+        height:240px;
+      }
+
+      .cta{
+        padding:34px 22px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>Feature Walls Vancouver</h1>
-</section>
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">Vancouver Feature Walls</p>
+      <h1>Feature Wall<br>Vancouver</h1>
+      <p>
+        Custom decorative feature walls in Vancouver designed with Venetian plaster, texture, and premium finishes that elevate modern interiors.
+      </p>
+    </div>
+  </section>
 
-<div class="container">
+  <div class="wrap">
 
-<p>
-A feature wall can completely transform a space. At Stile di Leo, we design and create <strong>custom feature walls in Vancouver</strong> using Venetian plaster and luxury decorative finishes.
-</p>
+    <div class="intro">
+      <div class="intro-copy">
+        <p>
+          A feature wall can completely transform a space. At Stile di Leo, we design and create <strong>custom feature walls in Vancouver</strong> using Venetian plaster and luxury decorative finishes.
+        </p>
 
-<p>
-Each surface is handcrafted to introduce depth, movement, and a refined architectural feel that standard paint cannot achieve.
-</p>
+        <p>
+          Each surface is handcrafted to introduce depth, movement, and a refined architectural feel that standard paint cannot achieve.
+        </p>
+      </div>
 
-<!-- MAIN IMAGE -->
-<div class="main-image">
-  <img src="/images/venetianplaster3.png" alt="Feature wall Vancouver living room">
-</div>
+      <div class="intro-image">
+        <img src="/images/venetianplaster3.png" alt="Feature wall Vancouver living room">
+      </div>
+    </div>
 
-<h2>Popular Feature Wall Styles</h2>
+    <div class="section">
+      <h2>Popular Feature Wall Styles</h2>
+      <ul>
+        <li>Marble-effect Venetian plaster</li>
+        <li>Soft textured neutral walls</li>
+        <li>Modern minimalist finishes</li>
+        <li>Warm luxury tones with subtle movement</li>
+      </ul>
+    </div>
 
-<ul>
-<li>Marble-effect Venetian plaster</li>
-<li>Soft textured neutral walls</li>
-<li>Modern minimalist finishes</li>
-<li>Warm luxury tones with subtle movement</li>
-</ul>
+    <div class="gallery">
+      <img src="/images/venetianplaster4.png" alt="Luxury decorative wall Vancouver">
+      <img src="/images/venetianplaster5.png" alt="Modern feature wall design Vancouver">
+    </div>
 
-<!-- GALLERY -->
-<div class="gallery">
-  <img src="/images/venetianplaster4.png" alt="Luxury decorative wall Vancouver">
-  <img src="/images/venetianplaster5.png" alt="Modern feature wall design Vancouver">
-</div>
+    <div class="section">
+      <h2>Where Feature Walls Work Best</h2>
+      <p>
+        Feature walls are especially effective when you want one strong architectural focal point without overwhelming the room.
+      </p>
+      <ul>
+        <li>Living rooms</li>
+        <li>Bedrooms</li>
+        <li>Dining areas</li>
+        <li>Modern condos</li>
+        <li>Open-concept interiors</li>
+      </ul>
+    </div>
 
-<h2>Where Feature Walls Work Best</h2>
+    <div class="section">
+      <h2>Feature Wall Cost in Vancouver</h2>
+      <p>
+        Most projects range between <strong>$2,000 – $5,000+</strong> depending on wall size, preparation, finish type, and design complexity.
+      </p>
+      <p>
+        Simpler textured walls cost less, while custom marble effects, multi-layer finishes, and premium detailing increase the overall investment.
+      </p>
+      <p>
+        See also:
+        <a href="/venetian-plaster-cost-vancouver.html">Venetian Plaster Cost Vancouver</a>
+      </p>
+    </div>
 
-<ul>
-<li>Living rooms</li>
-<li>Bedrooms</li>
-<li>Dining areas</li>
-<li>Modern condos</li>
-<li>Open-concept interiors</li>
-</ul>
+    <div class="section">
+      <h2>Custom Design Approach</h2>
+      <p>
+        Every feature wall is designed individually. We consider lighting, proportions, surrounding materials, and the overall mood of the room to ensure a cohesive and high-end result.
+      </p>
+      <p>
+        The goal is not simply to decorate a wall, but to create a surface that feels integrated into the architecture of the home.
+      </p>
+    </div>
 
-<h2>Feature Wall Cost in Vancouver</h2>
+    <div class="section">
+      <h2>Feature Walls vs Paint</h2>
+      <p>
+        A painted wall can add colour, but a Venetian plaster feature wall adds depth, movement, light reflection, and a custom feel that paint alone cannot deliver.
+      </p>
+      <p>
+        This is why feature walls are often chosen in higher-end Vancouver homes, condos, and renovated interiors where visual impact matters.
+      </p>
+    </div>
 
-<p>
-Most projects range between <strong>$2,000 – $5,000+</strong> depending on size, preparation, and design complexity.
-</p>
+    <div class="section">
+      <h2>Perfect for Modern Vancouver Interiors</h2>
+      <p>
+        Vancouver interiors often favour clean lines, soft neutral palettes, and elevated materials. Venetian plaster feature walls work beautifully in this context because they create richness without visual clutter.
+      </p>
+      <p>
+        They pair especially well with fireplaces, custom millwork, oak finishes, stone details, and contemporary lighting.
+      </p>
+    </div>
 
-<h2>Custom Design Approach</h2>
+    <div class="section related">
+      <h2>Related Services</h2>
+      <ul>
+        <li><a href="/venetian-plaster-vancouver.html">Venetian Plaster Vancouver</a></li>
+        <li><a href="/fireplace-wall-vancouver.html">Fireplace Wall Vancouver</a></li>
+        <li><a href="/feature-wall-ideas-vancouver.html">Feature Wall Ideas Vancouver</a></li>
+        <li><a href="/venetian-plaster-cost-vancouver.html">Venetian Plaster Cost Vancouver</a></li>
+        <li><a href="/microcement-vancouver.html">Microcement Vancouver</a></li>
+      </ul>
+    </div>
 
-<p>
-Every feature wall is designed individually. We consider lighting, proportions, and surrounding materials to ensure a cohesive and high-end result.
-</p>
+    <div class="cta">
+      <h2>Request a Consultation</h2>
+      <p>
+        Tell us about your project and we’ll help you design a custom feature wall tailored to your space, lighting, and interior style.
+      </p>
+      <a href="/#contact" class="btn">Get Quote</a>
+    </div>
 
-<!-- CTA -->
-<div class="cta">
-  <h2>Request a Consultation</h2>
-  <p>Tell us about your project and we will help you design the perfect feature wall.</p>
-  <a href="/#contact">GET QUOTE</a>
-</div>
-
-</div>
+  </div>
 
 </body>
 </html>
