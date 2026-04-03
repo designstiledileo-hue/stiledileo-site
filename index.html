@@ -524,25 +524,92 @@
     }
 
     /* MOBILE */
-    @media(max-width:900px){
-      nav{padding:18px 24px}
-      nav.s{padding:14px 24px}
-      .nav-links{display:none}
-      .hero{padding:0 24px 60px}
-      .about{grid-template-columns:1fr}
-      .about-content{padding:56px 28px}
-      .projects,.textures,.services,.blog,.process,.testi,.cta{padding:80px 24px}
-      .proj-grid{display:flex;flex-direction:column}
-      .p-item{aspect-ratio:4/3}
-      .proj-grid2,.srv-grid,.tex-grid,.blog-grid,.testi-grid{grid-template-columns:1fr}
-      .proc-grid{grid-template-columns:1fr 1fr}
-      .foot-top{grid-template-columns:1fr 1fr;gap:36px}
-      footer{padding:56px 24px 28px}
-      .luxury-grid{grid-template-columns:1fr}
-      .luxury-form-wrap{padding:24px}
-      .luxury-form-title{font-size:28px}
-      .luxury-form-footer{flex-direction:column;align-items:flex-start}
-    }
+@media(max-width:900px){
+  nav{
+    padding:18px 16px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+  }
+
+  nav.s{
+    padding:14px 16px;
+  }
+
+  .nav-links{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+
+  .nav-links a{
+    font-size:9px;
+    letter-spacing:2px;
+  }
+
+  .nav-cta{
+    padding:10px 16px;
+  }
+
+  .hero{
+    padding:0 24px 60px;
+  }
+
+  .about{
+    grid-template-columns:1fr;
+  }
+
+  .about-content{
+    padding:56px 28px;
+  }
+
+  .projects,.textures,.services,.blog,.process,.testi,.cta{
+    padding:80px 24px;
+  }
+
+  .proj-grid{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .p-item{
+    aspect-ratio:4/3;
+  }
+
+  .proj-grid2,.srv-grid,.tex-grid,.blog-grid,.testi-grid{
+    grid-template-columns:1fr;
+  }
+
+  .proc-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .foot-top{
+    grid-template-columns:1fr 1fr;
+    gap:36px;
+  }
+
+  footer{
+    padding:56px 24px 28px;
+  }
+
+  .luxury-grid{
+    grid-template-columns:1fr;
+  }
+
+  .luxury-form-wrap{
+    padding:24px;
+  }
+
+  .luxury-form-title{
+    font-size:28px;
+  }
+
+  .luxury-form-footer{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
   </style>
 </head>
 <body>
