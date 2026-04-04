@@ -571,8 +571,8 @@
   .seo-links a{
     padding:12px 0;
     font-size:13px;
-  }
-.wrap{
+ }
+  .wrap{
   max-width:1100px;
   margin:0 auto;
 }
@@ -850,7 +850,21 @@
   line-height:1.9;
   color:#8e8478;
 }
+@media(max-width:900px){
+  .sdl-benefits,
+  .sdl-process,
+  .sdl-services{
+    padding:56px 24px;
+  }
 
+  .sdl-benefits-grid,
+  .sdl-process-grid,
+  .sdl-links-grid{
+    grid-template-columns:1fr;
+  }
+  .sdl-title{
+    margin-bottom:22px;
+  }
 /* BENEFITS */
 .sdl-benefits{
   padding:90px 60px 60px;
@@ -959,25 +973,6 @@
   color:#e5c27a;
   border-color:rgba(229,194,122,.4);
   transform:translateX(4px);
-}
-
-/* MOBILE */
-@media(max-width:900px){
-  .sdl-benefits,
-  .sdl-process,
-  .sdl-services{
-    padding:56px 24px;
-  }
-
-  .sdl-benefits-grid,
-  .sdl-process-grid,
-  .sdl-links-grid{
-    grid-template-columns:1fr;
-  }
-
-  .sdl-title{
-    margin-bottom:22px;
-  }
 }
   </style>
 </head>
