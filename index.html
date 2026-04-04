@@ -485,39 +485,72 @@
       font-family:Arial, Helvetica, sans-serif;
     }
 .seo-links{
-  padding:80px 60px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:56px 60px 48px;
   background:#0f0d0b;
+  border-top:1px solid rgba(207,174,85,.12);
+  border-bottom:1px solid rgba(207,174,85,.12);
 }
 
 .seo-links h2{
   font-family:'Cormorant Garamond',serif;
-  font-size:32px;
-  color:#e8e8e8;
-  margin-bottom:24px;
+  font-size:40px;
+  font-weight:300;
+  color:#f0ebe4;
+  margin:0 0 26px;
+  line-height:1.1;
 }
 
 .seo-links ul{
   list-style:none;
   padding:0;
-
+  margin:0;
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px 40px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px 36px;
 }
 
 .seo-links li{
-  margin-bottom:12px;
+  margin:0;
 }
 
 .seo-links a{
+  display:block;
+  padding:14px 0;
   color:#cfae55;
   text-decoration:none;
   font-size:14px;
-  letter-spacing:1px;
+  letter-spacing:.4px;
+  border-bottom:1px solid rgba(207,174,85,.12);
+  transition:color .25s ease, border-color .25s ease, transform .25s ease;
 }
 
 .seo-links a:hover{
   color:#e5c27a;
+  border-color:rgba(229,194,122,.45);
+  transform:translateX(4px);
+}
+
+@media(max-width:800px){
+  .seo-links{
+    padding:42px 24px 36px;
+  }
+
+  .seo-links h2{
+    font-size:32px;
+    margin-bottom:20px;
+  }
+
+  .seo-links ul{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+
+  .seo-links a{
+    padding:12px 0;
+    font-size:13px;
+  }
 }
     /* FOOTER */
     footer{background:#0a0907;padding:80px 60px 36px}
