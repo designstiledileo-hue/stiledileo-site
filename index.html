@@ -821,6 +821,164 @@
   .links{
     grid-template-columns:1fr;
   }
+}.sdl-shell{
+  max-width:1180px;
+  margin:0 auto;
+  width:100%;
+}
+
+.sdl-kicker{
+  margin:0 0 12px;
+  font-size:10px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:#cfae55;
+}
+
+.sdl-title{
+  margin:0 0 28px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(34px,4.5vw,58px);
+  font-weight:300;
+  line-height:1.05;
+  color:#f0ebe4;
+}
+
+.sdl-sub{
+  max-width:700px;
+  margin:0 0 30px;
+  font-size:14px;
+  line-height:1.9;
+  color:#8e8478;
+}
+
+/* BENEFITS */
+.sdl-benefits{
+  padding:90px 60px 60px;
+  background:#0f0d0b;
+}
+
+.sdl-benefits-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:26px;
+}
+
+.sdl-benefit-card{
+  padding:26px 24px;
+  border:1px solid rgba(184,150,90,.12);
+  background:rgba(255,255,255,.01);
+  transition:transform .3s ease,border-color .3s ease,background .3s ease;
+}
+
+.sdl-benefit-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(212,176,122,.35);
+  background:rgba(255,255,255,.02);
+}
+
+.sdl-benefit-card h3{
+  margin:0 0 10px;
+  font-size:18px;
+  font-weight:500;
+  color:#f0ebe4;
+}
+
+.sdl-benefit-card p{
+  margin:0;
+  font-size:14px;
+  line-height:1.85;
+  color:#8e8478;
+}
+
+/* PROCESS */
+.sdl-process{
+  padding:60px 60px;
+  background:#15120f;
+  border-top:1px solid rgba(184,150,90,.08);
+  border-bottom:1px solid rgba(184,150,90,.08);
+}
+
+.sdl-process-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+}
+
+.sdl-step{
+  padding:24px 20px 22px;
+  border:1px solid rgba(184,150,90,.1);
+  background:rgba(255,255,255,.01);
+}
+
+.sdl-step-num{
+  display:inline-block;
+  margin-bottom:12px;
+  color:#cfae55;
+  font-size:12px;
+  letter-spacing:2px;
+}
+
+.sdl-step h3{
+  margin:0 0 10px;
+  font-size:17px;
+  font-weight:500;
+  color:#f0ebe4;
+}
+
+.sdl-step p{
+  margin:0;
+  font-size:14px;
+  line-height:1.85;
+  color:#8e8478;
+}
+
+/* SERVICES */
+.sdl-services{
+  padding:70px 60px 90px;
+  background:#0f0d0b;
+}
+
+.sdl-links-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px 36px;
+}
+
+.sdl-links-grid a{
+  display:block;
+  padding:14px 0;
+  color:#cfae55;
+  text-decoration:none;
+  font-size:14px;
+  letter-spacing:.3px;
+  border-bottom:1px solid rgba(207,174,85,.14);
+  transition:color .25s ease,border-color .25s ease,transform .25s ease;
+}
+
+.sdl-links-grid a:hover{
+  color:#e5c27a;
+  border-color:rgba(229,194,122,.4);
+  transform:translateX(4px);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .sdl-benefits,
+  .sdl-process,
+  .sdl-services{
+    padding:56px 24px;
+  }
+
+  .sdl-benefits-grid,
+  .sdl-process-grid,
+  .sdl-links-grid{
+    grid-template-columns:1fr;
+  }
+
+  .sdl-title{
+    margin-bottom:22px;
+  }
 }
   </style>
 </head>
@@ -1090,65 +1248,80 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="testi-card rv d3"><span class="quote">"</span><p class="testi-text">As an interior designer I've worked with many plasterers. Stile di Leo is in a league of their own — precise, artistic, and a true pleasure to collaborate with.</p><div class="testi-rule"></div><div class="testi-name">Elena R.</div><div class="testi-loc">Interior Designer, Vancouver</div></div>
   </div>
 </section>
-<!-- WHY US -->
-<section class="why-us">
-  <div class="wrap">
-    <p class="kicker">Stile di Leo</p>
-    <h2>Why Homeowners Choose Us</h2>
+<!-- LUXURY INFO BLOCKS -->
+<section class="sdl-benefits">
+  <div class="sdl-shell">
+    <p class="sdl-kicker">Stile di Leo</p>
+    <h2 class="sdl-title">Why Homeowners Choose Us</h2>
 
-    <div class="grid">
-      <div>
+    <div class="sdl-benefits-grid">
+      <article class="sdl-benefit-card">
         <h3>Handcrafted Finish</h3>
-        <p>Each wall is created manually with attention to texture, depth, and detail.</p>
-      </div>
+        <p>Each wall is built by hand with attention to texture, depth, balance, and detail.</p>
+      </article>
 
-      <div>
+      <article class="sdl-benefit-card">
         <h3>Marble-Level Aesthetic</h3>
-        <p>Achieve the visual impact of marble without slab limitations.</p>
-      </div>
+        <p>Get the visual impact of marble without the design limitations of heavy slabs.</p>
+      </article>
 
-      <div>
+      <article class="sdl-benefit-card">
         <h3>Fully Custom Design</h3>
-        <p>We design finishes based on your lighting, space, and interior style.</p>
-      </div>
+        <p>Every finish is tailored to your light, layout, furnishings, and interior direction.</p>
+      </article>
 
-      <div>
+      <article class="sdl-benefit-card">
         <h3>Vancouver Focused</h3>
-        <p>Serving Vancouver and the Lower Mainland with premium finishes.</p>
-      </div>
+        <p>Serving Vancouver and the Lower Mainland with premium decorative wall finishes.</p>
+      </article>
     </div>
   </div>
 </section>
 
+<section class="sdl-process">
+  <div class="sdl-shell">
+    <p class="sdl-kicker">Process</p>
+    <h2 class="sdl-title">How It Works</h2>
 
-<!-- PROCESS -->
-<section class="process">
-  <div class="wrap">
-    <p class="kicker">Process</p>
-    <h2>How It Works</h2>
-
-    <div class="steps">
-      <div>
-        <span>01</span>
+    <div class="sdl-process-grid">
+      <article class="sdl-step">
+        <span class="sdl-step-num">01</span>
         <h3>Consultation</h3>
-        <p>Send photos and measurements. We suggest a design direction.</p>
-      </div>
+        <p>Send photos and measurements. We review the space and suggest the right direction.</p>
+      </article>
 
-      <div>
-        <span>02</span>
+      <article class="sdl-step">
+        <span class="sdl-step-num">02</span>
         <h3>Design</h3>
-        <p>We define textures, tones, and finish style for your space.</p>
-      </div>
+        <p>We define texture, tone, finish style, and the overall visual mood of the wall.</p>
+      </article>
 
-      <div>
-        <span>03</span>
+      <article class="sdl-step">
+        <span class="sdl-step-num">03</span>
         <h3>Execution</h3>
-        <p>Multi-layer handcrafted application with a premium finish.</p>
-      </div>
+        <p>Multi-layer handcrafted application with a clean, architectural, high-end result.</p>
+      </article>
     </div>
   </div>
 </section>
 
+<section class="sdl-services">
+  <div class="sdl-shell">
+    <p class="sdl-kicker">Services</p>
+    <h2 class="sdl-title">Explore Our Finishes</h2>
+    <p class="sdl-sub">
+      Luxury wall finishes tailored for modern interiors across Vancouver and the Lower Mainland.
+    </p>
+
+    <div class="sdl-links-grid">
+      <a href="/venetian-plaster-vancouver.html">Venetian Plaster Vancouver</a>
+      <a href="/feature-wall-vancouver.html">Feature Wall Vancouver</a>
+      <a href="/fireplace-wall-vancouver.html">Fireplace Wall Vancouver</a>
+      <a href="/venetian-plaster-cost-vancouver.html">Venetian Plaster Cost Vancouver</a>
+      <a href="/microcement-vancouver.html">Microcement Vancouver</a>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES (SEO + SALES) -->
 <section class="seo-links">
