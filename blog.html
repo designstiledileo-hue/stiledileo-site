@@ -88,13 +88,13 @@
       transform:translateY(-1px);
     }
 
-    .hero{
-      padding:110px 60px 70px;
-      background:
-        linear-gradient(to bottom, rgba(15,13,11,.15), rgba(15,13,11,.88)),
-        url('/venetianplaster2.png') center/cover no-repeat;
-      position:relative;
-    }
+   .hero{
+  padding:110px 60px 70px;
+  background:
+    linear-gradient(to bottom, rgba(15,13,11,.15), rgba(15,13,11,.88)),
+    url('/images/venetianplaster2.png') center/cover no-repeat;
+  position:relative;
+}
 
     .hero-inner{
       max-width:980px;
@@ -414,53 +414,63 @@
       }
     }
 
-    @media(max-width:900px){
-      nav{
-        padding:18px 24px;
-      }
+   @media(max-width:900px){
+  nav{
+    padding:18px 24px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+  }
 
-      .nav-links{
-        display:none;
-      }
+  .nav-links{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+  }
 
-      .hero{
-        padding:90px 24px 58px;
-      }
+  .nav-links a{
+    font-size:9px;
+    letter-spacing:2px;
+  }
 
-      .blog-archive{
-        padding:70px 24px 90px;
-      }
+  .hero{
+    padding:90px 24px 58px;
+  }
 
-      .blog-grid{
-        grid-template-columns:1fr;
-        gap:24px;
-      }
+  .blog-archive{
+    padding:70px 24px 90px;
+  }
 
-      .blog-visual{
-        height:220px;
-      }
+  .blog-grid{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
 
-      .blog-body{
-        padding:22px;
-      }
+  .blog-visual{
+    height:220px;
+  }
 
-      .blog-title{
-        font-size:22px;
-      }
+  .blog-body{
+    padding:22px;
+  }
 
-      .cta{
-        padding:80px 24px;
-      }
+  .blog-title{
+    font-size:22px;
+  }
 
-      footer{
-        padding:50px 24px 28px;
-      }
+  .cta{
+    padding:80px 24px;
+  }
 
-      .foot-wrap{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-    }
+  footer{
+    padding:50px 24px 28px;
+  }
+
+  .foot-wrap{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
   </style>
 </head>
 <body>
