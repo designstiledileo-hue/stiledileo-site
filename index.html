@@ -5,20 +5,26 @@
   <meta name="description" content="Handcrafted Venetian plaster, marble finishes and decorative walls in Vancouver, BC. Transform your space with luxury stone textures by Stile di Leo."/>
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Stile di Leo",
-    "image": "https://stiledileo.com/venetianplaster2.png",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Vancouver",
-      "addressRegion": "BC",
-      "addressCountry": "CA"
-    },
-    "telephone": "+1-604-773-2298"
-  }
-  </script>
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Stile di Leo",
+  "url": "https://stiledileo.com",
+  "image": "https://stiledileo.com/images/venetianplaster2.png",
+  "telephone": "+1-604-773-2298",
+  "email": "designstiledileo@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Vancouver",
+    "addressRegion": "BC",
+    "addressCountry": "CA"
+  },
+  "areaServed": ["Vancouver", "West Vancouver", "North Vancouver", "Burnaby", "Surrey", "Langley"],
+  "sameAs": [
+    "https://www.instagram.com/stile_di_leo?igsh=MTc4bGhmeDM0amgwOA=="
+  ]
+}
+</script>
 
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P7VJ8MQNKS"></script>
@@ -830,6 +836,138 @@
       .luxury-form-title { font-size: 28px; }
       .luxury-form-footer { flex-direction: column; align-items: flex-start; }
     }
+    .viz-offer{
+  padding:110px 60px;
+  background:#0f0d0b;
+  border-top:1px solid rgba(184,150,90,.08);
+  border-bottom:1px solid rgba(184,150,90,.08);
+}
+
+.viz-inner{
+  max-width:980px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.viz-kicker{
+  font-size:10px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:#cfae55;
+  margin-bottom:16px;
+}
+
+.viz-offer h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(40px,5vw,64px);
+  font-weight:300;
+  color:#fff;
+  margin-bottom:16px;
+}
+
+.viz-offer h2 em{
+  font-style:italic;
+  color:#d4b07a;
+}
+
+.viz-sub{
+  max-width:680px;
+  margin:0 auto 40px;
+  font-size:14px;
+  line-height:1.9;
+  color:#8e8478;
+}
+
+/* FORM */
+.viz-form{
+  text-align:left;
+}
+
+.viz-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.viz-field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.viz-full{
+  grid-column:1 / -1;
+}
+
+.viz-field label{
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#cfae55;
+}
+
+.viz-field input,
+.viz-field select,
+.viz-field textarea{
+  background:#0d0b09;
+  border:1px solid rgba(184,150,90,.15);
+  padding:14px;
+  color:#f0ebe4;
+  font-size:14px;
+  outline:none;
+  transition:.25s;
+}
+
+.viz-field input:focus,
+.viz-field textarea:focus,
+.viz-field select:focus{
+  border-color:#cfae55;
+  background:#100d0a;
+}
+
+.viz-field textarea{
+  min-height:140px;
+}
+
+/* FOOTER */
+.viz-footer{
+  margin-top:30px;
+  text-align:center;
+}
+
+.viz-footer button{
+  background:#cfae55;
+  color:#000;
+  border:none;
+  padding:16px 34px;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.viz-footer button:hover{
+  background:#e0bf68;
+  transform:translateY(-1px);
+}
+
+.viz-footer p{
+  margin-top:14px;
+  font-size:12px;
+  color:#8e8478;
+}
+
+/* MOBILE */
+@media(max-width:900px){
+  .viz-offer{
+    padding:80px 24px;
+  }
+
+  .viz-grid{
+    grid-template-columns:1fr;
+  }
+}
   </style>
 </head>
 <body>
@@ -921,7 +1059,67 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 </section>
+<section class="viz-offer">
+  <div class="viz-inner">
 
+    <p class="viz-kicker">Free Design Concept</p>
+
+    <h2>
+      See Your Wall <em>Before We Build It</em>
+    </h2>
+
+    <p class="viz-sub">
+      Upload a photo of your wall and receive a custom visualization tailored to your space, lighting, and style.
+    </p>
+
+    <form name="visualization" method="POST" data-netlify="true" enctype="multipart/form-data" class="viz-form">
+      
+      <input type="hidden" name="form-name" value="visualization">
+
+      <div class="viz-grid">
+        
+        <div class="viz-field">
+          <label>Name</label>
+          <input type="text" name="name" required placeholder="Your name">
+        </div>
+
+        <div class="viz-field">
+          <label>Email</label>
+          <input type="email" name="email" required placeholder="Your email">
+        </div>
+
+        <div class="viz-field viz-full">
+          <label>Upload Photo</label>
+          <input type="file" name="photo" accept="image/*" required>
+        </div>
+
+        <div class="viz-field viz-full">
+          <label>Style Preference</label>
+          <select name="style">
+            <option>Marble effect</option>
+            <option>Soft texture</option>
+            <option>Minimal modern</option>
+            <option>Dark luxury wall</option>
+            <option>Fireplace feature</option>
+          </select>
+        </div>
+
+        <div class="viz-field viz-full">
+          <label>Details (optional)</label>
+          <textarea name="message" placeholder="Tell us about your space..."></textarea>
+        </div>
+
+      </div>
+
+      <div class="viz-footer">
+        <button type="submit">Get Free Visualization</button>
+        <p>We’ll review your space and send your concept within 24 hours</p>
+      </div>
+
+    </form>
+
+  </div>
+</section>
 <section class="seo-text">
   <div class="seo-text-inner">
     <p class="seo-kicker">Vancouver Decorative Walls</p>
