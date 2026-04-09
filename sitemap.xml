@@ -4,95 +4,105 @@
   <!-- MAIN -->
   <url>
     <loc>https://stiledileo.com/</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://stiledileo.com/blog.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.9</priority>
   </url>
 
   <!-- BLOG -->
   <url>
     <loc>https://stiledileo.com/blog-luxury-trends.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://stiledileo.com/blog-staging-vs-design.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://stiledileo.com/blog-yaletown-condo.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.8</priority>
   </url>
+<url>
+  <loc>https://stiledileo.com/venetian-plaster-vs-paint-vancouver.html</loc>
+  <lastmod>2026-04-09</lastmod>
+  <priority>0.85</priority>
+</url>
 
-  <!-- CORE -->
+<url>
+  <loc>https://stiledileo.com/is-venetian-plaster-worth-it-vancouver.html</loc>
+  <lastmod>2026-04-09</lastmod>
+  <priority>0.85</priority>
+</url>
+  <!-- CORE SERVICES -->
   <url>
     <loc>https://stiledileo.com/venetian-plaster-vancouver.html</loc>
-    <lastmod>2026-03-31</lastmod>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://stiledileo.com/venetian-plaster-cost-vancouver.html</loc>
-    <lastmod>2026-03-31</lastmod>
-    <priority>0.9</priority>
+    <lastmod>2026-04-09</lastmod>
+    <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://stiledileo.com/fireplace-wall-vancouver.html</loc>
-    <lastmod>2026-03-31</lastmod>
-    <priority>0.9</priority>
+    <lastmod>2026-04-09</lastmod>
+    <priority>0.95</priority>
   </url>
 
   <url>
     <loc>https://stiledileo.com/feature-wall-vancouver.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://stiledileo.com/venetian-plaster-cost-vancouver.html</loc>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://stiledileo.com/feature-wall-ideas-vancouver.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.9</priority>
   </url>
 
-  <!-- LOCATION -->
+  <!-- LOCATION PAGES -->
   <url>
     <loc>https://stiledileo.com/venetian-plaster-surrey.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://stiledileo.com/venetian-plaster-burnaby.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://stiledileo.com/venetian-plaster-langley.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.9</priority>
   </url>
 
   <!-- SPECIAL -->
   <url>
     <loc>https://stiledileo.com/venetian-plaster-bathroom-vancouver.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://stiledileo.com/microcement-vancouver.html</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-09</lastmod>
     <priority>0.9</priority>
   </url>
 
