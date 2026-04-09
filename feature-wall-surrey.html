@@ -1,1 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feature Wall Surrey BC | Custom Decorative Walls | Stile di Leo</title>
+  <meta name="description" content="Custom feature walls in Surrey BC using Venetian plaster and luxury decorative finishes. Fireplace walls, marble effects, and modern accent walls by Stile di Leo.">
 
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f0d0b;
+      --text:#f0ebe4;
+      --muted:#b8aea0;
+      --gold:#cfae55;
+      --gold-light:#ddb969;
+      --line:rgba(207,174,85,.18);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Montserrat',sans-serif;
+      line-height:1.85;
+    }
+
+    .hero{
+      position:relative;
+      min-height:68vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:80px 24px;
+      background:url('/images/venetianplaster3.png') center/cover no-repeat;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(15,13,11,.22), rgba(15,13,11,.62));
+    }
+
+    .hero-inner{
+      position:relative;
+      z-index:2;
+      max-width:920px;
+    }
+
+    .hero-kicker{
+      margin:0 0 14px;
+      font-size:10px;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      color:var(--gold);
+    }
+
+    .hero h1{
+      margin:0 0 18px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(46px,7vw,84px);
+      font-weight:300;
+      line-height:1;
+      color:#fff;
+    }
+
+    .hero p{
+      max-width:700px;
+      margin:0 auto;
+      color:rgba(240,235,228,.82);
+      font-size:15px;
+    }
+
+    .wrap{
+      max-width:1080px;
+      margin:0 auto;
+      padding:80px 24px 110px;
+    }
+
+    .intro{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:40px;
+      align-items:center;
+      margin-bottom:56px;
+    }
+
+    .intro-copy p,
+    .section p{
+      margin:0 0 18px;
+      font-size:15px;
+      color:var(--muted);
+    }
+
+    .intro-image img,
+    .gallery img{
+      width:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    .intro-image img{
+      height:520px;
+    }
+
+    h2{
+      margin:0 0 18px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(30px,4vw,46px);
+      font-weight:300;
+      line-height:1.15;
+      color:var(--text);
+    }
+
+    .section{
+      margin-bottom:46px;
+    }
+
+    .section ul{
+      margin:0;
+      padding-left:20px;
+      color:var(--muted);
+    }
+
+    .section li{
+      margin-bottom:8px;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin:12px 0 52px;
+    }
+
+    .gallery img{
+      height:360px;
+    }
+
+    a{
+      color:var(--gold);
+      text-decoration:none;
+    }
+
+    a:hover{
+      color:var(--gold-light);
+    }
+
+    .related{
+      margin-top:56px;
+      padding-top:36px;
+      border-top:1px solid var(--line);
+    }
+
+    .related ul{
+      margin:0;
+      padding-left:20px;
+    }
+
+    .cta{
+      margin-top:64px;
+      padding:44px 34px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      text-align:center;
+    }
+
+    .cta p{
+      max-width:680px;
+      margin:0 auto 18px;
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .btn{
+      display:inline-block;
+      margin-top:10px;
+      padding:14px 30px;
+      background:var(--gold);
+      color:#0f0d0b;
+      font-size:11px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      text-decoration:none;
+      transition:all .25s ease;
+    }
+
+    .btn:hover{
+      background:var(--gold-light);
+      color:#0f0d0b;
+      transform:translateY(-1px);
+    }
+
+    @media (max-width: 900px){
+      .hero{
+        min-height:54vh;
+        padding:60px 20px;
+      }
+
+      .wrap{
+        padding:64px 20px 90px;
+      }
+
+      .intro{
+        grid-template-columns:1fr;
+        gap:24px;
+      }
+
+      .intro-image img{
+        height:320px;
+      }
+
+      .gallery{
+        grid-template-columns:1fr;
+      }
+
+      .gallery img{
+        height:240px;
+      }
+
+      .cta{
+        padding:34px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">Surrey Decorative Walls</p>
+      <h1>Feature Wall<br>Surrey BC</h1>
+      <p>
+        Custom feature walls in Surrey using Venetian plaster, marble-style finishes, and modern decorative textures for refined interiors.
+      </p>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <div class="intro">
+      <div class="intro-copy">
+        <p>
+          A feature wall is one of the most effective ways to transform a room without renovating the entire space. In Surrey BC, homeowners are increasingly choosing decorative wall finishes that create a custom, high-end focal point instead of relying on flat paint.
+        </p>
+
+        <p>
+          At Stile di Leo, we design and create feature walls using Venetian plaster and premium decorative finishes tailored to the proportions, lighting, and interior style of each home.
+        </p>
+      </div>
+
+      <div class="intro-image">
+        <img src="/images/venetianplaster4.png" alt="Feature wall in Surrey BC interior">
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Custom Feature Walls in Surrey Homes</h2>
+      <p>
+        Surrey homes often benefit from a feature wall that adds depth and material richness without making the room feel heavy. Venetian plaster works especially well for this because it creates movement, softness, and a more architectural finish than standard painted drywall.
+      </p>
+      <p>
+        These walls can be designed as subtle neutral backdrops or as bold statement surfaces depending on the style of the home.
+      </p>
+    </div>
+
+    <div class="gallery">
+      <img src="/images/venetianplaster5.png" alt="Luxury decorative feature wall in Surrey">
+      <img src="/images/Fire-Place-Vancouver5.png" alt="Modern fireplace and feature wall in Surrey BC">
+    </div>
+
+    <div class="section">
+      <h2>Popular Feature Wall Styles</h2>
+      <p>Some of the most requested feature wall directions in Surrey include:</p>
+      <ul>
+        <li>Marble-inspired Venetian plaster finishes</li>
+        <li>Soft matte mineral textures</li>
+        <li>Warm neutral accent walls</li>
+        <li>Dark luxury walls with subtle movement</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Feature Walls for Living Rooms and Bedrooms</h2>
+      <p>
+        Feature walls work especially well in living rooms, bedrooms, entryways, and dining areas where a single architectural surface can anchor the whole design.
+      </p>
+      <p>
+        In Surrey homes, this type of finish is often used to create a stronger focal point while keeping the overall interior clean and modern.
+      </p>
+      <p>
+        Related page:
+        <a href="/feature-wall-vancouver.html">Feature Wall Vancouver</a>
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Fireplace Feature Walls in Surrey</h2>
+      <p>
+        One of the strongest applications for a decorative wall finish is around a fireplace. A plaster feature wall can make a standard fireplace look built-in, sculptural, and much more premium.
+      </p>
+      <p>
+        If you want a wall with marble-style elegance or a softer mineral finish, this is often the best area to elevate.
+      </p>
+      <p>
+        See also:
+        <a href="/fireplace-wall-vancouver.html">Fireplace Wall Vancouver</a>
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Why Choose a Decorative Feature Wall</h2>
+      <p>
+        A custom wall finish changes the feel of a room more dramatically than paint because it introduces material character and depth.
+      </p>
+      <ul>
+        <li>More visual depth than paint</li>
+        <li>Luxury custom appearance</li>
+        <li>Ideal for new builds and renovated homes</li>
+        <li>Tailored to the specific style of your interior</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Areas We Serve</h2>
+      <p>
+        We serve Surrey BC, Vancouver, Burnaby, Langley, and other areas across the Lower Mainland.
+      </p>
+    </div>
+
+    <div class="section related">
+      <h2>Related Services</h2>
+      <ul>
+        <li><a href="/venetian-plaster-surrey.html">Venetian Plaster Surrey</a></li>
+        <li><a href="/venetian-plaster-vancouver.html">Venetian Plaster Vancouver</a></li>
+        <li><a href="/feature-wall-vancouver.html">Feature Wall Vancouver</a></li>
+        <li><a href="/venetian-plaster-cost-vancouver.html">Venetian Plaster Cost Vancouver</a></li>
+        <li><a href="/microcement-vancouver.html">Microcement Vancouver</a></li>
+      </ul>
+    </div>
+
+    <div class="cta">
+      <h2>Request a Consultation</h2>
+      <p>
+        Planning a custom feature wall in Surrey? We can help you choose a finish that fits your space and creates a more refined interior.
+      </p>
+      <a href="/#contact" class="btn">Request a Consultation</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
