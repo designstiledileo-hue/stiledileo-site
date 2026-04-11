@@ -1,0 +1,29 @@
+name: Add Favicon to HTML files
+
+on:
+  workflow_dispatch:
+
+jobs:
+  add-favicon:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Add favicon to HTML files
+        run: |
+          for file in *.html; do
+            if ! grep -q 'rel="icon"' "$file"; then
+              sed -i 's|</head>|<link rel="icon" type="image/png" href="/images/favicon.png">\n<link rel="apple-touch-icon" href="/images/favicon.png">\n</head>|' "$file"
+              echo "Added favicon to $file"
+            else
+              echo "Favicon already exists in $file — skipped"
+            fi
+          done
+
+      - name: Commit changes
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add *.html
+          git commit -m "Add favicon to HTML files where missing" || echo "Nothing to commit"
+          git push
