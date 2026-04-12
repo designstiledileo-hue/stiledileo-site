@@ -1,10 +1,9 @@
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stile di Leo — Venetian Plaster & Decorative Walls | Vancouver, BC</title>
-  <meta name="description" content="Handcrafted Venetian plaster, marble finishes and decorative walls in Vancouver, BC. Transform your space with luxury stone textures by Stile di Leo."/>
-
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stile di Leo — Venetian Plaster &amp; Decorative Walls | Vancouver, BC</title>
+<meta content="Handcrafted Venetian plaster, marble finishes and decorative walls in Vancouver, BC. Transform your space with luxury stone textures by Stile di Leo." name="description"/>
+<script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -25,19 +24,16 @@
   ]
 }
 </script>
-
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P7VJ8MQNKS"></script>
-  <script>
+<!-- Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-P7VJ8MQNKS"></script>
+<script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-P7VJ8MQNKS');
   </script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
-
-  <style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Montserrat:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<style>
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -968,6 +964,7 @@
     grid-template-columns:1fr;
   }
 }
+
     /* PREMIUM TEXTURE GRID */
 .tex-card{
   position:relative;
@@ -1031,8 +1028,9 @@
 .tex-card:hover .tex-desc{
   opacity:1;
   transform:translateY(0);
-} 
-  .tex-cta{
+}
+
+.tex-cta{
   text-align:center;
   margin-top:50px;
 }
@@ -1041,370 +1039,281 @@
   color:#8e8478;
   margin-bottom:14px;
 }
-    .tex-card.active{
+
+.tex-card.active{
   border-color:#cfae55;
   box-shadow:0 0 0 1px rgba(207,174,85,.4),
              0 20px 60px rgba(0,0,0,.4);
 }
   </style>
-<link rel="icon" type="image/png" href="/images/favicon.png">
-<link rel="apple-touch-icon" href="/images/favicon.png">
-</head>
+<link href="https://stiledileo.com/images/favicon.png" rel="icon" type="image/png"/>
+<link href="https://stiledileo.com/images/favicon.png" rel="apple-touch-icon"/>
+<link as="image" href="/images/marble1.jpg" rel="preload"/><link as="image" href="/images/dark.jpg" rel="preload"/></head>
 <body>
-<div class="diamond-cursor hidden" id="diamond-cursor" aria-hidden="true"></div>
+<div aria-hidden="true" class="diamond-cursor hidden" id="diamond-cursor"></div>
 
-<script>const IMGS = {
-  hero: "/images/marble1.jpg",
-  venetian: "/images/marble1.jpg",
-  black_marble: "/images/dark.jpg",
-  golden_veins: "/images/sahara.jpg",
-  luxury_spa: "/images/soft-stone.jpg",
-  fireplace_grey: "/images/concrete.jpg",
-  black_gold: "/images/dark.jpg",
-  white_marble: "/images/soft-stone.jpg",
-  column: "/images/marble1.jpg",
-  column2: "/images/concrete.jpg",
-  ceiling: "/images/silk.jpg",
-  tex_warm: "/images/marble1.jpg",
-  tex_silver: "/images/silk.jpg",
-  tex_grey: "/images/concrete.jpg",
-  tex_pearl: "/images/soft-stone.jpg",
-  tex_graphite: "/images/dark.jpg",
-  tex_cream: "/images/sahara.jpg"
-};</script>
-
-<script>
-// Set images on load
-document.addEventListener('DOMContentLoaded', function() {
-  const set = (id, key) => { const el = document.getElementById(id); if(el && IMGS[key]) el.src = IMGS[key]; };
-  set('hero-img', 'hero');
-  set('about-img', 'venetian');
-  set('p1', 'hero');
-  set('p2', 'black_marble');
-  set('p3', 'golden_veins');
-  set('p4', 'luxury_spa');
-  set('p5', 'fireplace_grey');
-  set('p6', 'black_gold');
-  set('p7', 'white_marble');
-  set('p8', 'column');
-  set('p9', 'column2');
-  set('p10', 'ceiling');
-  set('t1', 'tex_warm');
-  set('t2', 'tex_silver');
-  set('t3', 'tex_grey');
-  set('t4', 'tex_pearl');
-  set('t5', 'tex_graphite');
-  set('t6', 'tex_cream');
-  set('srv1', 'fireplace_grey');
-  set('srv2', 'column');
-  set('srv3', 'golden_veins');
-  set('cta-bg-img', 'black_marble');
-  set('blog-img1', 'venetian');
-  set('blog-img2', 'column');
-  set('blog-img3', 'golden_veins');
-  // hero bg
-  const heroBg = document.getElementById('hero-bg');
-  if(heroBg && IMGS['hero']) heroBg.style.backgroundImage = `url(${IMGS['hero']})`;
-  const ctaBg = document.getElementById('cta-bg');
-  if(ctaBg && IMGS['black_gold']) ctaBg.style.backgroundImage = `url(${IMGS['black_gold']})`;
-});
-</script>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="logo">Stile di <span>Leo</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#textures">Finishes</a></li>
-    <li><a href="/blog.html">Blog</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <a href="#visualization" class="nav-cta">Free Visualization</a>
-  <a href="#contact" class="nav-cta secondary">Get Quote</a>
+<a class="logo" href="#">Stile di <span>Leo</span></a>
+<ul class="nav-links">
+<li><a href="#about">About</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#textures">Finishes</a></li>
+<li><a href="/blog.html">Blog</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<a class="nav-cta" href="#visualization">Free Visualization</a>
+<a class="nav-cta secondary" href="#contact">Get Quote</a>
 </nav>
-
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg" id="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <p class="hero-tag">Vancouver, BC · Venetian Plaster & Decorative Walls</p>
-    <h1 class="hero-h1">Walls Become<br><em>Works of Art</em></h1>
-    <p class="hero-sub">Handcrafted mineral finishes, Venetian plaster and decorative stone — designed to transform any interior into a luxury statement.</p>
-    <div class="hero-btns">
-      <a href="#projects" class="btn-p">View Our Work</a>
-      <a href="#contact" class="btn-g">Start a Project</a>
-    </div>
-  </div>
+<div class="hero-bg" id="hero-bg" style="background-image:url('/images/marble1.jpg');"></div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<p class="hero-tag">Vancouver, BC · Venetian Plaster &amp; Decorative Walls</p>
+<h1 class="hero-h1">Walls Become<br/><em>Works of Art</em></h1>
+<p class="hero-sub">Handcrafted mineral finishes, Venetian plaster and decorative stone — designed to transform any interior into a luxury statement.</p>
+<div class="hero-btns">
+<a class="btn-p" href="#projects">View Our Work</a>
+<a class="btn-g" href="#contact">Start a Project</a>
+</div>
+</div>
 </section>
-  <section class="viz-offer" id="visualization">
-  <div class="viz-inner">
-
-    <p class="viz-kicker">Free Design Concept</p>
-
-    <h2>
+<section class="viz-offer" id="visualization">
+<section class="viz-offer">
+<div class="viz-inner">
+<p class="viz-kicker">Free Design Concept</p>
+<h2>
       See Your Wall <em>Before We Build It</em>
-    </h2>
-
-    <p class="viz-sub">
+</h2>
+<p class="viz-sub">
       Upload a photo of your wall and receive a custom visualization tailored to your space, lighting, and style.
     </p>
-
-    <form name="visualization" method="POST" data-netlify="true" enctype="multipart/form-data" class="viz-form">
-      
-      <input type="hidden" name="form-name" value="visualization">
-
-      <div class="viz-grid">
-        
-        <div class="viz-field">
-          <label>Name</label>
-          <input type="text" name="name" required placeholder="Your name">
-        </div>
-
-        <div class="viz-field">
-          <label>Email</label>
-          <input type="email" name="email" required placeholder="Your email">
-        </div>
-
-        <div class="viz-field viz-full">
-          <label>Upload Photo</label>
-          <input type="file" name="photo" accept="image/*" required>
-        </div>
-
-        <div class="viz-field viz-full">
-          <label>Style Preference</label>
-          <select name="style">
-            <option>Marble effect</option>
-            <option>Soft texture</option>
-            <option>Minimal modern</option>
-            <option>Dark luxury wall</option>
-            <option>Fireplace feature</option>
-          </select>
-        </div>
-
-        <div class="viz-field viz-full">
-          <label>Details (optional)</label>
-          <textarea name="message" placeholder="Tell us about your space..."></textarea>
-        </div>
-
-      </div>
-
-      <div class="viz-footer">
-        <button type="submit">Get Free Visualization</button>
-        <p>We’ll review your space and send your concept within 24 hours</p>
-      </div>
-
-    </form>
-
-  </div>
+<form class="viz-form" data-netlify="true" enctype="multipart/form-data" method="POST" name="visualization">
+<input name="form-name" type="hidden" value="visualization"/>
+<div class="viz-grid">
+<div class="viz-field">
+<label>Name</label>
+<input name="name" placeholder="Your name" required="" type="text"/>
+</div>
+<div class="viz-field">
+<label>Email</label>
+<input name="email" placeholder="Your email" required="" type="email"/>
+</div>
+<div class="viz-field viz-full">
+<label>Upload Photo</label>
+<input accept="image/*" name="photo" required="" type="file"/>
+</div>
+<div class="viz-field viz-full">
+<label>Style Preference</label>
+<select name="style">
+<option>Marble effect</option>
+<option>Soft texture</option>
+<option>Minimal modern</option>
+<option>Dark luxury wall</option>
+<option>Fireplace feature</option>
+</select>
+</div>
+<div class="viz-field viz-full">
+<label>Details (optional)</label>
+<textarea name="message" placeholder="Tell us about your space..."></textarea>
+</div>
+</div>
+<div class="viz-footer">
+<button type="submit">Get Free Visualization</button>
+<p>We’ll review your space and send your concept within 24 hours</p>
+</div>
+</form>
+</div>
 </section>
 <section class="seo-text">
-  <div class="seo-text-inner">
-    <p class="seo-kicker">Vancouver Decorative Walls</p>
-    <h2>Venetian Plaster & Feature Walls in Vancouver</h2>
-    <p>
+<div class="seo-text-inner">
+<p class="seo-kicker">Vancouver Decorative Walls</p>
+<h2>Venetian Plaster &amp; Feature Walls in Vancouver</h2>
+<p>
       Stile di Leo creates premium Venetian plaster walls, fireplace feature walls, and custom decorative finishes across Vancouver, West Vancouver, North Vancouver, Surrey, and the Lower Mainland.
     </p>
-  </div>
+</div>
 </section>
-
 <!-- MARQUEE -->
 <div class="mq">
-  <div class="mq-track">
-    <span class="mq-item">Venetian Plaster</span><span class="mq-item">Stone Textures</span><span class="mq-item">Marble Finishes</span><span class="mq-item">Vancouver BC</span><span class="mq-item">Decorative Walls</span><span class="mq-item">Luxury Interiors</span><span class="mq-item">Metallic Finishes</span><span class="mq-item">Fireplace Surrounds</span>
-    <span class="mq-item">Venetian Plaster</span><span class="mq-item">Stone Textures</span><span class="mq-item">Marble Finishes</span><span class="mq-item">Vancouver BC</span><span class="mq-item">Decorative Walls</span><span class="mq-item">Luxury Interiors</span><span class="mq-item">Metallic Finishes</span><span class="mq-item">Fireplace Surrounds</span>
-  </div>
+<div class="mq-track">
+<span class="mq-item">Venetian Plaster</span><span class="mq-item">Stone Textures</span><span class="mq-item">Marble Finishes</span><span class="mq-item">Vancouver BC</span><span class="mq-item">Decorative Walls</span><span class="mq-item">Luxury Interiors</span><span class="mq-item">Metallic Finishes</span><span class="mq-item">Fireplace Surrounds</span>
+<span class="mq-item">Venetian Plaster</span><span class="mq-item">Stone Textures</span><span class="mq-item">Marble Finishes</span><span class="mq-item">Vancouver BC</span><span class="mq-item">Decorative Walls</span><span class="mq-item">Luxury Interiors</span><span class="mq-item">Metallic Finishes</span><span class="mq-item">Fireplace Surrounds</span>
 </div>
-
+</div>
 <!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-img rv"><img id="about-img" src="" alt="Venetian plaster texture"/></div>
-  <div class="about-content">
-    <p class="sec-label rv">Our Story</p>
-    <h2 class="sec-h rv d1">Rooted in Craft,<br>Built on <em>Artistry</em></h2>
-    <p class="sec-p rv d2">At Stile di Leo, we transform walls into timeless works of art. Inspired by the elegance of Venetian plaster, natural stone, and modern design, every surface becomes a reflection of luxury and intention.</p>
-    <p class="sec-p rv d3">We specialize in custom decorative walls, mineral-based plaster finishes, and handcrafted stone textures — bringing depth and soul into every space across Vancouver and BC.</p>
-    <div class="rule rv d4"></div>
-    <a href="#projects" class="btn-g rv d4">Explore Our Work</a>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section class="projects" id="projects">
-  <div class="sec-header">
-    <p class="sec-label rv" style="justify-content:center">Our Work</p>
-    <h2 class="sec-h rv d1" style="text-align:center">Signature <em>Projects</em></h2>
-  </div>
-  <div class="proj-grid">
-    <div class="p-item rv"><img id="p1" src="" alt="Fireplace Metamorphosis"/><div class="p-cap"><div class="p-cap-title">The Fireplace Metamorphosis</div><div class="p-cap-loc">Vancouver, BC</div></div></div>
-    <div class="p-item rv d1"><img id="p2" src="" alt="Black Marble Fireplace"/><div class="p-cap"><div class="p-cap-title">Black Marble Fireplace</div><div class="p-cap-loc">West Vancouver</div></div></div>
-    <div class="p-item rv d1"><img id="p3" src="" alt="Golden Veins Wall"/><div class="p-cap"><div class="p-cap-title">Golden Veins Wall</div><div class="p-cap-loc">Yaletown</div></div></div>
-    <div class="p-item rv d2"><img id="p4" src="" alt="Luxury Spa Wall"/><div class="p-cap"><div class="p-cap-title">Luxury Spa Wall</div><div class="p-cap-loc">North Vancouver</div></div></div>
-    <div class="p-item rv d3"><img id="p5" src="" alt="Grey Marble Fireplace"/><div class="p-cap"><div class="p-cap-title">Grey Marble Fireplace</div><div class="p-cap-loc">Burnaby</div></div></div>
-  </div>
-  <div class="proj-grid2" style="margin-top:4px">
-    <div class="p2-item rv"><img id="p6" src="" alt="Black Gold Fireplace"/><div class="p-cap"><div class="p-cap-title">Black Gold Fireplace</div><div class="p-cap-loc">Vancouver</div></div></div>
-    <div class="p2-item rv d1"><img id="p7" src="" alt="White Marble Fireplace"/><div class="p-cap"><div class="p-cap-title">White Marble Fireplace</div><div class="p-cap-loc">Coquitlam</div></div></div>
-    <div class="p2-item rv d2"><img id="p8" src="" alt="Dark Marble Column"/><div class="p-cap"><div class="p-cap-title">Dark Marble Column</div><div class="p-cap-loc">Vancouver</div></div></div>
-  </div>
-  <div class="proj-grid2" style="margin-top:4px">
-    <div class="p2-item rv"><img id="p9" src="" alt="Marble Column Detail"/><div class="p-cap"><div class="p-cap-title">Marble Column Detail</div><div class="p-cap-loc">Vancouver</div></div></div>
-    <div class="p2-item rv d1"><img id="p10" src="" alt="Decorative Ceiling"/><div class="p-cap"><div class="p-cap-title">Decorative Ceiling</div><div class="p-cap-loc">Vancouver</div></div></div>
-    <div class="p2-item rv d2" style="background:var(--charcoal);display:flex;align-items:center;justify-content:center">
-      <div style="text-align:center;padding:40px">
-        <p class="sec-label" style="justify-content:center;margin-bottom:12px">And More</p>
-        <p style="font-family:Cormorant Garamond,serif;font-size:28px;color:var(--cream)">Every project<br><em style="color:var(--gold-l)">is unique</em></p>
-        <a href="#contact" class="btn-p" style="margin-top:24px;display:inline-block">Book Consultation</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TEXTURES -->
-<section class="textures" id="textures">
-  <div class="sec-header">
-    <p class="sec-label rv" style="justify-content:center">Our Finishes</p>
-    <h2 class="sec-h rv d1" style="text-align:center">Textures & <em>Materials</em></h2>
-  </div>
-  <div class="tex-grid">
-    <div class="tex-card rv"><img id="t1" src="" alt="Warm Venetian"/><div class="tex-overlay"><div class="tex-name">Warm Venetian</div><div class="tex-desc">Classic Italian plaster with warm golden undertones</div></div></div>
-    <div class="tex-card rv d1"><img id="t2" src="" alt="Silver Metallic"/><div class="tex-overlay"><div class="tex-name">Silver Metallic</div><div class="tex-desc">Reflective metallic finish with cool silver tones</div></div></div>
-    <div class="tex-card rv d2"><img id="t3" src="" alt="Grey Stone"/><div class="tex-overlay"><div class="tex-name">Grey Stone</div><div class="tex-desc">Natural stone-inspired texture with depth and character</div></div></div>
-    <div class="tex-card rv"><img id="t4" src="" alt="Pearl White"/><div class="tex-overlay"><div class="tex-name">Pearl White</div><div class="tex-desc">Delicate pearl-white finish with subtle shimmer</div></div></div>
-    <div class="tex-card rv d1"><img id="t5" src="" alt="Graphite Metallic"/><div class="tex-overlay"><div class="tex-name">Graphite Metallic</div><div class="tex-desc">Dark sophisticated metallic with stormy depth</div></div></div>
-    <div class="tex-card rv d2"><img id="t6" src="" alt="Cream Gold"/><div class="tex-overlay"><div class="tex-name">Cream Gold</div><div class="tex-desc">Soft cream with fine gold veining — timeless luxury</div></div></div>
-  </div>
-  <div class="tex-grid">
-
-  <div class="tex-card">
-    <img src="/images/marble1.jpg" alt="Marble vein wall Vancouver">
-    <div class="tex-overlay">
-      <div class="tex-name">Marble Vein Finish</div>
-      <div class="tex-desc">Luxury marble-style walls with natural veins and depth.</div>
-    </div>
-  </div>
-
-  <div class="tex-card">
-    <img src="/images/soft-stone.jpg" alt="Soft stone plaster Vancouver">
-    <div class="tex-overlay">
-      <div class="tex-name">Soft Stone Texture</div>
-      <div class="tex-desc">Natural matte finish with soft mineral movement.</div>
-    </div>
-  </div>
-
-  <div class="tex-card">
-    <img src="/images/sahara.jpg" alt="Sahara metallic wall Vancouver">
-    <div class="tex-overlay">
-      <div class="tex-name">Sahara Metallic</div>
-      <div class="tex-desc">Light-reflective finish with warm metallic effect.</div>
-    </div>
-  </div>
-
-  <div class="tex-card">
-    <img src="/images/concrete.jpg" alt="Concrete wall Vancouver">
-    <div class="tex-overlay">
-      <div class="tex-name">Concrete Minimal</div>
-      <div class="tex-desc">Modern concrete-style finish for minimal interiors.</div>
-    </div>
-  </div>
-
-  <div class="tex-card">
-    <img src="/images/dark.jpg" alt="Dark luxury wall Vancouver">
-    <div class="tex-overlay">
-      <div class="tex-name">Dark Luxury Wall</div>
-      <div class="tex-desc">Deep textured finish for bold interior statements.</div>
-    </div>
-  </div>
-
-  <div class="tex-card">
-    <img src="/images/silk.jpg" alt="Silk metallic finish Vancouver">
-    <div class="tex-overlay">
-      <div class="tex-name">Silk Metallic</div>
-      <div class="tex-desc">Soft reflective finish with elegant shimmer.</div>
-    </div>
-  </div>
-<div class="tex-cta">
-  <p>Not sure which finish fits your space?</p>
-  <a href="#visualization" class="btn-p">
-    Get Free Visualization
-  </a>
+<div class="about-img rv"><img alt="Venetian plaster texture" decoding="async" fetchpriority="high" id="about-img" loading="eager" src="/images/marble1.jpg"/></div>
+<div class="about-content">
+<p class="sec-label rv">Our Story</p>
+<h2 class="sec-h rv d1">Rooted in Craft,<br/>Built on <em>Artistry</em></h2>
+<p class="sec-p rv d2">At Stile di Leo, we transform walls into timeless works of art. Inspired by the elegance of Venetian plaster, natural stone, and modern design, every surface becomes a reflection of luxury and intention.</p>
+<p class="sec-p rv d3">We specialize in custom decorative walls, mineral-based plaster finishes, and handcrafted stone textures — bringing depth and soul into every space across Vancouver and BC.</p>
+<div class="rule rv d4"></div>
+<a class="btn-g rv d4" href="#projects">Explore Our Work</a>
 </div>
 </section>
-
+<!-- PROJECTS -->
+<section class="projects" id="projects">
+<div class="sec-header">
+<p class="sec-label rv" style="justify-content:center">Our Work</p>
+<h2 class="sec-h rv d1" style="text-align:center">Signature <em>Projects</em></h2>
+</div>
+<div class="proj-grid">
+<div class="p-item rv"><img alt="Fireplace Metamorphosis" decoding="async" fetchpriority="high" id="p1" loading="eager" src="/images/marble1.jpg"/><div class="p-cap"><div class="p-cap-title">The Fireplace Metamorphosis</div><div class="p-cap-loc">Vancouver, BC</div></div></div>
+<div class="p-item rv d1"><img alt="Black Marble Fireplace" decoding="async" fetchpriority="high" id="p2" loading="eager" src="/images/dark.jpg"/><div class="p-cap"><div class="p-cap-title">Black Marble Fireplace</div><div class="p-cap-loc">West Vancouver</div></div></div>
+<div class="p-item rv d1"><img alt="Golden Veins Wall" decoding="async" id="p3" loading="lazy" src="/images/sahara.jpg"/><div class="p-cap"><div class="p-cap-title">Golden Veins Wall</div><div class="p-cap-loc">Yaletown</div></div></div>
+<div class="p-item rv d2"><img alt="Luxury Spa Wall" decoding="async" id="p4" loading="lazy" src="/images/soft-stone.jpg"/><div class="p-cap"><div class="p-cap-title">Luxury Spa Wall</div><div class="p-cap-loc">North Vancouver</div></div></div>
+<div class="p-item rv d3"><img alt="Grey Marble Fireplace" decoding="async" id="p5" loading="lazy" src="/images/concrete.jpg"/><div class="p-cap"><div class="p-cap-title">Grey Marble Fireplace</div><div class="p-cap-loc">Burnaby</div></div></div>
+</div>
+<div class="proj-grid2" style="margin-top:4px">
+<div class="p2-item rv"><img alt="Black Gold Fireplace" decoding="async" id="p6" loading="lazy" src="/images/dark.jpg"/><div class="p-cap"><div class="p-cap-title">Black Gold Fireplace</div><div class="p-cap-loc">Vancouver</div></div></div>
+<div class="p2-item rv d1"><img alt="White Marble Fireplace" decoding="async" id="p7" loading="lazy" src="/images/soft-stone.jpg"/><div class="p-cap"><div class="p-cap-title">White Marble Fireplace</div><div class="p-cap-loc">Coquitlam</div></div></div>
+<div class="p2-item rv d2"><img alt="Dark Marble Column" decoding="async" id="p8" loading="lazy" src="/images/marble1.jpg"/><div class="p-cap"><div class="p-cap-title">Dark Marble Column</div><div class="p-cap-loc">Vancouver</div></div></div>
+</div>
+<div class="proj-grid2" style="margin-top:4px">
+<div class="p2-item rv"><img alt="Marble Column Detail" decoding="async" id="p9" loading="lazy" src="/images/concrete.jpg"/><div class="p-cap"><div class="p-cap-title">Marble Column Detail</div><div class="p-cap-loc">Vancouver</div></div></div>
+<div class="p2-item rv d1"><img alt="Decorative Ceiling" decoding="async" id="p10" loading="lazy" src="/images/silk.jpg"/><div class="p-cap"><div class="p-cap-title">Decorative Ceiling</div><div class="p-cap-loc">Vancouver</div></div></div>
+<div class="p2-item rv d2" style="background:var(--charcoal);display:flex;align-items:center;justify-content:center">
+<div style="text-align:center;padding:40px">
+<p class="sec-label" style="justify-content:center;margin-bottom:12px">And More</p>
+<p style="font-family:Cormorant Garamond,serif;font-size:28px;color:var(--cream)">Every project<br/><em style="color:var(--gold-l)">is unique</em></p>
+<a class="btn-p" href="#contact" style="margin-top:24px;display:inline-block">Book Consultation</a>
+</div>
+</div>
+</div>
+</section>
+<!-- TEXTURES -->
+<section class="textures" id="textures">
+<div class="sec-header">
+<p class="sec-label rv" style="justify-content:center">Our Finishes</p>
+<h2 class="sec-h rv d1" style="text-align:center">Textures &amp; <em>Materials</em></h2>
+</div>
+<div class="tex-grid">
+<div class="tex-card rv"><img alt="Warm Venetian" decoding="async" id="t1" loading="lazy" src="/images/marble1.jpg"/><div class="tex-overlay"><div class="tex-name">Warm Venetian</div><div class="tex-desc">Classic Italian plaster with warm golden undertones</div></div></div>
+<div class="tex-card rv d1"><img alt="Silver Metallic" decoding="async" id="t2" loading="lazy" src="/images/silk.jpg"/><div class="tex-overlay"><div class="tex-name">Silver Metallic</div><div class="tex-desc">Reflective metallic finish with cool silver tones</div></div></div>
+<div class="tex-card rv d2"><img alt="Grey Stone" decoding="async" id="t3" loading="lazy" src="/images/concrete.jpg"/><div class="tex-overlay"><div class="tex-name">Grey Stone</div><div class="tex-desc">Natural stone-inspired texture with depth and character</div></div></div>
+<div class="tex-card rv"><img alt="Pearl White" decoding="async" id="t4" loading="lazy" src="/images/soft-stone.jpg"/><div class="tex-overlay"><div class="tex-name">Pearl White</div><div class="tex-desc">Delicate pearl-white finish with subtle shimmer</div></div></div>
+<div class="tex-card rv d1"><img alt="Graphite Metallic" decoding="async" id="t5" loading="lazy" src="/images/dark.jpg"/><div class="tex-overlay"><div class="tex-name">Graphite Metallic</div><div class="tex-desc">Dark sophisticated metallic with stormy depth</div></div></div>
+<div class="tex-card rv d2"><img alt="Cream Gold" decoding="async" id="t6" loading="lazy" src="/images/sahara.jpg"/><div class="tex-overlay"><div class="tex-name">Cream Gold</div><div class="tex-desc">Soft cream with fine gold veining — timeless luxury</div></div></div>
+</div>
+<div class="tex-grid">
+<div class="tex-card">
+<img alt="Marble vein wall Vancouver" decoding="async" id="t7" loading="lazy" src="/images/marble1.jpg"/>
+<div class="tex-overlay">
+<div class="tex-name">Marble Vein Finish</div>
+<div class="tex-desc">Luxury marble-style walls with natural veins and depth.</div>
+</div>
+</div>
+<div class="tex-card">
+<img alt="Soft stone plaster Vancouver" decoding="async" id="t8" loading="lazy" src="/images/soft-stone.jpg"/>
+<div class="tex-overlay">
+<div class="tex-name">Soft Stone Texture</div>
+<div class="tex-desc">Natural matte finish with soft mineral movement.</div>
+</div>
+</div>
+<div class="tex-card">
+<img alt="Sahara metallic wall Vancouver" decoding="async" id="t9" loading="lazy" src="/images/sahara.jpg"/>
+<div class="tex-overlay">
+<div class="tex-name">Sahara Metallic</div>
+<div class="tex-desc">Light-reflective finish with warm metallic effect.</div>
+</div>
+</div>
+<div class="tex-card">
+<img alt="Concrete wall Vancouver" decoding="async" id="t10" loading="lazy" src="/images/concrete.jpg"/>
+<div class="tex-overlay">
+<div class="tex-name">Concrete Minimal</div>
+<div class="tex-desc">Modern concrete-style finish for minimal interiors.</div>
+</div>
+</div>
+<div class="tex-card">
+<img alt="Dark luxury wall Vancouver" decoding="async" id="t11" loading="lazy" src="/images/dark.jpg"/>
+<div class="tex-overlay">
+<div class="tex-name">Dark Luxury Wall</div>
+<div class="tex-desc">Deep textured finish for bold interior statements.</div>
+</div>
+</div>
+<div class="tex-card">
+<img alt="Silk metallic finish Vancouver" decoding="async" id="t12" loading="lazy" src="/images/silk.jpg"/>
+<div class="tex-overlay">
+<div class="tex-name">Silk Metallic</div>
+<div class="tex-desc">Soft reflective finish with elegant shimmer.</div>
+</div>
+</div>
+</div>
+<div class="tex-cta">
+<p>Not sure which finish fits your space?</p>
+<a class="btn-p" href="#visualization">Get Free Visualization</a>
+</div>
+</section>
 <!-- SERVICES -->
 <section class="services" id="services">
-  <div class="sec-header">
-    <p class="sec-label rv" style="justify-content:center">What We Do</p>
-    <h2 class="sec-h rv d1" style="text-align:center">Our <em>Specialties</em></h2>
-  </div>
-  <div class="srv-grid">
-    <div class="srv-card rv d1"><img id="srv1" src="" alt="Venetian Plaster"/><div class="srv-overlay"><div class="srv-num">01</div><div class="srv-line"></div><div class="srv-name">Venetian Plaster</div><div class="srv-desc">Classic Italian technique with marble dust and lime — luminous, depth-rich walls.</div></div></div>
-    <div class="srv-card rv d2"><img id="srv2" src="" alt="Stone Textures"/><div class="srv-overlay"><div class="srv-num">02</div><div class="srv-line"></div><div class="srv-name">Stone & Marble</div><div class="srv-desc">Hand-sculpted stone and marble finishes for fireplaces, feature walls and columns.</div></div></div>
-    <div class="srv-card rv d3"><img id="srv3" src="" alt="Metallic Finishes"/><div class="srv-overlay"><div class="srv-num">03</div><div class="srv-line"></div><div class="srv-name">Metallic Finishes</div><div class="srv-desc">Gold, silver and copper metallic plasters — couture-level finishes for luxury spaces.</div></div></div>
-  </div>
+<div class="sec-header">
+<p class="sec-label rv" style="justify-content:center">What We Do</p>
+<h2 class="sec-h rv d1" style="text-align:center">Our <em>Specialties</em></h2>
+</div>
+<div class="srv-grid">
+<div class="srv-card rv d1"><img alt="Venetian Plaster" decoding="async" id="srv1" loading="lazy" src="/images/concrete.jpg"><div class="srv-overlay"><div class="srv-num">01</div><div class="srv-line"></div><div class="srv-name">Venetian Plaster</div><div class="srv-desc">Classic Italian technique with marble dust and lime — luminous, depth-rich walls.</div></div></img></div>
+<div class="srv-card rv d2"><img alt="Stone Textures" decoding="async" id="srv2" loading="lazy" src="/images/marble1.jpg"><div class="srv-overlay"><div class="srv-num">02</div><div class="srv-line"></div><div class="srv-name">Stone &amp; Marble</div><div class="srv-desc">Hand-sculpted stone and marble finishes for fireplaces, feature walls and columns.</div></div></img></div>
+<div class="srv-card rv d3"><img alt="Metallic Finishes" decoding="async" id="srv3" loading="lazy" src="/images/sahara.jpg"><div class="srv-overlay"><div class="srv-num">03</div><div class="srv-line"></div><div class="srv-name">Metallic Finishes</div><div class="srv-desc">Gold, silver and copper metallic plasters — couture-level finishes for luxury spaces.</div></div></img></div>
+</div>
 </section>
-
 <!-- BLOG -->
 <section class="blog" id="blog">
-  <div class="sec-header">
-    <p class="sec-label rv" style="justify-content:center">Insights</p>
-    <h2 class="sec-h rv d1" style="text-align:center">From Our <em>Blog</em></h2>
-  </div>
-
-  <div class="blog-grid">
-
-    <article class="blog-card">
-      <a class="blog-card-link" href="/venetian-plaster-vancouver.html" aria-label="Read Venetian plaster Vancouver complete guide">
-        <div class="blog-visual" style="background-image:url('/images/venetianplaster2.png')" aria-label="Venetian plaster guide for Vancouver homes">
-          <span class="blog-tag">Vancouver Guide</span>
-        </div>
-        <div class="blog-body">
-          <div class="blog-date">March 2026</div>
-          <h3 class="blog-title">Venetian Plaster Vancouver: Complete Guide</h3>
-          <div class="blog-excerpt">
+<div class="sec-header">
+<p class="sec-label rv" style="justify-content:center">Insights</p>
+<h2 class="sec-h rv d1" style="text-align:center">From Our <em>Blog</em></h2>
+</div>
+<div class="blog-grid">
+<article class="blog-card">
+<a aria-label="Read Venetian plaster Vancouver complete guide" class="blog-card-link" href="/venetian-plaster-vancouver.html">
+<div aria-label="Venetian plaster guide for Vancouver homes" class="blog-visual" id="blog-visual-1">
+<span class="blog-tag">Vancouver Guide</span>
+</div>
+<div class="blog-body">
+<div class="blog-date">March 2026</div>
+<h3 class="blog-title">Venetian Plaster Vancouver: Complete Guide</h3>
+<div class="blog-excerpt">
             Learn what Venetian plaster is, where it works best, what it costs, and why Vancouver homeowners choose it over paint.
           </div>
-          <span class="blog-read">Read Article →</span>
-        </div>
-      </a>
-    </article>
-
-    <article class="blog-card">
-      <a class="blog-card-link" href="/fireplace-wall-vancouver.html" aria-label="Read fireplace wall ideas in Vancouver">
-        <div class="blog-visual" style="background-image:url('/images/venetianplaster5.png')" aria-label="Luxury marble fireplace wall in Vancouver">
-          <span class="blog-tag">Fireplace Ideas</span>
-        </div>
-        <div class="blog-body">
-          <div class="blog-date">March 2026</div>
-          <h3 class="blog-title">Luxury Marble Fireplace Wall in Vancouver</h3>
-          <div class="blog-excerpt">
+<span class="blog-read">Read Article →</span>
+</div>
+</a>
+</article>
+<article class="blog-card">
+<a aria-label="Read fireplace wall ideas in Vancouver" class="blog-card-link" href="/fireplace-wall-vancouver.html">
+<div aria-label="Luxury marble fireplace wall in Vancouver" class="blog-visual" id="blog-visual-2">
+<span class="blog-tag">Fireplace Ideas</span>
+</div>
+<div class="blog-body">
+<div class="blog-date">March 2026</div>
+<h3 class="blog-title">Luxury Marble Fireplace Wall in Vancouver</h3>
+<div class="blog-excerpt">
             Explore high-end fireplace wall ideas in Vancouver, including marble-look plaster finishes and modern feature wall concepts.
           </div>
-          <span class="blog-read">Read Article →</span>
-        </div>
-      </a>
-    </article>
-
-    <article class="blog-card">
-      <a class="blog-card-link" href="/venetian-plaster-cost-vancouver.html" aria-label="Read Venetian plaster cost Vancouver pricing guide">
-        <div class="blog-visual" style="background-image:url('/images/venetianplaster11.png')" aria-label="Venetian plaster cost guide for Vancouver">
-          <span class="blog-tag">Pricing Guide</span>
-        </div>
-        <div class="blog-body">
-          <div class="blog-date">April 2026</div>
-          <h3 class="blog-title">Venetian Plaster Cost Vancouver: Pricing Guide</h3>
-          <div class="blog-excerpt">
+<span class="blog-read">Read Article →</span>
+</div>
+</a>
+</article>
+<article class="blog-card">
+<a aria-label="Read Venetian plaster cost Vancouver pricing guide" class="blog-card-link" href="/venetian-plaster-cost-vancouver.html">
+<div aria-label="Venetian plaster cost guide for Vancouver" class="blog-visual" id="blog-visual-3">
+<span class="blog-tag">Pricing Guide</span>
+</div>
+<div class="blog-body">
+<div class="blog-date">April 2026</div>
+<h3 class="blog-title">Venetian Plaster Cost Vancouver: Pricing Guide</h3>
+<div class="blog-excerpt">
             Discover how much Venetian plaster costs in Vancouver, including feature walls, fireplace finishes, and custom designs.
           </div>
-          <span class="blog-read">Read Article →</span>
-        </div>
-      </a>
-    </article>
-
-  </div>
+<span class="blog-read">Read Article →</span>
+</div>
+</a>
+</article>
+</div>
 </section>
-
 <style>
   .sdl-shell {
     max-width: 1200px;
@@ -1585,264 +1494,255 @@ document.addEventListener('DOMContentLoaded', function() {
     .sdl-benefits-grid { grid-template-columns: 1fr; }
   }
 </style>
-
-
 <!-- PROCESS -->
 <section class="process">
-  <div class="sec-header">
-    <p class="sec-label rv" style="justify-content:center">How We Work</p>
-    <h2 class="sec-h rv d1" style="text-align:center">From Concept to <em>Completion</em></h2>
-  </div>
-  <div class="proc-grid">
-    <div class="proc-step rv">
-      <div class="proc-letter">A</div>
-      <div class="proc-title">Consultation & Vision</div>
-      <div class="proc-text">We start with an in-depth conversation to understand your aesthetic goals, the space, and the atmosphere you wish to create.</div>
-    </div>
-    <div class="proc-step rv d1">
-      <div class="proc-letter">B</div>
-      <div class="proc-title">Sample & Selection</div>
-      <div class="proc-text">We craft handmade samples on-site so you see and feel the exact finish, colour and texture before any commitment.</div>
-    </div>
-    <div class="proc-step rv d2">
-      <div class="proc-letter">C</div>
-      <div class="proc-title">Craftsmanship</div>
-      <div class="proc-text">Every coat is applied by hand with precision. We work clean, on schedule, and with deep respect for your space.</div>
-    </div>
-    <div class="proc-step rv d3">
-      <div class="proc-letter">D</div>
-      <div class="proc-title">Reveal & Guarantee</div>
-      <div class="proc-text">A final walkthrough together ensures every detail is perfect. All work is backed by our quality guarantee.</div>
-    </div>
-  </div>
+<div class="sec-header">
+<p class="sec-label rv" style="justify-content:center">How We Work</p>
+<h2 class="sec-h rv d1" style="text-align:center">From Concept to <em>Completion</em></h2>
+</div>
+<div class="proc-grid">
+<div class="proc-step rv">
+<div class="proc-letter">A</div>
+<div class="proc-title">Consultation &amp; Vision</div>
+<div class="proc-text">We start with an in-depth conversation to understand your aesthetic goals, the space, and the atmosphere you wish to create.</div>
+</div>
+<div class="proc-step rv d1">
+<div class="proc-letter">B</div>
+<div class="proc-title">Sample &amp; Selection</div>
+<div class="proc-text">We craft handmade samples on-site so you see and feel the exact finish, colour and texture before any commitment.</div>
+</div>
+<div class="proc-step rv d2">
+<div class="proc-letter">C</div>
+<div class="proc-title">Craftsmanship</div>
+<div class="proc-text">Every coat is applied by hand with precision. We work clean, on schedule, and with deep respect for your space.</div>
+</div>
+<div class="proc-step rv d3">
+<div class="proc-letter">D</div>
+<div class="proc-title">Reveal &amp; Guarantee</div>
+<div class="proc-text">A final walkthrough together ensures every detail is perfect. All work is backed by our quality guarantee.</div>
+</div>
+</div>
 </section>
-
 <!-- TESTIMONIALS -->
 <section class="testi">
-  <div class="sec-header">
-    <p class="sec-label rv" style="justify-content:center">Client Words</p>
-    <h2 class="sec-h rv d1" style="text-align:center">What They <em>Say</em></h2>
-  </div>
-  <div class="testi-grid">
-    <div class="testi-card rv d1">
-      <span class="quote">"</span>
-      <p class="testi-text">The Venetian plaster in our living room is absolutely stunning. Every guest comments on it. Stile di Leo brought our vision to life beyond what we imagined.</p>
-      <div class="testi-rule"></div>
-      <div class="testi-name">Sarah M.</div>
-      <div class="testi-loc">West Vancouver</div>
-    </div>
-    <div class="testi-card rv d2">
-      <span class="quote">"</span>
-      <p class="testi-text">Professional, punctual, and extraordinary craftsmanship. The stone texture wall is the centrepiece of our entire renovation. Worth every penny.</p>
-      <div class="testi-rule"></div>
-      <div class="testi-name">David K.</div>
-      <div class="testi-loc">Yaletown, Vancouver</div>
-    </div>
-    <div class="testi-card rv d3">
-      <span class="quote">"</span>
-      <p class="testi-text">As an interior designer I've worked with many plasterers. Stile di Leo is in a league of their own — precise, artistic, and a true pleasure to collaborate with.</p>
-      <div class="testi-rule"></div>
-      <div class="testi-name">Elena R.</div>
-      <div class="testi-loc">Interior Designer, Vancouver</div>
-    </div>
-  </div>
+<div class="sec-header">
+<p class="sec-label rv" style="justify-content:center">Client Words</p>
+<h2 class="sec-h rv d1" style="text-align:center">What They <em>Say</em></h2>
+</div>
+<div class="testi-grid">
+<div class="testi-card rv d1">
+<span class="quote">"</span>
+<p class="testi-text">The Venetian plaster in our living room is absolutely stunning. Every guest comments on it. Stile di Leo brought our vision to life beyond what we imagined.</p>
+<div class="testi-rule"></div>
+<div class="testi-name">Sarah M.</div>
+<div class="testi-loc">West Vancouver</div>
+</div>
+<div class="testi-card rv d2">
+<span class="quote">"</span>
+<p class="testi-text">Professional, punctual, and extraordinary craftsmanship. The stone texture wall is the centrepiece of our entire renovation. Worth every penny.</p>
+<div class="testi-rule"></div>
+<div class="testi-name">David K.</div>
+<div class="testi-loc">Yaletown, Vancouver</div>
+</div>
+<div class="testi-card rv d3">
+<span class="quote">"</span>
+<p class="testi-text">As an interior designer I've worked with many plasterers. Stile di Leo is in a league of their own — precise, artistic, and a true pleasure to collaborate with.</p>
+<div class="testi-rule"></div>
+<div class="testi-name">Elena R.</div>
+<div class="testi-loc">Interior Designer, Vancouver</div>
+</div>
+</div>
 </section>
-
 <!-- BENEFITS -->
 <section class="sdl-benefits">
-  <div class="sdl-shell">
-    <p class="sdl-kicker">Stile di Leo</p>
-    <h2 class="sdl-title">Why Homeowners Choose Us</h2>
-    <div class="sdl-benefits-grid">
-      <article class="sdl-benefit-card">
-        <h3>Handcrafted Finish</h3>
-        <p>Each wall is built by hand with attention to texture, depth, balance, and detail.</p>
-      </article>
-      <article class="sdl-benefit-card">
-        <h3>Marble-Level Aesthetic</h3>
-        <p>Get the visual impact of marble without the design limitations of heavy slabs.</p>
-      </article>
-      <article class="sdl-benefit-card">
-        <h3>Fully Custom Design</h3>
-        <p>Every finish is tailored to your light, layout, furnishings, and interior direction.</p>
-      </article>
-      <article class="sdl-benefit-card">
-        <h3>Vancouver Focused</h3>
-        <p>Serving Vancouver and the Lower Mainland with premium decorative wall finishes.</p>
-      </article>
-    </div>
-  </div>
+<div class="sdl-shell">
+<p class="sdl-kicker">Stile di Leo</p>
+<h2 class="sdl-title">Why Homeowners Choose Us</h2>
+<div class="sdl-benefits-grid">
+<article class="sdl-benefit-card">
+<h3>Handcrafted Finish</h3>
+<p>Each wall is built by hand with attention to texture, depth, balance, and detail.</p>
+</article>
+<article class="sdl-benefit-card">
+<h3>Marble-Level Aesthetic</h3>
+<p>Get the visual impact of marble without the design limitations of heavy slabs.</p>
+</article>
+<article class="sdl-benefit-card">
+<h3>Fully Custom Design</h3>
+<p>Every finish is tailored to your light, layout, furnishings, and interior direction.</p>
+</article>
+<article class="sdl-benefit-card">
+<h3>Vancouver Focused</h3>
+<p>Serving Vancouver and the Lower Mainland with premium decorative wall finishes.</p>
+</article>
+</div>
+</div>
 </section>
-
 <!-- SDL PROCESS -->
 <section class="sdl-process">
-  <div class="sdl-shell">
-    <p class="sdl-kicker">Process</p>
-    <h2 class="sdl-title">How It Works</h2>
-    <div class="sdl-process-grid">
-      <article class="sdl-step">
-        <span class="sdl-step-num">01</span>
-        <h3>Consultation</h3>
-        <p>Send photos and measurements. We review the space and suggest the right direction.</p>
-      </article>
-      <article class="sdl-step">
-        <span class="sdl-step-num">02</span>
-        <h3>Design</h3>
-        <p>We define texture, tone, finish style, and the overall visual mood of the wall.</p>
-      </article>
-      <article class="sdl-step">
-        <span class="sdl-step-num">03</span>
-        <h3>Execution</h3>
-        <p>Multi-layer handcrafted application with a clean, architectural, high-end result.</p>
-      </article>
-    </div>
-  </div>
+<div class="sdl-shell">
+<p class="sdl-kicker">Process</p>
+<h2 class="sdl-title">How It Works</h2>
+<div class="sdl-process-grid">
+<article class="sdl-step">
+<span class="sdl-step-num">01</span>
+<h3>Consultation</h3>
+<p>Send photos and measurements. We review the space and suggest the right direction.</p>
+</article>
+<article class="sdl-step">
+<span class="sdl-step-num">02</span>
+<h3>Design</h3>
+<p>We define texture, tone, finish style, and the overall visual mood of the wall.</p>
+</article>
+<article class="sdl-step">
+<span class="sdl-step-num">03</span>
+<h3>Execution</h3>
+<p>Multi-layer handcrafted application with a clean, architectural, high-end result.</p>
+</article>
+</div>
+</div>
 </section>
-
 <!-- SEO SERVICES -->
 <section class="sdl-services">
-  <div class="sdl-shell">
-    <p class="sdl-kicker">Services</p>
-    <h2 class="sdl-title">Explore Our Finishes</h2>
-    <p class="sdl-sub">Luxury wall finishes tailored for modern interiors across Vancouver and the Lower Mainland.</p>
-    <div class="sdl-links-grid">
-      <a href="/venetian-plaster-vancouver.html">Venetian Plaster Vancouver</a>
-      <a href="/feature-wall-vancouver.html">Feature Wall Vancouver</a>
-      <a href="/fireplace-wall-vancouver.html">Fireplace Wall Vancouver</a>
-      <a href="/venetian-plaster-cost-vancouver.html">Venetian plaster cost Vancouver</a>
-      <a href="/microcement-vancouver.html">Microcement Vancouver</a>
-    </div>
-  </div>
+<div class="sdl-shell">
+<p class="sdl-kicker">Services</p>
+<h2 class="sdl-title">Explore Our Finishes</h2>
+<p class="sdl-sub">Luxury wall finishes tailored for modern interiors across Vancouver and the Lower Mainland.</p>
+<div class="sdl-links-grid">
+<a href="/venetian-plaster-vancouver.html">Venetian Plaster Vancouver</a>
+<a href="/feature-wall-vancouver.html">Feature Wall Vancouver</a>
+<a href="/fireplace-wall-vancouver.html">Fireplace Wall Vancouver</a>
+<a href="/venetian-plaster-cost-vancouver.html">Venetian plaster cost Vancouver</a>
+<a href="/microcement-vancouver.html">Microcement Vancouver</a>
+</div>
+</div>
 </section>
-
 <!-- CTA -->
 <section class="cta" id="contact">
-  <div class="cta-bg" id="cta-bg"></div>
-  <div class="cta-overlay"></div>
-  <div class="cta-inner">
-    <p class="cta-eye rv">Ready to Transform Your Space?</p>
-    <h2 class="cta-h rv d1">Let's Create Something<br><em>Extraordinary</em></h2>
-    <p class="cta-sub rv d2">Based in Vancouver, serving the Greater Vancouver Area and all of BC. Every project begins with a free consultation.</p>
-    <div class="cta-btns rv d3">
-      <a href="tel:+16047732298" class="btn-p">+1 (604) 773-2298</a>
-      <a href="mailto:designstiledileo@gmail.com" class="btn-g">designstiledileo@gmail.com</a>
-    </div>
-    <div class="luxury-form-wrap">
-      <div class="luxury-form-intro">
-        <p class="luxury-form-kicker">Private Project Inquiry</p>
-        <h3 class="luxury-form-title">Request a Consultation</h3>
-        <p class="luxury-form-text">Tell us about your space, finish preferences, budget, and timing. We'll review the details and get back to you with the next steps.</p>
-      </div>
-      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form luxury-form">
-        <input type="hidden" name="form-name" value="contact"/>
-        <p style="display:none">
-          <label>Don't fill this out if you're human: <input name="bot-field"/></label>
-        </p>
-        <div class="luxury-grid">
-          <div class="luxury-field">
-            <label for="name">Full Name</label>
-            <input id="name" type="text" name="name" placeholder="Your full name" required/>
-          </div>
-          <div class="luxury-field">
-            <label for="email">Email</label>
-            <input id="email" type="email" name="email" placeholder="your@email.com" required/>
-          </div>
-          <div class="luxury-field">
-            <label for="phone">Phone</label>
-            <input id="phone" type="text" name="phone" placeholder="+1 (604) ..."/>
-          </div>
-          <div class="luxury-field">
-            <label for="location">Project Location</label>
-            <input id="location" type="text" name="location" placeholder="Vancouver, West Vancouver, Yaletown..."/>
-          </div>
-          <div class="luxury-field">
-            <label for="project-type">Project Type</label>
-            <select id="project-type" name="project_type" required>
-              <option value="">Select one</option>
-              <option>Venetian Plaster Wall</option>
-              <option>Fireplace Wall</option>
-              <option>Feature Wall</option>
-              <option>Decorative Finish</option>
-              <option>Luxury Interior Styling</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="luxury-field">
-            <label for="budget">Estimated Budget</label>
-            <select id="budget" name="budget">
-              <option value="">Select one</option>
-              <option>Under $2,000</option>
-              <option>$2,000 – $5,000</option>
-              <option>$5,000 – $10,000</option>
-              <option>$10,000+</option>
-            </select>
-          </div>
-          <div class="luxury-field luxury-field-full">
-            <label for="timeline">Desired Timeline</label>
-            <input id="timeline" type="text" name="timeline" placeholder="ASAP, 2–4 weeks, next month, just planning..."/>
-          </div>
-          <div class="luxury-field luxury-field-full">
-            <label for="message">Project Details</label>
-            <textarea id="message" name="message" rows="7" placeholder="Tell us what kind of finish you want, which room it is, whether it's a fireplace or feature wall, approximate size, reference style, and when you'd like to start." required></textarea>
-          </div>
-        </div>
-        <div class="luxury-form-footer">
-          <button type="submit" class="luxury-submit">Send Inquiry</button>
-          <p class="luxury-response-note">We typically respond within 24 hours.</p>
-        </div>
-      </form>
-    </div>
-  </div>
+<div class="cta-bg" id="cta-bg" style="background-image:url('/images/dark.jpg');"></div>
+<div class="cta-overlay"></div>
+<div class="cta-inner">
+<p class="cta-eye rv">Ready to Transform Your Space?</p>
+<h2 class="cta-h rv d1">Let's Create Something<br/><em>Extraordinary</em></h2>
+<p class="cta-sub rv d2">Based in Vancouver, serving the Greater Vancouver Area and all of BC. Every project begins with a free consultation.</p>
+<div class="cta-btns rv d3">
+<a class="btn-p" href="tel:+16047732298">+1 (604) 773-2298</a>
+<a class="btn-g" href="mailto:designstiledileo@gmail.com">designstiledileo@gmail.com</a>
+</div>
+<div class="luxury-form-wrap">
+<div class="luxury-form-intro">
+<p class="luxury-form-kicker">Private Project Inquiry</p>
+<h3 class="luxury-form-title">Request a Consultation</h3>
+<p class="luxury-form-text">Tell us about your space, finish preferences, budget, and timing. We'll review the details and get back to you with the next steps.</p>
+</div>
+<form class="contact-form luxury-form" data-netlify="true" method="POST" name="contact" netlify-honeypot="bot-field">
+<input name="form-name" type="hidden" value="contact">
+<p style="display:none">
+<label>Don't fill this out if you're human: <input name="bot-field"/></label>
+</p>
+<div class="luxury-grid">
+<div class="luxury-field">
+<label for="name">Full Name</label>
+<input id="name" name="name" placeholder="Your full name" required="" type="text">
+</input></div>
+<div class="luxury-field">
+<label for="email">Email</label>
+<input id="email" name="email" placeholder="your@email.com" required="" type="email">
+</input></div>
+<div class="luxury-field">
+<label for="phone">Phone</label>
+<input id="phone" name="phone" placeholder="+1 (604) ..." type="text"/>
+</div>
+<div class="luxury-field">
+<label for="location">Project Location</label>
+<input id="location" name="location" placeholder="Vancouver, West Vancouver, Yaletown..." type="text"/>
+</div>
+<div class="luxury-field">
+<label for="project-type">Project Type</label>
+<select id="project-type" name="project_type" required="">
+<option value="">Select one</option>
+<option>Venetian Plaster Wall</option>
+<option>Fireplace Wall</option>
+<option>Feature Wall</option>
+<option>Decorative Finish</option>
+<option>Luxury Interior Styling</option>
+<option>Other</option>
+</select>
+</div>
+<div class="luxury-field">
+<label for="budget">Estimated Budget</label>
+<select id="budget" name="budget">
+<option value="">Select one</option>
+<option>Under $2,000</option>
+<option>$2,000 – $5,000</option>
+<option>$5,000 – $10,000</option>
+<option>$10,000+</option>
+</select>
+</div>
+<div class="luxury-field luxury-field-full">
+<label for="timeline">Desired Timeline</label>
+<input id="timeline" name="timeline" placeholder="ASAP, 2–4 weeks, next month, just planning..." type="text"/>
+</div>
+<div class="luxury-field luxury-field-full">
+<label for="message">Project Details</label>
+<textarea id="message" name="message" placeholder="Tell us what kind of finish you want, which room it is, whether it's a fireplace or feature wall, approximate size, reference style, and when you'd like to start." required="" rows="7"></textarea>
+</div>
+</div>
+<div class="luxury-form-footer">
+<button class="luxury-submit" type="submit">Send Inquiry</button>
+<p class="luxury-response-note">We typically respond within 24 hours.</p>
+</div>
+</input></form>
+</div>
+</div>
 </section>
-
 <!-- FOOTER -->
 <footer>
-  <div class="foot-top">
-    <div>
-      <span class="foot-logo">Stile di <span>Leo</span></span>
-      <p class="foot-desc">Decorative walls and Venetian plaster artistry, handcrafted for discerning interiors across Vancouver and British Columbia.</p>
-    </div>
-    <div>
-      <div class="foot-col-h">Services</div>
-      <ul class="foot-links">
-        <li><a href="#services">Venetian Plaster</a></li>
-        <li><a href="#services">Stone Textures</a></li>
-        <li><a href="#services">Metallic Finishes</a></li>
-        <li><a href="#textures">Our Finishes</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="foot-col-h">Studio</div>
-      <ul class="foot-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Portfolio</a></li>
-        <li><a href="#blog">Blog</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="foot-col-h">Contact</div>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Vancouver, BC, Canada</p>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:8px">
-        <a href="tel:+16047732298" style="color:var(--muted);text-decoration:none">+1 (604) 773-2298</a>
-      </p>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:20px">
-        <a href="mailto:designstiledileo@gmail.com" style="color:var(--muted);text-decoration:none">designstiledileo@gmail.com</a>
-      </p>
-      <a href="#contact" class="btn-p" style="font-size:10px;padding:10px 20px">Free Consultation</a>
-    </div>
-  </div>
-  <div class="foot-bottom">
-    <p class="foot-copy">© 2026 Stile di Leo. All Rights Reserved. Vancouver, BC.</p>
-    <div class="foot-social">
-      <a href="/venetian-plaster-cost-vancouver.html">Venetian plaster cost Vancouver</a>
-      <a href="#">Instagram</a>
-      <a href="#">Houzz</a>
-      <a href="#">HomeStars</a>
-    </div>
-  </div>
+<div class="foot-top">
+<div>
+<span class="foot-logo">Stile di <span>Leo</span></span>
+<p class="foot-desc">Decorative walls and Venetian plaster artistry, handcrafted for discerning interiors across Vancouver and British Columbia.</p>
+</div>
+<div>
+<div class="foot-col-h">Services</div>
+<ul class="foot-links">
+<li><a href="#services">Venetian Plaster</a></li>
+<li><a href="#services">Stone Textures</a></li>
+<li><a href="#services">Metallic Finishes</a></li>
+<li><a href="#textures">Our Finishes</a></li>
+</ul>
+</div>
+<div>
+<div class="foot-col-h">Studio</div>
+<ul class="foot-links">
+<li><a href="#about">About</a></li>
+<li><a href="#projects">Portfolio</a></li>
+<li><a href="#blog">Blog</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</div>
+<div>
+<div class="foot-col-h">Contact</div>
+<p style="font-size:12px;color:var(--muted);margin-bottom:8px">Vancouver, BC, Canada</p>
+<p style="font-size:12px;color:var(--muted);margin-bottom:8px">
+<a href="tel:+16047732298" style="color:var(--muted);text-decoration:none">+1 (604) 773-2298</a>
+</p>
+<p style="font-size:12px;color:var(--muted);margin-bottom:20px">
+<a href="mailto:designstiledileo@gmail.com" style="color:var(--muted);text-decoration:none">designstiledileo@gmail.com</a>
+</p>
+<a class="btn-p" href="#contact" style="font-size:10px;padding:10px 20px">Free Consultation</a>
+</div>
+</div>
+<div class="foot-bottom">
+<p class="foot-copy">© 2026 Stile di Leo. All Rights Reserved. Vancouver, BC.</p>
+<div class="foot-social">
+<a href="/venetian-plaster-cost-vancouver.html">Venetian plaster cost Vancouver</a>
+<a href="#">Instagram</a>
+<a href="#">Houzz</a>
+<a href="#">HomeStars</a>
+</div>
+</div>
 </footer>
-
 <script>
   // Nav scroll
   const nav = document.getElementById('nav');
@@ -2003,5 +1903,4 @@ document.querySelectorAll('.tex-card').forEach(card => {
   });
 });
 </script>
-</body>
-</html>
+</section></body>
