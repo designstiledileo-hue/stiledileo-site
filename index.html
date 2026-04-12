@@ -409,6 +409,37 @@
       opacity: 0;
     }
     .tex-card:hover .tex-desc { max-height: 60px; opacity: 1; }
+.tex-card.active{
+  border-color:#cfae55;
+  box-shadow:0 0 0 1px rgba(207,174,85,.4),
+             0 20px 60px rgba(0,0,0,.4);
+}
+
+.tex-hidden{
+  display:none;
+}
+
+.tex-more-wrap{
+  text-align:center;
+  margin-top:40px;
+}
+
+.tex-more-btn{
+  display:inline-block;
+  padding:14px 32px;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#cfae55;
+  border:1px solid rgba(207,174,85,.25);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.tex-more-btn:hover{
+  background:rgba(207,174,85,.08);
+  border-color:#cfae55;
+}
 
     /* ── SERVICES ── */
     .services { padding: 120px 60px; background: var(--dark); }
@@ -1201,48 +1232,48 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <div class="tex-grid">
 
-  <div class="tex-card">
-    <img src="/images/marble1.jpg" alt="Marble vein wall Vancouver">
+  <div class="tex-card tex-hidden">
+    <img id="t7" src="" alt="Marble vein wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Marble Vein Finish</div>
       <div class="tex-desc">Luxury marble-style walls with natural veins and depth.</div>
     </div>
   </div>
 
-  <div class="tex-card">
-    <img src="/images/soft-stone.jpg" alt="Soft stone plaster Vancouver">
+  <div class="tex-card tex-hidden">
+    <img id="t8" src="" alt="Soft stone plaster Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Soft Stone Texture</div>
       <div class="tex-desc">Natural matte finish with soft mineral movement.</div>
     </div>
   </div>
 
-  <div class="tex-card">
-    <img src="/images/sahara.jpg" alt="Sahara metallic wall Vancouver">
+  <div class="tex-card tex-hidden">
+    <img id="t9" src="" alt="Sahara metallic wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Sahara Metallic</div>
       <div class="tex-desc">Light-reflective finish with warm metallic effect.</div>
     </div>
   </div>
 
-  <div class="tex-card">
-    <img src="/images/concrete.jpg" alt="Concrete wall Vancouver">
+  <div class="tex-card tex-hidden">
+    <img id="t10" src="" alt="Concrete wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Concrete Minimal</div>
       <div class="tex-desc">Modern concrete-style finish for minimal interiors.</div>
     </div>
   </div>
 
-  <div class="tex-card">
-    <img src="/images/dark.jpg" alt="Dark luxury wall Vancouver">
+  <div class="tex-card tex-hidden">
+    <img id="t11" src="" alt="Dark luxury wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Dark Luxury Wall</div>
       <div class="tex-desc">Deep textured finish for bold interior statements.</div>
     </div>
   </div>
 
-  <div class="tex-card">
-    <img src="/images/silk.jpg" alt="Silk metallic finish Vancouver">
+  <div class="tex-card tex-hidden">
+    <img id="t12" src="" alt="Silk metallic finish Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Silk Metallic</div>
       <div class="tex-desc">Soft reflective finish with elegant shimmer.</div>
@@ -1250,6 +1281,17 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
 </div>
+  <div class="tex-more-wrap">
+    <div class="tex-more-btn" id="showMoreTextures">
+      See More Textures
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:30px;">
+    <a href="#visualization" class="btn-p">
+      Get Free Visualization
+    </a>
+  </div>
 </section>
 
 <!-- SERVICES -->
@@ -1488,7 +1530,31 @@ document.addEventListener('DOMContentLoaded', function() {
     background: rgba(184,150,90,.04);
   }
   .seo-links { display: none; }
+.tex-hidden{
+  display:none;
+}
 
+.tex-more-wrap{
+  text-align:center;
+  margin-top:40px;
+}
+
+.tex-more-btn{
+  display:inline-block;
+  padding:14px 32px;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#cfae55;
+  border:1px solid rgba(207,174,85,.25);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.tex-more-btn:hover{
+  background:rgba(207,174,85,.08);
+  border-color:#cfae55;
+}
   /* ── MOBILE ── */
   @media (max-width: 900px) {
     .sdl-shell { padding: 0 24px; }
@@ -1914,6 +1980,15 @@ document.addEventListener('DOMContentLoaded', function() {
       console.warn('site.json not loaded', e);
     }
   })();
+</script>
+
+<script>
+document.getElementById('showMoreTextures').addEventListener('click', function() {
+  document.querySelectorAll('.tex-hidden').forEach(el => {
+    el.style.display = 'block';
+  });
+  this.style.display = 'none';
+});
 </script>
 </body>
 </html>
