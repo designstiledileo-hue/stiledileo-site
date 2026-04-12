@@ -1,3 +1,4 @@
+
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -409,37 +410,6 @@
       opacity: 0;
     }
     .tex-card:hover .tex-desc { max-height: 60px; opacity: 1; }
-.tex-card.active{
-  border-color:#cfae55;
-  box-shadow:0 0 0 1px rgba(207,174,85,.4),
-             0 20px 60px rgba(0,0,0,.4);
-}
-
-.tex-hidden{
-  display:none;
-}
-
-.tex-more-wrap{
-  text-align:center;
-  margin-top:40px;
-}
-
-.tex-more-btn{
-  display:inline-block;
-  padding:14px 32px;
-  font-size:11px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:#cfae55;
-  border:1px solid rgba(207,174,85,.25);
-  cursor:pointer;
-  transition:.3s;
-}
-
-.tex-more-btn:hover{
-  background:rgba(207,174,85,.08);
-  border-color:#cfae55;
-}
 
     /* ── SERVICES ── */
     .services { padding: 120px 60px; background: var(--dark); }
@@ -999,9 +969,116 @@
     grid-template-columns:1fr;
   }
 }
+
+    /* PREMIUM TEXTURE GRID */
+.tex-card{
+  position:relative;
+  overflow:hidden;
+  aspect-ratio:1;
+  cursor:pointer;
+  border:1px solid rgba(184,150,90,.12);
+  transition:all .4s ease;
+}
+
+.tex-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.6));
+  opacity:.6;
+  transition:.4s;
+}
+
+.tex-card:hover{
+  transform:translateY(-6px) scale(1.02);
+  border-color:rgba(212,176,122,.4);
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+
+.tex-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 1s ease;
+}
+
+.tex-card:hover img{
+  transform:scale(1.08);
+}
+
+.tex-overlay{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:26px;
+  z-index:2;
+}
+
+.tex-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+  color:#fff;
+  margin-bottom:6px;
+}
+
+.tex-desc{
+  font-size:12px;
+  color:#cfc6b8;
+  opacity:0;
+  transform:translateY(10px);
+  transition:.4s;
+}
+
+.tex-card:hover .tex-desc{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.tex-cta{
+  text-align:center;
+  margin-top:50px;
+}
+
+.tex-cta p{
+  color:#8e8478;
+  margin-bottom:14px;
+}
+
+.tex-card.active{
+  border-color:#cfae55;
+  box-shadow:0 0 0 1px rgba(207,174,85,.4),
+             0 20px 60px rgba(0,0,0,.4);
+}
+
+.tex-hidden{
+  display:none;
+}
+
+.tex-more-wrap{
+  text-align:center;
+  margin-top:40px;
+}
+
+.tex-more-btn{
+  display:inline-block;
+  padding:14px 32px;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#cfae55;
+  border:1px solid rgba(207,174,85,.25);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.tex-more-btn:hover{
+  background:rgba(207,174,85,.08);
+  border-color:#cfae55;
+}
   </style>
-<link rel="icon" type="image/png" href="/images/favicon.png">
-<link rel="apple-touch-icon" href="/images/favicon.png">
+<link rel="icon" type="image/png" href="https://stiledileo.com/images/favicon.png">
+<link rel="apple-touch-icon" href="https://stiledileo.com/images/favicon.png">
 </head>
 <body>
 <div class="diamond-cursor hidden" id="diamond-cursor" aria-hidden="true"></div>
@@ -1031,6 +1108,7 @@
 // Set images on load
 document.addEventListener('DOMContentLoaded', function() {
   const set = (id, key) => { const el = document.getElementById(id); if(el && IMGS[key]) el.src = IMGS[key]; };
+  const setBg = (id, key) => { const el = document.getElementById(id); if(el && IMGS[key]) el.style.backgroundImage = `url(${IMGS[key]})`; };
   set('hero-img', 'hero');
   set('about-img', 'venetian');
   set('p1', 'hero');
@@ -1053,9 +1131,9 @@ document.addEventListener('DOMContentLoaded', function() {
   set('srv2', 'column');
   set('srv3', 'golden_veins');
   set('cta-bg-img', 'black_marble');
-  set('blog-img1', 'venetian');
-  set('blog-img2', 'column');
-  set('blog-img3', 'golden_veins');
+  setBg('blog-visual-1', 'venetian');
+  setBg('blog-visual-2', 'fireplace_grey');
+  setBg('blog-visual-3', 'golden_veins');
   // hero bg
   const heroBg = document.getElementById('hero-bg');
   if(heroBg && IMGS['hero']) heroBg.style.backgroundImage = `url(${IMGS['hero']})`;
@@ -1093,7 +1171,6 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
   <section class="viz-offer" id="visualization">
-<section class="viz-offer">
   <div class="viz-inner">
 
     <p class="viz-kicker">Free Design Concept</p>
@@ -1228,12 +1305,12 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="tex-card rv d2"><img id="t3" src="" alt="Grey Stone"/><div class="tex-overlay"><div class="tex-name">Grey Stone</div><div class="tex-desc">Natural stone-inspired texture with depth and character</div></div></div>
     <div class="tex-card rv"><img id="t4" src="" alt="Pearl White"/><div class="tex-overlay"><div class="tex-name">Pearl White</div><div class="tex-desc">Delicate pearl-white finish with subtle shimmer</div></div></div>
     <div class="tex-card rv d1"><img id="t5" src="" alt="Graphite Metallic"/><div class="tex-overlay"><div class="tex-name">Graphite Metallic</div><div class="tex-desc">Dark sophisticated metallic with stormy depth</div></div></div>
-    <div class="tex-card rv d2"><img id="t6" src="" alt="Cream Gold"/><div class="tex-overlay"><div class="tex-name">Cream Gold</div><div class="tex-desc">Soft cream with fine gold veining — timeless luxury</div></div></div>
-  </div>
+   <div class="tex-card rv d2"><img id="t6" src="images/cream-gold.jpg" alt="Cream Gold"/><div class="tex-overlay"><div class="tex-name">Cream Gold</div><div class="tex-desc">Soft cream with fine gold veining — timeless luxury</div></div></div>
+</div>
   <div class="tex-grid">
 
   <div class="tex-card tex-hidden">
-    <img id="t7" src="" alt="Marble vein wall Vancouver">
+    <img id="t7" src="https://stiledileo.com/images/venetianplaster8.jpg" alt="Marble vein wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Marble Vein Finish</div>
       <div class="tex-desc">Luxury marble-style walls with natural veins and depth.</div>
@@ -1241,7 +1318,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t8" src="" alt="Soft stone plaster Vancouver">
+    <img id="t8" src="https://stiledileo.com/images/soft-stone.jpg" alt="Soft stone plaster Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Soft Stone Texture</div>
       <div class="tex-desc">Natural matte finish with soft mineral movement.</div>
@@ -1249,7 +1326,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t9" src="" alt="Sahara metallic wall Vancouver">
+    <img id="t9" src="https://stiledileo.com/images/silk.jpg" alt="Sahara metallic wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Sahara Metallic</div>
       <div class="tex-desc">Light-reflective finish with warm metallic effect.</div>
@@ -1257,15 +1334,15 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t10" src="" alt="Concrete wall Vancouver">
+    <img id="t10" src="https://stiledileo.com/images/marble1.jpg" alt="Concrete wall Vancouver">
     <div class="tex-overlay">
-      <div class="tex-name">Concrete Minimal</div>
-      <div class="tex-desc">Modern concrete-style finish for minimal interiors.</div>
+      <div class="tex-name">Marble reflection</div>
+      <div class="tex-desc">Luxury marble-style walls with natural veins and depth.</div>
     </div>
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t11" src="" alt="Dark luxury wall Vancouver">
+    <img id="t11" src="https://stiledileo.com/images/dark.jpg" alt="Dark luxury wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Dark Luxury Wall</div>
       <div class="tex-desc">Deep textured finish for bold interior statements.</div>
@@ -1273,10 +1350,10 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t12" src="" alt="Silk metallic finish Vancouver">
+    <img id="t12" src="https://stiledileo.com/images/concrete.jpg" alt="Silk metallic finish Vancouver">
     <div class="tex-overlay">
-      <div class="tex-name">Silk Metallic</div>
-      <div class="tex-desc">Soft reflective finish with elegant shimmer.</div>
+      <div class="tex-name">Concrete minimal</div>
+      <div class="tex-desc">Modern concrete-style finish for minimal interiors.</div>
     </div>
   </div>
 
@@ -1318,7 +1395,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <article class="blog-card">
       <a class="blog-card-link" href="/venetian-plaster-vancouver.html" aria-label="Read Venetian plaster Vancouver complete guide">
-        <div class="blog-visual" style="background-image:url('/images/venetianplaster2.png')" aria-label="Venetian plaster guide for Vancouver homes">
+        <div class="blog-visual" id="blog-visual-1" aria-label="Venetian plaster guide for Vancouver homes">
           <span class="blog-tag">Vancouver Guide</span>
         </div>
         <div class="blog-body">
@@ -1334,7 +1411,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <article class="blog-card">
       <a class="blog-card-link" href="/fireplace-wall-vancouver.html" aria-label="Read fireplace wall ideas in Vancouver">
-        <div class="blog-visual" style="background-image:url('/images/venetianplaster5.png')" aria-label="Luxury marble fireplace wall in Vancouver">
+        <div class="blog-visual" id="blog-visual-2" aria-label="Luxury marble fireplace wall in Vancouver">
           <span class="blog-tag">Fireplace Ideas</span>
         </div>
         <div class="blog-body">
@@ -1350,7 +1427,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     <article class="blog-card">
       <a class="blog-card-link" href="/venetian-plaster-cost-vancouver.html" aria-label="Read Venetian plaster cost Vancouver pricing guide">
-        <div class="blog-visual" style="background-image:url('/images/venetianplaster11.png')" aria-label="Venetian plaster cost guide for Vancouver">
+        <div class="blog-visual" id="blog-visual-3" aria-label="Venetian plaster cost guide for Vancouver">
           <span class="blog-tag">Pricing Guide</span>
         </div>
         <div class="blog-body">
@@ -1530,31 +1607,7 @@ document.addEventListener('DOMContentLoaded', function() {
     background: rgba(184,150,90,.04);
   }
   .seo-links { display: none; }
-.tex-hidden{
-  display:none;
-}
 
-.tex-more-wrap{
-  text-align:center;
-  margin-top:40px;
-}
-
-.tex-more-btn{
-  display:inline-block;
-  padding:14px 32px;
-  font-size:11px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:#cfae55;
-  border:1px solid rgba(207,174,85,.25);
-  cursor:pointer;
-  transition:.3s;
-}
-
-.tex-more-btn:hover{
-  background:rgba(207,174,85,.08);
-  border-color:#cfae55;
-}
   /* ── MOBILE ── */
   @media (max-width: 900px) {
     .sdl-shell { padding: 0 24px; }
@@ -1983,12 +2036,37 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-document.getElementById('showMoreTextures').addEventListener('click', function() {
+document.querySelectorAll('.tex-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.tex-card').forEach(c => c.classList.remove('active'));
+    card.classList.add('active');
+  });
+});
+</script>
+<script>
+const showMoreTexturesBtn = document.getElementById('showMoreTextures');
+if (showMoreTexturesBtn) {
+  showMoreTexturesBtn.addEventListener('click', function() {
+  const textureImageMap = {
+    t7: 'https://stiledileo.com/images/sahara.jpg',
+    t8: 'https://stiledileo.com/images/soft-stone.jpg',
+    t9: 'https://stiledileo.com/images/silk.jpg',
+    t10: 'https://stiledileo.com/images/marble1.jpg',
+    t11: 'https://stiledileo.com/images/dark.jpg',
+    t12: 'https://stiledileo.com/images/concrete.jpg'
+  };
+
   document.querySelectorAll('.tex-hidden').forEach(el => {
-    el.style.display = 'block';
+    el.classList.remove('tex-hidden');
+
+    const img = el.querySelector('img');
+    if (img && (!img.getAttribute('src') || img.getAttribute('src') === '') && textureImageMap[img.id]) {
+      img.src = textureImageMap[img.id];
+    }
   });
   this.style.display = 'none';
-});
+  });
+}
 </script>
 </body>
 </html>
