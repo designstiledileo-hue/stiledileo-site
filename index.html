@@ -337,13 +337,16 @@
       grid-template-columns: 1fr 1fr;
       min-height: 85vh;
     }
-    .about-img { position: relative; overflow: hidden; }
-    .about-img img {
+    .about-img { position: relative; overflow: hidden; background: #14110f; }
+    .about-img img,
+    .about-img video {
       width: 100%; height: 100%;
       object-fit: cover;
       transition: transform 1.2s var(--ease);
+      display: block;
     }
-    .about-img:hover img { transform: scale(1.05); }
+    .about-img:hover img,
+    .about-img:hover video { transform: scale(1.02); }
     .about-content {
       background: var(--charcoal);
       padding: 100px 72px;
@@ -1180,7 +1183,6 @@ const IMGS = {
 // Set images on load
 document.addEventListener('DOMContentLoaded', function() {
   const set = (id, key) => { const el = document.getElementById(id); if(el && IMGS[key]) el.src = IMGS[key]; };
-  set('about-img', 'venetian');
   set('p1', 'project_metamorphosis');
   set('p2', 'black_marble');
   set('p3', 'golden_veins');
@@ -1326,7 +1328,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-img rv"><img id="about-img" src="" alt="Venetian plaster texture" loading="lazy" decoding="async"/></div>
+  <div class="about-img rv">
+    <video id="about-process-video" muted loop playsinline autoplay preload="metadata" poster="/images/homepage/about.jpg" aria-label="Hand applying Venetian plaster material in the Our Story section">
+      <source src="/videos/homepage/process-application.mp4" type="video/mp4">
+      <source src="/videos/homepage/process-application.mov" type="video/quicktime">
+    </video>
+  </div>
   <div class="about-content">
     <p class="sec-label rv">Our Story</p>
     <h2 class="sec-h rv d1">Rooted in Craft,<br>Built on <em>Artistry</em></h2>
@@ -1359,12 +1366,12 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="proj-grid2" style="margin-top:4px">
     <div class="p2-item rv"><img id="p9" src="" alt="Marble Column Detail" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Marble Column Detail</div><div class="p-cap-loc">Vancouver</div></div></div>
     <div class="p2-item rv d1"><img id="p10" src="" alt="Decorative Ceiling" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Decorative Ceiling</div><div class="p-cap-loc">Vancouver</div></div></div>
-    <div class="p2-item rv d2">
-      <video muted loop playsinline autoplay preload="none" poster="/images/homepage/about.jpg" aria-label="Hand applying Venetian plaster material">
-        <source src="/videos/homepage/process-application.mp4" type="video/mp4">
-        <source src="/videos/homepage/process-application.mov" type="video/quicktime">
-      </video>
-      <div class="p-cap"><div class="p-cap-title">Applied by Hand</div><div class="p-cap-loc">Craft Process</div></div>
+    <div class="p2-item rv d2" style="background:var(--charcoal);display:flex;align-items:center;justify-content:center">
+      <div style="text-align:center;padding:40px">
+        <p class="sec-label" style="justify-content:center;margin-bottom:12px">And More</p>
+        <p style="font-family:Cormorant Garamond,serif;font-size:28px;color:var(--cream)">Every project<br><em style="color:var(--gold-l)">is unique</em></p>
+        <a href="#contact" class="btn-p" style="margin-top:24px;display:inline-block">Request Consultation</a>
+      </div>
     </div>
   </div>
 </section>
@@ -2029,6 +2036,15 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('[data-bg]:not(.rv)').forEach(el => {
     io.observe(el);
   });
+
+  const aboutProcessVideo = document.getElementById('about-process-video');
+  if (aboutProcessVideo) {
+    const tunePlayback = () => {
+      aboutProcessVideo.playbackRate = 0.85;
+    };
+    tunePlayback();
+    aboutProcessVideo.addEventListener('loadedmetadata', tunePlayback, { once: true });
+  }
 
   (async function(){
     const isFinePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
