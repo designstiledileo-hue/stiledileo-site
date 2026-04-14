@@ -89,6 +89,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="preload" as="image" href="/images/homepage/hero.jpg" fetchpriority="high"/>
+  <link rel="preload" as="video" href="/videos/homepage/hero-luxury.mp4"/>
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"/>
 
@@ -193,8 +194,12 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-size: cover;
-      background-position: center;
+      overflow: hidden;
+    }
+    .hero-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       transform: scale(1.08);
       animation: hzoom 14s var(--ease) forwards;
     }
@@ -409,12 +414,14 @@
     .p-item:nth-child(3) { grid-column: 1/5; aspect-ratio: 1; }
     .p-item:nth-child(4) { grid-column: 5/9; aspect-ratio: 1; }
     .p-item:nth-child(5) { grid-column: 9/13; aspect-ratio: 1; }
-    .p-item img {
+    .p-item img,
+    .p-item video {
       width: 100%; height: 100%;
       object-fit: cover;
       transition: transform .9s var(--ease);
     }
-    .p-item:hover img { transform: scale(1.07); }
+    .p-item:hover img,
+    .p-item:hover video { transform: scale(1.07); }
     .p-cap {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -428,12 +435,14 @@
     .p-cap-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #fff; }
     .p-cap-loc { font-size: 10px; letter-spacing: 2px; color: var(--gold); margin-top: 5px; }
     .p2-item { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4/3; }
-    .p2-item img {
+    .p2-item img,
+    .p2-item video {
       width: 100%; height: 100%;
       object-fit: cover;
       transition: transform .9s var(--ease);
     }
-    .p2-item:hover img { transform: scale(1.07); }
+    .p2-item:hover img,
+    .p2-item:hover video { transform: scale(1.07); }
     .p2-item .p-cap { opacity: 0; transform: translateY(6px); }
     .p2-item:hover .p-cap { opacity: 1; transform: translateY(0); }
 
@@ -1162,7 +1171,10 @@ const IMGS = {
   tex_silver: '/images/silk.jpg',
   tex_grey: '/images/soft-stone.jpg',
   tex_pearl: '/images/marble1.jpg',
-  tex_graphite: '/images/dark.jpg'
+  tex_graphite: '/images/dark.jpg',
+  srv_venetian: '/images/homepage/about.jpg',
+  srv_feature: '/images/homepage/luxury-spa.jpg',
+  srv_fireplace: '/images/homepage/blog-fireplace.jpg'
 };
 </script>
 
@@ -1186,9 +1198,9 @@ document.addEventListener('DOMContentLoaded', function() {
   set('t3', 'tex_grey');
   set('t4', 'tex_pearl');
   set('t5', 'tex_graphite');
-  set('srv1', 'fireplace_grey');
-  set('srv2', 'column');
-  set('srv3', 'golden_veins');
+  set('srv1', 'srv_venetian');
+  set('srv2', 'srv_feature');
+  set('srv3', 'srv_fireplace');
   const lazyBgMap = {
     'blog-visual-1': IMGS['venetian'],
     'blog-visual-2': IMGS['fireplace_grey'],
@@ -1219,7 +1231,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-bg" id="hero-bg" style="background-image:url('/images/homepage/hero.jpg')"></div>
+  <div class="hero-bg" id="hero-bg">
+    <video autoplay muted loop playsinline preload="metadata" poster="/images/homepage/hero.jpg" aria-label="Luxury decorative wall showcase">
+      <source src="/videos/homepage/hero-luxury.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <p class="hero-tag">Vancouver, BC · Venetian Plaster, Feature Walls & Fireplace Walls</p>
@@ -1343,7 +1359,12 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="p2-item rv d2"><img id="p8" src="" alt="Dark Marble Column" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Dark Marble Column</div><div class="p-cap-loc">Vancouver</div></div></div>
   </div>
   <div class="proj-grid2" style="margin-top:4px">
-    <div class="p2-item rv"><img id="p9" src="" alt="Marble Column Detail" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Marble Column Detail</div><div class="p-cap-loc">Vancouver</div></div></div>
+    <div class="p2-item rv">
+      <video muted loop playsinline autoplay preload="none" poster="/images/homepage/about.jpg" aria-label="Hand applying Venetian plaster material">
+        <source src="/videos/homepage/process-application.mov" type="video/quicktime">
+      </video>
+      <div class="p-cap"><div class="p-cap-title">Applied by Hand</div><div class="p-cap-loc">Craft Process</div></div>
+    </div>
     <div class="p2-item rv d1"><img id="p10" src="" alt="Decorative Ceiling" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Decorative Ceiling</div><div class="p-cap-loc">Vancouver</div></div></div>
     <div class="p2-item rv d2" style="background:var(--charcoal);display:flex;align-items:center;justify-content:center">
       <div style="text-align:center;padding:40px">
@@ -1389,7 +1410,7 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t9" src="/images/silk.jpg" loading="lazy" decoding="async" alt="Sahara metallic wall Vancouver">
+    <img id="t9" src="/images/sahara.jpg" loading="lazy" decoding="async" alt="Sahara metallic wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Sahara Metallic</div>
       <div class="tex-desc">Light-reflective finish with warm metallic effect.</div>
@@ -1397,10 +1418,10 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t10" src="/images/marble1.jpg" loading="lazy" decoding="async" alt="Marble vein wall Vancouver">
+    <img id="t10" src="/images/concrete.jpg" loading="lazy" decoding="async" alt="Concrete wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Concrete Minimal</div>
-      <div class="tex-desc">Luxury marble-style walls with natural veins and depth.</div>
+      <div class="tex-desc">Refined concrete-style finish for quiet, minimal architectural spaces.</div>
     </div>
   </div>
 
@@ -1413,10 +1434,10 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t12" src="/images/concrete.jpg" loading="lazy" decoding="async" alt="Concrete wall Vancouver">
+    <img id="t12" src="/images/silk.jpg" loading="lazy" decoding="async" alt="Silk metallic wall Vancouver">
     <div class="tex-overlay">
       <div class="tex-name">Silk Metallic</div>
-      <div class="tex-desc">Modern concrete-style finish for minimal interiors.</div>
+      <div class="tex-desc">Subtle reflective movement for elegant, light-catching interiors.</div>
     </div>
   </div>
   </div>
