@@ -468,6 +468,28 @@
       line-height: 1.6;
     }
 
+    .hero-mobile-links {
+      display: none;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .hero-mobile-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.64rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(239, 231, 220, 0.82);
+    }
+
     .hero-mobile-frame {
       display: none;
     }
@@ -1396,6 +1418,10 @@
         display: block;
       }
 
+      .hero-mobile-links {
+        display: flex;
+      }
+
       .section-head-media {
         min-height: 220px;
       }
@@ -1544,6 +1570,12 @@
         <div class="btn-row">
           <a href="#contact" class="btn btn-primary">Get Free Visualization</a>
           <a href="#projects" class="btn btn-secondary">View Projects</a>
+        </div>
+        <div class="hero-mobile-links">
+          <a href="#projects">Projects</a>
+          <a href="#textures">Finishes</a>
+          <a href="/blog.html">Blog</a>
+          <a href="#process">Process</a>
         </div>
         <p class="hero-note">Premium finishes for fireplaces, feature walls, and refined interiors</p>
         <div class="hero-mobile-frame">
