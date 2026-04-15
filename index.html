@@ -404,6 +404,10 @@
       transform: scale(1.08);
     }
 
+    .hero-mobile-video {
+      display: none;
+    }
+
     @keyframes heroZoom {
       to {
         transform: scale(1);
@@ -1282,6 +1286,14 @@
         padding-top: 132px;
       }
 
+      .hero-desktop-video {
+        display: none;
+      }
+
+      .hero-mobile-video {
+        display: block;
+      }
+
       .hero-title {
         font-size: clamp(3.2rem, 13vw, 5.4rem);
       }
@@ -1417,10 +1429,14 @@
 
   <header class="hero">
     <div class="hero-media">
-      <video autoplay muted loop playsinline preload="metadata" poster="/images/homepage/hero.jpg" aria-label="Luxury decorative fireplace wall in Vancouver interior">
+      <video class="hero-desktop-video" autoplay muted loop playsinline preload="metadata" poster="/images/homepage/hero.jpg" aria-label="Luxury decorative fireplace wall in Vancouver interior">
         <source src="/videos/homepage/hero-new.mp4" type="video/mp4">
         <source src="/videos/homepage/hero-luxury.mp4" type="video/mp4">
         <img src="/images/homepage/hero.jpg" alt="Luxury decorative fireplace wall in Vancouver interior">
+      </video>
+      <video class="hero-mobile-video" autoplay muted loop playsinline preload="auto" poster="/images/homepage/hero.jpg" aria-label="Hand applying decorative wall material for mobile hero">
+        <source src="/videos/homepage/process-application-mobile.mp4" type="video/mp4">
+        <img src="/images/homepage/hero.jpg" alt="Hand applying decorative wall material">
       </video>
     </div>
     <div class="hero-overlay"></div>
