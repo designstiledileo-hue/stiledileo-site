@@ -148,6 +148,17 @@
       margin-bottom: 42px;
     }
 
+    .section-head.has-media {
+      grid-template-columns: minmax(0, 0.88fr) minmax(280px, 0.78fr);
+      align-items: end;
+      gap: 28px;
+    }
+
+    .section-head-copy {
+      display: grid;
+      gap: 18px;
+    }
+
     .section-title {
       font-family: "Cormorant Garamond", serif;
       font-size: clamp(2.5rem, 5vw, 4.5rem);
@@ -167,6 +178,77 @@
       font-size: 0.98rem;
       line-height: 1.95;
       color: var(--muted);
+    }
+
+    .section-head-media {
+      position: relative;
+      min-height: 280px;
+      overflow: hidden;
+      border-radius: calc(var(--radius) + 2px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: #15110f;
+      box-shadow: 0 18px 52px rgba(0, 0, 0, 0.22);
+      isolation: isolate;
+    }
+
+    .section-head-media::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.72;
+    }
+
+    .section-head-media img,
+    .section-head-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 1.2s var(--ease), filter 1.1s var(--ease);
+      filter: saturate(0.96);
+    }
+
+    .section-head-media:hover img,
+    .section-head-media:hover video {
+      transform: scale(1.04);
+      filter: saturate(1);
+    }
+
+    .section-head-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 10, 10, 0.05), rgba(10, 10, 10, 0.62));
+      z-index: 1;
+    }
+
+    .section-head-media-copy {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 8px;
+    }
+
+    .section-head-media-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+      line-height: 1;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .section-head-media-text {
+      max-width: 34ch;
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: rgba(239, 231, 220, 0.78);
     }
 
     .site-nav {
@@ -1115,7 +1197,8 @@
     @media (max-width: 1100px) {
       .hero-content,
       .featured-grid,
-      .projects-grid {
+      .projects-grid,
+      .section-head.has-media {
         grid-template-columns: 1fr;
       }
 
@@ -1183,6 +1266,10 @@
 
       .hero-content {
         gap: 26px;
+      }
+
+      .section-head-media {
+        min-height: 220px;
       }
 
       .statement-card,
@@ -1345,10 +1432,20 @@
 
     <section class="projects" id="projects">
       <div class="shell">
-        <div class="section-head reveal">
-          <span class="eyebrow">Curated Projects</span>
-          <h2 class="section-title">A more editorial view of <em>your walls</em></h2>
-          <p class="section-copy">The work keeps the newer editorial framing, but the approved projects stay intact: the same photographs, the same names, and a fuller collection that better reflects the range of completed surfaces.</p>
+        <div class="section-head has-media reveal">
+          <div class="section-head-copy">
+            <span class="eyebrow">Curated Projects</span>
+            <h2 class="section-title">A more editorial view of <em>your walls</em></h2>
+            <p class="section-copy">The work keeps the newer editorial framing, but the approved projects stay intact: the same photographs, the same names, and a fuller collection that better reflects the range of completed surfaces.</p>
+          </div>
+          <article class="section-head-media reveal delay-1">
+            <img src="/images/Fire-place-vancouver2.png" alt="Black marble fireplace wall detail">
+            <div class="section-head-media-copy">
+              <span class="project-kicker">Selected Work</span>
+              <h3 class="section-head-media-title">Black Marble Fireplace</h3>
+              <p class="section-head-media-text">A supporting editorial frame that keeps the section visually anchored before the full project grid begins.</p>
+            </div>
+          </article>
         </div>
 
         <div class="projects-grid">
@@ -1503,10 +1600,23 @@
 
     <section class="textures" id="textures">
       <div class="shell">
-        <div class="section-head reveal">
-          <span class="eyebrow">Textures And Finishes</span>
-          <h2 class="section-title">Tactile finishes with a <em>quieter luxury</em></h2>
-          <p class="section-copy">The section keeps the cleaner, calmer presentation from the newer design, but restores the fuller approved material library so the homepage feels complete again.</p>
+        <div class="section-head has-media reveal">
+          <div class="section-head-copy">
+            <span class="eyebrow">Textures And Finishes</span>
+            <h2 class="section-title">Tactile finishes with a <em>quieter luxury</em></h2>
+            <p class="section-copy">The section keeps the cleaner, calmer presentation from the newer design, but restores the fuller approved material library so the homepage feels complete again.</p>
+          </div>
+          <article class="section-head-media reveal delay-1">
+            <video autoplay muted loop playsinline preload="metadata" poster="/images/cream-gold.jpg" aria-label="Hand applying Venetian plaster with a trowel">
+              <source src="/videos/homepage/process-application.mp4" type="video/mp4">
+              <source src="/videos/homepage/process-application.mov" type="video/quicktime">
+            </video>
+            <div class="section-head-media-copy">
+              <span class="texture-kicker">Material In Motion</span>
+              <h3 class="section-head-media-title">The finish begins in layers</h3>
+              <p class="section-head-media-text">A restrained craft moment fills the empty space while staying fully aligned with the material story of the section.</p>
+            </div>
+          </article>
         </div>
 
         <div class="textures-grid">
@@ -1641,10 +1751,20 @@
 
     <section class="blog" id="blog">
       <div class="shell">
-        <div class="section-head reveal">
-          <span class="eyebrow">Insights</span>
-          <h2 class="section-title">From Our <em>Blog</em></h2>
-          <p class="section-copy">The homepage keeps a focused editorial layout, but the blog returns as part of the approved structure so design guidance, pricing, and fireplace ideas stay visible from the main entry point.</p>
+        <div class="section-head has-media reveal">
+          <div class="section-head-copy">
+            <span class="eyebrow">Insights</span>
+            <h2 class="section-title">From Our <em>Blog</em></h2>
+            <p class="section-copy">The homepage keeps a focused editorial layout, but the blog returns as part of the approved structure so design guidance, pricing, and fireplace ideas stay visible from the main entry point.</p>
+          </div>
+          <article class="section-head-media reveal delay-1">
+            <img src="/images/homepage/blog-cost.jpg" alt="Venetian plaster cost guide visual">
+            <div class="section-head-media-copy">
+              <span class="blog-kicker">Editorial Note</span>
+              <h3 class="section-head-media-title">Pricing, ideas, and guidance</h3>
+              <p class="section-head-media-text">A calm supporting frame that makes the section feel intentional instead of visually cut off.</p>
+            </div>
+          </article>
         </div>
 
         <div class="blog-grid">
