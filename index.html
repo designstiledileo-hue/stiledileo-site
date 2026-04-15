@@ -1161,21 +1161,16 @@
 const IMGS = {
   hero: '/images/homepage/hero.jpg',
   project_metamorphosis: '/images/homepage/project-fireplace-metamorphosis.png',
-  venetian: '/images/homepage/about.jpg',
-  black_marble: '/images/homepage/black-marble.jpg',
-  golden_veins: '/images/homepage/blog-cost.jpg',
-  luxury_spa: '/images/homepage/luxury-spa.jpg',
-  fireplace_grey: '/images/homepage/blog-fireplace.jpg',
-  black_gold: '/images/homepage/cta.jpg',
-  white_marble: '/images/homepage/white-marble.jpg',
-  column: '/images/homepage/column.jpg',
-  column2: '/images/homepage/column2.jpg',
-  ceiling: '/images/homepage/ceiling.jpg',
-  tex_warm: '/images/cream-gold.jpg',
-  tex_silver: '/images/silk.jpg',
-  tex_grey: '/images/soft-stone.jpg',
-  tex_pearl: '/images/marble1.jpg',
-  tex_graphite: '/images/dark.jpg'
+  venetian: '/images/venetianplaster11.png',
+  black_marble: '/images/Fire-place-vancouver2.png',
+  golden_veins: '/images/venetianplaster8.png',
+  luxury_spa: '/images/venetianplaster13.png',
+  fireplace_grey: '/images/venetianplaster6.png',
+  black_gold: '/images/Fire-Place-Vancouver5.png',
+  white_marble: '/images/Fire-Place-vancouver1.png',
+  column: '/images/venetianplaster9.png',
+  column2: '/images/marble1.jpg',
+  ceiling: '/images/homepage/ceiling.jpg'
 };
 </script>
 
@@ -1193,19 +1188,14 @@ document.addEventListener('DOMContentLoaded', function() {
   set('p8', 'column');
   set('p9', 'column2');
   set('p10', 'ceiling');
-  set('t1', 'tex_warm');
-  set('t2', 'tex_silver');
-  set('t3', 'tex_grey');
-  set('t4', 'tex_pearl');
-  set('t5', 'tex_graphite');
-  set('srv1', 'fireplace_grey');
+  set('srv1', 'venetian');
   set('srv2', 'column');
-  set('srv3', 'golden_veins');
+  set('srv3', 'black_marble');
   const lazyBgMap = {
-    'blog-visual-1': IMGS['venetian'],
-    'blog-visual-2': IMGS['fireplace_grey'],
-    'blog-visual-3': IMGS['golden_veins'],
-    'cta-bg': IMGS['black_gold']
+    'blog-visual-1': '/images/venetianplaster11.png',
+    'blog-visual-2': '/images/venetianplaster6.png',
+    'blog-visual-3': '/images/venetianplaster13.png',
+    'cta-bg': '/images/homepage/cta.jpg'
   };
 
   Object.entries(lazyBgMap).forEach(([id, src]) => {
@@ -1329,7 +1319,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-img rv">
-    <video id="about-process-video" muted loop playsinline autoplay preload="metadata" poster="/images/homepage/about.jpg" aria-label="Hand applying Venetian plaster material in the Our Story section">
+    <video id="about-process-video" muted loop playsinline autoplay preload="metadata" poster="/images/venetianplaster11.png" aria-label="Hand applying Venetian plaster material in the Our Story section">
       <source src="/videos/homepage/process-application.mp4" type="video/mp4">
       <source src="/videos/homepage/process-application.mov" type="video/quicktime">
     </video>
@@ -1355,16 +1345,16 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="p-item rv"><img id="p1" src="" alt="Fireplace transformation wall in Vancouver" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">The Fireplace Metamorphosis</div><div class="p-cap-loc">Vancouver, BC</div></div></div>
     <div class="p-item rv d1"><img id="p2" src="" alt="Black marble fireplace wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Black Marble Fireplace</div><div class="p-cap-loc">West Vancouver</div></div></div>
     <div class="p-item rv d1"><img id="p3" src="" alt="Golden veined feature wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Golden Veins Wall</div><div class="p-cap-loc">Yaletown</div></div></div>
-    <div class="p-item rv d2"><img id="p4" src="" alt="Luxury spa-style plaster wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Luxury Spa Wall</div><div class="p-cap-loc">North Vancouver</div></div></div>
-    <div class="p-item rv d3"><img id="p5" src="" alt="Grey marble fireplace wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Grey Marble Fireplace</div><div class="p-cap-loc">Burnaby</div></div></div>
+    <div class="p-item rv d2"><img id="p4" src="" alt="Spa-inspired plaster interior" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Spa-Inspired Plaster</div><div class="p-cap-loc">North Vancouver</div></div></div>
+    <div class="p-item rv d3"><img id="p5" src="" alt="Black vein fireplace wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Black Vein Fireplace</div><div class="p-cap-loc">Burnaby</div></div></div>
   </div>
   <div class="proj-grid2" style="margin-top:4px">
-    <div class="p2-item rv"><img id="p6" src="" alt="Black fireplace feature wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Black Fireplace Wall</div><div class="p-cap-loc">Vancouver</div></div></div>
+    <div class="p2-item rv"><img id="p6" src="" alt="Architectural fireplace wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Architectural Fireplace Wall</div><div class="p-cap-loc">Vancouver</div></div></div>
     <div class="p2-item rv d1"><img id="p7" src="" alt="White marble fireplace feature wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">White Marble Fireplace</div><div class="p-cap-loc">Coquitlam</div></div></div>
-    <div class="p2-item rv d2"><img id="p8" src="" alt="White marble statement wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">White Marble Wall</div><div class="p-cap-loc">Vancouver</div></div></div>
+    <div class="p2-item rv d2"><img id="p8" src="" alt="Soft grey marble wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Soft Grey Marble Wall</div><div class="p-cap-loc">Vancouver</div></div></div>
   </div>
   <div class="proj-grid2" style="margin-top:4px">
-    <div class="p2-item rv"><img id="p9" src="" alt="Black marble statement wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Black Marble Wall</div><div class="p-cap-loc">Vancouver</div></div></div>
+    <div class="p2-item rv"><img id="p9" src="" alt="Blue vein marble wall" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Blue Vein Marble Wall</div><div class="p-cap-loc">Vancouver</div></div></div>
     <div class="p2-item rv d1"><img id="p10" src="" alt="Decorative ceiling finish" loading="lazy" decoding="async"/><div class="p-cap"><div class="p-cap-title">Decorative Ceiling</div><div class="p-cap-loc">Vancouver</div></div></div>
     <div class="p2-item rv d2" style="background:var(--charcoal);display:flex;align-items:center;justify-content:center">
       <div style="text-align:center;padding:40px">
@@ -1384,60 +1374,60 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
   <p class="sec-intro rv d2">Our finishes range from soft mineral plaster to marble-look statement walls, always tailored to the light, layout, and mood of the interior.</p>
   <div class="tex-grid">
-    <div class="tex-card rv"><img id="t1" src="" alt="Warm Venetian" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Warm Venetian</div><div class="tex-desc">Classic Italian plaster with warm golden undertones</div></div></div>
-    <div class="tex-card rv d1"><img id="t2" src="" alt="Silver Metallic" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Silver Metallic</div><div class="tex-desc">Reflective metallic finish with cool silver tones</div></div></div>
-    <div class="tex-card rv d2"><img id="t3" src="" alt="Grey Stone" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Grey Stone</div><div class="tex-desc">Natural stone-inspired texture with depth and character</div></div></div>
-    <div class="tex-card rv"><img id="t4" src="" alt="Pearl White" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Pearl White</div><div class="tex-desc">Delicate pearl-white finish with subtle shimmer</div></div></div>
-    <div class="tex-card rv d1"><img id="t5" src="" alt="Graphite Metallic" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Graphite Metallic</div><div class="tex-desc">Dark sophisticated metallic with stormy depth</div></div></div>
-    <div class="tex-card rv d2"><img id="t6" src="/images/cream-gold.jpg" loading="lazy" decoding="async" alt="Cream Gold"/><div class="tex-overlay"><div class="tex-name">Cream Gold</div><div class="tex-desc">Soft cream with fine gold veining — timeless luxury</div></div></div>
+    <div class="tex-card rv"><img id="t1" src="/images/venetianplaster8.png" alt="Marble vein finish" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Marble Vein Finish</div><div class="tex-desc">Luxury marble-style finish with elegant veining and depth.</div></div></div>
+    <div class="tex-card rv d1"><img id="t2" src="/images/soft-stone.jpg" alt="Soft stone texture" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Soft Stone Texture</div><div class="tex-desc">Natural matte finish with soft mineral movement.</div></div></div>
+    <div class="tex-card rv d2"><img id="t3" src="/images/sahara.jpg" alt="Sahara metallic finish" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Sahara Metallic</div><div class="tex-desc">Warm metallic finish with light-catching movement.</div></div></div>
+    <div class="tex-card rv"><img id="t4" src="/images/concrete.jpg" alt="Concrete minimal finish" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Concrete Minimal</div><div class="tex-desc">Clean stone-like texture for calm, minimal interiors.</div></div></div>
+    <div class="tex-card rv d1"><img id="t5" src="/images/dark.jpg" alt="Dark luxury wall finish" loading="lazy" decoding="async"/><div class="tex-overlay"><div class="tex-name">Dark Luxury Wall</div><div class="tex-desc">Deep dramatic surface with bold architectural presence.</div></div></div>
+    <div class="tex-card rv d2"><img id="t6" src="/images/silk.jpg" loading="lazy" decoding="async" alt="Silk metallic finish"/><div class="tex-overlay"><div class="tex-name">Silk Metallic</div><div class="tex-desc">Soft metallic sheen with refined layered texture.</div></div></div>
   </div>
   <div class="tex-grid">
 
   <div class="tex-card tex-hidden">
-    <img id="t7" src="/images/venetianplaster8.png" loading="lazy" decoding="async" alt="Marble vein wall Vancouver">
+    <img id="t7" src="/images/cream-gold.jpg" loading="lazy" decoding="async" alt="Cream gold finish">
     <div class="tex-overlay">
-      <div class="tex-name">Marble Vein Finish</div>
-      <div class="tex-desc">Luxury marble-style walls with natural veins and depth.</div>
+      <div class="tex-name">Cream Gold</div>
+      <div class="tex-desc">Soft cream surface with warm golden depth and quiet luxury.</div>
     </div>
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t8" src="/images/soft-stone.jpg" loading="lazy" decoding="async" alt="Soft stone plaster Vancouver">
+    <img id="t8" src="/images/stone.jpg" loading="lazy" decoding="async" alt="Grey stone finish">
     <div class="tex-overlay">
-      <div class="tex-name">Soft Stone Texture</div>
-      <div class="tex-desc">Natural matte finish with soft mineral movement.</div>
+      <div class="tex-name">Grey Stone Vein</div>
+      <div class="tex-desc">Stone-inspired finish with layered movement and cooler contrast.</div>
     </div>
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t9" src="/images/silk.jpg" loading="lazy" decoding="async" alt="Sahara metallic wall Vancouver">
+    <img id="t9" src="/images/marble1.jpg" loading="lazy" decoding="async" alt="Blue vein marble finish">
     <div class="tex-overlay">
-      <div class="tex-name">Sahara Metallic</div>
-      <div class="tex-desc">Light-reflective finish with warm metallic effect.</div>
+      <div class="tex-name">Blue Vein Marble</div>
+      <div class="tex-desc">Reflective marble-inspired finish with strong natural veining.</div>
     </div>
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t10" src="/images/marble1.jpg" loading="lazy" decoding="async" alt="Marble vein wall Vancouver">
+    <img id="t10" src="/images/venetianplaster10.png" loading="lazy" decoding="async" alt="White vein finish">
     <div class="tex-overlay">
-      <div class="tex-name">Concrete Minimal</div>
-      <div class="tex-desc">Luxury marble-style walls with natural veins and depth.</div>
+      <div class="tex-name">White Vein Finish</div>
+      <div class="tex-desc">Luminous white finish with subtle veining for elegant interiors.</div>
     </div>
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t11" src="/images/dark.jpg" loading="lazy" decoding="async" alt="Dark luxury wall Vancouver">
+    <img id="t11" src="/images/venetianplaster11.png" loading="lazy" decoding="async" alt="Pearl white finish">
     <div class="tex-overlay">
-      <div class="tex-name">Dark Luxury Wall</div>
-      <div class="tex-desc">Deep textured finish for bold interior statements.</div>
+      <div class="tex-name">Pearl White</div>
+      <div class="tex-desc">Pearlescent polished finish with soft reflective movement.</div>
     </div>
   </div>
 
   <div class="tex-card tex-hidden">
-    <img id="t12" src="/images/concrete.jpg" loading="lazy" decoding="async" alt="Concrete wall Vancouver">
+    <img id="t12" src="/images/venetianplaster9.png" loading="lazy" decoding="async" alt="Soft grey marble finish">
     <div class="tex-overlay">
-      <div class="tex-name">Silk Metallic</div>
-      <div class="tex-desc">Modern concrete-style finish for minimal interiors.</div>
+      <div class="tex-name">Soft Grey Marble</div>
+      <div class="tex-desc">Refined grey finish with delicate stone-like veining.</div>
     </div>
   </div>
   </div>
