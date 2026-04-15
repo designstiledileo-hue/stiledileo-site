@@ -468,6 +468,72 @@
       line-height: 1.6;
     }
 
+    .hero-mobile-frame {
+      display: none;
+    }
+
+    .hero-mobile-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: calc(var(--radius) + 2px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #111;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      isolation: isolate;
+    }
+
+    .hero-mobile-card::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.72;
+    }
+
+    .hero-mobile-card video,
+    .hero-mobile-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      max-height: 620px;
+      display: block;
+      object-fit: cover;
+      object-position: center 62%;
+      transform: scale(1.02);
+    }
+
+    .hero-mobile-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to top, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.16) 38%, rgba(0,0,0,0.10) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .hero-mobile-card-copy {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 3;
+      display: grid;
+      gap: 6px;
+    }
+
+    .hero-mobile-card-title {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 28px;
+      line-height: 1.05;
+      font-weight: 400;
+      color: #f3eee7;
+    }
+
     .hero-aside {
       justify-self: end;
       width: 100%;
@@ -1293,33 +1359,37 @@
       }
 
       .hero {
-        padding-top: 132px;
+        min-height: auto;
+        display: block;
+        padding-top: 112px;
+        padding-bottom: 40px;
       }
 
-      .hero-desktop-video {
+      .hero-media,
+      .hero-overlay {
         display: none;
       }
 
-      .hero-mobile-video {
-        display: block;
-        object-position: center 24%;
-        transform: none;
-        animation: none;
-        filter: brightness(1.12) saturate(1.04);
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 28px;
       }
 
-      .hero-overlay {
-        background:
-          linear-gradient(180deg, rgba(15, 13, 11, 0.12) 0%, rgba(15, 13, 11, 0.46) 56%, rgba(15, 13, 11, 0.82) 100%),
-          linear-gradient(90deg, rgba(15, 13, 11, 0.42) 0%, rgba(15, 13, 11, 0.18) 50%, rgba(15, 13, 11, 0.48) 100%);
+      .hero-main {
+        max-width: 100%;
+      }
+
+      .hero-mobile-frame {
+        display: block;
+        margin-top: 8px;
+      }
+
+      .hero-aside {
+        display: none;
       }
 
       .hero-title {
         font-size: clamp(3.2rem, 13vw, 5.4rem);
-      }
-
-      .hero-content {
-        gap: 26px;
       }
 
       .hero-mobile-note {
@@ -1393,8 +1463,14 @@
       }
 
       .hero {
-        min-height: 92svh;
-        padding-bottom: 46px;
+        min-height: auto;
+        padding-bottom: 34px;
+      }
+
+      .hero-mobile-card video,
+      .hero-mobile-card img {
+        min-height: 420px;
+        max-height: 62vh;
       }
 
       .featured,
@@ -1458,10 +1534,6 @@
         <source src="/videos/homepage/hero-luxury.mp4" type="video/mp4">
         <img src="/images/homepage/hero.jpg" alt="Luxury decorative fireplace wall in Vancouver interior">
       </video>
-      <video class="hero-mobile-video" autoplay muted loop playsinline preload="auto" poster="/images/homepage/hero.jpg" aria-label="Hand applying decorative wall material for mobile hero">
-        <source src="/videos/homepage/process-application-mobile.mp4" type="video/mp4">
-        <img src="/images/homepage/hero.jpg" alt="Hand applying decorative wall material">
-      </video>
     </div>
     <div class="hero-overlay"></div>
     <div class="shell hero-content">
@@ -1473,8 +1545,19 @@
           <a href="#contact" class="btn btn-primary">Get Free Visualization</a>
           <a href="#projects" class="btn btn-secondary">View Projects</a>
         </div>
-        <p class="hero-mobile-note">Hand-applied Venetian plaster, shown in motion</p>
         <p class="hero-note">Premium finishes for fireplaces, feature walls, and refined interiors</p>
+        <div class="hero-mobile-frame">
+          <article class="hero-mobile-card">
+            <video class="hero-mobile-video" autoplay muted loop playsinline preload="auto" poster="/images/homepage/hero.jpg" aria-label="Hand applying decorative wall material for mobile hero">
+              <source src="/videos/homepage/process-application-mobile.mp4" type="video/mp4">
+              <img src="/images/homepage/hero.jpg" alt="Hand applying decorative wall material">
+            </video>
+            <div class="hero-mobile-card-copy">
+              <span class="hero-mobile-note">Featured Craft Process</span>
+              <h3 class="hero-mobile-card-title">Hand-applied Venetian plaster</h3>
+            </div>
+          </article>
+        </div>
       </div>
       <aside class="hero-aside reveal delay-1">
         <div class="hero-frame">
