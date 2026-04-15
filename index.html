@@ -979,6 +979,13 @@
       filter: saturate(0.96);
     }
 
+    .process-media-fallback {
+      display: none;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .process-media-card:hover video {
       transform: scale(1.04);
       filter: saturate(1);
@@ -1317,6 +1324,14 @@
         padding: 20px;
       }
 
+      .process-media-card video {
+        display: none;
+      }
+
+      .process-media-fallback {
+        display: block;
+      }
+
       .hero-aside {
         max-width: 100%;
       }
@@ -1392,7 +1407,7 @@
         <li><a href="#featured">Featured</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#textures">Finishes</a></li>
-        <li><a href="#blog">Blog</a></li>
+        <li><a href="/blog.html">Blog</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -1845,10 +1860,11 @@
 
         <div class="process-intro-grid">
           <article class="process-media-card reveal delay-1">
-            <video autoplay muted loop playsinline preload="metadata" aria-label="Hand applying Venetian plaster material with a trowel">
+            <video id="process-craft-video" autoplay muted loop playsinline preload="auto" aria-label="Hand applying Venetian plaster material with a trowel">
               <source src="/videos/homepage/process-application.mp4" type="video/mp4">
               <source src="/videos/homepage/process-application.mov" type="video/quicktime">
             </video>
+            <img class="process-media-fallback" src="/images/venetianplaster11.png" alt="Venetian plaster material detail">
             <div class="process-media-overlay">
               <div class="process-media-copy">
                 <span class="project-kicker">Craft In Motion</span>
@@ -1958,6 +1974,19 @@
         });
         showMoreTextures.style.display = "none";
       });
+    }
+
+    const processCraftVideo = document.getElementById("process-craft-video");
+    if (processCraftVideo) {
+      processCraftVideo.playbackRate = 0.85;
+      const ensurePlay = () => {
+        const playPromise = processCraftVideo.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {});
+        }
+      };
+      processCraftVideo.addEventListener("loadeddata", ensurePlay, { once: true });
+      ensurePlay();
     }
   </script>
 </body>
