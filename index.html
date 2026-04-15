@@ -218,6 +218,21 @@
       filter: saturate(1);
     }
 
+    .section-head-media-fallback {
+      display: none;
+    }
+
+    .section-head-media.process-preview video {
+      object-position: center center;
+    }
+
+    .section-head-media.process-preview .section-head-media-fallback {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
     .section-head-media::after {
       content: "";
       position: absolute;
@@ -1272,6 +1287,14 @@
         min-height: 220px;
       }
 
+      .section-head-media.process-preview video {
+        display: none;
+      }
+
+      .section-head-media.process-preview .section-head-media-fallback {
+        display: block;
+      }
+
       .statement-card,
       .project-feature {
         min-height: 520px;
@@ -1369,6 +1392,7 @@
         <li><a href="#featured">Featured</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#textures">Finishes</a></li>
+        <li><a href="#blog">Blog</a></li>
         <li><a href="#process">Process</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -1606,11 +1630,12 @@
             <h2 class="section-title">Tactile finishes with a <em>quieter luxury</em></h2>
             <p class="section-copy">The section keeps the cleaner, calmer presentation from the newer design, but restores the fuller approved material library so the homepage feels complete again.</p>
           </div>
-          <article class="section-head-media reveal delay-1">
-            <video autoplay muted loop playsinline preload="metadata" poster="/images/cream-gold.jpg" aria-label="Hand applying Venetian plaster with a trowel">
+          <article class="section-head-media process-preview reveal delay-1">
+            <video autoplay muted loop playsinline preload="auto" poster="/images/venetianplaster11.png" aria-label="Hand applying Venetian plaster with a trowel">
               <source src="/videos/homepage/process-application.mp4" type="video/mp4">
               <source src="/videos/homepage/process-application.mov" type="video/quicktime">
             </video>
+            <img class="section-head-media-fallback" src="/images/venetianplaster11.png" alt="Venetian plaster material detail">
             <div class="section-head-media-copy">
               <span class="texture-kicker">Material In Motion</span>
               <h3 class="section-head-media-title">The finish begins in layers</h3>
