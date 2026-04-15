@@ -374,6 +374,42 @@
       background: rgba(255, 255, 255, 0.05);
     }
 
+    .floating-quote {
+      position: fixed;
+      right: 20px;
+      bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+      z-index: 90;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-width: 132px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(216, 185, 140, 0.38);
+      background: linear-gradient(135deg, #c19c67, #b48d57);
+      color: #17120d;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.3);
+      transition:
+        transform 0.35s var(--ease),
+        box-shadow 0.35s var(--ease),
+        opacity 0.35s var(--ease);
+    }
+
+    .floating-quote:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.36);
+    }
+
+    .floating-quote.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+    }
+
     .hero {
       position: relative;
       min-height: 100svh;
@@ -1471,6 +1507,10 @@
       .cta-card {
         padding: 56px 28px;
       }
+
+      .floating-quote {
+        display: inline-flex;
+      }
     }
 
     @media (max-width: 640px) {
@@ -1533,6 +1573,12 @@
 
       .process-card {
         padding: 28px 22px 24px;
+      }
+
+      .floating-quote {
+        right: 14px;
+        left: 14px;
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
       }
     }
   </style>
@@ -2083,6 +2129,8 @@
     </section>
   </main>
 
+  <a href="#contact" class="floating-quote" id="floating-quote">Get Quote</a>
+
   <footer class="footer">
     <div class="footer-inner">
       <p>Stile di Leo • Decorative walls and Venetian plaster for Vancouver interiors</p>
@@ -2143,6 +2191,19 @@
       };
       processCraftVideo.addEventListener("loadeddata", ensurePlay, { once: true });
       ensurePlay();
+    }
+
+    const floatingQuote = document.getElementById("floating-quote");
+    const contactSection = document.getElementById("contact");
+
+    if (floatingQuote && contactSection) {
+      const quoteObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          floatingQuote.classList.toggle("is-hidden", entry.isIntersecting);
+        });
+      }, { threshold: 0.2 });
+
+      quoteObserver.observe(contactSection);
     }
   </script>
 </body>
