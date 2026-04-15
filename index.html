@@ -458,6 +458,16 @@
       text-transform: uppercase;
     }
 
+    .hero-mobile-note {
+      display: none;
+      max-width: 260px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold-soft);
+      line-height: 1.6;
+    }
+
     .hero-aside {
       justify-self: end;
       width: 100%;
@@ -1292,6 +1302,16 @@
 
       .hero-mobile-video {
         display: block;
+        object-position: center 24%;
+        transform: none;
+        animation: none;
+        filter: brightness(1.12) saturate(1.04);
+      }
+
+      .hero-overlay {
+        background:
+          linear-gradient(180deg, rgba(15, 13, 11, 0.12) 0%, rgba(15, 13, 11, 0.46) 56%, rgba(15, 13, 11, 0.82) 100%),
+          linear-gradient(90deg, rgba(15, 13, 11, 0.42) 0%, rgba(15, 13, 11, 0.18) 50%, rgba(15, 13, 11, 0.48) 100%);
       }
 
       .hero-title {
@@ -1300,6 +1320,10 @@
 
       .hero-content {
         gap: 26px;
+      }
+
+      .hero-mobile-note {
+        display: block;
       }
 
       .section-head-media {
@@ -1449,6 +1473,7 @@
           <a href="#contact" class="btn btn-primary">Get Free Visualization</a>
           <a href="#projects" class="btn btn-secondary">View Projects</a>
         </div>
+        <p class="hero-mobile-note">Hand-applied Venetian plaster, shown in motion</p>
         <p class="hero-note">Premium finishes for fireplaces, feature walls, and refined interiors</p>
       </div>
       <aside class="hero-aside reveal delay-1">
