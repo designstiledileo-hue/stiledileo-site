@@ -1626,7 +1626,7 @@
         <p class="hero-note">Premium finishes for fireplaces, feature walls, and refined interiors</p>
         <div class="hero-mobile-frame">
           <article class="hero-mobile-card">
-            <video class="hero-mobile-video" autoplay muted loop playsinline preload="auto" poster="/images/homepage/hero.jpg" aria-label="Hand applying decorative wall material for mobile hero">
+            <video class="hero-mobile-video" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback aria-label="Hand applying decorative wall material for mobile hero">
               <source src="/videos/homepage/process-application-mobile.mp4" type="video/mp4">
               <img src="/images/homepage/hero.jpg" alt="Hand applying decorative wall material">
             </video>
@@ -1644,7 +1644,7 @@
         <div class="hero-aside-copy">
           <span class="hero-aside-label">Selected Surface</span>
           <h2 class="hero-aside-title">A room feels finished when the wall carries the atmosphere.</h2>
-          <p class="hero-aside-text">Designed to read like an interior brand: quieter, rarer, and more architectural than a typical home-services website.</p>
+          <p class="hero-aside-text">A refined plaster finish brings softness, depth, and a more complete feeling to the room.</p>
         </div>
       </aside>
     </div>
@@ -1665,7 +1665,7 @@
           <p>Every surface is approached like part of the architecture, not a decorative afterthought. The goal is atmosphere first: a room that feels quieter, richer, and more composed the moment you walk in.</p>
           <div class="meta">
             <span class="meta-label">Luxury Finish Direction</span>
-            <p class="meta-copy">Real project photography, restrained copy, and a calm editorial layout lead the experience.</p>
+            <p class="meta-copy">Real project photography and a restrained layout keep the focus on the surface, the room, and the finish itself.</p>
           </div>
         </div>
       </div>
@@ -1676,15 +1676,15 @@
         <div class="section-head has-media reveal">
           <div class="section-head-copy">
             <span class="eyebrow">Curated Projects</span>
-            <h2 class="section-title">A more editorial view of <em>your walls</em></h2>
-            <p class="section-copy">The work keeps the newer editorial framing, but the approved projects stay intact: the same photographs, the same names, and a fuller collection that better reflects the range of completed surfaces.</p>
+            <h2 class="section-title">Selected projects for <em>modern interiors</em></h2>
+            <p class="section-copy">A curated collection of completed walls, fireplace features, and decorative finishes across Vancouver homes.</p>
           </div>
           <article class="section-head-media reveal delay-1">
             <img src="/images/Fire-place-vancouver2.png" alt="Black marble fireplace wall detail">
             <div class="section-head-media-copy">
               <span class="project-kicker">Selected Work</span>
               <h3 class="section-head-media-title">Black Marble Fireplace</h3>
-              <p class="section-head-media-text">A supporting editorial frame that keeps the section visually anchored before the full project grid begins.</p>
+              <p class="section-head-media-text">A marble-look fireplace wall that shows how a single surface can shape the mood of the entire room.</p>
             </div>
           </article>
         </div>
@@ -1831,7 +1831,7 @@
             <div>
               <span class="project-kicker">And More</span>
               <h3 class="project-title">Every project stays <em>unique</em></h3>
-              <p class="project-text">The new direction keeps the portfolio feeling more curated, while still showing the full breadth of approved work.</p>
+              <p class="project-text">Each project is tailored to the room, the light, and the atmosphere the client wants to create.</p>
               <a href="#contact" class="btn btn-primary" style="margin-top:20px;">Request Consultation</a>
             </div>
           </article>
@@ -1845,14 +1845,14 @@
           <div class="section-head-copy">
             <span class="eyebrow">Textures And Finishes</span>
             <h2 class="section-title">Tactile finishes with a <em>quieter luxury</em></h2>
-            <p class="section-copy">The section keeps the cleaner, calmer presentation from the newer design, but restores the fuller approved material library so the homepage feels complete again.</p>
+            <p class="section-copy">A selection of finishes that shows the range of tone, depth, and texture available for premium interior walls.</p>
           </div>
           <article class="section-head-media reveal delay-1">
             <img src="/images/venetianplaster11.png" alt="Venetian plaster material detail">
             <div class="section-head-media-copy">
               <span class="texture-kicker">Material Detail</span>
               <h3 class="section-head-media-title">Layered, luminous, restrained</h3>
-              <p class="section-head-media-text">A calm material frame works better here than video and keeps the section balanced on both desktop and mobile.</p>
+              <p class="section-head-media-text">Subtle variation in texture and light is what gives these finishes their quiet, high-end presence.</p>
             </div>
           </article>
         </div>
@@ -1994,7 +1994,7 @@
           <div class="section-head-copy">
             <span class="eyebrow">Insights</span>
             <h2 class="section-title">From Our <em>Blog</em></h2>
-            <p class="section-copy">The homepage keeps a focused editorial layout, but the blog returns as part of the approved structure so design guidance, pricing, and fireplace ideas stay visible from the main entry point.</p>
+            <p class="section-copy">Guides on pricing, fireplace walls, and decorative finishes to help you plan the right direction for your space.</p>
           </div>
           <article class="section-head-media reveal delay-1">
             <img src="/images/homepage/blog-cost.jpg" alt="Venetian plaster cost guide visual">
@@ -2079,8 +2079,8 @@
           <aside class="process-story-card reveal delay-2">
             <span class="eyebrow">Material Craft</span>
             <h3 class="process-story-title">The finish should feel <em>considered</em>, not decorative.</h3>
-            <p class="process-story-copy">This lower process moment keeps the homepage grounded in craft while preserving the approved editorial mood. The hero introduces the atmosphere; this section shows how that atmosphere is actually built.</p>
-            <p class="process-story-copy">The transition stays smooth and production-safe: the video supports the page rather than dominating it, and the approved structure, imagery, and names remain intact.</p>
+            <p class="process-story-copy">Every finish is built by hand, in controlled layers, so the wall feels calm, architectural, and naturally part of the room.</p>
+            <p class="process-story-copy">The goal is not a decorative effect on top of the surface, but a finish that feels integrated, soft, and lasting.</p>
           </aside>
         </div>
 
@@ -2181,6 +2181,36 @@
     }
 
     const processCraftVideo = document.getElementById("process-craft-video");
+    const heroMobileVideo = document.querySelector(".hero-mobile-video");
+
+    if (heroMobileVideo) {
+      heroMobileVideo.muted = true;
+      heroMobileVideo.defaultMuted = true;
+      heroMobileVideo.autoplay = true;
+      heroMobileVideo.playsInline = true;
+      heroMobileVideo.setAttribute("muted", "");
+      heroMobileVideo.setAttribute("autoplay", "");
+      heroMobileVideo.setAttribute("playsinline", "");
+      heroMobileVideo.setAttribute("webkit-playsinline", "true");
+
+      const ensureHeroMobilePlay = () => {
+        const playPromise = heroMobileVideo.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {});
+        }
+      };
+
+      heroMobileVideo.addEventListener("loadeddata", ensureHeroMobilePlay, { once: true });
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+          ensureHeroMobilePlay();
+        }
+      });
+      window.addEventListener("pageshow", ensureHeroMobilePlay);
+      window.addEventListener("touchstart", ensureHeroMobilePlay, { passive: true, once: true });
+      ensureHeroMobilePlay();
+    }
+
     if (processCraftVideo) {
       processCraftVideo.playbackRate = 0.85;
       const ensurePlay = () => {
