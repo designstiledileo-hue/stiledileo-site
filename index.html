@@ -1626,7 +1626,7 @@
         <p class="hero-note">Premium finishes for fireplaces, feature walls, and refined interiors</p>
         <div class="hero-mobile-frame">
           <article class="hero-mobile-card">
-            <video class="hero-mobile-video" autoplay muted loop playsinline preload="auto" poster="/images/homepage/hero.jpg" aria-label="Hand applying decorative wall material for mobile hero">
+            <video class="hero-mobile-video" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback aria-label="Hand applying decorative wall material for mobile hero">
               <source src="/videos/homepage/process-application-mobile.mp4" type="video/mp4">
               <img src="/images/homepage/hero.jpg" alt="Hand applying decorative wall material">
             </video>
@@ -2181,6 +2181,36 @@
     }
 
     const processCraftVideo = document.getElementById("process-craft-video");
+    const heroMobileVideo = document.querySelector(".hero-mobile-video");
+
+    if (heroMobileVideo) {
+      heroMobileVideo.muted = true;
+      heroMobileVideo.defaultMuted = true;
+      heroMobileVideo.autoplay = true;
+      heroMobileVideo.playsInline = true;
+      heroMobileVideo.setAttribute("muted", "");
+      heroMobileVideo.setAttribute("autoplay", "");
+      heroMobileVideo.setAttribute("playsinline", "");
+      heroMobileVideo.setAttribute("webkit-playsinline", "true");
+
+      const ensureHeroMobilePlay = () => {
+        const playPromise = heroMobileVideo.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(() => {});
+        }
+      };
+
+      heroMobileVideo.addEventListener("loadeddata", ensureHeroMobilePlay, { once: true });
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+          ensureHeroMobilePlay();
+        }
+      });
+      window.addEventListener("pageshow", ensureHeroMobilePlay);
+      window.addEventListener("touchstart", ensureHeroMobilePlay, { passive: true, once: true });
+      ensureHeroMobilePlay();
+    }
+
     if (processCraftVideo) {
       processCraftVideo.playbackRate = 0.85;
       const ensurePlay = () => {
