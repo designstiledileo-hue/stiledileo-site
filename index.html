@@ -44,7 +44,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="image" href="/images/homepage/hero.jpg" fetchpriority="high">
-  <link rel="preload" as="image" href="/images/homepage/project-fireplace-metamorphosis.png">
+  <link rel="preload" as="image" href="/images/homepage/fireplace-metamorphosis-before-after.jpg">
   <link rel="preload" as="video" href="/videos/homepage/hero-new.mp4">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -1065,6 +1065,37 @@
       filter: brightness(1.06);
     }
 
+    .statement-card.fireplace-metamorphosis-card,
+    .project-feature.fireplace-metamorphosis-card {
+      min-height: 0;
+      background: #0b0a09;
+    }
+
+    .fireplace-metamorphosis-card .project-media {
+      display: grid;
+      place-items: center;
+      height: auto;
+      background: #0b0a09;
+    }
+
+    .statement-card.fireplace-metamorphosis-card .fireplace-metamorphosis-img,
+    .project-feature.fireplace-metamorphosis-card .fireplace-metamorphosis-img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center center;
+      background: #0b0a09;
+      filter: none;
+      transform: none;
+    }
+
+    .statement-card.fireplace-metamorphosis-card:hover .fireplace-metamorphosis-img,
+    .project-feature.fireplace-metamorphosis-card:hover .fireplace-metamorphosis-img {
+      filter: none;
+      transform: none;
+    }
+
     .project-overlay,
     .texture-overlay,
     .blog-overlay {
@@ -1585,6 +1616,11 @@
         min-height: 620px;
       }
 
+      .statement-card.fireplace-metamorphosis-card,
+      .project-feature.fireplace-metamorphosis-card {
+        min-height: auto;
+      }
+
       .texture-card:first-child {
         grid-column: span 1;
         grid-row: span 1;
@@ -1810,6 +1846,11 @@
         min-height: 360px;
       }
 
+      .statement-card.fireplace-metamorphosis-card,
+      .project-feature.fireplace-metamorphosis-card {
+        min-height: auto;
+      }
+
       .statement-copy,
       .project-overlay,
       .texture-overlay {
@@ -1914,8 +1955,8 @@
   <main>
     <section class="featured" id="featured">
       <div class="shell featured-grid">
-        <article class="statement-card reveal">
-          <img src="/images/homepage/project-fireplace-metamorphosis.png" alt="Architectural fireplace wall transformation">
+        <article class="statement-card fireplace-metamorphosis-card reveal">
+          <img src="/images/homepage/fireplace-metamorphosis-before-after.jpg" alt="Before and after fireplace wall transformation with dark Venetian plaster finish and warm integrated lighting" class="fireplace-metamorphosis-img" loading="lazy">
           <div class="statement-copy">
             <span class="project-kicker">Featured Statement</span>
             <h2 class="statement-title">From plain wall to architectural focal point</h2>
@@ -1952,9 +1993,9 @@
         </div>
 
         <div class="projects-grid">
-          <article class="project-feature reveal delay-1">
+          <article class="project-feature fireplace-metamorphosis-card reveal delay-1">
             <div class="project-media">
-              <img src="/images/homepage/project-fireplace-metamorphosis.png" alt="Fireplace transformation wall in Vancouver">
+              <img src="/images/homepage/fireplace-metamorphosis-before-after.jpg" alt="Before and after fireplace wall transformation with dark Venetian plaster finish and warm integrated lighting" class="fireplace-metamorphosis-img" loading="lazy">
             </div>
             <div class="project-overlay">
               <div class="project-copy">
@@ -2307,6 +2348,34 @@
                 <h3 class="blog-title">Venetian Plaster Cost Vancouver: Pricing Guide</h3>
                 <p class="blog-text">Discover how much Venetian plaster costs in Vancouver, including feature walls, fireplace finishes, and custom designs.</p>
                 <a href="/venetian-plaster-cost-vancouver.html" class="btn btn-secondary" style="margin-top:12px; width:fit-content;">Read Article</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card reveal delay-4">
+            <div class="blog-media">
+              <img src="/images/venetianplaster4.png" alt="Durable Venetian plaster wall finish in Vancouver interior">
+            </div>
+            <div class="blog-overlay">
+              <div class="blog-copy">
+                <span class="blog-kicker">Durability Guide</span>
+                <h3 class="blog-title">Venetian Plaster Durability in Vancouver</h3>
+                <p class="blog-text">Learn how long Venetian plaster lasts, where it performs best, and what affects durability in real interiors.</p>
+                <a href="/venetian-plaster-durability-vancouver.html" class="btn btn-secondary" style="margin-top:12px; width:fit-content;">Read Article</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="blog-card reveal delay-4">
+            <div class="blog-media">
+              <img src="/images/venetianplaster5.png" alt="Venetian plaster maintenance and care guide for Vancouver homes">
+            </div>
+            <div class="blog-overlay">
+              <div class="blog-copy">
+                <span class="blog-kicker">Care Guide</span>
+                <h3 class="blog-title">Venetian Plaster Maintenance in Vancouver</h3>
+                <p class="blog-text">Practical guidance on cleaning, care, and protecting Venetian plaster finishes in real interiors.</p>
+                <a href="/venetian-plaster-maintenance-vancouver.html" class="btn btn-secondary" style="margin-top:12px; width:fit-content;">Read Article</a>
               </div>
             </div>
           </article>
