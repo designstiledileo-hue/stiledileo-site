@@ -394,7 +394,7 @@
       right: 20px;
       bottom: calc(20px + env(safe-area-inset-bottom, 0px));
       z-index: 90;
-      display: none;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       min-width: 132px;
@@ -407,6 +407,7 @@
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
+      cursor: pointer;
       box-shadow: 0 18px 34px rgba(0, 0, 0, 0.3);
       transition:
         transform 0.35s var(--ease),
@@ -423,6 +424,276 @@
       opacity: 0;
       pointer-events: none;
       transform: translateY(10px);
+    }
+
+    .estimate-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      place-items: center;
+      padding: 22px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(216, 185, 140, 0.16), transparent 34%),
+        rgba(7, 6, 5, 0.74);
+      backdrop-filter: blur(18px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.38s var(--ease);
+    }
+
+    .estimate-modal.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.estimate-lock {
+      overflow: hidden;
+    }
+
+    .estimate-card {
+      position: relative;
+      width: min(100%, 560px);
+      overflow: hidden;
+      border: 1px solid rgba(216, 185, 140, 0.22);
+      border-radius: 28px;
+      background:
+        linear-gradient(145deg, rgba(28, 23, 19, 0.9), rgba(12, 10, 8, 0.94)),
+        rgba(255, 255, 255, 0.04);
+      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.52);
+      transform: translateY(18px) scale(0.98);
+      transition: transform 0.42s var(--ease);
+    }
+
+    .estimate-modal.is-open .estimate-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .estimate-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 3;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.045);
+      color: var(--text);
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform 0.28s var(--ease), border-color 0.28s var(--ease), color 0.28s var(--ease);
+    }
+
+    .estimate-close:hover {
+      transform: translateY(-1px);
+      border-color: rgba(216, 185, 140, 0.5);
+      color: var(--gold-soft);
+    }
+
+    .estimate-progress {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      padding: 26px 26px 0;
+    }
+
+    .estimate-progress span {
+      height: 2px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.13);
+      transition: background 0.28s var(--ease);
+    }
+
+    .estimate-progress span.is-active {
+      background: var(--gold-soft);
+    }
+
+    .estimate-flow {
+      padding: 42px 34px 34px;
+    }
+
+    .estimate-step {
+      display: none;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .estimate-step.is-active {
+      display: block;
+      animation: estimateStepIn 0.48s var(--ease) forwards;
+    }
+
+    @keyframes estimateStepIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .estimate-step-title {
+      max-width: 420px;
+      margin-bottom: 14px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.05rem, 7vw, 3.1rem);
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .estimate-step-text {
+      max-width: 420px;
+      margin-bottom: 26px;
+      color: rgba(239, 231, 220, 0.72);
+      font-size: 0.95rem;
+      line-height: 1.75;
+    }
+
+    .estimate-upload {
+      display: grid;
+      place-items: center;
+      min-height: 150px;
+      padding: 24px;
+      border: 1px dashed rgba(216, 185, 140, 0.42);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--gold-soft);
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.3s var(--ease), background 0.3s var(--ease), transform 0.3s var(--ease);
+    }
+
+    .estimate-upload:hover {
+      border-color: rgba(216, 185, 140, 0.72);
+      background: rgba(255, 255, 255, 0.055);
+      transform: translateY(-1px);
+    }
+
+    .estimate-upload input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .estimate-upload strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .estimate-upload span {
+      color: rgba(239, 231, 220, 0.62);
+      font-size: 0.86rem;
+    }
+
+    .estimate-options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .estimate-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 58px;
+      padding: 0 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font: inherit;
+      cursor: pointer;
+      transition: transform 0.28s var(--ease), border-color 0.28s var(--ease), background 0.28s var(--ease);
+    }
+
+    .estimate-option::after {
+      content: "Select";
+      color: rgba(216, 185, 140, 0.78);
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .estimate-option:hover,
+    .estimate-option.is-selected {
+      transform: translateY(-1px);
+      border-color: rgba(216, 185, 140, 0.54);
+      background: rgba(216, 185, 140, 0.08);
+    }
+
+    .estimate-range {
+      margin: 4px 0 12px;
+      color: var(--gold-soft);
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.3rem, 8vw, 3.6rem);
+      line-height: 1;
+    }
+
+    .estimate-lead-fields {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .estimate-lead-fields input {
+      width: 100%;
+      min-height: 56px;
+      padding: 0 16px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.055);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+      transition: border-color 0.28s var(--ease), background 0.28s var(--ease);
+    }
+
+    .estimate-lead-fields input:focus {
+      border-color: rgba(216, 185, 140, 0.62);
+      background: rgba(255, 255, 255, 0.075);
+    }
+
+    .estimate-note {
+      margin-top: 13px;
+      color: rgba(239, 231, 220, 0.58);
+      font-size: 0.78rem;
+      line-height: 1.55;
+    }
+
+    .estimate-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .estimate-back {
+      min-width: 106px;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--text);
+    }
+
+    .estimate-submit {
+      flex: 1;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .estimate-success {
+      display: none;
+      margin-top: 16px;
+      color: var(--gold-soft);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .estimate-success.is-visible {
+      display: block;
     }
 
     .hero {
@@ -1765,6 +2036,10 @@
     }
 
     @media (max-width: 640px) {
+      body {
+        padding-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
+      }
+
       .shell,
       .nav-inner,
       .footer-inner {
@@ -1840,6 +2115,37 @@
         right: 14px;
         left: 14px;
         bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        width: auto;
+        min-height: 58px;
+        border-radius: 18px;
+      }
+
+      .estimate-modal {
+        align-items: end;
+        padding: 12px;
+      }
+
+      .estimate-card {
+        max-height: calc(100svh - 24px);
+        overflow-y: auto;
+        border-radius: 24px;
+      }
+
+      .estimate-flow {
+        padding: 38px 22px 24px;
+      }
+
+      .estimate-progress {
+        padding: 22px 22px 0;
+      }
+
+      .estimate-actions {
+        flex-direction: column-reverse;
+      }
+
+      .estimate-back,
+      .estimate-submit {
+        width: 100%;
       }
     }
   </style>
@@ -2419,7 +2725,99 @@
     </section>
   </main>
 
-  <a href="#contact" class="floating-quote" id="floating-quote">Get Quote</a>
+  <button type="button" class="floating-quote" id="floating-quote">Get Estimate</button>
+
+  <div class="estimate-modal" id="estimate-modal" aria-hidden="true">
+    <div class="estimate-card" role="dialog" aria-modal="true" aria-labelledby="estimate-title">
+      <button type="button" class="estimate-close" id="estimate-close" aria-label="Close estimate flow">×</button>
+      <div class="estimate-progress" aria-hidden="true">
+        <span class="is-active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <form class="estimate-flow" id="estimate-form" name="instant-estimate" method="POST" data-netlify="true" netlify netlify-honeypot="company" enctype="multipart/form-data">
+        <input type="hidden" name="form-name" value="instant-estimate">
+        <p hidden>
+          <label>Company <input name="company"></label>
+        </p>
+        <input type="hidden" name="project_type" id="estimate-project-type">
+        <input type="hidden" name="wall_size" id="estimate-wall-size">
+        <input type="hidden" name="estimated_range" id="estimate-range-input">
+        <input type="hidden" name="wall_photo_filename" id="estimate-photo-filename">
+
+        <section class="estimate-step is-active" data-step="0">
+          <h2 class="estimate-step-title" id="estimate-title">See your wall with Venetian plaster</h2>
+          <p class="estimate-step-text">Upload a photo of your wall. We’ll estimate the price and show possible finish direction.</p>
+          <label class="estimate-upload">
+            <input type="file" id="estimate-photo" name="wall_photo" accept="image/*">
+            <span>
+              <strong>Upload Photo</strong>
+              <span id="estimate-file-label">JPG, PNG, or HEIC from your phone</span>
+            </span>
+          </label>
+          <div class="estimate-actions">
+            <button type="button" class="btn btn-primary estimate-submit" data-next>Continue</button>
+          </div>
+        </section>
+
+        <section class="estimate-step" data-step="1">
+          <h2 class="estimate-step-title">What are you planning?</h2>
+          <p class="estimate-step-text">Choose the closest option. You can refine the details after we see the wall.</p>
+          <div class="estimate-options" data-estimate-options="project">
+            <button type="button" class="estimate-option" data-value="fireplace">Fireplace wall</button>
+            <button type="button" class="estimate-option" data-value="feature">Feature wall</button>
+            <button type="button" class="estimate-option" data-value="full">Full wall</button>
+            <button type="button" class="estimate-option" data-value="unsure">Not sure</button>
+          </div>
+          <div class="estimate-actions">
+            <button type="button" class="btn estimate-back" data-back>Back</button>
+          </div>
+        </section>
+
+        <section class="estimate-step" data-step="2">
+          <h2 class="estimate-step-title">Approximate wall size?</h2>
+          <p class="estimate-step-text">A quick range is enough. Final pricing depends on finish and surface condition.</p>
+          <div class="estimate-options" data-estimate-options="size">
+            <button type="button" class="estimate-option" data-value="small">Small (up to 50 sq ft)</button>
+            <button type="button" class="estimate-option" data-value="medium">Medium (50–120 sq ft)</button>
+            <button type="button" class="estimate-option" data-value="large">Large (120+ sq ft)</button>
+            <button type="button" class="estimate-option" data-value="unsure">Not sure</button>
+          </div>
+          <div class="estimate-actions">
+            <button type="button" class="btn estimate-back" data-back>Back</button>
+          </div>
+        </section>
+
+        <section class="estimate-step" data-step="3">
+          <h2 class="estimate-step-title">Estimated range:</h2>
+          <p class="estimate-range" id="estimate-range" aria-live="polite">$1,400 – $2,800</p>
+          <p class="estimate-step-text">Final price depends on finish and surface condition.</p>
+          <div class="estimate-actions">
+            <button type="button" class="btn estimate-back" data-back>Back</button>
+            <button type="button" class="btn btn-primary estimate-submit" data-next>Continue</button>
+          </div>
+        </section>
+
+        <section class="estimate-step" data-step="4">
+          <h2 class="estimate-step-title">Want a quick visualization?</h2>
+          <p class="estimate-step-text">We can show how it will look in your space.</p>
+          <div class="estimate-lead-fields">
+            <input type="tel" name="phone" autocomplete="tel" placeholder="Phone">
+            <input type="email" name="email" autocomplete="email" placeholder="Email">
+          </div>
+          <p class="estimate-note">Phone or email is enough. We usually reply within 10–20 minutes.</p>
+          <div class="estimate-actions">
+            <button type="button" class="btn estimate-back" data-back>Back</button>
+            <button type="submit" class="btn btn-primary estimate-submit">Get My Visualization</button>
+          </div>
+          <p class="estimate-success" id="estimate-success">Thank you. We received your request and will reply shortly.</p>
+        </section>
+      </form>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="footer-inner">
@@ -2515,15 +2913,227 @@
 
     const floatingQuote = document.getElementById("floating-quote");
     const contactSection = document.getElementById("contact");
+    const estimateModal = document.getElementById("estimate-modal");
+    const estimateClose = document.getElementById("estimate-close");
+    const estimateForm = document.getElementById("estimate-form");
+    const estimateSteps = Array.from(document.querySelectorAll(".estimate-step"));
+    const estimateProgress = Array.from(document.querySelectorAll(".estimate-progress span"));
+    const estimatePhoto = document.getElementById("estimate-photo");
+    const estimateFileLabel = document.getElementById("estimate-file-label");
+    const estimateProjectInput = document.getElementById("estimate-project-type");
+    const estimateSizeInput = document.getElementById("estimate-wall-size");
+    const estimateRangeInput = document.getElementById("estimate-range-input");
+    const estimatePhotoFilename = document.getElementById("estimate-photo-filename");
+    const estimateRangeText = document.getElementById("estimate-range");
+    const estimateSuccess = document.getElementById("estimate-success");
+    const estimatePhoneInput = estimateForm ? estimateForm.querySelector("input[name='phone']") : null;
+    const estimateEmailInput = estimateForm ? estimateForm.querySelector("input[name='email']") : null;
+
+    const estimateState = {
+      step: 0,
+      project: "feature",
+      size: "medium"
+    };
+
+    const estimateRanges = {
+      fireplace: {
+        small: [1200, 2200],
+        medium: [1800, 3200],
+        large: [3000, 6000],
+        unsure: [1800, 3200]
+      },
+      feature: {
+        small: [900, 1600],
+        medium: [1400, 2800],
+        large: [2500, 4500],
+        unsure: [1400, 2800]
+      },
+      full: {
+        small: [1100, 1900],
+        medium: [1800, 3400],
+        large: [3200, 6500],
+        unsure: [1800, 3400]
+      },
+      unsure: {
+        small: [900, 1600],
+        medium: [1400, 2800],
+        large: [2500, 4500],
+        unsure: [1400, 2800]
+      }
+    };
+
+    const formatEstimate = ([min, max]) => {
+      return `$${min.toLocaleString()} – $${max.toLocaleString()}`;
+    };
+
+    const updateEstimate = () => {
+      const range = estimateRanges[estimateState.project][estimateState.size];
+      const formatted = formatEstimate(range);
+      if (estimateRangeText) {
+        estimateRangeText.textContent = formatted;
+      }
+      if (estimateRangeInput) {
+        estimateRangeInput.value = formatted;
+      }
+      if (estimateProjectInput) {
+        estimateProjectInput.value = estimateState.project;
+      }
+      if (estimateSizeInput) {
+        estimateSizeInput.value = estimateState.size;
+      }
+      if (estimatePhotoFilename && estimatePhoto) {
+        const file = estimatePhoto.files && estimatePhoto.files[0];
+        estimatePhotoFilename.value = file ? file.name : "";
+      }
+    };
+
+    const showEstimateStep = (step) => {
+      estimateState.step = Math.max(0, Math.min(step, estimateSteps.length - 1));
+      estimateSteps.forEach((element, index) => {
+        element.classList.toggle("is-active", index === estimateState.step);
+      });
+      estimateProgress.forEach((element, index) => {
+        element.classList.toggle("is-active", index <= estimateState.step);
+      });
+      updateEstimate();
+      if (estimateState.step === 4 && estimatePhoneInput) {
+        window.setTimeout(() => estimatePhoneInput.focus(), 80);
+      }
+    };
+
+    const openEstimate = () => {
+      if (!estimateModal) return;
+      estimateModal.classList.add("is-open");
+      estimateModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("estimate-lock");
+        if (estimateSuccess) {
+          estimateSuccess.classList.remove("is-visible");
+        }
+      showEstimateStep(0);
+    };
+
+    const closeEstimate = () => {
+      if (!estimateModal) return;
+      estimateModal.classList.remove("is-open");
+      estimateModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("estimate-lock");
+    };
 
     if (floatingQuote && contactSection) {
-      const quoteObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          floatingQuote.classList.toggle("is-hidden", entry.isIntersecting);
-        });
-      }, { threshold: 0.2 });
+      floatingQuote.addEventListener("click", openEstimate);
+    }
 
-      quoteObserver.observe(contactSection);
+    if (estimateClose) {
+      estimateClose.addEventListener("click", closeEstimate);
+    }
+
+    if (estimateModal) {
+      estimateModal.addEventListener("click", (event) => {
+        if (event.target === estimateModal) {
+          closeEstimate();
+        }
+      });
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && estimateModal && estimateModal.classList.contains("is-open")) {
+        closeEstimate();
+      }
+    });
+
+    if (estimatePhoto && estimateFileLabel) {
+      estimatePhoto.addEventListener("change", () => {
+        const file = estimatePhoto.files && estimatePhoto.files[0];
+        estimateFileLabel.textContent = file ? file.name : "JPG, PNG, or HEIC from your phone";
+        if (estimatePhotoFilename) {
+          estimatePhotoFilename.value = file ? file.name : "";
+        }
+        if (file && estimateState.step === 0) {
+          showEstimateStep(1);
+        }
+      });
+    }
+
+    document.querySelectorAll("[data-next]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (estimateState.step === 0 && estimatePhoto && !estimatePhoto.files.length) {
+          estimatePhoto.click();
+          return;
+        }
+        showEstimateStep(estimateState.step + 1);
+      });
+    });
+
+    document.querySelectorAll("[data-back]").forEach((button) => {
+      button.addEventListener("click", () => {
+        showEstimateStep(estimateState.step - 1);
+      });
+    });
+
+    document.querySelectorAll("[data-estimate-options]").forEach((group) => {
+      group.addEventListener("click", (event) => {
+        const option = event.target.closest(".estimate-option");
+        if (!option) return;
+
+        group.querySelectorAll(".estimate-option").forEach((item) => {
+          item.classList.remove("is-selected");
+        });
+        option.classList.add("is-selected");
+
+        if (group.dataset.estimateOptions === "project") {
+          estimateState.project = option.dataset.value;
+        }
+
+        if (group.dataset.estimateOptions === "size") {
+          estimateState.size = option.dataset.value;
+        }
+
+        updateEstimate();
+        showEstimateStep(estimateState.step + 1);
+      });
+    });
+
+    if (estimateForm) {
+      estimateForm.addEventListener("submit", async (event) => {
+        const phone = estimatePhoneInput ? estimatePhoneInput.value.trim() : "";
+        const email = estimateEmailInput ? estimateEmailInput.value.trim() : "";
+        const filename = estimatePhotoFilename ? estimatePhotoFilename.value : "";
+
+        if (!phone && !email) {
+          event.preventDefault();
+          if (estimatePhoneInput) {
+            estimatePhoneInput.focus();
+          }
+          return;
+        }
+
+        event.preventDefault();
+        updateEstimate();
+
+        try {
+          const response = await fetch("/", {
+            method: "POST",
+            body: new FormData(estimateForm)
+          });
+
+          if (!response.ok) {
+            throw new Error("Submission failed");
+          }
+
+          if (estimateSuccess) {
+            estimateSuccess.classList.add("is-visible");
+          }
+          estimateForm.querySelectorAll(".estimate-option").forEach((item) => {
+            item.classList.remove("is-selected");
+          });
+          if (estimateFileLabel) {
+            estimateFileLabel.textContent = "JPG, PNG, or HEIC from your phone";
+          }
+          window.setTimeout(closeEstimate, 1800);
+        } catch (error) {
+          window.location.href = `mailto:designstiledileo@gmail.com?subject=Visualization%20Request&body=Estimate:%20${encodeURIComponent(estimateRangeInput.value)}%0AProject:%20${encodeURIComponent(estimateState.project)}%0ASize:%20${encodeURIComponent(estimateState.size)}%0APhoto:%20${encodeURIComponent(filename)}%0APhone:%20${encodeURIComponent(phone)}%0AEmail:%20${encodeURIComponent(email)}`;
+        }
+      });
     }
   </script>
 </body>
