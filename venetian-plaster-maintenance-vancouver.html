@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Venetian Plaster Maintenance Vancouver | Cleaning, Care and Long-Term Upkeep</title>
-  <meta name="description" content="Learn how to maintain Venetian plaster in Vancouver, including cleaning, long-term care, what to avoid, and how to keep feature walls looking refined over time." />
+  <title>Venetian Plaster Maintenance Vancouver | Care, Cleaning & Longevity</title>
+  <meta name="description" content="Learn how to maintain Venetian plaster in Vancouver homes, including cleaning, care, what to avoid, and how finish type affects longevity." />
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://stiledileo.com/venetian-plaster-maintenance-vancouver.html" />
   <meta property="og:url" content="https://stiledileo.com/venetian-plaster-maintenance-vancouver.html">
@@ -17,107 +17,183 @@
     :root{--bg:#0f0d0b;--text:#f0ebe4;--muted:#b8aea0;--gold:#cfae55;--gold-light:#ddb969;--line:rgba(207,174,85,.18)}
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;line-height:1.85}
-    .hero{position:relative;min-height:62vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px;background:url('/images/venetianplaster3.png') center/cover no-repeat}
-    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,13,11,.28), rgba(15,13,11,.68))}
-    .hero-inner{position:relative;z-index:2;max-width:900px}
+    .nav{position:absolute;top:0;left:0;right:0;z-index:5;padding:24px;display:flex;justify-content:center}
+    .nav-inner{width:min(1120px,100%);display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--text);text-decoration:none;letter-spacing:.04em}
+    .nav-links{display:flex;gap:22px;margin:0;padding:0;list-style:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+    .nav-links a{color:rgba(240,235,228,.76);text-decoration:none}.nav-links a:hover{color:var(--gold-light)}
+    .hero{position:relative;min-height:62vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:96px 24px 80px;background:url('/images/venetianplaster5.png') center/cover no-repeat}
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,13,11,.38), rgba(15,13,11,.76))}
+    .hero-inner{position:relative;z-index:2;max-width:920px}
     .hero-kicker{margin:0 0 14px;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
     .hero h1{margin:0 0 18px;font-family:'Cormorant Garamond',serif;font-size:clamp(44px,7vw,82px);font-weight:300;line-height:1;color:#fff}
-    .hero p{max-width:720px;margin:0 auto;color:rgba(240,235,228,.84);font-size:15px}
+    .hero p{max-width:740px;margin:0 auto;color:rgba(240,235,228,.84);font-size:15px}
     .wrap{max-width:1040px;margin:0 auto;padding:72px 24px 110px}
     .lead{max-width:860px;margin:0 auto 48px}.lead p,.section p{margin:0 0 18px;font-size:15px;color:var(--muted)}
     h2{margin:0 0 18px;font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,44px);font-weight:300;line-height:1.15;color:var(--text)}
-    .section{margin-bottom:46px}.section ul{margin:0;padding-left:20px;color:var(--muted)}.section li{margin-bottom:8px}
-    .image{margin:8px 0 52px}.image img{width:100%;height:420px;object-fit:cover;display:block}
+    h3{margin:26px 0 8px;font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+    .section{margin-bottom:48px}.section ul{margin:0 0 18px;padding-left:20px;color:var(--muted)}.section li{margin-bottom:8px}
     a{color:var(--gold);text-decoration:none}a:hover{color:var(--gold-light)}
-    .cta{margin-top:64px;padding:44px 34px;border:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));text-align:center}
+    .note{border:1px solid var(--line);padding:24px 26px;margin:22px 0 0;background:linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.01));color:var(--muted);font-size:15px}
+    .related{margin-top:56px;padding-top:34px;border-top:1px solid var(--line)}
+    .related ul{margin:0;padding-left:20px;color:var(--muted)}
+    .cta{margin-top:64px;padding:44px 34px;border:1px solid var(--line);background:radial-gradient(circle at top, rgba(207,174,85,.12), transparent 44%),linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.01));text-align:center}
     .cta p{max-width:700px;margin:0 auto 18px;color:var(--muted);font-size:15px}
     .btn{display:inline-block;margin-top:10px;padding:14px 30px;background:var(--gold);color:#0f0d0b;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all .25s ease}.btn:hover{background:var(--gold-light);color:#0f0d0b;transform:translateY(-1px)}
-    @media (max-width:900px){.hero{min-height:52vh;padding:60px 20px}.wrap{padding:60px 20px 90px}.image img{height:240px}.cta{padding:34px 22px}}
+    .footer{border-top:1px solid rgba(207,174,85,.12);padding:28px 24px;color:rgba(240,235,228,.54);font-size:12px;text-align:center}
+    @media (max-width:900px){.nav{position:relative;background:#0f0d0b}.nav-inner{align-items:flex-start}.nav-links{flex-wrap:wrap;justify-content:flex-end;gap:14px}.hero{min-height:52vh;padding:64px 20px}.wrap{padding:60px 20px 90px}.cta{padding:34px 22px}}
+    @media (max-width:640px){.nav-inner{display:block;text-align:center}.nav-links{justify-content:center;margin-top:14px}.hero h1{font-size:clamp(40px,13vw,58px)}}
   </style>
 </head>
 <body>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="nav-inner">
+      <a class="brand" href="/">Stile di Leo</a>
+      <ul class="nav-links">
+        <li><a href="/venetian-plaster-vancouver.html">Venetian Plaster</a></li>
+        <li><a href="/feature-wall-vancouver.html">Feature Walls</a></li>
+        <li><a href="/fireplace-wall-vancouver.html">Fireplace Walls</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+      </ul>
+    </div>
+  </nav>
 
   <section class="hero">
     <div class="hero-inner">
       <p class="hero-kicker">Vancouver Care Guide</p>
-      <h1>Venetian Plaster Maintenance</h1>
-      <p>
-        A practical guide to cleaning and maintaining Venetian plaster in Vancouver so feature walls and focal surfaces continue to look refined over time.
-      </p>
+      <h1>Venetian Plaster Maintenance in Vancouver</h1>
+      <p>How to clean, care for, and protect Venetian plaster finishes in real homes without overcomplicating the process.</p>
     </div>
   </section>
 
-  <div class="wrap">
-
+  <main class="wrap">
     <div class="lead">
       <p>
-        Venetian plaster does not need complicated maintenance, but it does benefit from the right kind of care. In Vancouver homes, most maintenance questions come down to how to clean the surface gently, how to avoid damage, and when it makes sense to refresh or repair a wall.
+        Venetian plaster is low-maintenance when it is properly applied, but care depends on finish type, sealing, room use, and surface exposure. A living room feature wall, fireplace surround, bathroom wall, and entryway do not all need the same maintenance expectations.
       </p>
       <p>
-        For the broader service overview, start with <a href="/venetian-plaster-vancouver.html">Venetian Plaster Vancouver</a>. If your main concern is longevity first, also review <a href="/venetian-plaster-durability-vancouver.html">Venetian Plaster Durability Vancouver</a>.
+        For a broader overview of Venetian plaster in Vancouver, start with the main service page: <a href="/venetian-plaster-vancouver.html">Venetian plaster Vancouver</a>. This guide focuses specifically on cleaning, care, and day-to-day longevity.
       </p>
     </div>
 
-    <div class="image">
-      <img src="/images/venetianplaster4.png" alt="Maintained Venetian plaster wall in Vancouver interior">
-    </div>
-
-    <div class="section">
+    <section class="section">
       <h2>How to Clean Venetian Plaster</h2>
       <p>
-        Most interior Venetian plaster walls only need light cleaning. A soft dry cloth or a slightly damp microfiber cloth is usually enough for everyday dust and minor marks. The goal is to clean the surface gently rather than scrub it aggressively.
+        Most Venetian plaster walls only need gentle care. For dust or light marks, start with a soft dry cloth or microfiber cloth. Avoid treating the finish like basic washable paint, especially if you do not know the exact finish system.
       </p>
       <ul>
-        <li>Use a soft microfiber cloth for light dusting</li>
-        <li>Use minimal moisture when needed</li>
-        <li>Test any cleaning approach on a discreet area first</li>
-        <li>Avoid harsh chemicals and abrasive scrubbers</li>
+        <li>Use a soft dry cloth or clean microfiber cloth first</li>
+        <li>A lightly damp cloth may be appropriate for some sealed finishes</li>
+        <li>Avoid harsh scrubbing or pressure</li>
+        <li>Avoid abrasive cleaners and rough pads</li>
+        <li>If unsure, test gently in a discreet area first</li>
       </ul>
-    </div>
+      <p>
+        If a mark does not lift with a gentle approach, it is better to ask before using stronger products. Premium finishes can often be corrected, but aggressive cleaning can make a small issue more visible.
+      </p>
+    </section>
 
-    <div class="section">
+    <section class="section">
       <h2>What to Avoid</h2>
       <p>
-        Venetian plaster is a specialty finish, so harsh cleaning products, abrasive pads, and repeated friction are not the right approach. On high-visibility walls, aggressive cleaning can dull the finish or disturb the refined surface character that makes the wall special in the first place.
+        Venetian plaster is a refined wall finish, not a utility coating. Care should protect the surface rather than force it through heavy cleaning.
       </p>
-    </div>
+      <ul>
+        <li>Abrasive pads or scrub sponges</li>
+        <li>Harsh chemicals or strong household cleaners</li>
+        <li>Aggressive scrubbing</li>
+        <li>Soaking the surface with water</li>
+        <li>Repeated impact, sharp contact, or dragging furniture against the wall</li>
+      </ul>
+      <div class="note">
+        Not every Venetian plaster finish is waterproof or stain-proof. The finish type, sealer, location, and installation quality all affect how the wall should be maintained.
+      </div>
+    </section>
 
-    <div class="section">
-      <h2>Feature Walls and Fireplace Walls</h2>
+    <section class="section">
+      <h2>How Finish Type Affects Maintenance</h2>
+      <h3>Matte finishes</h3>
       <p>
-        Maintenance is usually easiest when Venetian plaster is used on walls with real visual importance but limited day-to-day abuse. That is one reason it works so well for feature walls, fireplace walls, dining walls, and bedroom focal walls.
+        Matte finishes often feel soft and understated, but they can show aggressive rubbing more easily than a protected surface. Gentle dusting and careful spot cleaning are usually best.
       </p>
+      <h3>Polished finishes</h3>
       <p>
-        For those narrower use cases, see <a href="/feature-wall-vancouver.html">Feature Wall Vancouver</a> and <a href="/fireplace-wall-vancouver.html">Fireplace Wall Vancouver</a>.
+        Polished finishes can be visually rich and more reflective. They should still be cleaned carefully so the sheen and movement stay consistent.
       </p>
-    </div>
+      <h3>Sealed finishes</h3>
+      <p>
+        Sealed finishes can offer more practical protection, but sealing does not make every wall immune to moisture, staining, or damage. The right product and application matter.
+      </p>
+      <h3>Bathrooms and moisture-prone areas</h3>
+      <p>
+        Bathroom or moisture-prone areas need the correct system and finish protection from the start. If you are planning that type of wall, review <a href="/venetian-plaster-bathroom-vancouver.html">Venetian plaster bathroom Vancouver</a> before assuming a standard decorative finish is suitable.
+      </p>
+    </section>
 
-    <div class="section">
-      <h2>When a Wall May Need Attention</h2>
+    <section class="section">
+      <h2>Maintenance by Area</h2>
+      <h3>Living rooms</h3>
       <p>
-        A well-finished wall can look beautiful for years, but certain situations may justify a refresh or repair: impact damage, unusual moisture exposure, substrate movement, or a change in the surrounding renovation. In many cases, the right solution depends on how visible the wall is and how exact the finish needs to remain.
+        Living room feature walls are usually among the easiest Venetian plaster applications to maintain because they are visible but not constantly touched.
       </p>
-    </div>
-
-    <div class="section">
-      <h2>Maintenance vs Long-Term Value</h2>
+      <h3>Fireplace walls</h3>
       <p>
-        Venetian plaster is not maintenance-free, but most owners find it reasonable to care for because the wall does not read like a temporary coating. It feels more like a design surface worth preserving. That is a big part of why it often delivers stronger long-term value than an ordinary painted feature wall.
+        Fireplace walls need thoughtful detailing and practical care around edges, returns, and the firebox area. For fireplace-specific finish planning, see <a href="/venetian-plaster-fireplace-surround-vancouver.html">Venetian plaster fireplace surround Vancouver</a>.
+      </p>
+      <h3>Entryways</h3>
+      <p>
+        Entryways can perform well, but they are more exposed to bags, shoes, furniture movement, and daily contact, so finish selection should be practical.
+      </p>
+      <h3>Bathrooms</h3>
+      <p>
+        Bathrooms require more careful specification. The right finish location, sealing approach, and ventilation matter more than the material name alone.
+      </p>
+      <h3>Dining spaces</h3>
+      <p>
+        Dining walls are often strong candidates because they bring atmosphere to the room while usually staying away from heavy impact and constant moisture.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Maintenance and Durability Work Together</h2>
+      <p>
+        Maintenance and durability are connected. A properly specified finish in the right location requires less worry over time because the wall is designed for how the room is actually used.
       </p>
       <p>
-        If you are still weighing the investment, read <a href="/is-venetian-plaster-worth-it-vancouver.html">Is Venetian Plaster Worth It in Vancouver?</a> and <a href="/venetian-plaster-vs-paint-vancouver.html">Venetian Plaster vs Paint Vancouver</a>.
+        For lifespan and performance expectations, read <a href="/venetian-plaster-durability-vancouver.html">Venetian plaster durability Vancouver</a>. If you are still planning budget, the <a href="/venetian-plaster-cost-per-sq-ft-vancouver.html">Venetian plaster cost per sq ft Vancouver</a> guide gives practical planning ranges.
       </p>
-    </div>
+    </section>
 
-    <div class="cta">
-      <h2>Plan the Right Finish</h2>
+    <section class="section">
+      <h2>When to Ask a Professional</h2>
       <p>
-        If you want a finish that stays beautiful and makes sense for the room over time, we can help define the right Venetian plaster direction from the start.
+        Ask a professional if you notice chips, staining, moisture issues, bubbling, cracking, or substrate movement. Avoid aggressive DIY repairs on premium finishes because mismatched patching, sanding, or cleaning can draw more attention than the original mark.
       </p>
-      <a href="/#contact" class="btn">Request a Consultation</a>
-    </div>
+      <p>
+        A small repair or touch-up should be handled with the finish system in mind, not treated like a standard drywall patch.
+      </p>
+    </section>
 
-  </div>
+    <section class="cta">
+      <h2>Want to know if Venetian plaster is right for your wall?</h2>
+      <p>Send a photo and get practical guidance on finish suitability, care expectations, and estimated project range.</p>
+      <a href="/#estimate" class="btn">Get Estimate from Your Wall</a>
+    </section>
 
+    <section class="related">
+      <h2>Related Guides</h2>
+      <ul>
+        <li><a href="/venetian-plaster-vancouver.html">Venetian Plaster Vancouver</a></li>
+        <li><a href="/venetian-plaster-durability-vancouver.html">Venetian Plaster Durability Vancouver</a></li>
+        <li><a href="/venetian-plaster-bathroom-vancouver.html">Venetian Plaster Bathroom Vancouver</a></li>
+        <li><a href="/venetian-plaster-fireplace-surround-vancouver.html">Venetian Plaster Fireplace Surround Vancouver</a></li>
+        <li><a href="/venetian-plaster-cost-per-sq-ft-vancouver.html">Venetian Plaster Cost per Sq Ft Vancouver</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Stile di Leo - Decorative walls and Venetian plaster for Vancouver interiors
+  </footer>
 </body>
 </html>

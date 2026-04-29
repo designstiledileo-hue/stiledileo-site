@@ -12,6 +12,21 @@
   status = 200
 
 [[redirects]]
+  from = "/venetian-plaster-cost-per-sq-ft-vancouver"
+  to = "/venetian-plaster-cost-per-sq-ft-vancouver.html"
+  status = 301
+
+[[redirects]]
+  from = "/venetian-plaster-durability-vancouver"
+  to = "/venetian-plaster-durability-vancouver.html"
+  status = 301
+
+[[redirects]]
+  from = "/venetian-plaster-maintenance-vancouver"
+  to = "/venetian-plaster-maintenance-vancouver.html"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
