@@ -3012,6 +3012,10 @@
       showEstimateStep(0);
     };
 
+    if (window.location.hash === "#estimate") {
+      openEstimate();
+    }
+
     const closeEstimate = () => {
       if (!estimateModal) return;
       estimateModal.classList.remove("is-open");
