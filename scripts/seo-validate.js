@@ -79,7 +79,7 @@ for (const file of htmlFiles) {
           cursor = path.join(cursor, part);
         }
       }
-      if (!/\.(html|xml|txt|png|PNG|jpe?g|webp|svg|mp4|pdf|ico)$/i.test(clean) && !clean.startsWith('/admin')) {
+      if (!/\.(html|xml|txt|js|png|PNG|jpe?g|webp|svg|mp4|pdf|ico)$/i.test(clean) && !clean.startsWith('/admin')) {
         const htmlTarget = path.join(root, `${clean.slice(1)}.html`);
         if (fs.existsSync(htmlTarget)) fail.push(`${file}: internal link points to redirecting clean URL ${raw}`);
       }
