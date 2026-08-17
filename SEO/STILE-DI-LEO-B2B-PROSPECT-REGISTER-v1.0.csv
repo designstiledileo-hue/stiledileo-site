@@ -1,0 +1,3 @@
+prospect_id,company,contact_name,segment,city,website,instagram,email,reason_for_fit,first_contact_date,channel,follow_up_1,follow_up_2,response,status,opportunity,notes
+EXAMPLE-001,Example Interior Design Studio,,interior_designer,Vancouver,https://example.com,@exampledesign,,Residential interiors with fireplace and feature-wall work,2026-08-17,email,2026-08-24,2026-09-03,none,new,possible_future_project,Example row only — not a real prospect
+EXAMPLE-002,Example Fireplace Contractor,,fireplace_contractor,Langley,https://example.com,@examplefireplace,,Fireplace installs where plaster surround finishes may fit,2026-08-17,instagram,2026-08-24,2026-09-03,none,new,partnership_fit,Example row only — not a real prospect
