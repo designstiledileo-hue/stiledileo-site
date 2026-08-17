@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Marmorino Vancouver | Custom Fireplace & Wall Finishes | Stile di Leo</title>
+  <meta name="description" content="Custom Marmorino in Vancouver for fireplaces, feature walls and refined interiors. Hand-applied mineral finishes with estimate guidance from Stile di Leo.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://stiledileo.com/marmorino-vancouver.html">
+  <meta property="og:url" content="https://stiledileo.com/marmorino-vancouver.html">
+  <meta property="og:title" content="Marmorino Vancouver | Custom Fireplace & Wall Finishes | Stile di Leo">
+  <meta property="og:description" content="Custom Marmorino in Vancouver for fireplaces, feature walls and refined interiors. Hand-applied mineral finishes with estimate guidance from Stile di Leo.">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="apple-touch-icon" href="/images/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f0d0b;
+      --panel:#161310;
+      --text:#f0ebe4;
+      --muted:#b8aea0;
+      --gold:#cfae55;
+      --gold-light:#ddb969;
+      --line:rgba(207,174,85,.18);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Montserrat',sans-serif;
+      line-height:1.85;
+    }
+
+    .hero{
+      max-width:1120px;
+      margin:0 auto;
+      padding:86px 24px 60px;
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:44px;
+      align-items:center;
+    }
+
+    .kicker{
+      margin:0 0 14px;
+      font-size:10px;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      color:var(--gold);
+    }
+
+    h1,h2,h3{
+      font-family:'Cormorant Garamond',serif;
+      font-weight:300;
+      color:var(--text);
+    }
+
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(48px,7vw,86px);
+      line-height:1;
+    }
+
+    h2{
+      margin:0 0 18px;
+      font-size:clamp(32px,4vw,46px);
+      line-height:1.14;
+    }
+
+    h3{
+      margin:0 0 8px;
+      font-size:28px;
+    }
+
+    p,li{
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    a{
+      color:var(--gold);
+      text-decoration:none;
+    }
+
+    a:hover{color:var(--gold-light)}
+
+    .hero p{
+      max-width:680px;
+      margin:0 0 22px;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:14px 28px;
+      background:var(--gold);
+      color:#0f0d0b;
+      font-size:11px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
+    .btn:hover{
+      background:var(--gold-light);
+      color:#0f0d0b;
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--gold);
+      border:1px solid var(--line);
+    }
+
+    .btn.secondary:hover{
+      color:var(--gold-light);
+      border-color:rgba(207,174,85,.38);
+    }
+
+    figure{
+      margin:0;
+    }
+
+    img{
+      width:100%;
+      display:block;
+    }
+
+    .hero img{
+      height:620px;
+      object-fit:cover;
+    }
+
+    figcaption{
+      margin-top:10px;
+      color:rgba(184,174,160,.72);
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .wrap{
+      max-width:1040px;
+      margin:0 auto;
+      padding:26px 24px 110px;
+    }
+
+    .section{
+      margin-top:58px;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:34px;
+      align-items:start;
+    }
+
+    .panel{
+      padding:34px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    }
+
+    .list{
+      margin:0;
+      padding-left:20px;
+    }
+
+    .details{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-top:22px;
+    }
+
+    .detail{
+      padding:24px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.015);
+    }
+
+    .detail strong{
+      display:block;
+      margin-bottom:8px;
+      color:var(--text);
+      font-size:12px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
+    .faq p{
+      margin:0 0 20px;
+    }
+
+    .cta{
+      margin-top:70px;
+      padding:44px 34px;
+      border:1px solid var(--line);
+      text-align:center;
+      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    }
+
+    .cta p{
+      max-width:680px;
+      margin:0 auto 20px;
+    }
+
+    @media(max-width:900px){
+      .hero{
+        grid-template-columns:1fr;
+        padding:62px 20px 36px;
+        gap:28px;
+      }
+
+      .hero img{
+        height:auto;
+        max-height:560px;
+        object-fit:cover;
+      }
+
+      .wrap{
+        padding:20px 20px 86px;
+      }
+
+      .split,.details{
+        grid-template-columns:1fr;
+      }
+
+      .panel,.cta{
+        padding:30px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div>
+      <p class="kicker">Vancouver Marmorino Finishes</p>
+      <h1>Marmorino Vancouver</h1>
+      <p>
+        Hand-applied Marmorino finishes for fireplaces, feature walls, living rooms, and refined interior surfaces that need more depth and material character than paint.
+      </p>
+      <div class="actions">
+        <a href="/#contact" class="btn">Request an Estimate</a>
+        <a href="#projects" class="btn secondary">View Real Projects</a>
+      </div>
+    </div>
+
+    <figure>
+      <img src="/images/car-marmorino.jpg" width="600" height="900" alt="Warm Marmorino mineral plaster wall in a refined residential interior">
+      <figcaption>Real Stile di Leo mineral plaster photography used for material direction.</figcaption>
+    </figure>
+  </section>
+
+  <main class="wrap">
+
+    <section class="section split">
+      <div>
+        <h2>What Marmorino Is</h2>
+        <p>
+          Marmorino is a hand-applied decorative plaster finish used when a wall should feel more architectural, mineral, and custom than a standard painted surface. It can create a smooth, refined appearance with depth, soft movement, and finish character that changes with light.
+        </p>
+      </div>
+      <div class="panel">
+        <h3>A Material-Led Finish</h3>
+        <p>
+          The appeal is not a printed pattern or a flat colour. It comes from preparation, hand application, subtle surface movement, and the way the finish is developed for the room.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Where Marmorino Works</h2>
+      <p>
+        Stile di Leo uses Marmorino where the surface has a clear role in the room: a fireplace elevation, a feature wall behind the main seating area, a living-room focal wall, or another selected interior surface that should feel quietly elevated.
+      </p>
+      <div class="details">
+        <div class="detail">
+          <strong>Fireplaces</strong>
+          <p>For suitable prepared fireplace walls and surrounds that need a more refined plaster finish.</p>
+        </div>
+        <div class="detail">
+          <strong>Feature Walls</strong>
+          <p>For focal surfaces where paint feels too flat and a mineral wall finish would add depth.</p>
+        </div>
+        <div class="detail">
+          <strong>Living Spaces</strong>
+          <p>For interiors where the wall finish should support lighting, millwork, stone, and furniture.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <h2>Marmorino for Fireplaces</h2>
+        <p>
+          Fireplace walls are one of the strongest places to consider Marmorino. On suitable prepared surfaces, it can help an existing or newly planned fireplace feel more continuous, architectural, and integrated with the room.
+        </p>
+        <p>
+          Because fireplace projects depend on the existing construction, substrate condition, clearances, and finish direction, each one should be reviewed before a scope is confirmed. For broader planning, see <a href="/fireplace-wall-vancouver.html">fireplace transformations</a>.
+        </p>
+      </div>
+      <div>
+        <h2>Preparation Matters</h2>
+        <p>
+          The final appearance depends heavily on what happens before the decorative finish. Substrate condition, leveling, edges, corners, and surface preparation all affect how clean and refined the finished Marmorino wall will feel.
+        </p>
+        <p>
+          Stile di Leo reviews the wall, the surrounding materials, and the desired finish character before recommending the right approach.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Finish Character</h2>
+      <p>
+        Marmorino can be calm and understated or more expressive depending on colour, sheen, movement, and the room around it. The strongest results usually come from matching the finish to the architecture rather than forcing a surface effect onto every wall.
+      </p>
+      <ul class="list">
+        <li>Subtle movement and mineral depth</li>
+        <li>Smooth, hand-applied variation</li>
+        <li>Custom colour and sheen direction</li>
+        <li>A refined alternative to ordinary paint on important walls</li>
+      </ul>
+    </section>
+
+    <section class="section" id="projects">
+      <h2>Project Examples</h2>
+      <p>
+        The current verified Marmorino imagery in the repository is limited, so this page uses one real Stile di Leo mineral plaster image rather than presenting unrelated or artificial project proof.
+      </p>
+      <figure>
+        <img src="/images/car-marmorino.jpg" width="600" height="900" loading="lazy" alt="Close view of warm Marmorino-style mineral plaster finish in a residential interior">
+        <figcaption>Real material photography. Additional project-specific Marmorino case studies can be added when approved photography is available.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section split">
+      <div>
+        <h2>Cost and Estimate Path</h2>
+        <p>
+          Marmorino pricing depends on substrate condition, preparation, area, detailing, access, and finish complexity. A simple flat wall and a detailed fireplace wall are not scoped the same way.
+        </p>
+        <p>
+          For broader finish pricing context, review <a href="/venetian-plaster-cost-vancouver.html">Venetian plaster pricing</a>.
+        </p>
+      </div>
+      <div>
+        <h2>How It Relates to Venetian Plaster</h2>
+        <p>
+          Marmorino is part of the broader family of decorative plaster finishes, but this page is focused on the Marmorino material direction specifically. For the wider service category, see <a href="/venetian-plaster-vancouver.html">Venetian plaster services in Vancouver</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="section faq">
+      <h2>Frequently Asked Questions</h2>
+
+      <p><strong>What is Marmorino?</strong><br>
+      Marmorino is a decorative plaster finish chosen for smooth mineral depth, hand-applied movement, and a more architectural surface than standard paint.</p>
+
+      <p><strong>Is Marmorino the same as Venetian plaster?</strong><br>
+      It is related to the broader decorative plaster category, but Marmorino has its own material character and finish direction. The right choice depends on the room and desired surface.</p>
+
+      <p><strong>Can Marmorino be used on fireplace walls?</strong><br>
+      Yes, when the fireplace surface and project conditions are suitable and properly prepared. The existing construction should be reviewed before confirming scope.</p>
+
+      <p><strong>How is Marmorino priced?</strong><br>
+      Pricing depends on preparation, wall size, detailing, access, and finish complexity. Photos and approximate dimensions help with an initial estimate direction.</p>
+
+      <p><strong>Can the colour and sheen be customized?</strong><br>
+      Yes. Colour, sheen, and movement are part of the finish direction and should be selected around the room, lighting, and surrounding materials.</p>
+    </section>
+
+    <div class="cta">
+      <h2>Planning a Marmorino Fireplace or Feature Wall?</h2>
+      <p>
+        Send photos, approximate dimensions, and your city. Stile di Leo can review the surface and help define the right Marmorino finish direction for your project.
+      </p>
+      <a href="/#contact" class="btn">Request an Estimate</a>
+    </div>
+
+  </main>
+
+</body>
+</html>
