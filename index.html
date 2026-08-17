@@ -40,6 +40,7 @@
     gtag('js', new Date());
     gtag('config', 'G-P7VJ8MQNKS');
   </script>
+  <script src="/scripts/analytics.js" defer></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -3125,6 +3126,12 @@
 
           if (estimateSuccess) {
             estimateSuccess.classList.add("is-visible");
+          }
+          if (window.StileAnalytics) {
+            window.StileAnalytics.trackLeadSuccess({
+              cta_location: "estimate_modal",
+              service: estimateState.project || "general"
+            });
           }
           estimateForm.querySelectorAll(".estimate-option").forEach((item) => {
             item.classList.remove("is-selected");
