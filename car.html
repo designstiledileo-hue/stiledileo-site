@@ -21,6 +21,7 @@
     gtag('js', new Date());
     gtag('config', 'G-P7VJ8MQNKS');
   </script>
+  <script src="/scripts/analytics.js" defer></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -209,18 +210,5 @@
   <footer class="site-path"><a href="/" data-track="main_site">Explore Stile di Leo</a></footer>
   <a class="mobile-cta" href="/#estimate" data-track="send_photo">Send Your Project Photo</a>
 
-  <script>
-    document.querySelectorAll('[data-track]').forEach(function(link){
-      link.addEventListener('click', function(){
-        if (typeof gtag === 'function') {
-          gtag('event', 'car_landing_action', {
-            action_name: link.dataset.track,
-            link_url: link.href,
-            campaign_source: 'vehicle_qr'
-          });
-        }
-      });
-    });
-  </script>
 </body>
 </html>
