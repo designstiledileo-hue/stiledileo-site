@@ -8,6 +8,7 @@
     "/fireplace-wall-vancouver.html": "fireplace",
     "/venetian-plaster-vancouver.html": "venetian_plaster",
     "/marmorino-vancouver.html": "marmorino",
+    "/west-vancouver-fireplace-transformation.html": "fireplace",
     "/car.html": "general",
     "/car": "general"
   };
