@@ -1,3 +1,3 @@
-lead_id,date_received,lead_source,source_detail,landing_page,service_interest,city,contact_method,qualified,qualification_reason,consultation_or_site_visit,quote_sent,quote_amount,status,won_project_value,lost_reason,notes
-EXAMPLE-001,2026-08-17,organic_google,Google Search inquiry,/fireplace-wall-vancouver.html,fireplace,Langley,form,yes,"Service fit, location fit, plausible fireplace project",yes,yes,6500,quote_sent,,,"Example row only — not a real lead"
-EXAMPLE-002,2026-08-17,car_qr,vehicle QR /car,/car.html,marmorino,Vancouver,email,unknown,"Awaiting reply / project details",no,no,,new,,unknown,"Example row only — not a real lead"
+lead_id,date_received,lead_source,source_detail,landing_page,service_interest,application_subtype,city,contact_method,qualified,qualification_reason,consultation_or_site_visit,quote_sent,quote_amount,status,won_project_value,lost_reason,notes
+EXAMPLE-001,2026-08-17,organic_google,Google Search inquiry,/fireplace-wall-vancouver.html,fireplace,,Langley,form,yes,"Service fit, location fit, plausible fireplace project",yes,yes,6500,quote_sent,,,Example row only — not a real lead
+EXAMPLE-002,2026-08-17,car_qr,vehicle QR /car,/car.html,marmorino,,Vancouver,email,unknown,Awaiting reply / project details,no,no,,new,,unknown,Example row only — not a real lead
