@@ -9,14 +9,14 @@ Final implementation status:
 - Internal project economics record created.
 - B2B validation tracker created with 5 designer / design-adjacent targets and 3 fireplace / specialty partner targets from the existing prospect register.
 - Lead Register lightly extended with `application_subtype` for sculpted-stone validation tracking.
-- Public project case-study HTML was not created because verified case-study assets are not physically present in the canonical repository.
+- Public project case-study HTML was created locally because verified project assets are now physically present in the canonical repository.
 - No push, deployment, social publishing, customer contact, GBP change, or paid ad launch was performed.
 
 ## A. Existing Project Evidence
 
 ### Exact Project Facts
 
-Current confirmed-in-repository evidence is insufficient for publication.
+Current repository evidence is sufficient for a controlled project-proof case study.
 
 Business-reported project facts from the approved sprint brief:
 
@@ -25,10 +25,12 @@ Business-reported project facts from the approved sprint brief:
 
 Repository-verified evidence:
 
-- `images/stone.jpg`: close-up grey stone-vein texture image, 1284 x 2282.
-- `images/soft-stone.jpg`: close-up soft grey finish texture image, 363 x 363.
+- `images/projects/sculpted-stone-feature/stile-di-leo-sculpted-stone-feature-after-hero-01.jpg`: completed interior feature with substantial relief and warm perimeter lighting.
+- `images/projects/sculpted-stone-feature/stile-di-leo-sculpted-stone-feature-after-detail-01.jpg`: moss integration and accent lighting visible.
+- `images/projects/sculpted-stone-feature/stile-di-leo-sculpted-stone-feature-after-detail-02.jpg`: close texture/detail evidence.
+- `images/projects/sculpted-stone-feature/stile-di-leo-sculpted-stone-feature-after-detail-03.jpg`: additional close texture/detail evidence.
 
-These two assets do not verify a completed interior sculptural-rock installation with moss, ambient lighting, room context, process material, or video.
+The assets verify a completed dry interior sculptural feature surface with relief, moss, and lighting. No project video is currently present in the approved directory.
 
 ### Missing Facts
 
@@ -59,7 +61,7 @@ All unavailable project economics fields are marked `UNKNOWN` rather than invent
 
 ### Selected Photos / Video
 
-No public case-study photos or video were selected because the required proof assets are not physically present in the canonical repository.
+Selected public case-study assets are the four verified files in `images/projects/sculpted-stone-feature/`. No video was selected because no real video file is present in that directory.
 
 ### Public Claims Allowed
 
@@ -91,46 +93,32 @@ Do not publicly claim:
 
 ### URL
 
-Recommended only after assets pass the evidence gate:
-
 `/custom-architectural-rock-installation.html`
 
-Alternative if the verified project location becomes known:
-
-`/[city]-architectural-rock-installation.html`
-
 ### Title
-
-Draft for future human review:
 
 `Custom Architectural Rock Installation | Stile di Leo Project`
 
 ### Meta Description
 
-Draft for future human review:
-
-`A real Stile di Leo custom architectural rock installation with sculpted relief, texture, moss, and ambient lighting for a dry interior feature surface.`
+`A real Stile di Leo custom architectural rock installation with sculpted relief, moss integration, ambient lighting, and textured interior feature-wall proof.`
 
 ### H1
-
-Draft for future human review:
 
 `Custom Architectural Rock Installation`
 
 ### Full Copy
 
-Not drafted into production HTML during this sprint because the project-proof image/video gate failed.
+Implemented in `custom-architectural-rock-installation.html`.
 
 ### Asset Mapping
 
-Required future evidence set:
+Implemented asset mapping:
 
-- finished wide interior image;
-- close-up relief texture image;
-- moss integration detail image;
-- ambient lighting image;
-- process image or video;
-- optional short project video.
+- Hero / finished proof: `stile-di-leo-sculpted-stone-feature-after-hero-01.jpg`
+- Moss + lighting detail: `stile-di-leo-sculpted-stone-feature-after-detail-01.jpg`
+- Texture detail: `stile-di-leo-sculpted-stone-feature-after-detail-02.jpg`
+- Additional close detail retained: `stile-di-leo-sculpted-stone-feature-after-detail-03.jpg`
 
 ### CTA
 
@@ -144,15 +132,16 @@ Supporting copy:
 
 ### Internal Links
 
-Future contextual links only:
+Implemented contextual links:
 
-- from Feature Wall Vancouver where sculptural feature surfaces are relevant;
-- from Fireplace Wall Vancouver only as a conceptual direction, not proof of completed sculpted-stone fireplace work;
-- from the case study to `/feature-wall-vancouver.html`, `/fireplace-wall-vancouver.html`, and `/#contact`.
+- `feature-wall-vancouver.html` links to `/custom-architectural-rock-installation.html`.
+- The case-study page links to `/feature-wall-vancouver.html`, `/fireplace-wall-vancouver.html`, and `/#contact`.
+
+No link was added from the fireplace owner page to avoid implying sculpted-stone fireplace readiness.
 
 ### Analytics
 
-Future page should use existing GROWTH-002 conventions:
+The page uses existing GROWTH-002 conventions:
 
 - `estimate_click`
 - `project_photo_click`
@@ -398,33 +387,25 @@ No sitemap change was made because no public case-study page was created.
 
 ### Links
 
-No production internal links were added.
+`feature-wall-vancouver.html` now contains one contextual link to the case study.
 
 ### Assets
 
-Evidence gate failed for public case study.
+Evidence gate passed for a controlled dry interior feature case study.
 
-Verified current assets:
+Verified assets used only from:
 
-- `images/stone.jpg` - close-up finish/texture, not sufficient case-study proof.
-- `images/soft-stone.jpg` - close-up finish/texture, not sufficient case-study proof.
+`images/projects/sculpted-stone-feature/`
 
-Missing required case-study proof assets:
-
-- finished sculptural wall in room context;
-- moss integration image;
-- ambient lighting image;
-- process image/video;
-- project video;
-- approved publication set.
+No `images/stone.jpg`, `images/soft-stone.jpg`, stock, AI-generated, or unrelated assets were used.
 
 ### Analytics
 
-No production analytics changes were made for a public case-study page.
+`scripts/analytics.js` maps `/custom-architectural-rock-installation.html` to `feature_wall` under the existing shared analytics layer.
 
 ### Mobile / Desktop QA
 
-Not applicable because no public case-study page was created.
+Completed against a local HTTP preview. See validation summary in the final response.
 
 ## Changes Implemented
 
@@ -443,22 +424,172 @@ Not created:
 - sculpted-stone owner page;
 - sculpted-stone city page;
 - fireplace sculpted-stone service page;
-- wine-room landing page;
-- public case-study HTML.
+- wine-room landing page.
 
 ## Recommended Next Step
 
-Ingest the verified sculpted-stone project assets into the canonical repository under a dedicated project directory, for example:
+Human review should approve the case-study page, confirm publication permission, and decide whether a project video/process clip will be added later. Do not push or deploy until approved.
 
-`images/projects/sculpted-stone-feature-wall/`
+## Final Implementation Addendum - 2026-08-26
 
-Minimum required files:
+### Case Study Implemented
 
-- final wide room-context photo;
-- final detail / relief photo;
-- moss and lighting detail photo;
-- process photo or video;
-- final reveal video if available;
-- permission confirmation in the internal project-proof register.
+Created:
 
-After that, rerun the evidence gate and create the real-project case study.
+`custom-architectural-rock-installation.html`
+
+Title:
+
+`Custom Architectural Rock Installation | Stile di Leo Project`
+
+Meta description:
+
+`A real Stile di Leo custom architectural rock installation with sculpted relief, moss integration, ambient lighting, and textured interior feature-wall proof.`
+
+H1:
+
+`Custom Architectural Rock Installation`
+
+### Asset Mapping
+
+Used only assets from:
+
+`images/projects/sculpted-stone-feature/`
+
+Mapped assets:
+
+- Hero / finished proof: `stile-di-leo-sculpted-stone-feature-after-hero-01.jpg`
+- Gallery detail / moss + lighting: `stile-di-leo-sculpted-stone-feature-after-detail-01.jpg`
+- Gallery detail / texture: `stile-di-leo-sculpted-stone-feature-after-detail-02.jpg`
+- Additional retained detail asset: `stile-di-leo-sculpted-stone-feature-after-detail-03.jpg`
+
+Not used:
+
+- `images/stone.jpg`
+- `images/soft-stone.jpg`
+- stock imagery
+- AI-generated imagery
+- unrelated feature-wall assets
+
+### Video Status
+
+No real project video file was present in `images/projects/sculpted-stone-feature/`.
+
+The page includes a restrained video-status section stating that video can be added after approved footage is ingested into the same directory.
+
+### CTA
+
+Primary CTA:
+
+`Send Project Photos`
+
+CTA destination:
+
+`/#contact`
+
+CTA framing:
+
+Custom architectural feature review, not guaranteed service availability for every wall or application.
+
+### Internal Links
+
+Implemented:
+
+- `feature-wall-vancouver.html` -> `/custom-architectural-rock-installation.html`
+- `/custom-architectural-rock-installation.html` -> `/feature-wall-vancouver.html`
+- `/custom-architectural-rock-installation.html` -> `/fireplace-wall-vancouver.html`
+- `/custom-architectural-rock-installation.html` -> `/#contact`
+
+Not implemented:
+
+- no sitewide footer link;
+- no homepage overhaul;
+- no sculpted-stone service owner link;
+- no sculpted-stone fireplace service link;
+- no wine-room page link.
+
+### Sitemap
+
+Added:
+
+`https://stiledileo.com/custom-architectural-rock-installation.html`
+
+Lastmod:
+
+`2026-08-26`
+
+### Analytics
+
+Updated:
+
+`scripts/analytics.js`
+
+Mapping added:
+
+`/custom-architectural-rock-installation.html` -> `feature_wall`
+
+The page uses existing shared analytics conventions and `data-track="send_photo"` for the primary CTA.
+
+### Validation Results
+
+- `node --check scripts/analytics.js`: passed
+- `node scripts/seo-validate.js`: passed for 46 HTML files and 44 sitemap URLs
+- One H1: passed
+- Canonical: passed
+- Robots: passed
+- OG URL: passed
+- Sitemap entry: passed
+- Local references: passed
+- No banned substitute assets: passed
+- No unsupported visible claim terms: passed
+
+Existing validator warning:
+
+- 100 non-blocking image dimension opportunities reported sitewide.
+
+### Render QA
+
+HTTP preview:
+
+`http://127.0.0.1:4181/custom-architectural-rock-installation.html`
+
+Desktop 1440 px:
+
+- no horizontal overflow;
+- one H1;
+- hero visible;
+- gallery visible;
+- CTA visible;
+- no broken images;
+- no visible unsupported claim terms;
+- no console errors.
+
+Mobile 390 px:
+
+- no horizontal overflow;
+- one H1;
+- hero visible;
+- gallery visible;
+- CTA visible;
+- no broken images;
+- no visible unsupported claim terms;
+- no console errors.
+
+Mobile 375 px:
+
+- no horizontal overflow;
+- one H1;
+- hero visible;
+- gallery visible;
+- CTA visible;
+- no broken images;
+- no visible unsupported claim terms;
+- no console errors.
+
+### Deployment Status
+
+Not pushed.
+
+Not deployed.
+
+No Netlify deployment was triggered.
