@@ -62,7 +62,7 @@
     if (/wa\.me|whatsapp/i.test(href)) return "whatsapp_click";
     if (href.startsWith("mailto:")) return "email_click";
 
-    if (dataTrack === "send_photo" || /send .*photo|fireplace photo|project photo/.test(text)) {
+    if (dataTrack === "send_photo" || dataTrack === "project_photo" || /send .*photo|fireplace photo|project photo/.test(text)) {
       return "project_photo_click";
     }
 
