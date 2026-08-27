@@ -191,6 +191,50 @@
       margin-top:22px;
     }
 
+    .project-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+      margin-top:24px;
+    }
+
+    .project-card{
+      display:block;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.018);
+    }
+
+    .project-card img{
+      height:380px;
+      object-fit:cover;
+      background:#090806;
+    }
+
+    .project-card-copy{
+      padding:24px;
+    }
+
+    .project-card-copy h3{
+      color:#fff;
+    }
+
+    .project-meta{
+      margin:0 0 10px;
+      color:var(--gold);
+      font-size:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
+    .project-action{
+      display:inline-block;
+      margin-top:8px;
+      color:var(--gold);
+      font-size:11px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
     .detail{
       padding:24px;
       border-top:1px solid var(--line);
@@ -240,8 +284,12 @@
         padding:20px 20px 86px;
       }
 
-      .split,.details{
+      .split,.details,.project-grid{
         grid-template-columns:1fr;
+      }
+
+      .project-card img{
+        height:auto;
       }
 
       .panel,.cta{
@@ -345,17 +393,33 @@
     </section>
 
     <section class="section" id="projects">
-      <h2>Project Examples</h2>
+      <h2>Marmorino Fireplace Projects</h2>
       <p>
-        A completed <a href="/west-vancouver-fireplace-transformation.html">West Vancouver Marmorino fireplace transformation</a> is now available as a project case study, showing how dark tile was transformed into a lighter mineral plaster surface.
+        Marmorino is easiest to understand through finished rooms. These fireplace transformations show how the material can soften heavy existing surfaces and create a more continuous architectural presence.
       </p>
+      <div class="project-grid">
+        <a class="project-card" href="/brookswood-langley-fireplace-transformation.html" data-track="project_photo">
+          <img src="/images/projects/brookswood-fireplace/stile-di-leo-brookswood-marmorino-fireplace-after-hero-01.jpg" width="1284" height="2469" loading="lazy" alt="Brookswood fireplace finished with San Marco Marmorino Antico">
+          <div class="project-card-copy">
+            <p class="project-meta">Brookswood, Langley / San Marco Marmorino Antico</p>
+            <h3>Brookswood Fireplace Transformation</h3>
+            <p>Dated brick prepared and transformed into a lighter architectural fireplace surface.</p>
+            <span class="project-action">View Project</span>
+          </div>
+        </a>
+        <a class="project-card" href="/west-vancouver-fireplace-transformation.html" data-track="project_photo">
+          <img src="/images/projects/west-vancouver-fireplace/stile-di-leo-west-vancouver-marmorino-fireplace-after-front-01.jpg" width="1280" height="1271" loading="lazy" alt="West Vancouver fireplace finished with light Marmorino">
+          <div class="project-card-copy">
+            <p class="project-meta">West Vancouver, BC / Marmorino</p>
+            <h3>West Vancouver Fireplace Transformation</h3>
+            <p>Dark large-format tile transformed into a light, continuous Marmorino fireplace surface.</p>
+            <span class="project-action">View Project</span>
+          </div>
+        </a>
+      </div>
       <p>
-        For a documented brick-to-Marmorino project, see the <a href="/brookswood-langley-fireplace-transformation.html">Brookswood Langley fireplace transformation</a>.
+        For more completed work, visit <a href="/projects.html">Selected Projects</a>.
       </p>
-      <figure>
-        <img src="/images/car-marmorino.jpg" width="600" height="900" loading="lazy" alt="Close view of warm Marmorino-style mineral plaster finish in a residential interior">
-        <figcaption>Real material photography. Additional project-specific Marmorino case studies can be added when approved photography is available.</figcaption>
-      </figure>
     </section>
 
     <section class="section split">
