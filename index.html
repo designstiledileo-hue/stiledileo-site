@@ -1090,6 +1090,80 @@
       font-weight: 400;
     }
 
+    .featured-before-after {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #0b0908;
+    }
+
+    .featured-before-after figure {
+      position: relative;
+      margin: 0;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .featured-before-after img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .featured-before-after .before-img {
+      object-position: center top;
+    }
+
+    .featured-before-after .after-img {
+      object-position: center;
+    }
+
+    .featured-before-after::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: rgba(239, 231, 220, 0.42);
+      z-index: 1;
+    }
+
+    .project-label {
+      position: absolute;
+      top: 22px;
+      z-index: 2;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      background: rgba(15, 13, 11, 0.68);
+      color: #fff;
+      font-size: 0.64rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    .project-label-before { left: 22px; }
+    .project-label-after { right: 22px; }
+
+    .featured-actions,
+    .meta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .featured-actions .btn,
+    .meta-actions .btn {
+      min-height: 42px;
+      padding: 11px 16px;
+      font-size: 0.68rem;
+    }
+
     .statement-text {
       max-width: 36ch;
       font-size: 0.94rem;
@@ -2109,7 +2183,7 @@
       }
 
       .statement-card {
-        min-height: 460px;
+        min-height: 720px;
       }
 
       .project-feature,
@@ -2130,6 +2204,24 @@
         left: 20px;
         right: 20px;
         bottom: 20px;
+      }
+
+      .featured-before-after {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-before-after::after {
+        top: 50%;
+        bottom: auto;
+        left: 0;
+        width: 100%;
+        height: 1px;
+      }
+
+      .project-label-before,
+      .project-label-after {
+        left: 20px;
+        right: auto;
       }
 
       .process-card {
@@ -2255,19 +2347,36 @@
     <section class="featured" id="featured">
       <div class="shell featured-grid">
         <article class="statement-card reveal">
-          <img src="/images/homepage/project-fireplace-metamorphosis.png" alt="Architectural fireplace wall transformation">
+          <div class="featured-before-after" aria-label="Brookswood fireplace before and after comparison">
+            <figure>
+              <img class="before-img" src="/images/projects/brookswood-fireplace/stile-di-leo-brookswood-marmorino-fireplace-before-01.jpg" width="1284" height="1703" alt="Before view of dated brick fireplace in Brookswood, Langley">
+              <span class="project-label project-label-before">Before</span>
+            </figure>
+            <figure>
+              <img class="after-img" src="/images/projects/brookswood-fireplace/stile-di-leo-brookswood-marmorino-fireplace-after-hero-01.jpg" width="1284" height="2469" alt="After view of Brookswood fireplace transformed with San Marco Marmorino Antico">
+              <span class="project-label project-label-after">After</span>
+            </figure>
+          </div>
           <div class="statement-copy">
-            <span class="project-kicker">Featured Statement</span>
-            <h2 class="statement-title">From plain wall to architectural focal point</h2>
-            <p class="statement-text">A single fireplace wall becomes the visual anchor of the room, adding weight, mood, and a more complete interior presence.</p>
+            <span class="project-kicker">Featured Project</span>
+            <h2 class="statement-title">Brookswood Fireplace Transformation</h2>
+            <p class="statement-text">A dated brick fireplace transformed into a lighter architectural focal point with San Marco Marmorino Antico.</p>
+            <p class="project-meta">Brookswood, Langley BC / Marmorino / Fireplace Transformation</p>
+            <div class="featured-actions">
+              <a href="/brookswood-langley-fireplace-transformation.html" class="btn btn-primary" data-track="project_photo">View Project</a>
+            </div>
           </div>
         </article>
         <div class="statement-side reveal delay-1">
           <span class="eyebrow">Material Presence</span>
-          <p>Every surface is approached like part of the architecture, not a decorative afterthought. The goal is atmosphere first: a room that feels quieter, richer, and more composed the moment you walk in.</p>
+          <p>The original brick carried a strong joint pattern and visual weight. After proper preparation, the fireplace was finished in Marmorino Antico to create a lighter, more continuous architectural surface.</p>
           <div class="meta">
-            <span class="meta-label">Luxury Finish Direction</span>
-            <p class="meta-copy">Real project photography and a restrained layout keep the focus on the surface, the room, and the finish itself.</p>
+            <span class="meta-label">Real Transformation</span>
+            <p class="meta-copy">Brick to Marmorino. Real preparation. Hand-applied finish. Completed Brookswood project.</p>
+            <div class="meta-actions">
+              <a href="/brookswood-langley-fireplace-transformation.html" class="btn btn-primary" data-track="project_photo">View Full Project</a>
+              <a href="#projects" class="btn btn-secondary">View All Projects</a>
+            </div>
           </div>
         </div>
       </div>
