@@ -12,6 +12,11 @@
   status = 200
 
 [[redirects]]
+  from = "/blog.html"
+  to = "/blog"
+  status = 301
+
+[[redirects]]
   from = "/venetian-plaster-cost-per-sq-ft-vancouver"
   to = "/venetian-plaster-cost-per-sq-ft-vancouver.html"
   status = 301
