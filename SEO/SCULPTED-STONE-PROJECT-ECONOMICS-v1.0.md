@@ -7,7 +7,7 @@ Internal operating record. Do not publish project economics publicly.
 | Field | Value |
 |---|---|
 | Project type | Interior sculptural rock / architectural feature surface |
-| Public publication status | Blocked until verified project assets are physically present in the canonical repository |
+| Public publication status | Case-study page prepared locally for human review |
 | Commercial validation role | Dry interior sculptural feature-wall proof; possible conversation starter for fireplace-adjacent concepts after technical gate |
 | Location | UNKNOWN |
 | Client / property | UNKNOWN |
@@ -17,13 +17,13 @@ Internal operating record. Do not publish project economics publicly.
 
 | Evidence item | Status |
 |---|---|
-| Finished sculptural stone / rock installation | Reported by business, not physically verified in repository |
-| Real interior context | Reported by business, not physically verified in repository |
-| Integrated moss | Reported by business, not physically verified in repository |
-| Ambient lighting | Reported by business, not physically verified in repository |
-| Hand-created relief | Reported by business, not physically verified in repository |
-| Process material | Reported by business, not physically verified in repository |
-| Video material | Reported by business, not physically verified in repository |
+| Finished sculptural stone / rock installation | Verified in repository assets |
+| Real interior context | Verified in repository assets |
+| Integrated moss | Verified in repository assets |
+| Ambient lighting | Verified in repository assets |
+| Hand-created relief | Visible in repository assets; exact system UNKNOWN |
+| Process material | Not present in repository |
+| Video material | Not present in repository |
 
 ## Economics Record
 
@@ -49,8 +49,8 @@ Internal operating record. Do not publish project economics publicly.
 
 ## Claims Allowed Internally
 
-- The business reports one completed sculptural-rock interior project.
-- The project may support validation for interior sculptural feature walls only after real project assets are ingested and approved.
+- The repository now contains approved finished sculpted-stone project assets.
+- The project supports validation for dry interior sculptural feature walls.
 - Fireplace use remains a controlled sales concept, not a proven completed sculpted-stone fireplace service.
 
 ## Claims Prohibited Publicly Until Verified
@@ -65,9 +65,6 @@ Internal operating record. Do not publish project economics publicly.
 
 ## Next Evidence Needed
 
-- Approved finished wide image in room context.
-- Approved close-up texture image.
-- Approved moss / lighting detail image.
-- Approved process image or video.
-- Permission confirmation.
+- Process image or video, if available.
+- Permission confirmation if not already documented outside the repo.
 - Basic production facts: location, approximate size, substrate, materials, labor days, issues, and lessons learned.
