@@ -1059,6 +1059,7 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg, rgba(10, 10, 10, 0.04), rgba(10, 10, 10, 0.7));
+      pointer-events: none;
     }
 
     .statement-card::before {
@@ -1093,23 +1094,24 @@
     .featured-before-after {
       position: absolute;
       inset: 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      background: #0b0908;
-    }
-
-    .featured-before-after figure {
-      position: relative;
-      margin: 0;
-      min-width: 0;
       overflow: hidden;
+      background: #0b0908;
+      cursor: ew-resize;
+      touch-action: pan-y;
+      --compare-position: 50%;
     }
 
     .featured-before-after img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center;
+      transform: none;
+      filter: saturate(0.92);
+      user-select: none;
+      pointer-events: none;
     }
 
     .featured-before-after .before-img {
@@ -1118,6 +1120,7 @@
 
     .featured-before-after .after-img {
       object-position: center;
+      clip-path: inset(0 0 0 var(--compare-position));
     }
 
     .featured-before-after::after {
@@ -1125,10 +1128,63 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 50%;
-      width: 1px;
+      left: var(--compare-position);
+      width: 2px;
       background: rgba(239, 231, 220, 0.42);
-      z-index: 1;
+      z-index: 3;
+      transform: translateX(-50%);
+      pointer-events: none;
+      box-shadow: 0 0 22px rgba(0, 0, 0, 0.35);
+    }
+
+    .statement-card:hover .featured-before-after img {
+      transform: none;
+    }
+
+    .compare-handle {
+      position: absolute;
+      left: var(--compare-position);
+      top: 50%;
+      z-index: 4;
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border: 1px solid rgba(239, 231, 220, 0.68);
+      border-radius: 999px;
+      background: rgba(20, 17, 14, 0.76);
+      color: #fff;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.38);
+      transform: translate(-50%, -50%);
+      backdrop-filter: blur(12px);
+      pointer-events: auto;
+    }
+
+    .compare-handle span {
+      display: block;
+      font-size: 1.25rem;
+      line-height: 1;
+      transform: translateY(-1px);
+    }
+
+    .compare-instruction {
+      position: absolute;
+      top: 22px;
+      left: 50%;
+      z-index: 2;
+      padding: 8px 12px;
+      border: 1px solid rgba(212, 172, 96, 0.28);
+      border-radius: 999px;
+      background: rgba(15, 13, 11, 0.62);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transform: translateX(-50%);
+      backdrop-filter: blur(10px);
+      pointer-events: none;
     }
 
     .project-label {
@@ -2207,21 +2263,37 @@
       }
 
       .featured-before-after {
-        grid-template-columns: 1fr;
+        touch-action: pan-y;
       }
 
       .featured-before-after::after {
-        top: 50%;
-        bottom: auto;
-        left: 0;
-        width: 100%;
-        height: 1px;
+        top: 0;
+        bottom: 0;
+        left: var(--compare-position);
+        width: 2px;
+        height: auto;
       }
 
-      .project-label-before,
-      .project-label-after {
+      .project-label-before {
         left: 20px;
         right: auto;
+      }
+
+      .project-label-after {
+        left: auto;
+        right: 20px;
+      }
+
+      .compare-instruction {
+        top: 62px;
+        font-size: 0.56rem;
+        letter-spacing: 0.18em;
+      }
+
+      .compare-handle {
+        width: 54px;
+        height: 54px;
+        top: 38%;
       }
 
       .process-card {
@@ -2347,15 +2419,13 @@
     <section class="featured" id="featured">
       <div class="shell featured-grid">
         <article class="statement-card reveal">
-          <div class="featured-before-after" aria-label="Brookswood fireplace before and after comparison">
-            <figure>
-              <img class="before-img" src="/images/projects/brookswood-fireplace/stile-di-leo-brookswood-marmorino-fireplace-before-01.jpg" width="1284" height="1703" alt="Before view of dated brick fireplace in Brookswood, Langley">
-              <span class="project-label project-label-before">Before</span>
-            </figure>
-            <figure>
-              <img class="after-img" src="/images/projects/brookswood-fireplace/stile-di-leo-brookswood-marmorino-fireplace-after-hero-01.jpg" width="1284" height="2469" alt="After view of Brookswood fireplace transformed with San Marco Marmorino Antico">
-              <span class="project-label project-label-after">After</span>
-            </figure>
+          <div class="featured-before-after" data-featured-compare role="slider" tabindex="0" aria-label="Compare Brookswood fireplace before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+            <img class="before-img" src="/images/projects/brookswood-fireplace/stile-di-leo-brookswood-marmorino-fireplace-before-01.jpg" width="1284" height="1703" alt="Before view of dated brick fireplace in Brookswood, Langley">
+            <img class="after-img" src="/images/projects/brookswood-fireplace/stile-di-leo-brookswood-marmorino-fireplace-after-hero-01.jpg" width="1284" height="2469" alt="After view of Brookswood fireplace transformed with San Marco Marmorino Antico">
+            <span class="project-label project-label-before">Before</span>
+            <span class="project-label project-label-after">After</span>
+            <span class="compare-instruction">Drag to compare</span>
+            <span class="compare-handle" aria-hidden="true"><span>‹</span><span>›</span></span>
           </div>
           <div class="statement-copy">
             <span class="project-kicker">Featured Project</span>
@@ -2908,6 +2978,164 @@
     document.querySelectorAll(".reveal").forEach((element) => {
       observer.observe(element);
     });
+
+    const featuredCompare = document.querySelector("[data-featured-compare]");
+
+    if (featuredCompare) {
+      let compareValue = 50;
+      let pointerId = null;
+      let startX = 0;
+      let startY = 0;
+      let isDragging = false;
+      let userControlled = false;
+
+      const setCompareValue = (value) => {
+        compareValue = Math.max(6, Math.min(94, value));
+        featuredCompare.style.setProperty("--compare-position", `${compareValue}%`);
+        featuredCompare.setAttribute("aria-valuenow", String(Math.round(compareValue)));
+      };
+
+      const updateCompareFromX = (clientX) => {
+        const rect = featuredCompare.getBoundingClientRect();
+        if (!rect.width) return;
+        setCompareValue(((clientX - rect.left) / rect.width) * 100);
+      };
+
+      featuredCompare.addEventListener("pointerdown", (event) => {
+        pointerId = event.pointerId;
+        startX = event.clientX;
+        startY = event.clientY;
+        isDragging = event.pointerType === "mouse";
+        userControlled = true;
+
+        if (isDragging) {
+          featuredCompare.setPointerCapture(pointerId);
+          updateCompareFromX(event.clientX);
+        }
+      });
+
+      featuredCompare.addEventListener("pointermove", (event) => {
+        if (pointerId !== event.pointerId) return;
+
+        if (!isDragging) {
+          const deltaX = Math.abs(event.clientX - startX);
+          const deltaY = Math.abs(event.clientY - startY);
+
+          if (deltaY > 8 && deltaY > deltaX) {
+            pointerId = null;
+            return;
+          }
+
+          if (deltaX > 8 && deltaX > deltaY) {
+            isDragging = true;
+            featuredCompare.setPointerCapture(pointerId);
+          }
+        }
+
+        if (isDragging) {
+          updateCompareFromX(event.clientX);
+        }
+      });
+
+      const endCompareDrag = (event) => {
+        if (pointerId === event.pointerId && featuredCompare.hasPointerCapture(pointerId)) {
+          featuredCompare.releasePointerCapture(pointerId);
+        }
+        pointerId = null;
+        isDragging = false;
+      };
+
+      featuredCompare.addEventListener("pointerup", endCompareDrag);
+      featuredCompare.addEventListener("pointercancel", endCompareDrag);
+
+      let mouseDragging = false;
+
+      featuredCompare.addEventListener("mousedown", (event) => {
+        mouseDragging = true;
+        userControlled = true;
+        updateCompareFromX(event.clientX);
+      });
+
+      window.addEventListener("mousemove", (event) => {
+        if (!mouseDragging) return;
+        updateCompareFromX(event.clientX);
+      });
+
+      window.addEventListener("mouseup", () => {
+        mouseDragging = false;
+      });
+
+      featuredCompare.addEventListener("touchstart", (event) => {
+        const touch = event.touches && event.touches[0];
+        if (!touch) return;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        userControlled = true;
+      }, { passive: true });
+
+      featuredCompare.addEventListener("touchmove", (event) => {
+        const touch = event.touches && event.touches[0];
+        if (!touch) return;
+
+        const deltaX = Math.abs(touch.clientX - startX);
+        const deltaY = Math.abs(touch.clientY - startY);
+
+        if (deltaX > 8 && deltaX > deltaY) {
+          updateCompareFromX(touch.clientX);
+        }
+      }, { passive: true });
+
+      featuredCompare.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          userControlled = true;
+          setCompareValue(compareValue - 5);
+        }
+
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          userControlled = true;
+          setCompareValue(compareValue + 5);
+        }
+
+        if (event.key === "Home") {
+          event.preventDefault();
+          userControlled = true;
+          setCompareValue(6);
+        }
+
+        if (event.key === "End") {
+          event.preventDefault();
+          userControlled = true;
+          setCompareValue(94);
+        }
+      });
+
+      setCompareValue(50);
+
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+        const compareHint = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            compareHint.unobserve(entry.target);
+
+            window.setTimeout(() => {
+              if (userControlled) return;
+              setCompareValue(46);
+              window.setTimeout(() => {
+                if (userControlled) return;
+                setCompareValue(54);
+                window.setTimeout(() => {
+                  if (!userControlled) setCompareValue(50);
+                }, 280);
+              }, 280);
+            }, 420);
+          });
+        }, { threshold: 0.45 });
+
+        compareHint.observe(featuredCompare);
+      }
+    }
 
     const showMoreTextures = document.getElementById("showMoreTextures");
 
