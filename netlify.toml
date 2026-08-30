@@ -32,6 +32,16 @@
   status = 301
 
 [[redirects]]
+  from = "/venetian-plaster-surrey"
+  to = "/venetian-plaster-surrey.html"
+  status = 301
+
+[[redirects]]
+  from = "/feature-wall-surrey"
+  to = "/feature-wall-surrey.html"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/:splat.html"
   status = 301
