@@ -1,6 +1,279 @@
 [build]
   publish = "."
 
+# Canonical URL normalization: serve static pages at .html and redirect clean variants.
+
+[[redirects]]
+  from = "/blog-luxury-trends"
+  to = "/blog-luxury-trends.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog-staging-vs-design"
+  to = "/blog-staging-vs-design.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog-yaletown-condo"
+  to = "/blog-yaletown-condo.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/brookswood-langley-fireplace-transformation"
+  to = "/brookswood-langley-fireplace-transformation.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/custom-architectural-rock-installation"
+  to = "/custom-architectural-rock-installation.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/feature-wall-bedroom-vancouver"
+  to = "/feature-wall-bedroom-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/feature-wall-condo-vancouver"
+  to = "/feature-wall-condo-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/feature-wall-ideas-vancouver"
+  to = "/feature-wall-ideas-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/feature-wall-living-room-vancouver"
+  to = "/feature-wall-living-room-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/feature-wall-surrey"
+  to = "/feature-wall-surrey.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/feature-wall-tv-wall-vancouver"
+  to = "/feature-wall-tv-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/feature-wall-vancouver"
+  to = "/feature-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fireplace-wall-tv-design-vancouver"
+  to = "/fireplace-wall-tv-design-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fireplace-wall-vancouver"
+  to = "/fireplace-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/is-venetian-plaster-worth-it-vancouver"
+  to = "/is-venetian-plaster-worth-it-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/marmorino-vancouver"
+  to = "/marmorino-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/microcement-vancouver"
+  to = "/microcement-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects"
+  to = "/projects.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-bathroom-ideas-vancouver"
+  to = "/venetian-plaster-bathroom-ideas-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-bathroom-vancouver"
+  to = "/venetian-plaster-bathroom-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-burnaby"
+  to = "/venetian-plaster-burnaby.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-condo-ideas-vancouver"
+  to = "/venetian-plaster-condo-ideas-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-condo-vancouver"
+  to = "/venetian-plaster-condo-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-coquitlam"
+  to = "/venetian-plaster-coquitlam.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-cost-per-sq-ft-vancouver"
+  to = "/venetian-plaster-cost-per-sq-ft-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-cost-vancouver"
+  to = "/venetian-plaster-cost-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-dining-room-vancouver"
+  to = "/venetian-plaster-dining-room-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-durability-vancouver"
+  to = "/venetian-plaster-durability-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-entryway-vancouver"
+  to = "/venetian-plaster-entryway-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-fireplace-ideas-vancouver"
+  to = "/venetian-plaster-fireplace-ideas-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-fireplace-surround-vancouver"
+  to = "/venetian-plaster-fireplace-surround-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-langley"
+  to = "/venetian-plaster-langley.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-living-room-vancouver"
+  to = "/venetian-plaster-living-room-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-maintenance-vancouver"
+  to = "/venetian-plaster-maintenance-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-north-vancouver"
+  to = "/venetian-plaster-north-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-pros-and-cons-vancouver"
+  to = "/venetian-plaster-pros-and-cons-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-richmond"
+  to = "/venetian-plaster-richmond.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-surrey"
+  to = "/venetian-plaster-surrey.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-vancouver"
+  to = "/venetian-plaster-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-vs-drywall-vancouver"
+  to = "/venetian-plaster-vs-drywall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-vs-microcement-vancouver"
+  to = "/venetian-plaster-vs-microcement-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-vs-paint-vancouver"
+  to = "/venetian-plaster-vs-paint-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/venetian-plaster-west-vancouver"
+  to = "/venetian-plaster-west-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/west-vancouver-fireplace-transformation"
+  to = "/west-vancouver-fireplace-transformation.html"
+  status = 301
+  force = true
+
+
 [[redirects]]
   from = "/admin/*"
   to = "/admin/:splat"
@@ -10,29 +283,3 @@
   from = "/admin"
   to = "/admin/index.html"
   status = 200
-
-[[redirects]]
-  from = "/blog.html"
-  to = "/blog"
-  status = 301
-
-[[redirects]]
-  from = "/venetian-plaster-cost-per-sq-ft-vancouver"
-  to = "/venetian-plaster-cost-per-sq-ft-vancouver.html"
-  status = 301
-
-[[redirects]]
-  from = "/venetian-plaster-durability-vancouver"
-  to = "/venetian-plaster-durability-vancouver.html"
-  status = 301
-
-[[redirects]]
-  from = "/venetian-plaster-maintenance-vancouver"
-  to = "/venetian-plaster-maintenance-vancouver.html"
-  status = 301
-
-[[redirects]]
-  from = "/*"
-  to = "/:splat.html"
-  status = 301
-  conditions = {Path = ["!*.html"]}
