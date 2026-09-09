@@ -6,6 +6,12 @@
 
   const serviceByPath = {
     "/fireplace-wall-vancouver.html": "fireplace",
+    "/venetian-plaster-fireplace-surround-vancouver.html": "fireplace",
+    "/feature-wall-vancouver.html": "feature_wall",
+    "/microcement-vancouver.html": "microcement",
+    "/venetian-plaster-surrey.html": "venetian_plaster",
+    "/venetian-plaster-langley.html": "venetian_plaster",
+    "/venetian-plaster-north-vancouver.html": "venetian_plaster",
     "/venetian-plaster-vancouver.html": "venetian_plaster",
     "/marmorino-vancouver.html": "marmorino",
     "/west-vancouver-fireplace-transformation.html": "fireplace",
@@ -24,6 +30,41 @@
 
   const pageService = () => serviceByPath[pagePath] || "general";
   const pageCampaign = () => campaignByPath[pagePath] || undefined;
+
+  // Same-tab session attribution is sent with the inquiry, not as GA4 event data.
+  // Empty values remain unknown; a referrer is not proof of a paid/organic source.
+  const acquisitionKey = "stile_acquisition_v1";
+  const acquisitionFields = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "initial_landing_path", "first_referrer"];
+  const readAcquisition = () => {
+    try {
+      const stored = JSON.parse(window.sessionStorage.getItem(acquisitionKey));
+      if (stored && typeof stored.initial_landing_path === "string") return stored;
+    } catch (error) { /* Blocked storage must not prevent contact or tracking. */ }
+    const query = new URLSearchParams(window.location.search);
+    const entry = { initial_landing_path: pagePath, first_referrer: "", service: "general" };
+    acquisitionFields.filter((key) => key.startsWith("utm_")).forEach((key) => {
+      entry[key] = (query.get(key) || "").slice(0, 500);
+    });
+    try {
+      const referrer = new URL(document.referrer);
+      if (referrer.origin !== window.location.origin) entry.first_referrer = referrer.origin;
+    } catch (error) { /* No available referrer. */ }
+    return entry;
+  };
+  const acquisition = readAcquisition();
+  if (pageService() !== "general") acquisition.service = pageService();
+  try {
+    window.sessionStorage.setItem(acquisitionKey, JSON.stringify(acquisition));
+  } catch (error) { /* Current-page context remains available without storage. */ }
+
+  const getInquiryContext = () => {
+    const context = {};
+    acquisitionFields.forEach((key) => {
+      context[key] = typeof acquisition[key] === "string" ? acquisition[key].slice(0, 500) : "";
+    });
+    context.service = Object.values(serviceByPath).includes(acquisition.service) ? acquisition.service : "general";
+    return context;
+  };
 
   const closestLocation = (element) => {
     const section = element.closest("header, footer, section, main, .cta, .conversion, .hero, .topbar");
@@ -56,6 +97,7 @@
     const href = link.getAttribute("href") || "";
     const dataTrack = link.dataset.track;
     const text = normalizeText(link.textContent).toLowerCase();
+    if (dataTrack === "none") return null;
 
     if (href.startsWith("tel:")) return "phone_click";
     if (href.startsWith("sms:")) return "sms_click";
@@ -84,7 +126,7 @@
     const params = {
       cta_text: normalizeText(link.textContent),
       cta_location: closestLocation(link),
-      link_url: href || undefined
+      link_url: href ? href.split("?")[0] : undefined
     };
 
     if (eventName === "phone_click") params.lead_method = "phone";
@@ -125,6 +167,7 @@
 
   window.StileAnalytics = {
     track,
+    getInquiryContext,
     trackLeadSuccess: (params) => {
       track("generate_lead", Object.assign({
         lead_method: "form"
