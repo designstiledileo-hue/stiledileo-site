@@ -14,6 +14,7 @@
     "/venetian-plaster-north-vancouver.html": "venetian_plaster",
     "/venetian-plaster-vancouver.html": "venetian_plaster",
     "/marmorino-vancouver.html": "marmorino",
+    "/marmorino-retail-interiors.html": "marmorino",
     "/plaster-range-hood-vancouver.html": "range_hood",
     "/west-vancouver-fireplace-transformation.html": "fireplace",
     "/brookswood-langley-fireplace-transformation.html": "fireplace",

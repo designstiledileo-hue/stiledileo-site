@@ -106,6 +106,12 @@
   force = true
 
 [[redirects]]
+  from = "/marmorino-retail-interiors"
+  to = "/marmorino-retail-interiors.html"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/microcement-vancouver"
   to = "/microcement-vancouver.html"
   status = 301
