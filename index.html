@@ -1617,6 +1617,28 @@
       font-weight: 400;
     }
 
+    .range-hood-card {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      align-items: center;
+      border: 1px solid rgba(216, 185, 140, 0.18);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .range-hood-card:hover,
+    .range-hood-card:focus-visible { border-color: var(--gold-soft); }
+    .range-hood-card:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 4px; }
+    .range-hood-card-copy { display: grid; gap: 16px; padding: 30px; }
+    .range-hood-card-copy .project-text { max-width: 48ch; }
+
+    @media (max-width: 640px) {
+      .range-hood-card { grid-template-columns: 1fr; }
+      .range-hood-card-copy { padding: 24px 20px; }
+    }
+
     .textures-grid.is-extra {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       margin-top: 28px;
@@ -2627,6 +2649,16 @@
             </div>
           </article>
 
+          <a class="range-hood-card" href="/plaster-range-hood-vancouver.html" data-track="project_photo">
+            <img src="/images/projects/white-rock-range-hood/stile-di-leo-white-rock-plaster-range-hood-after-hero-01.jpg" width="1284" height="1570" loading="lazy" decoding="async" alt="Custom plaster range hood completed by Stile di Leo in White Rock BC">
+            <div class="range-hood-card-copy">
+              <span class="texture-kicker">Kitchen Application</span>
+              <h3 class="texture-name">Plaster Range Hoods</h3>
+              <p class="project-text">Custom decorative plaster finishes for architectural kitchen hood surrounds.</p>
+              <p class="project-text">Custom plaster range hood — White Rock, BC.<br>Completed by Stile di Leo.</p>
+              <span class="project-action">Explore Plaster Range Hoods</span>
+            </div>
+          </a>
         </div>
 
         <div class="textures-grid is-extra">
