@@ -1251,6 +1251,50 @@
       padding: var(--section-space) 0 30px;
     }
 
+    .featured-application {
+      padding: 36px 0 0;
+    }
+
+    .application-feature {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      align-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(216, 185, 140, 0.18);
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012));
+    }
+
+    .application-feature:hover,
+    .application-feature:focus-visible {
+      border-color: var(--gold-soft);
+    }
+
+    .application-feature:focus-visible {
+      outline: 2px solid var(--gold-soft);
+      outline-offset: 5px;
+    }
+
+    .application-feature img {
+      width: 100%;
+      height: auto;
+    }
+
+    .application-feature-copy {
+      display: grid;
+      gap: 20px;
+      padding: 36px;
+    }
+
+    .application-feature-copy h2 {
+      margin: 0;
+    }
+
+    @media (max-width: 860px) {
+      .application-feature { grid-template-columns: 1fr; border-radius: 26px; }
+      .application-feature-copy { padding: 28px 24px; }
+    }
+
     .projects-grid {
       display: grid;
       grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
@@ -2419,6 +2463,20 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="featured-application" id="applications" aria-labelledby="retail-application-title">
+      <div class="shell">
+        <a class="application-feature" href="/marmorino-retail-interiors.html" data-track="project_photo">
+          <img src="/images/projects/marmorino-vancouver-retail/marmorino-retail-wide.webp" width="1536" height="1024" loading="lazy" decoding="async" alt="Marmorino finish direction across curved retail walls with timber displays and warm lighting">
+          <div class="application-feature-copy">
+            <span class="project-kicker">Commercial Interiors</span>
+            <h2 class="project-title" id="retail-application-title">Marmorino for Retail Interiors</h2>
+            <p class="project-text">Soft mineral movement, seamless curved surfaces and warm architectural lighting.</p>
+            <span class="project-action">Explore the Application</span>
+          </div>
+        </a>
       </div>
     </section>
 
