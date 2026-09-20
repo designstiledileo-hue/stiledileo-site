@@ -118,6 +118,12 @@
   force = true
 
 [[redirects]]
+  from = "/plaster-range-hood-vancouver"
+  to = "/plaster-range-hood-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/venetian-plaster-bathroom-ideas-vancouver"
   to = "/venetian-plaster-bathroom-ideas-vancouver.html"
   status = 301
