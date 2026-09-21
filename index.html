@@ -2930,10 +2930,12 @@
         <input type="hidden" name="utm_content">
         <input type="hidden" name="initial_landing_path">
         <input type="hidden" name="first_referrer">
+        <input type="hidden" name="lead_source" value="website">
 
         <section class="estimate-step is-active" data-step="0">
           <h2 class="estimate-step-title" id="estimate-title" tabindex="-1">Send your project photo</h2>
           <p class="estimate-step-text">Step 1 of 2. Share a photo for a manual review of your surface and finish direction.</p>
+          <p class="estimate-note" id="estimate-advisor-note" hidden>Your Finish Advisor notes are editable in step 2. Please attach your photo here if it is not already selected. Nothing is submitted until you choose Send Project Photo.</p>
           <label class="estimate-upload" for="estimate-photo">
             <input type="file" id="estimate-photo" name="wall_photo" accept="image/*,.heic,.heif" required aria-describedby="estimate-file-label estimate-photo-error">
             <span>
@@ -3281,6 +3283,7 @@
       estimateTrigger = trigger instanceof HTMLElement ? trigger : floatingQuote;
       if (estimateAccepted) {
         estimateForm.reset();
+        document.getElementById("estimate-advisor-note").hidden = true;
         estimateAccepted = false;
         estimateSubmit.disabled = false;
         estimateSubmit.textContent = "Send Project Photo";
@@ -3429,6 +3432,28 @@
       }
     });
     if (window.location.hash === "#estimate") openEstimate();
+    // Explicit visitor handoff only: preserve the existing reviewed, manual submission flow.
+    const applyAdvisorHandoff = (detail) => {
+      if (estimatePending || !detail || typeof detail.summary !== "string") return;
+      openEstimate();
+      const note = estimateForm.elements.namedItem("project_note");
+      if (!note.value) note.value = detail.summary.slice(0, 2000);
+      else if (!note.value.includes(detail.summary)) note.value = (note.value + "\n" + detail.summary).slice(0, 2000);
+      estimateForm.elements.namedItem("lead_source").value = "finish_advisor";
+      document.getElementById("estimate-advisor-note").hidden = false;
+      if (!estimatePhoto.files.length && detail.imageFile instanceof File && detail.imageFile.size <= 7 * 1024 * 1024) {
+        try {
+          const transfer = new DataTransfer(); transfer.items.add(detail.imageFile);
+          estimatePhoto.files = transfer.files; estimatePhoto.dispatchEvent(new Event("change", { bubbles: true }));
+        } catch (error) { /* Browser cannot transfer file: existing upload remains available. */ }
+      }
+    };
+    document.addEventListener("stile:advisor-handoff", (event) => applyAdvisorHandoff(event.detail));
+    try {
+      const pendingAdvisor = JSON.parse(sessionStorage.getItem("stile_advisor_handoff_v1"));
+      sessionStorage.removeItem("stile_advisor_handoff_v1");
+      if (window.location.hash === "#estimate" && pendingAdvisor && Date.now() - pendingAdvisor.time < 10 * 60 * 1000) applyAdvisorHandoff(pendingAdvisor);
+    } catch (error) { /* Contact flow must work without storage. */ }
   </script>
 </body>
 </html>
