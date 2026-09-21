@@ -176,4 +176,14 @@
       }, params || {}));
     }
   };
+
+  // One shared inclusion; no widget on admin, technical or unrelated campaign pages.
+  const advisorPaths = ["/", "/index.html", "/projects.html", "/venetian-plaster-vancouver.html", "/marmorino-vancouver.html", "/fireplace-wall-vancouver.html", "/feature-wall-vancouver.html", "/plaster-range-hood-vancouver.html", "/marmorino-retail-interiors.html", "/microcement-vancouver.html", "/custom-architectural-rock-installation.html", "/brookswood-langley-fireplace-transformation.html", "/west-vancouver-fireplace-transformation.html", "/venetian-plaster-cost-vancouver.html"];
+  if (advisorPaths.includes(pagePath)) {
+    const style = document.createElement("link");
+    style.rel = "stylesheet"; style.href = "/styles/finish-advisor.css";
+    const script = document.createElement("script");
+    script.src = "/scripts/finish-advisor.js"; script.defer = true;
+    document.head.append(style, script);
+  }
 })();
