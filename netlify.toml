@@ -4,6 +4,12 @@
 # Canonical URL normalization: serve static pages at .html and redirect clean variants.
 
 [[redirects]]
+  from = "/api/finish-advisor"
+  to = "/.netlify/functions/finish-advisor"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/blog-luxury-trends"
   to = "/blog-luxury-trends.html"
   status = 301
