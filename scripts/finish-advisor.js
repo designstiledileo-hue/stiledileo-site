@@ -15,16 +15,18 @@
   const make = (tag, className, text) => { const el = document.createElement(tag); if (className) el.className = className; if (text) el.textContent = text; return el; };
   const button = (text, className, fn) => { const b = make('button', className, text); b.type = 'button'; b.dataset.track = 'none'; if (fn) b.addEventListener('click', fn); return b; };
   const root = make('div'); root.id = 'stile-advisor';
+  const visual = phase => root.dispatchEvent(new CustomEvent('stile:advisor-visual', { detail: phase }));
   if (document.getElementById('floating-quote')) root.classList.add('sa-has-photo-cta');
   const dialog = make('dialog'); dialog.id = 'stile-advisor-dialog'; dialog.setAttribute('aria-labelledby', 'sa-title');
-  const launcher = button('Ask about your project', 'sa-launcher', () => { dialog.showModal(); track('finish_advisor_open'); input.focus(); resize(); });
+  const launcher = button('Ask Leo', 'sa-launcher', () => { dialog.showModal(); visual('open'); track('finish_advisor_open'); input.focus(); resize(); });
   launcher.setAttribute('aria-haspopup', 'dialog'); launcher.setAttribute('aria-controls', dialog.id);
-  const close = () => { dialog.close(); launcher.focus(); };
+  const close = () => { dialog.close(); visual('close'); launcher.focus(); };
   const header = make('div', 'sa-header'), titleRow = make('div', 'sa-title-row');
   const title = make('div', 'sa-title', 'Stile di Leo Finish Advisor'); title.id = 'sa-title';
   const closeButton = button('×', '', close); closeButton.setAttribute('aria-label', 'Close Finish Advisor');
   titleRow.append(title, closeButton); header.append(titleRow, make('p', 'sa-subtitle', "Tell me what you're planning, or upload a photo."), make('p', 'sa-small', 'AI finish advisor · Final scope confirmed by Stile di Leo'));
   const clear = button('New conversation', 'sa-clear', () => {
+    visual('cancel');
     generation++; activeRequest?.abort(); pending = false; history = []; image = null; input.value = ''; file.value = ''; thumb.removeAttribute('src'); log.replaceChildren(); photo.hidden = true; chips.hidden = false; status.textContent = ''; handoff.hidden = true; direct.hidden = true; save(); update(); track('finish_advisor_clear'); input.focus();
     try { sessionStorage.removeItem(pendingKey); } catch (_) { /* Optional storage. */ }
   }); header.append(clear);
@@ -93,7 +95,9 @@
     add('user', text); chips.hidden = true;
     const prior = history.slice(-8); history.push({ role: 'user', text }); history = history.slice(-8); save(); input.value = ''; handoff.hidden = false;
     try {
-      const response = await fetch('/api/finish-advisor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal, body: JSON.stringify({ message: text, history: prior, ...(image ? { image: image.data } : {}) }) });
+      const request = fetch('/api/finish-advisor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal, body: JSON.stringify({ message: text, history: prior, ...(image ? { image: image.data } : {}) }) });
+      if (image) visual('photo-sent');
+      const response = await request;
       if (!response.ok) throw new Error(response.status === 429 ? 'rate' : 'unavailable');
       const result = await response.json();
       if (typeof result.reply !== 'string' || result.reply.length > 2000 || !Array.isArray(result.links)) throw new Error('unavailable');
@@ -103,7 +107,7 @@
       if (run !== generation) return;
       status.textContent = error.message === 'rate' ? 'Please wait a minute before asking again. You can also request a project review below.' : 'The Finish Advisor is temporarily unavailable. You can still send your project photo directly to Stile di Leo using Request a project review below.';
       input.value = text;
-    } finally { clearTimeout(timeout); if (run === generation) { pending = false; activeRequest = null; update(); } }
+    } finally { clearTimeout(timeout); if (run === generation) { visual('settled'); pending = false; activeRequest = null; update(); } }
   }
   file.addEventListener('change', async () => {
     const selected = file.files[0]; if (!selected) return;
@@ -124,4 +128,12 @@
     } catch (_) { status.textContent = 'This photo could not be prepared. Please choose another JPEG, PNG or WebP.'; file.value = ''; }
     finally { bitmap?.close(); processing = false; update(); }
   });
+  // Optional enhancement loads independently after the working Advisor exists.
+  if (window.StileLeo) window.StileLeo.init(root);
+  else if (!document.getElementById('stile-leo-script')) {
+    const script = document.createElement('script'); script.id = 'stile-leo-script';
+    script.src = '/scripts/leo-interaction.js'; script.async = true;
+    script.onload = () => window.StileLeo?.init(root);
+    document.head.append(script);
+  }
 })();
