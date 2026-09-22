@@ -35,6 +35,10 @@
 #stile-advisor .sa-status{font-size:12px;color:#ecd5ad;margin:8px 0;overflow-wrap:anywhere}
 #stile-advisor .sa-handoff{width:100%;margin-top:8px;font-size:12px}
 #stile-advisor .sa-status:empty{display:none}
+#stile-advisor .sa-launcher{right:calc(20px + env(safe-area-inset-right,0px))}
+#stile-advisor .sa-leo-visual{position:fixed;pointer-events:none;z-index:94;contain:layout paint;overflow:hidden}
+#stile-advisor .sa-leo-visual *{pointer-events:none!important}
+@media(max-width:767px),(prefers-reduced-motion:reduce){#stile-advisor .sa-leo-visual{display:none!important}}
 @media(max-width:640px){#stile-advisor dialog{right:12px;bottom:max(12px,env(safe-area-inset-bottom,0px));width:calc(100vw - 24px);height:calc(100dvh - 24px);max-height:var(--sa-height,calc(100dvh - 24px));border-radius:18px}#stile-advisor .sa-launcher{right:14px}#stile-advisor .sa-header{padding:14px 14px 10px}#stile-advisor .sa-scroll{padding:12px 14px}#stile-advisor .sa-compose{padding:10px 14px 12px}#stile-advisor textarea{font-size:16px}}
 @media(prefers-reduced-motion:reduce){#stile-advisor *{scroll-behavior:auto}}
 @media(max-height:620px){#stile-advisor dialog{overflow-y:auto}#stile-advisor .sa-scroll{min-height:40px;flex:1}#stile-advisor .sa-header{padding:8px 14px}#stile-advisor .sa-header .sa-small,#stile-advisor .sa-subtitle{display:none}#stile-advisor .sa-title{font-size:21px}#stile-advisor textarea{height:44px}#stile-advisor .sa-photo img{height:40px;width:40px}#stile-advisor .sa-compose{padding:8px 14px}#stile-advisor .sa-compose .sa-small{font-size:10px;line-height:1.3}}
