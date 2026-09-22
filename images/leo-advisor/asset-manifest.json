@@ -1,0 +1,130 @@
+[
+  {
+    "state": "hide",
+    "source": "leo-hide.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "alpha_bounds": [
+      0,
+      0,
+      1093,
+      1371
+    ],
+    "anchor_bounds_alpha128": [
+      34,
+      16,
+      1073,
+      1364
+    ],
+    "source_bytes": 2449926,
+    "runtime_bytes": 120960,
+    "source_sha256": "52548d9d926a26ff82b4a73218433dacbb1f75683085bbefbba2960d1c04103b",
+    "runtime_sha256": "0e3d113947de01d1c236244f5c5e4e32c76721e1d55d02600378cd9edae5b9f2",
+    "runtime_dimensions": [
+      512,
+      640
+    ],
+    "runtime_quality": 88,
+    "resize": "whole-canvas LANCZOS; proportional height rounded to nearest pixel",
+    "runtime_alpha_lossless": true,
+    "source_master_unchanged": true
+  },
+  {
+    "state": "peek",
+    "source": "leo-peek.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "alpha_bounds": [
+      0,
+      19,
+      1122,
+      1402
+    ],
+    "anchor_bounds_alpha128": [
+      42,
+      314,
+      1095,
+      1321
+    ],
+    "source_bytes": 1596302,
+    "runtime_bytes": 81594,
+    "source_sha256": "ea05312a66bc7280a3335701814c37f28c5446cf21bcc61cf25227252e5e429b",
+    "runtime_sha256": "af6f64fae6abbe60bec9f62e017b1fb67222c41fd17bb240d4d87cc5b6a0c398",
+    "runtime_dimensions": [
+      512,
+      640
+    ],
+    "runtime_quality": 88,
+    "resize": "whole-canvas LANCZOS; proportional height rounded to nearest pixel",
+    "runtime_alpha_lossless": true,
+    "source_master_unchanged": true
+  },
+  {
+    "state": "react",
+    "source": "leo-react.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "alpha_bounds": [
+      0,
+      0,
+      1102,
+      1385
+    ],
+    "anchor_bounds_alpha128": [
+      47,
+      16,
+      1082,
+      1345
+    ],
+    "source_bytes": 2091121,
+    "runtime_bytes": 102786,
+    "source_sha256": "38c314a6a60660efa3e8009433189b1453cdf796de0bb12b14b0c9f9af23fb5b",
+    "runtime_sha256": "9432765cc8977b3a11d4764a92adb08b085eae1e0840cea24a192409dba3fe0d",
+    "runtime_dimensions": [
+      512,
+      640
+    ],
+    "runtime_quality": 88,
+    "resize": "whole-canvas LANCZOS; proportional height rounded to nearest pixel",
+    "runtime_alpha_lossless": true,
+    "source_master_unchanged": true
+  },
+  {
+    "state": "inspect",
+    "source": "leo-inspect.png",
+    "size": [
+      1122,
+      1402
+    ],
+    "alpha_bounds": [
+      0,
+      0,
+      1122,
+      1402
+    ],
+    "anchor_bounds_alpha128": [
+      12,
+      11,
+      1110,
+      1370
+    ],
+    "source_bytes": 2486035,
+    "runtime_bytes": 121666,
+    "source_sha256": "50a6d4a61c58c027bb2814dad590fdcec98b5bd1fc9cd3e655a2b9b1caf4d8a2",
+    "runtime_sha256": "f65493c82ba15d50cfc44bd8ceacb51ab29bea2fa30d6a5063fa1071e41445f7",
+    "runtime_dimensions": [
+      512,
+      640
+    ],
+    "runtime_quality": 88,
+    "resize": "whole-canvas LANCZOS; proportional height rounded to nearest pixel",
+    "runtime_alpha_lossless": true,
+    "source_master_unchanged": true
+  }
+]
