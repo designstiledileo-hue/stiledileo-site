@@ -1,5 +1,11 @@
 # Leo Interaction Layer v2.0 — local owner review
 
+> Historical pre-asset implementation record. The approved four-state artwork is
+> now integrated locally; the current status, calibration, tests and screenshots
+> are in [LEO-FINAL-ASSET-REVIEW.md](LEO-FINAL-ASSET-REVIEW.md).
+> The no-asset statements and repository status below describe the earlier phase,
+> not the current working tree.
+
 ## Status and scope
 
 INTERACTION INTEGRATION READY
