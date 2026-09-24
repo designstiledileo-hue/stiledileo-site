@@ -1,14 +1,224 @@
-// Optional decorative layer. No character artwork or animation runtime is bundled.
+// Optional real-motion enhancement with approved still fallback. Never blocks the Advisor.
 (function () {
   'use strict';
   if (window.StileLeo) return;
   const controllers = new WeakMap();
   const introKey = 'stile_leo_intro_seen';
   let autonomousDisabled = false;
-  const noVisual = Object.freeze({ ready: false, hide() {}, destroy() {} });
+  // Alpha >=128 bounds establish the visible paw anchor; ALL alpha is retained.
+  // Shared 0.19 scale preserves the original anatomy. Translations compensate
+  // for each visible centre/bottom, not its canvas centre. Paw anchor is (115,280).
+  const calibration = Object.freeze({
+    hide: { scale: .19, translateX: 9.835, translateY: 20.84 },
+    peek: { scale: .19, translateX: 6.985, translateY: 29.01 },
+    react: { scale: .19, translateX: 7.745, translateY: 24.45 },
+    inspect: { scale: .19, translateX: 8.41, translateY: 19.7 }
+  });
+  function artworkAdapter() {
+    let ready = false, dead = false, image, host, timer, revision = 0;
+    const images = {};
+    function stop() { revision++; clearTimeout(timer); image?.getAnimations().forEach(a => a.cancel()); }
+    function pose(state) {
+      const c = calibration[state];
+      image.src = images[state].src;
+      image.style.transform = `translate(${c.translateX}px,${c.translateY}px) scale(${c.scale})`;
+      host.dataset.pose = state;
+    }
+    async function swap(state) {
+      const current = ++revision;
+      try {
+        await image.animate([{opacity:1},{opacity:0}],{duration:90,fill:'forwards'}).finished;
+        if (current !== revision || dead) return;
+        pose(state);
+        await image.animate([{opacity:0},{opacity:1}],{duration:90,fill:'forwards'}).finished;
+      } catch (_) { /* Interrupted by input/close. */ }
+    }
+    function show(state, element, continuing) {
+      if (!ready || dead) return false;
+      stop(); host = element;
+      if (!image) { image = new Image(); image.alt = ''; image.className = 'sa-leo-pose'; image.draggable = false; }
+      host.replaceChildren(image);
+      if (continuing) { swap(state); return true; }
+      pose(state);
+      image.animate([{opacity:0,translate:'0 10px'},{opacity:1,translate:'0 0'}],
+        {duration:state === 'peek' ? 600 : 180,easing:'ease-out',fill:'forwards'});
+      return true;
+    }
+    return {
+      get ready() { return ready; },
+      load(done) {
+        if (innerWidth < 768 || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const load = async () => {
+          try {
+            await Promise.all(Object.keys(calibration).map(async state => {
+              const asset = new Image(); asset.src = `/images/leo-advisor/leo-${state}.webp`;
+              await asset.decode(); images[state] = asset;
+            }));
+            if (!dead) { ready = true; done(); }
+          } catch (_) { if (!dead) done(); /* No broken image is inserted. */ }
+        };
+        if ('requestIdleCallback' in window) requestIdleCallback(load,{timeout:3000}); else timer = setTimeout(load,1000);
+      },
+      showPeek: (element,continuing) => show('peek',element,continuing),
+      showReact: (element,continuing) => show('react',element,continuing),
+      showInspect: (element,continuing) => show('inspect',element,continuing),
+      retreat(done) {
+        if (!image || dead) { done(); return; }
+        swap('hide');
+        timer = setTimeout(() => {
+          image.animate([{opacity:1,translate:'0 0'},{opacity:0,translate:'0 12px'}],
+            {duration:220,easing:'ease-in',fill:'forwards'});
+          timer = setTimeout(done,220);
+        },180);
+      },
+      hide() { stop(); },
+      destroy() { dead = true; stop(); image?.remove(); }
+    };
+  }
 
-  function init(root, adapter = noVisual) {
+  function motionAdapter() {
+    const fallback = artworkAdapter();
+    // Calibrated from the approved alpha bounds, not the static PNG transforms.
+    const geometry = {
+      peek: { width:220, bottom:-102*220/834 },
+      react: { width:230, bottom:0 },
+      inspect: { width:230, bottom:0 },
+      hide: { width:230, bottom:-87*230/860 }
+    };
+    const cached = new Map(), videos = new Set();
+    // Conservative V1 Safari path. No second codec or UA-dependent opaque video.
+    const safari = /Safari/.test(navigator.userAgent) && !/Chrome|Chromium|CriOS|Edg|OPR/.test(navigator.userAgent);
+    const supportsVideo = !safari && !!document.createElement('video').canPlayType('video/webm; codecs="vp9"');
+    let ready = false, dead = false, revision = 0, active, host, idle, timer, fallbackLoad;
+    const allowed = () => !dead && innerWidth >= 768 && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function stop() {
+      revision++; clearTimeout(timer);
+      videos.forEach(v => { v.pause(); v.onended = null; if (v.dataset.alphaVerified) v.onerror = null; v.getAnimations().forEach(a => a.cancel()); });
+      fallback.hide(); active = null;
+    }
+    function prepare(state) {
+      if (cached.has(state)) return cached.get(state);
+      const promise = new Promise((resolve,reject) => {
+        if (!allowed() || !supportsVideo) { reject(Error('static fallback')); return; }
+        const v = document.createElement('video'); videos.add(v);
+        v.className = 'sa-leo-motion'; v.muted = true; v.playsInline = true;
+        v.loop = false; v.controls = false; v.tabIndex = -1; v.setAttribute('aria-hidden','true');
+        v.preload = 'auto';
+        const timeout = setTimeout(() => fail(),4000);
+        function fail() {
+          clearTimeout(timeout); v.onloadeddata = null; v.onerror = null;
+          v.pause(); v.removeAttribute('src'); v.load(); reject(Error('motion unavailable'));
+        }
+        v.onerror = fail;
+        v.onloadeddata = () => {
+          try {
+            // Verify real decoded alpha on this browser, not codec/container tags.
+            const canvas = document.createElement('canvas'); canvas.width = canvas.height = 16;
+            const ctx = canvas.getContext('2d',{willReadFrequently:true});
+            ctx.drawImage(v,0,0,16,16);
+            const bytes = ctx.getImageData(0,0,16,16).data;
+            const alpha = []; for (let i=3;i<bytes.length;i+=4) alpha.push(bytes[i]);
+            if (Math.min(...alpha) > 8 || Math.max(...alpha) < 200) { fail(); return; }
+            clearTimeout(timeout); v.onloadeddata = null; v.onerror = null;
+            v.dataset.alphaVerified = 'true'; resolve(v);
+          } catch (_) { fail(); }
+        };
+        v.src = `/images/leo-advisor/motion/leo-${state}.webm`;
+      });
+      cached.set(state,promise); return promise;
+    }
+    function getFallback() {
+      fallbackLoad ||= new Promise(resolve => fallback.load(resolve));
+      return fallbackLoad;
+    }
+    async function exit(done, token) {
+      if (token !== revision || dead) return;
+      try {
+        if (active) await active.animate([{opacity:1,translate:'0 0'},{opacity:0,translate:'0 28px'}],
+          {duration:220,easing:'ease-in',fill:'forwards'}).finished;
+      } catch (_) { return; }
+      if (token === revision && !dead) done();
+    }
+    async function render(state, token, done, retreat = false, shown = () => {}) {
+      try {
+        const v = await prepare(state);
+        if (token !== revision || !allowed()) return;
+        if (retreat && active) {
+          await active.animate([{opacity:1},{opacity:0}],{duration:80,fill:'forwards'}).finished;
+          if (token !== revision) return;
+          active.pause(); active.getAnimations().forEach(a => a.cancel());
+        }
+        const viewport = document.createElement('div'); viewport.className = 'sa-leo-motion-viewport';
+        const boundary = document.createElement('div'); boundary.className = 'sa-leo-boundary';
+        Object.assign(v.style,{width:geometry[state].width+'px',bottom:geometry[state].bottom+'px'});
+        v.currentTime = 0; viewport.append(v); host.replaceChildren(viewport,boundary);
+        host.dataset.pose = state; host.dataset.renderer = 'motion'; active = v;
+        // Keep the element transparent until playback succeeds. No broken flash.
+        host.style.opacity = '0'; await v.play();
+        if (token !== revision || !allowed()) { v.pause(); return; }
+        host.style.opacity = '1';
+        shown();
+        v.onerror = () => { if (token === revision) done(); };
+        v.animate([{opacity:0,translate:'0 16px'},{opacity:1,translate:'0 0'}],
+          {duration:200,easing:'ease-out'});
+        v.onended = () => {
+          v.onended = null;
+          if (token !== revision) return;
+          if (state === 'inspect') render('hide',token,done,true);
+          else exit(done,token);
+        };
+      } catch (_) {
+        if (token !== revision || !allowed()) return;
+        if (retreat) { exit(done,token); return; }
+        await getFallback();
+        if (token !== revision || !allowed()) return;
+        if (!fallback.ready) { done(); return; }
+        host.style.opacity = '1'; host.dataset.renderer = 'static';
+        const method = {peek:'showPeek',react:'showReact',inspect:'showInspect'}[state];
+        if (fallback[method](host,false) !== true) { done(); return; }
+        shown();
+        timer = setTimeout(() => { if (token === revision) fallback.retreat(done); },state === 'peek' ? 2000 : state === 'inspect' ? 2400 : 1200);
+      }
+    }
+    function show(state, element, _continuing, done, shown) {
+      if (!ready || !allowed()) return false;
+      stop(); host = element; host.replaceChildren(); host.style.opacity = '0';
+      const token = revision;
+      render(state,token,done,false,shown);
+      // Load only the upcoming retreat, only after a real photo request.
+      if (state === 'inspect' && supportsVideo) prepare('hide').catch(() => {});
+      return true;
+    }
+    return {
+      get ready() { return ready; },
+      completionDriven:true,
+      motionGeometry:true,
+      load(done) {
+        if (!allowed()) return;
+        const load = () => {
+          if (!allowed()) return;
+          ready = true; done();
+          // One non-critical idle warmup, never four eager video downloads.
+          if (supportsVideo) prepare('peek').catch(() => {});
+        };
+        if ('requestIdleCallback' in window) idle = requestIdleCallback(load,{timeout:3000});
+        else timer = setTimeout(load,1000);
+      },
+      warmReact() { if (ready && allowed() && supportsVideo) prepare('react').catch(() => {}); },
+      showPeek:(e,c,done,shown)=>show('peek',e,c,done,shown),
+      showReact:(e,c,done,shown)=>show('react',e,c,done,shown),
+      showInspect:(e,c,done,shown)=>show('inspect',e,c,done,shown),
+      hide() { stop(); if (host) host.style.opacity='0'; },
+      destroy() {
+        dead=true; stop(); if (idle !== undefined && 'cancelIdleCallback' in window) cancelIdleCallback(idle);
+        fallback.destroy(); videos.forEach(v=>{v.removeAttribute('src');v.load();v.remove();});cached.clear();
+      }
+    };
+  }
+
+  function init(root, adapter) {
     if (!root || controllers.has(root)) return controllers.get(root);
+    adapter ||= motionAdapter();
     const launcher = root.querySelector('.sa-launcher');
     const panel = root.querySelector('dialog');
     if (!launcher || !panel) return;
@@ -29,6 +239,7 @@
       clearTimeout(endTimer); endTimer = null;
       if (visualState !== 'HIDDEN') safe('hide');
       visualState = 'HIDDEN';
+      if (host?.hidePopover && host.matches(':popover-open')) host.hidePopover();
       if (host && !host.hidden) host.hidden = true;
     }
     function cancelIntro() {
@@ -49,44 +260,59 @@
       // Conservative mobile fallback, including all 375/390 layouts. A final asset
       // must pass an additional rendered mobile review before relaxing this rule.
       if (innerWidth < 768 || reduced.matches || document.visibilityState !== 'visible' || !document.hasFocus() || conflictingUI()) return null;
-      const anchor = (kind === 'INSPECT' ? panel : launcher).getBoundingClientRect();
-      const width = 144, height = 160;
-      const box = kind === 'INSPECT'
-        ? { left: anchor.left - width - 12, top: anchor.bottom - height, width, height }
-        : { left: anchor.right - width, top: anchor.top - height - 8, width, height };
-      if (box.left < 16 || box.top < 16 || box.left + width > innerWidth - 16 || box.top + height > innerHeight - 16) return null;
+      const besidePanel = panel.open;
+      const anchor = (besidePanel ? panel : launcher).getBoundingClientRect();
+      const width = 230, height = adapter.motionGeometry ? 295 : 300;
+      const box = besidePanel
+        ? { left: anchor.left - width - 12, top: anchor.bottom - (adapter.motionGeometry ? 295 : 280), width, height }
+        : { left: anchor.right - width, top: anchor.top - (adapter.motionGeometry ? 281 : 288), width, height };
+      if (box.left < 16 || box.top < 16 || box.left + width > innerWidth - 16 || box.top + height > innerHeight) return null;
+      // Collision checks use dense visible artwork, not empty transparent padding.
+      const occupiedTop = box.top + (adapter.motionGeometry ? 0 : kind === 'PEEK' ? 88 : 22);
+      const occupiedBottom = box.top + 283;
       const overlaps = el => {
         if (el === launcher || el === host || host?.contains(el) || !visible(el)) return false;
         const r = el.getBoundingClientRect();
-        return r.right > box.left - 8 && r.left < box.left + width + 8 && r.bottom > box.top - 8 && r.top < box.top + height + 8;
+        return r.right > box.left - 8 && r.left < box.left + width + 8 && r.bottom > occupiedTop - 8 && r.top < occupiedBottom + 8;
       };
       // Protect all visible actions and project media, not merely the safe-area inset.
       if ([...document.querySelectorAll('button, a[href], input, textarea, select, img, video, [role="button"]')].some(overlaps)) return null;
       return box;
     }
     function start(kind, autonomous = false) {
-      if (!available() || (kind !== 'INSPECT' && panel.open) || (kind === 'INSPECT' && !panel.open)) return false;
+      if (!available() || (kind === 'PEEK' && panel.open) || (kind === 'INSPECT' && !panel.open)) return false;
       const box = placement(kind); if (!box) return false;
+      const continuing = visualState !== 'HIDDEN';
       hide();
       if (!host) {
         host = document.createElement('div'); host.className = 'sa-leo-visual';
         host.hidden = true; host.inert = true; host.setAttribute('aria-hidden', 'true');
+        host.setAttribute('popover', 'manual');
         root.append(host);
       }
       Object.assign(host.style, { left: box.left + 'px', top: box.top + 'px', width: box.width + 'px', height: box.height + 'px' });
-      // The ready adapter MUST begin playback synchronously and return true only
-      // after it has begun. Loading belongs outside this controller.
+      // The motion adapter may finish decoding asynchronously, never delaying UI.
       if (autonomous) {
         try { sessionStorage.setItem(introKey, 'true'); }
         catch (_) { interrupt(); return false; }
         introCancelled = true; autonomousDisabled = true;
       }
       host.hidden = false;
+      // Decorative top-layer sibling: stays outside the modal's content and focus.
+      if (host.showPopover) host.showPopover();
       const method = { PEEK: 'showPeek', REACT: 'showReact', INSPECT: 'showInspect' }[kind];
-      if (safe(method, host) !== true) { safe('hide'); host.hidden = true; return false; }
+      let tracked = false;
+      const shown = () => {
+        if (!autonomous || tracked) return;
+        tracked = true;
+        try { window.StileAnalytics?.track('leo_peek_shown'); } catch (_) { /* Optional measurement. */ }
+      };
+      if (safe(method, host, continuing, hide, shown) !== true) { hide(); return false; }
       visualState = kind;
-      if (autonomous) { try { window.StileAnalytics?.track('leo_peek_shown'); } catch (_) { /* Optional measurement. */ } }
-      endTimer = setTimeout(hide, kind === 'PEEK' ? 2200 : kind === 'INSPECT' ? 2400 : 1200);
+      if (!adapter.completionDriven) shown();
+      endTimer = setTimeout(() => {
+        if (!adapter.completionDriven && typeof adapter.retreat === 'function') safe('retreat',hide); else hide();
+      }, adapter.completionDriven ? 12000 : kind === 'PEEK' ? 2000 : kind === 'INSPECT' ? 2400 : 1200);
       return true;
     }
     function scheduleIntro() {
@@ -101,16 +327,19 @@
     }
     function environmentChanged() {
       if (reduced.matches || conflictingUI() || document.visibilityState !== 'visible' || innerWidth < 768) interrupt();
-      else if (panel.open && visualState !== 'INSPECT') interrupt();
+      else if (panel.open && visualState === 'PEEK') interrupt();
       else if (visualState !== 'HIDDEN' && !placement(visualState)) hide();
     }
     on(launcher, 'pointerenter', () => {
+      // Warm the intentional REACT without a hover animation then click replay.
+      if (adapter.completionDriven) { safe('warmReact'); return; }
       if (!pointer.matches || performance.now() - lastReact < 20000 || visualState !== 'HIDDEN') return;
       cancelIntro();
       if (start('REACT')) lastReact = performance.now();
     });
     on(root, 'stile:advisor-visual', event => {
       if (event.detail === 'photo-sent') { cancelIntro(); start('INSPECT'); }
+      else if (event.detail === 'open') { cancelIntro(); start('REACT'); }
       else interrupt();
     });
     on(document, 'input', interrupt);
@@ -134,7 +363,8 @@
         controllers.delete(root);
       }
     };
-    controllers.set(root, controller); scheduleIntro();
+    controllers.set(root, controller);
+    if (typeof adapter.load === 'function') safe('load',scheduleIntro); else scheduleIntro();
     return controller;
   }
   window.StileLeo = Object.freeze({ init });
