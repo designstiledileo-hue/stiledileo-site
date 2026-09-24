@@ -36,7 +36,12 @@
 #stile-advisor .sa-handoff{width:100%;margin-top:8px;font-size:12px}
 #stile-advisor .sa-status:empty{display:none}
 #stile-advisor .sa-launcher{right:calc(20px + env(safe-area-inset-right,0px))}
-#stile-advisor .sa-leo-visual{position:fixed;pointer-events:none;z-index:94;contain:layout paint;overflow:hidden}
+#stile-advisor .sa-leo-visual{position:fixed;pointer-events:none;z-index:94;contain:layout paint;overflow:hidden;margin:0;padding:0;border:0;background:transparent;inset:auto;color:inherit}
+#stile-advisor .sa-leo-pose{position:absolute;left:0;top:0;width:1122px;height:1402px;max-width:none;transform-origin:0 0;object-fit:contain}
+#stile-advisor .sa-leo-motion-viewport{position:absolute;bottom:14px;left:0;width:230px;height:280px;overflow:hidden;isolation:isolate}
+#stile-advisor .sa-leo-motion{position:absolute;left:50%;bottom:0;height:auto;max-width:none;transform:translateX(-50%);pointer-events:none;object-fit:contain}
+#stile-advisor .sa-leo-boundary{position:absolute;bottom:0;left:0;right:0;height:14px;border-top:1px solid #756346;border-radius:7px 7px 0 0;background:#211b15}
+#stile-advisor .sa-leo-visual::backdrop{background:transparent;pointer-events:none}
 #stile-advisor .sa-leo-visual *{pointer-events:none!important}
 @media(max-width:767px),(prefers-reduced-motion:reduce){#stile-advisor .sa-leo-visual{display:none!important}}
 @media(max-width:640px){#stile-advisor dialog{right:12px;bottom:max(12px,env(safe-area-inset-bottom,0px));width:calc(100vw - 24px);height:calc(100dvh - 24px);max-height:var(--sa-height,calc(100dvh - 24px));border-radius:18px}#stile-advisor .sa-launcher{right:14px}#stile-advisor .sa-header{padding:14px 14px 10px}#stile-advisor .sa-scroll{padding:12px 14px}#stile-advisor .sa-compose{padding:10px 14px 12px}#stile-advisor textarea{font-size:16px}}
