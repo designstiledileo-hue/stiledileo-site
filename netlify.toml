@@ -1,6 +1,13 @@
 [build]
   publish = "."
 
+# Keep the public Advisor endpoint independent of in-source config extraction.
+[[redirects]]
+  from = "/api/finish-advisor"
+  to = "/.netlify/functions/finish-advisor"
+  status = 200
+  force = true
+
 # Canonical URL normalization: serve static pages at .html and redirect clean variants.
 
 [[redirects]]
