@@ -27,6 +27,7 @@ body{margin:0;min-height:100vh;background:#eee}.estimate-modal{display:none}.est
   const page=await context.newPage(), errors=[]; page.on('pageerror',e=>errors.push(e.message));
   await page.route('**/__leo-qa*',r=>r.fulfill({contentType:'text/html',body:fixture}));
   await page.route('**/scripts/leo-interaction.js',r=>options.loadFailure?r.abort():r.fulfill({contentType:'text/javascript',body:controllerSource+(options.noAdapter?'':installAdapter)}));
+  if(options.noAdapter) await page.route('**/images/leo-advisor/**',r=>r.abort());
   let respond;
   await page.route('**/api/finish-advisor',async r=>{
    await page.evaluate(()=>{window.requestSent=true});
@@ -50,7 +51,8 @@ body{margin:0;min-height:100vh;background:#eee}.estimate-modal{display:none}.est
   for(const mode of ['noAdapter','storage','loadFailure','reduced']) {
    t=await setup({[mode]:true});await t.page.clock.runFor(12000);assert.equal(await t.count('PEEK'),0);
    const immediate=await t.page.evaluate(()=>{document.querySelector('.sa-launcher').click();return document.querySelector('#stile-advisor dialog').open});assert(immediate);
-   if(mode==='noAdapter')assert.equal(await t.page.locator('.sa-leo-visual').count(),0);
+   // Lazy decoding may create an empty decorative host; failed media must never render.
+   if(mode==='noAdapter')assert.equal(await t.page.locator('.sa-leo-visual img,.sa-leo-visual video').count(),0);
    await finish(t,'fallback opens synchronously: '+mode);
   }
   for(const action of ['advisor','estimate','typing','hidden','blur','reduced','destroy','overlay']) {
@@ -77,6 +79,7 @@ body{margin:0;min-height:100vh;background:#eee}.estimate-modal{display:none}.est
     if(a==='destroy')leoController.destroy();
    },action);
    if(action==='reduced')await t.page.emulateMedia({reducedMotion:'reduce'});
+   if(action==='advisor') {assert.equal(await t.page.evaluate(()=>leoController.visualState),'REACT');await t.page.clock.runFor(1300);}
    await t.page.waitForFunction(()=>leoController.visualState==='HIDDEN');await t.page.clock.runFor(15000);assert.equal(await t.count('PEEK'),1);await finish(t,'active interruption: '+action);
   }
   t=await setup();assert(await t.page.evaluate(()=>StileLeo.init(document.querySelector('#stile-advisor'))===leoController));
