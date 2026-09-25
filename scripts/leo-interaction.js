@@ -227,6 +227,7 @@
     const abort = new AbortController();
     let destroyed = false, failed = false, host = null;
     let visualState = 'HIDDEN', introTimer = null, endTimer = null, lastReact = -Infinity;
+    let introAttempts = 0;
     let introCancelled = autonomousDisabled;
     const panelState = () => panel.open ? 'OPEN' : 'CLOSED';
     const on = (target, type, callback) => target.addEventListener(type, callback, { signal: abort.signal });
@@ -256,28 +257,54 @@
       return [...document.querySelectorAll('dialog[open], [aria-modal="true"], .estimate-modal.is-open, [data-leo-blocking-overlay]')]
         .some(el => el !== panel && !root.contains(el) && visible(el));
     }
-    function placement(kind) {
+    function placement(kind, retainPosition = false) {
       // Conservative mobile fallback, including all 375/390 layouts. A final asset
       // must pass an additional rendered mobile review before relaxing this rule.
       if (innerWidth < 768 || reduced.matches || document.visibilityState !== 'visible' || !document.hasFocus() || conflictingUI()) return null;
       const besidePanel = panel.open;
       const anchor = (besidePanel ? panel : launcher).getBoundingClientRect();
       const width = 230, height = adapter.motionGeometry ? 295 : 300;
-      const box = besidePanel
+      const preferred = besidePanel
         ? { left: anchor.left - width - 12, top: anchor.bottom - (adapter.motionGeometry ? 295 : 280), width, height }
         : { left: anchor.right - width, top: anchor.top - (adapter.motionGeometry ? 281 : 288), width, height };
-      if (box.left < 16 || box.top < 16 || box.left + width > innerWidth - 16 || box.top + height > innerHeight) return null;
-      // Collision checks use dense visible artwork, not empty transparent padding.
-      const occupiedTop = box.top + (adapter.motionGeometry ? 0 : kind === 'PEEK' ? 88 : 22);
-      const occupiedBottom = box.top + 283;
-      const overlaps = el => {
-        if (el === launcher || el === host || host?.contains(el) || !visible(el)) return false;
-        const r = el.getBoundingClientRect();
-        return r.right > box.left - 8 && r.left < box.left + width + 8 && r.bottom > occupiedTop - 8 && r.top < occupiedBottom + 8;
+      // Only the explicitly decorative homepage background is exempt. Foreground
+      // project media, interactive cards, controls and the open panel stay protected.
+      const decorative = el => el.matches('.hero-desktop-video') && !!el.closest('header.hero');
+      const excluded = el => el === launcher || launcher.contains(el) || el === host || host?.contains(el) || !visible(el);
+      const obstacles = [...document.querySelectorAll('button, a[href], input, textarea, select, img, video, nav, dialog[open], [role="button"], [role="slider"]')]
+        .filter(el => !excluded(el) && !decorative(el)).map(el => el.getBoundingClientRect());
+      // Protect actual readable line rectangles, not the empty area of a layout
+      // wrapper. This leaves legitimate gutters available without covering copy.
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      let text;
+      while ((text = walker.nextNode())) {
+        const parent = text.parentElement;
+        if (!text.textContent.trim() || !parent || parent.closest('script, style, noscript') || excluded(parent)) continue;
+        const range = document.createRange(); range.selectNodeContents(text);
+        obstacles.push(...range.getClientRects());
+      }
+      const inView = obstacles.filter(r => r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth);
+      const safeBox = box => {
+        if (box.left < 16 || box.top < 16 || box.left + width > innerWidth - 16 || box.top + height > innerHeight) return false;
+        const top = box.top + (adapter.motionGeometry ? 0 : kind === 'PEEK' ? 88 : 22);
+        return !inView.some(r => r.right > box.left - 8 && r.left < box.left + width + 8 && r.bottom > top - 4 && r.top < box.top + 283 + 8);
       };
-      // Protect all visible actions and project media, not merely the safe-area inset.
-      if ([...document.querySelectorAll('button, a[href], input, textarea, select, img, video, [role="button"]')].some(overlaps)) return null;
-      return box;
+      // Never slide an already playing character around in response to layout changes.
+      if (retainPosition && host && !host.hidden) {
+        const current = host.getBoundingClientRect();
+        return safeBox(current) ? current : null;
+      }
+      if (safeBox(preferred)) return preferred;
+      // Bounded, nearest-first alternatives along nearby foreground edges. At most
+      // two character widths horizontally / 96px vertically from the original anchor.
+      const xs = [preferred.left, preferred.left - width - 12, preferred.left + width + 12];
+      const ys = [preferred.top, preferred.top - 48, preferred.top + 48, preferred.top - 96, preferred.top + 96,
+        Math.min(preferred.top + 96, innerHeight - height)];
+      inView.forEach(r => { xs.push(r.left - width - 8, r.right + 8); });
+      const candidates = [...new Set(xs)].filter(x => Math.abs(x - preferred.left) <= width * 2)
+        .flatMap(left => ys.map(top => ({ left, top, width, height })))
+        .sort((a,b) => Math.hypot(a.left-preferred.left,a.top-preferred.top)-Math.hypot(b.left-preferred.left,b.top-preferred.top));
+      return candidates.find(safeBox) || null;
     }
     function start(kind, autonomous = false) {
       if (!available() || (kind === 'PEEK' && panel.open) || (kind === 'INSPECT' && !panel.open)) return false;
@@ -292,11 +319,6 @@
       }
       Object.assign(host.style, { left: box.left + 'px', top: box.top + 'px', width: box.width + 'px', height: box.height + 'px' });
       // The motion adapter may finish decoding asynchronously, never delaying UI.
-      if (autonomous) {
-        try { sessionStorage.setItem(introKey, 'true'); }
-        catch (_) { interrupt(); return false; }
-        introCancelled = true; autonomousDisabled = true;
-      }
       host.hidden = false;
       // Decorative top-layer sibling: stays outside the modal's content and focus.
       if (host.showPopover) host.showPopover();
@@ -304,10 +326,14 @@
       let tracked = false;
       const shown = () => {
         if (!autonomous || tracked) return;
+        try { sessionStorage.setItem(introKey, 'true'); }
+        catch (_) { interrupt(); return; }
+        cancelIntro();
         tracked = true;
         try { window.StileAnalytics?.track('leo_peek_shown'); } catch (_) { /* Optional measurement. */ }
       };
-      if (safe(method, host, continuing, hide, shown) !== true) { hide(); return false; }
+      const finished = () => { hide(); if (autonomous && !tracked) scheduleIntro(4000); };
+      if (safe(method, host, continuing, finished, shown) !== true) { hide(); return false; }
       visualState = kind;
       if (!adapter.completionDriven) shown();
       endTimer = setTimeout(() => {
@@ -315,20 +341,23 @@
       }, adapter.completionDriven ? 12000 : kind === 'PEEK' ? 2000 : kind === 'INSPECT' ? 2400 : 1200);
       return true;
     }
-    function scheduleIntro() {
-      if (!available() || introCancelled || reduced.matches || innerWidth < 768) return;
+    function scheduleIntro(delay = 9000) {
+      if (!available() || introCancelled || introTimer !== null || introAttempts >= 3 || reduced.matches || innerWidth < 768) return;
       try { if (sessionStorage.getItem(introKey) === 'true') return; }
       catch (_) { cancelIntro(); return; }
       if (panel.open || conflictingUI() || document.visibilityState !== 'visible' || !document.hasFocus()) { cancelIntro(); return; }
       introTimer = setTimeout(() => {
         introTimer = null;
-        if (!introCancelled) { start('PEEK', true); cancelIntro(); }
-      }, 9000);
+        if (!introCancelled) {
+          introAttempts++;
+          if (!start('PEEK', true)) scheduleIntro(4000);
+        }
+      }, delay);
     }
     function environmentChanged() {
       if (reduced.matches || conflictingUI() || document.visibilityState !== 'visible' || innerWidth < 768) interrupt();
       else if (panel.open && visualState === 'PEEK') interrupt();
-      else if (visualState !== 'HIDDEN' && !placement(visualState)) hide();
+      else if (visualState !== 'HIDDEN' && !placement(visualState, true)) hide();
     }
     on(launcher, 'pointerenter', () => {
       // Warm the intentional REACT without a hover animation then click replay.
