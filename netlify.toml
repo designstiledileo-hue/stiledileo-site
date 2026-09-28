@@ -1,6 +1,10 @@
 [build]
   publish = "."
 
+# Preserve .html canonical links in deployed HTML.
+[build.processing.html]
+  pretty_urls = false
+
 # Keep the public Advisor endpoint independent of in-source config extraction.
 [[redirects]]
   from = "/api/finish-advisor"
