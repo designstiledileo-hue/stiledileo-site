@@ -302,3 +302,10 @@
   from = "/admin"
   to = "/admin/index.html"
   status = 200
+
+# Dedicated black plaster service page.
+[[redirects]]
+  from = "/black-venetian-plaster-wall-vancouver"
+  to = "/black-venetian-plaster-wall-vancouver.html"
+  status = 301
+  force = true
