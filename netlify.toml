@@ -1,6 +1,10 @@
 [build]
   publish = "."
 
+# Preserve .html canonical links in deployed HTML.
+[build.processing.html]
+  pretty_urls = false
+
 # Keep the public Advisor endpoint independent of in-source config extraction.
 [[redirects]]
   from = "/api/finish-advisor"
@@ -302,3 +306,36 @@
   from = "/admin"
   to = "/admin/index.html"
   status = 200
+
+# Dedicated black plaster service page.
+[[redirects]]
+  from = "/black-venetian-plaster-wall-vancouver"
+  to = "/black-venetian-plaster-wall-vancouver.html"
+  status = 301
+  force = true
+
+# Preserve historical service URLs through relevant canonical replacements.
+[[redirects]]
+  from = "/marble-look-fireplace-wall-vancouver"
+  to = "/fireplace-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/marble-look-fireplace-wall-vancouver.html"
+  to = "/fireplace-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/luxury-wall-finishes-vancouver"
+  to = "/venetian-plaster-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/luxury-wall-finishes-vancouver.html"
+  to = "/venetian-plaster-vancouver.html"
+  status = 301
+  force = true
+
