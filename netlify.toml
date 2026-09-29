@@ -314,6 +314,20 @@
   status = 301
   force = true
 
+
+# Redirect the retired TV fireplace URL to the current matching guide.
+[[redirects]]
+  from = "/tv-fireplace-wall-vancouver"
+  to = "/fireplace-wall-tv-design-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/tv-fireplace-wall-vancouver.html"
+  to = "/fireplace-wall-tv-design-vancouver.html"
+  status = 301
+  force = true
+
 # Preserve historical service URLs through relevant canonical replacements.
 [[redirects]]
   from = "/marble-look-fireplace-wall-vancouver"
