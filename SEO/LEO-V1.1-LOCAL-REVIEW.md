@@ -2,6 +2,31 @@
 
 Baseline: `ae94a6b177c4cdd885a7b9033b64c109296ba22f`. Local changes only; no commit, push or deployment.
 
+## Deferred mobile follow-up (local owner review)
+
+The original homepage-top recordings below establish suppression, **not** a mobile autonomous PEEK pass. The follow-up adds scheduling only; placement, 135px mobile scale, collision padding, artwork and desktop behavior are unchanged.
+
+- A mobile first attempt rejected for lack of space remains unconsumed. No timed placement retry follows it.
+- A passive scroll listener waits for at least 48px net downward progress and 320ms of settling. At most six settled viewport checks are allowed; no polling. Success or cancellation removes the listener.
+- Advisor opening/photo dispatch, hidden document, blur, page exit, reduced motion and destruction invalidate pending callbacks. Existing interaction/idle semantics remain in charge afterward. Only the renderer's visible-frame acknowledgement consumes the first PEEK flag.
+- These are bounded opportunities, not a promise of an appearance on every browsing path: six unsafe pauses exhaust the opportunity without setting the seen flag. The existing one-time 60-second idle return remains separate.
+
+New real-homepage recordings (Chrome mobile emulation; normal scroll input, no forced pose or empty fixture):
+
+- `/private/tmp/leo-v11-deferred-final-review/MOBILE_375_DEFERRED_OWNER_REVIEW.webm`
+- `/private/tmp/leo-v11-deferred-final-review/MOBILE_390_DEFERRED_OWNER_REVIEW.webm`
+
+Both start at scrollY=0, show initial suppression, then browsing pauses at 960, 1920, 2880, 3840 and 4800 before the sixth check succeeds. This is several screens into the page, not just below the hero. These are the first safe **tested** stops, not a claim of a pixel-exhaustive search of all possible scroll positions.
+
+| Viewport | Appearance scrollY | Host box (x, y, width, height), CSS px | Context | Placement |
+| --- | ---: | --- | --- | --- |
+| 375×812 | 5920 | 127.641, 537.859, 135, 174 | Below the project-photo prompt, before finishes | Existing bounded alternate |
+| 390×844 | 6160 | 225, 521.859, 135, 174 | Beside the “Tactile finishes with a quieter luxury” heading | Preferred |
+
+Actual rendered subject pixels and decoded alpha verified; zero overlapping protected controls, links, readable text, navigation or foreground images/video. Each recording includes complete hiding, a further scroll without a duplicate first appearance, and independent visible REACT after opening. Native iPhone Safari remains unverified; its conservative static fallback is unchanged.
+
+Regression evidence is outside Git: `/private/tmp/leo-v11-deferred-controller-qa.json`, `/private/tmp/leo-v11-deferred-regression/qa.json`, and `/private/tmp/leo-v11-deferred-final-review/qa.json`. Test-only adapter instrumentation is used for lifecycle tests; owner recordings use the unchanged production renderer and real local media. Provider replies in Advisor regression are mocked; no hosted API revalidation is claimed.
+
 ## Implemented behavior
 
 - First autonomous PEEK: approximately 3 seconds after readiness, subject to focus, visibility, supported transparent media and safe placement.

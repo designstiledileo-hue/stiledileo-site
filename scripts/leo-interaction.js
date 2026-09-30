@@ -189,6 +189,7 @@
       first: { key:introKey, timer:null, attempts:0 },
       idle: { key:idleKey, timer:null, attempts:0 }
     };
+    const deferredFirst = { used:false, armed:false, timer:null, checks:0, y:0, revision:0 };
     function read(key) { try { return sessionStorage.getItem(key); } catch (_) { autonomousDisabled = true; return null; } }
     function write(key,value) { try { sessionStorage.setItem(key,value); return true; } catch (_) { autonomousDisabled = true; cancelAutonomous(); return false; } }
     lastInteraction = Number(read(interactionKey)) || 0;
@@ -210,6 +211,42 @@
     }
     function cancelAutonomous() {
       Object.values(autonomous).forEach(slot => { clearTimeout(slot.timer); slot.timer = null; });
+      cancelDeferredFirst();
+    }
+    function cancelDeferredFirst() {
+      deferredFirst.revision++;
+      deferredFirst.armed = false;
+      clearTimeout(deferredFirst.timer); deferredFirst.timer = null;
+      window.removeEventListener('scroll', deferredScroll);
+    }
+    function firstOpportunityReady() {
+      return available() && !autonomousDisabled && innerWidth < 768 && !reduced.matches
+        && document.visibilityState === 'visible' && document.hasFocus() && !conflictingUI()
+        && !panel.open && !photoPending && Date.now() >= typingUntil && visualState === 'HIDDEN'
+        && read(introKey) !== 'true' && read(idleKey) !== 'true' && !autonomousDisabled;
+    }
+    function deferredScroll() {
+      clearTimeout(deferredFirst.timer); deferredFirst.timer = null;
+      if (!deferredFirst.armed) return;
+      // Scroll frames only reset a debounce; collision geometry is read once settled.
+      if (scrollY - deferredFirst.y < 48) return;
+      const revision = deferredFirst.revision;
+      deferredFirst.timer = setTimeout(() => {
+        deferredFirst.timer = null;
+        if (!deferredFirst.armed || revision !== deferredFirst.revision) return;
+        if (!firstOpportunityReady()) { cancelDeferredFirst(); return; }
+        deferredFirst.y = scrollY; deferredFirst.checks++;
+        if (placement('PEEK')) {
+          cancelDeferredFirst();
+          // The normal renderer still owns visible-pixel acknowledgement/session use.
+          start('PEEK', 'first');
+        } else if (deferredFirst.checks >= 6) cancelDeferredFirst();
+      }, 320);
+    }
+    function deferFirstUntilScroll() {
+      if (deferredFirst.used || !firstOpportunityReady()) return;
+      deferredFirst.used = true; deferredFirst.armed = true; deferredFirst.y = scrollY;
+      window.addEventListener('scroll', deferredScroll, { passive:true });
     }
     function interrupt() { cancelAutonomous(); hide(); }
     function meaningful() {
@@ -324,11 +361,16 @@
     }
     function scheduleAutonomous(name, delay) {
       const slot = autonomous[name];
+      // A deferred first opportunity never turns back into timed placement polling.
+      if (name === 'first' && deferredFirst.used) return;
       if (!available() || autonomousDisabled || slot.timer !== null || slot.attempts >= 3 || reduced.matches || read(slot.key)==='true' || read(idleKey)==='true' || autonomousDisabled) return;
       slot.timer = setTimeout(() => {
         slot.timer = null; slot.attempts++;
         if (destroyed || autonomousDisabled) return;
         const safe = !panel.open && !photoPending && Date.now() >= typingUntil && visualState==='HIDDEN';
+        if (name === 'first' && firstOpportunityReady() && !placement('PEEK')) {
+          deferFirstUntilScroll(); return;
+        }
         if (!safe || !start('PEEK',name)) scheduleAutonomous(name,4000);
       }, delay);
     }

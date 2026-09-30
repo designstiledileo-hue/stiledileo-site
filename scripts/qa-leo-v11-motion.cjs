@@ -2,7 +2,7 @@
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {PNG}=require(path.resolve(path.dirname(require.resolve(process.env.PLAYWRIGHT_MODULE||'playwright')),'../playwright-core/lib/utilsBundle.js'));
-const base='http://127.0.0.1:8888',out=process.env.LEO_QA_OUTPUT||'/private/tmp/leo-v11-owner-review';fs.mkdirSync(out,{recursive:true});
+const base=process.env.LEO_QA_BASE||'http://127.0.0.1:8888',out=process.env.LEO_QA_OUTPUT||'/private/tmp/leo-v11-owner-review';fs.mkdirSync(out,{recursive:true});
 const testPNG=new PNG({width:32,height:32});for(let i=0;i<testPNG.data.length;i+=4){testPNG.data[i]=130;testPNG.data[i+1]=95;testPNG.data[i+2]=60;testPNG.data[i+3]=255;}
 const photo={name:'disposable-qa.png',mimeType:'image/png',buffer:PNG.sync.write(testPNG)};
 const fixture='<!doctype html><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/styles/finish-advisor.css"><style>body{background:#171310;margin:0;min-height:100vh}</style><body><script src="/scripts/finish-advisor.js"></script></body>';
@@ -18,7 +18,7 @@ const fixture='<!doctype html><meta name="viewport" content="width=device-width,
   if(o.autoplay)await p.addInitScript(()=>{HTMLMediaElement.prototype.play=()=>Promise.reject(new DOMException('QA autoplay denied','NotAllowedError'));});
   if(o.delayMedia)await p.route('**/images/leo-advisor/motion/**',async r=>{await new Promise(resolve=>setTimeout(resolve,r.request().url().endsWith('leo-peek.webm')?3500:1500));await r.continue().catch(()=>{});});
   await p.route('**/api/finish-advisor',async r=>{sent=!!r.request().postDataJSON().image;await new Promise(resolve=>release=resolve);await r.fulfill({contentType:'application/json',body:JSON.stringify({reply:'Local mock: review the sample finish direction with the owner.',links:[]})}).catch(()=>{});});
-  await p.addInitScript(()=>{window.qaPoses=[];window.qaShifts=[];new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)qaShifts.push({value:e.value,nodes:e.sources.map(s=>s.node?.className||'')});}).observe({type:'layout-shift'});document.addEventListener('DOMContentLoaded',()=>new MutationObserver(()=>{const h=document.querySelector('.sa-leo-visual:not([hidden])');const pose=h?.dataset.pose||'hidden';if(qaPoses.at(-1)?.pose!==pose)qaPoses.push({pose,time:performance.now()});}).observe(document.body,{subtree:true,attributes:true,childList:true}));});
+  await p.addInitScript(()=>{window.qaPoses=[];window.qaShifts=[];new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)qaShifts.push({value:e.value,nodes:e.sources.map(s=>s.node?.className||'')});}).observe({type:'layout-shift'});document.addEventListener('DOMContentLoaded',()=>new MutationObserver(()=>{const h=document.querySelector('.sa-leo-visual:not([hidden])'),v=h?.querySelector('video');const pose=h&&getComputedStyle(h).opacity==='1'&&v&&!v.paused&&v.getAttribute('src')?.endsWith('/leo-'+h.dataset.pose+'.webm')?h.dataset.pose:'hidden';if(qaPoses.at(-1)?.pose!==pose)qaPoses.push({pose,time:performance.now()});}).observe(document.body,{subtree:true,attributes:true,childList:true}));});
   await p.goto(base+(o.fixture?'/__v11-empty':'/'),{waitUntil:'domcontentloaded'});await p.locator('.sa-launcher').waitFor();await p.waitForFunction(()=>!!window.StileLeo);
   return{c,p,errors,assets,release:()=>release?.(),sent:()=>sent};
  }
@@ -36,7 +36,11 @@ const fixture='<!doctype html><meta name="viewport" content="width=device-width,
    const overlap=r=>r.width>0&&r.height>0&&r.right>hr.left&&r.left<hr.right&&r.bottom>hr.top&&r.top<hr.bottom;
    const blockers=[...document.querySelectorAll('button,a[href],input,textarea,select,img,video,nav,dialog[open]')].filter(e=>!skip(e)&&overlap(e.getBoundingClientRect())).map(e=>e.tagName+'.'+e.className);
    const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){const e=n.parentElement;if(!n.textContent.trim()||!e||skip(e)||e.closest('style,script,noscript'))continue;const r=document.createRange();r.selectNodeContents(n);if([...r.getClientRects()].some(overlap))blockers.push('text:'+n.textContent.trim().slice(0,35));}
-   return{samples,clear,box:hr.toJSON(),blockers,muted:v.muted,inline:v.playsInline,scrollY};
+   const anchor=document.querySelector('.sa-launcher').getBoundingClientRect();
+   const preferred={left:anchor.right-135-16,top:anchor.top-174-8};
+   const nearbySections=[...document.querySelectorAll('section')].filter(e=>overlap(e.getBoundingClientRect())).map(e=>({id:e.id,heading:e.querySelector('h2,h3')?.textContent.trim()}));
+   return{samples,clear,box:hr.toJSON(),blockers,muted:v.muted,inline:v.playsInline,scrollY,nearbySections,
+    alternatePlacement:!inside&&innerWidth<768?(Math.abs(hr.left-preferred.left)>.1||Math.abs(hr.top-preferred.top)>.1):null};
   };
   const probe=await p.evaluate(capture);
   assert(probe.clear>20);assert(probe.samples.length>250);assert(probe.muted&&probe.inline);assert.deepEqual(probe.blockers,[]);
@@ -49,6 +53,29 @@ const fixture='<!doctype html><meta name="viewport" content="width=device-width,
  async function done(t,label,movie){t.release();assert.deepEqual(t.errors,[]);assert.equal(await t.p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert((await t.p.evaluate(()=>qaShifts)).every(s=>s.nodes.every(n=>!String(n).includes('sa-leo'))));const video=await t.p.video().path();await t.c.close();if(movie)fs.copyFileSync(video,path.join(out,movie+'.webm'));results.push(label);console.log('PASS',label);}
  try{
   let t,p;
+  if(process.env.LEO_QA_DEFERRED_ONLY){
+   for(const [width,height,target]of [[375,812,5920],[390,844,6160]]){
+    t=await setup({width,height});p=t.p;await p.evaluate(()=>document.fonts.ready);await p.waitForTimeout(3800);
+    assert.equal(await p.evaluate(()=>scrollY),0);assert.equal(await p.evaluate(()=>sessionStorage.getItem('stile_leo_intro_seen')),null);assert.equal(await p.locator('.sa-leo-visual:not([hidden])').count(),0);await shot(p,'deferred-'+width+'-initial-suppressed');
+    await p.mouse.move(width/2,height/2);
+    const stops=[];
+    // Real input scrolling on the unchanged homepage, not a fixture or forced pose.
+    // Five ordinary browsing pauses, then the first safe region found by geometry QA.
+    for(const stop of [960,1920,2880,3840,4800,target]){
+     let y=await p.evaluate(()=>scrollY);
+     while(y<stop){await p.mouse.wheel(0,Math.min(80,stop-y));await p.waitForTimeout(70);y=await p.evaluate(()=>scrollY);}
+     await p.waitForTimeout(650);stops.push({scrollY:await p.evaluate(()=>scrollY),visible:await p.locator('.sa-leo-visual:not([hidden])').count()>0});
+     if(stops.at(-1).visible)break;
+    }
+    await pixels(p,'peek','deferred-'+width+'-peek');await p.waitForFunction(()=>sessionStorage.getItem('stile_leo_intro_seen')==='true');await hidden(p);await shot(p,'deferred-'+width+'-hidden');
+    await p.mouse.wheel(0,160);await p.waitForTimeout(6000);assert.equal(await p.evaluate(()=>qaPoses.filter(x=>x.pose==='peek').length),1);assert.equal(await p.locator('.sa-leo-visual:not([hidden])').count(),0);
+    await p.locator('.sa-launcher').click();assert(await p.locator('dialog').evaluate(e=>e.open));await pixels(p,'react','deferred-'+width+'-react');await hidden(p);await shot(p,'deferred-'+width+'-final');
+    fs.writeFileSync(path.join(out,'deferred-'+width+'-sequence.json'),JSON.stringify({stops,poses:await p.evaluate(()=>qaPoses),forcedState:false,fixture:false},null,2));
+    await done(t,'real homepage '+width+' suppression → settled browsing → visible autonomous PEEK → hidden → independent REACT','MOBILE_'+width+'_DEFERRED_OWNER_REVIEW');
+   }
+   t=await setup({width:1440,height:1000});p=t.p;await pixels(p,'peek','desktop-1000-peek');assert.equal(await p.evaluate(()=>scrollY),0);await hidden(p);await done(t,'1440×1000 untouched homepage first PEEK unchanged','DESKTOP_1000_REGRESSION');
+   fs.writeFileSync(path.join(out,'qa.json'),JSON.stringify({status:'PASS',checks:results,nativeIPhoneSafari:'UNVERIFIED',scope:'local real homepage; actual scroll input and rendered pixels, no forced poses'},null,2));return;
+  }
   if(!process.env.LEO_QA_RACES_ONLY){
   t=await setup();p=t.p;await shot(p,'desktop-initial');await pixels(p,'peek','desktop-peek');assert.equal(await p.evaluate(()=>scrollY),0);await p.waitForFunction(()=>sessionStorage.getItem('stile_leo_intro_seen')==='true');await hidden(p);await shot(p,'desktop-hidden');
   // Real-time idle return, not a forced state or clock jump, in the owner recording.
