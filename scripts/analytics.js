@@ -3,6 +3,11 @@
   const pagePath = window.location.pathname || "/";
   const pageTitle = document.title || "";
   const sentFormStarts = new WeakSet();
+  const sentLeadIds = new Set();
+  const adsConversion = "AW-18005193234/Wa3ECP-l0I8dEJLkxYlD";
+
+  // Reuse the site's existing Google tag; do not install a second loader.
+  if (measurementReady()) window.gtag("config", "AW-18005193234");
 
   const serviceByPath = {
     "/fireplace-wall-vancouver.html": "fireplace",
@@ -171,9 +176,17 @@
     track,
     getInquiryContext,
     trackLeadSuccess: (params) => {
+      const submissionId = params && params.transaction_id;
+      if (!submissionId || sentLeadIds.has(submissionId) || !measurementReady()) return;
+      sentLeadIds.add(submissionId);
       track("generate_lead", Object.assign({
         lead_method: "form"
       }, params || {}));
+      // Only the accepted form calls this hook. Contact details never enter Ads.
+      window.gtag("event", "conversion", {
+        send_to: adsConversion,
+        transaction_id: submissionId
+      });
     }
   };
 

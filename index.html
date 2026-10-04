@@ -2931,6 +2931,7 @@
         <input type="hidden" name="initial_landing_path">
         <input type="hidden" name="first_referrer">
         <input type="hidden" name="lead_source" value="website">
+        <input type="hidden" name="submission_id">
 
         <section class="estimate-step is-active" data-step="0">
           <h2 class="estimate-step-title" id="estimate-title" tabindex="-1">Send your project photo</h2>
@@ -3399,6 +3400,9 @@
       });
       estimateForm.elements.namedItem("project_type").value = context.service || "general";
       estimateForm.elements.namedItem("wall_photo_filename").value = estimatePhoto.files[0].name;
+      // Keep the same non-personal ID on retries; reset with the next inquiry.
+      const submissionId = estimateForm.elements.namedItem("submission_id");
+      if (!submissionId.value) submissionId.value = crypto.randomUUID();
       estimatePending = true;
       estimateSubmit.disabled = true;
       estimateSubmit.textContent = "Sending…";
@@ -3418,7 +3422,7 @@
         if (estimateModal.classList.contains("is-open")) estimateSuccess.focus();
         // Analytics must never turn an accepted request into a retryable failure.
         try {
-          if (window.StileAnalytics) window.StileAnalytics.trackLeadSuccess({ cta_location: "estimate_modal", service: context.service || "general" });
+          if (window.StileAnalytics) window.StileAnalytics.trackLeadSuccess({ cta_location: "estimate_modal", service: context.service || "general", transaction_id: submissionId.value });
         } catch (analyticsError) { /* Receipt remains successful if measurement is unavailable. */ }
       } catch (error) {
         estimateFailure.hidden = false;
