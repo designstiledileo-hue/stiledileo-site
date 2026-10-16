@@ -353,3 +353,14 @@
   status = 301
   force = true
 
+
+[[redirects]]
+  from = "/holt-renfrew-limewash-vancouver"
+  to = "/holt-renfrew-limewash-vancouver.html"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/commercial-limewash-vancouver"
+  to = "/commercial-limewash-vancouver.html"
+  status = 301
+  force = true
