@@ -18,9 +18,15 @@
       hide: { width:230, bottom:-87*230/860 }
     };
     const cached = new Map(), videos = new Set();
-    // Conservative V1 Safari path. No second codec or UA-dependent opaque video.
-    const safari = /Safari/.test(navigator.userAgent) && !/Chrome|Chromium|CriOS|Edg|OPR/.test(navigator.userAgent);
-    const supportsVideo = !safari && !!document.createElement('video').canPlayType('video/webm; codecs="vp9"');
+    // iOS browsers need the Apple alpha derivative, not the VP9-only path.
+    // A format hint never replaces the decoded-alpha check below.
+    const apple = /iPhone|iPad|iPod/.test(navigator.userAgent)
+      || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+      || (/Safari/.test(navigator.userAgent) && !/Chrome|Chromium|Edg|OPR/.test(navigator.userAgent));
+    const probe = document.createElement('video');
+    const formats = (apple ? ['mov','webm'] : ['webm','mov']).filter(format =>
+      probe.canPlayType(format === 'mov' ? 'video/mp4; codecs="hvc1"' : 'video/webm; codecs="vp9"'));
+    const supportsVideo = formats.length > 0;
     let ready = false, dead = false, revision = 0, active, host, idle, timer;
     const pendingFrames = new Set();
     const allowed = () => !dead && supportsVideo && !matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -32,7 +38,7 @@
     }
     function prepare(state) {
       if (cached.has(state)) return cached.get(state);
-      const promise = new Promise((resolve,reject) => {
+      const load = format => new Promise((resolve,reject) => {
         if (!allowed() || !supportsVideo) { reject(Error('static fallback')); return; }
         const v = document.createElement('video'); videos.add(v);
         v.className = 'sa-leo-motion'; v.muted = true; v.playsInline = true;
@@ -57,8 +63,14 @@
             v.dataset.alphaVerified = 'true'; resolve(v);
           } catch (_) { fail(); }
         };
-        v.src = `/images/leo-advisor/motion/leo-${state}.webm`;
+        v.src = `/images/leo-advisor/motion/leo-${state}.${format}`;
       });
+      const promise = (async () => {
+        for (const format of formats) {
+          try { return await load(format); } catch (_) { if (!allowed()) break; }
+        }
+        throw Error('transparent motion unavailable');
+      })();
       cached.set(state,promise); return promise;
     }
     function visibleFrame(v, token) {
@@ -240,11 +252,11 @@
           cancelDeferredFirst();
           // The normal renderer still owns visible-pixel acknowledgement/session use.
           start('PEEK', 'first');
-        } else if (deferredFirst.checks >= 6) cancelDeferredFirst();
+        }
       }, 320);
     }
     function deferFirstUntilScroll() {
-      if (deferredFirst.used || !firstOpportunityReady()) return;
+      if (deferredFirst.armed || !firstOpportunityReady()) return;
       deferredFirst.used = true; deferredFirst.armed = true; deferredFirst.y = scrollY;
       window.addEventListener('scroll', deferredScroll, { passive:true });
     }
@@ -376,6 +388,9 @@
     }
     function resumeAutonomous() {
       if (destroyed || autonomousDisabled) return;
+      // Backgrounding a phone must not permanently lose an unseen first PEEK.
+      // Still event-driven: a new settled downward scroll is required.
+      if (deferredFirst.used && !lastInteraction) { deferFirstUntilScroll(); return; }
       if (lastInteraction) scheduleAutonomous('idle',Math.max(0,60000-(Date.now()-lastInteraction)));
       else scheduleAutonomous('first',3000);
     }
