@@ -59,7 +59,13 @@ window.controller=StileLeo.init(document.querySelector('#stile-advisor'),adapter
   }
   t=await setup({width:390});await block(t);await run(t,3100);
   for(let i=1;i<=6;i++){await scroll(t,i*100);await run(t,400);}
-  const capped=await t.p.evaluate(()=>placementChecks);await t.p.locator('#block').evaluate(e=>e.remove());await scroll(t,900);await run(t,15000);assert.equal(await t.p.evaluate(()=>placementChecks),capped);assert.equal(await marker(t),null);await done(t,'six settled states maximum; exhausted opportunity never polls or consumes session');
+  const capped=await t.p.evaluate(()=>placementChecks);await run(t,15000);assert.equal(await t.p.evaluate(()=>placementChecks),capped);assert.equal(await marker(t),null);
+  await t.p.locator('#block').evaluate(e=>e.remove());await scroll(t,900);await run(t,341);assert.equal(await marker(t),'true');assert.equal(await t.count('PEEK'),1);await done(t,'six unsafe pauses do not discard first PEEK; no polling, later safe settled scroll succeeds');
+  t=await setup({width:428,height:926});await block(t);await run(t,3100);
+  await t.p.evaluate(()=>window.dispatchEvent(new Event('blur')));await t.p.locator('#block').evaluate(e=>e.remove());
+  await scroll(t,120);await run(t,500);assert.equal(await t.count('PEEK'),0);
+  await t.p.evaluate(()=>window.dispatchEvent(new Event('focus')));await run(t,5000);assert.equal(await t.count('PEEK'),0);
+  await scroll(t,240);await run(t,341);assert.equal(await marker(t),'true');assert.equal(await t.count('PEEK'),1);await done(t,'iPhone-size focus return rearms unseen first PEEK without timed polling');
   for(const event of ['open','photo','hidden','pagehide','reduced','destroy','reinit']){
    t=await setup({width:390});await block(t);await run(t,3100);await t.p.locator('#block').evaluate(e=>e.remove());await scroll(t,120);await run(t,200);
    if(event==='open')assert(await open(t));
