@@ -17,7 +17,7 @@
     :root{--bg:#0f0d0b;--text:#f0ebe4;--muted:#b8aea0;--gold:#cfae55;--gold-light:#ddb969;--line:rgba(207,174,85,.18)}
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;line-height:1.85}
-    .hero{position:relative;min-height:62vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px;background:url('/images/Fire-Place-Vancouver5.png') center/cover no-repeat}
+    .hero{position:relative;min-height:62vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px;background:url('/.netlify/images?url=/images/Fire-Place-Vancouver5.png&w=1024&fm=webp&q=85') center/cover no-repeat}
     .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,13,11,.28), rgba(15,13,11,.68))}
     .hero-inner{position:relative;z-index:2;max-width:900px}
     .hero-kicker{margin:0 0 14px;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
@@ -42,8 +42,25 @@
     gtag('config', 'G-P7VJ8MQNKS');
   </script>
   <script src="/scripts/analytics.js" defer></script>
+  <link rel="stylesheet" href="/styles/site-navigation.css">
 </head>
 <body>
+  <header class="stile-site-header">
+    <div class="stile-site-header__inner">
+      <a class="stile-site-header__brand" href="/">Stile di Leo</a>
+      <nav class="stile-site-header__links" aria-label="Main navigation">
+        <a href="/venetian-plaster-vancouver.html">Venetian plaster</a>
+        <a href="/fireplace-wall-vancouver.html">Fireplaces</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/venetian-plaster-cost-vancouver.html">Pricing</a>
+      </nav>
+      <div class="stile-site-header__actions">
+        <a href="tel:+16047732298" aria-label="Call Stile di Leo at +1 604 773 2298">Call Leo</a>
+        <a class="stile-site-header__photo" href="/#estimate">Send a Project Photo</a>
+      </div>
+    </div>
+  </header>
+
 
   <section class="hero">
     <div class="hero-inner">
@@ -67,8 +84,8 @@
     </div>
 
     <div class="gallery">
-      <img src="/images/Fire-place-vancouver2.png" alt="Venetian plaster fireplace wall idea in Vancouver living room">
-      <img src="/images/Fire-Place-Vancouver5.png" alt="Modern fireplace surround idea with Venetian plaster">
+      <img src="/.netlify/images?url=/images/Fire-place-vancouver2.png&amp;w=1200&amp;fm=webp&amp;q=85" alt="Venetian plaster fireplace wall idea in Vancouver living room" srcset="/.netlify/images?url=/images/Fire-place-vancouver2.png&amp;w=480&amp;fm=webp&amp;q=85 480w, /.netlify/images?url=/images/Fire-place-vancouver2.png&amp;w=800&amp;fm=webp&amp;q=85 800w, /.netlify/images?url=/images/Fire-place-vancouver2.png&amp;w=1200&amp;fm=webp&amp;q=85 1200w, /.netlify/images?url=/images/Fire-place-vancouver2.png&amp;w=1284&amp;fm=webp&amp;q=85 1284w" sizes="(max-width: 900px) calc(100vw - 40px), 600px" width="1284" height="2282" decoding="async" loading="lazy">
+      <img src="/.netlify/images?url=/images/Fire-Place-Vancouver5.png&amp;w=1024&amp;fm=webp&amp;q=85" alt="Modern fireplace surround idea with Venetian plaster" srcset="/.netlify/images?url=/images/Fire-Place-Vancouver5.png&amp;w=480&amp;fm=webp&amp;q=85 480w, /.netlify/images?url=/images/Fire-Place-Vancouver5.png&amp;w=800&amp;fm=webp&amp;q=85 800w, /.netlify/images?url=/images/Fire-Place-Vancouver5.png&amp;w=1024&amp;fm=webp&amp;q=85 1024w" sizes="(max-width: 900px) calc(100vw - 40px), 600px" width="1024" height="1024" decoding="async" loading="lazy">
     </div>
 
     <div class="section">

@@ -1,0 +1,79 @@
+/* Shared, non-sticky navigation for service and journal landing pages. */
+.stile-site-header {
+  background: #0f0d0b;
+  border-bottom: 1px solid rgba(207, 174, 85, .2);
+  color: #f0ebe4;
+}
+.stile-site-header__inner {
+  box-sizing: border-box;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+}
+.stile-site-header .stile-site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: #f0ebe4;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.stile-site-header__links,
+.stile-site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px 20px;
+  flex-wrap: wrap;
+}
+.stile-site-header__links a,
+.stile-site-header__actions a {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: .04em;
+  color: #e0d7ca;
+  text-decoration: none;
+}
+.stile-site-header a:hover { color: #ddb969; }
+.stile-site-header a:focus-visible {
+  outline: 2px solid #ddb969;
+  outline-offset: 4px;
+}
+.stile-site-header__actions a.stile-site-header__photo {
+  padding: 10px 16px;
+  background: #cfae55;
+  color: #0f0d0b;
+}
+.stile-site-header__actions a.stile-site-header__photo:hover { background: #ddb969; }
+@media (max-width: 1080px) {
+  .stile-site-header__links {
+    order: 3;
+    flex-basis: 100%;
+    justify-content: center;
+  }
+}
+@media (max-width: 540px) {
+  .stile-site-header__inner { padding: 12px 18px; gap: 8px 12px; }
+  .stile-site-header .stile-site-header__brand { font-size: 25px; }
+  .stile-site-header__actions { gap: 6px 12px; }
+  .stile-site-header__links { justify-content: space-between; gap: 0 12px; }
+  .stile-site-header__links a { font-size: 10px; }
+}
+@media (max-width: 380px) {
+  .stile-site-header__actions { flex-basis: 100%; justify-content: space-between; }
+}
