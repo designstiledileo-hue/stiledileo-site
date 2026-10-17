@@ -99,6 +99,7 @@
     @media(max-width:860px){.topbar{flex-wrap:wrap;padding:18px}.nav{order:2;width:100%;justify-content:space-between;gap:12px}.hero,.section{padding:48px 18px}.hero{padding-bottom:0}.section-intro,.work-lead,.work-pair,.application-lead .application-copy{grid-template-columns:1fr;gap:24px}.work-lead .work-image{max-width:none}.work-pair{margin-top:36px}.work-pair .work-link:nth-child(2){margin-top:16px}.work-copy{max-width:none}.work-sculpture{margin-top:24px}.work-sculpture .work-image{order:0}.work-sculpture .work-copy{order:1}.finish-grid{grid-template-columns:1fr;gap:0;padding-top:10px}.finish-card+.finish-card{border-top:1px solid var(--line)}.application-lead .application-copy{gap:0;padding-bottom:30px}.cta{margin:48px 18px;padding:32px 22px}.footer-inner{flex-direction:column;gap:6px}}
     @media(max-width:420px){h1{font-size:54px}.lead{font-size:16px}.hero-actions .btn{width:100%}.nav{font-size:10px;letter-spacing:.04em}.topbar>.btn{padding:10px 14px;font-size:10px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.work-image img{transition:none}}
+    #commercial-retail{scroll-margin-top:32px}#commercial-retail .work-image{max-width:440px}
   </style>
 </head>
 <body>
@@ -106,7 +107,7 @@
     <a class="brand" href="/">Stile di Leo</a>
     <nav class="nav" aria-label="Primary navigation">
       <a href="/projects.html" aria-current="page">Work</a>
-      <a href="#projects">Selected Work</a>
+      <a href="#commercial-retail">Commercial</a>
       <a href="#applications">Applications</a>
       <a href="/#contact">Contact</a>
     </nav>
@@ -119,9 +120,21 @@
       <p class="lead">Decorative plaster across fireplaces, architectural surfaces, custom details and commercial interiors.</p>
       <p class="lead">Different textures and finish directions, considered around the architecture of each space.</p>
       <div class="hero-actions">
-        <a class="btn" href="#projects">Explore Selected Work</a>
+        <a class="btn" href="#commercial-retail">Commercial &amp; Retail Projects</a><a class="btn btn-ghost" href="#projects">Selected Work</a>
         <a class="btn btn-ghost" href="#applications">Applications &amp; Finishes</a>
       </div>
+    </section>
+
+    <section class="section" id="commercial-retail" aria-labelledby="commercial-retail-title">
+      <div class="section-intro">
+        <div><p class="kicker">Commercial interiors</p><h2 id="commercial-retail-title">Commercial &amp; Retail Projects</h2></div>
+        <p>Documented specialty decorative finish work within commercial and retail interiors in Metro Vancouver.</p>
+      </div>
+      <a class="work-link work-lead" href="/holt-renfrew-limewash-vancouver.html" data-track="project_photo">
+        <div class="work-image"><picture><source type="image/webp" srcset="/images/projects/holt-renfrew/holt-renfrew-finished-interior-600.webp 600w, /images/projects/holt-renfrew/holt-renfrew-finished-interior-1200.webp 1200w" sizes="(max-width: 860px) calc(100vw - 36px), 440px"><img src="/images/projects/holt-renfrew/holt-renfrew-finished-interior.jpg" width="1200" height="2127" loading="lazy" decoding="async" class="" alt="Hand-applied decorative wall finish at Holt Renfrew Vancouver beside clothing displays and an upholstered bench"></picture></div>
+        <div class="work-copy"><p class="kicker">Commercial interiors · Vancouver · 8 units</p><h3>Holt Renfrew · Limewash</h3><p>Hand-applied decorative wall finishes across eight units within a Holt Renfrew luxury retail environment in Vancouver. Original project photography and film document the wall finish in its retail setting.</p><p>The specialty finish formed part of a wider construction project; no direct appointment by Holt Renfrew or retailer endorsement is implied.</p><span class="btn btn-ghost">View project &amp; photographs</span></div>
+      </a>
+      <p class="related">For general contractors and designers: <a href="/#trade">send drawings &amp; commercial project details →</a></p>
     </section>
 
     <section class="section" id="projects" aria-labelledby="work-title">
@@ -157,16 +170,7 @@
       </a>
     </section>
 
-    <section class="section" id="commercial-retail" aria-labelledby="commercial-retail-title">
-      <div class="section-intro">
-        <div><p class="kicker">Commercial interiors</p><h2 id="commercial-retail-title">Commercial &amp; Retail Projects</h2></div>
-        <p>Documented specialty decorative finish work within commercial and retail interiors in Metro Vancouver.</p>
-      </div>
-      <a class="work-link work-lead" href="/holt-renfrew-limewash-vancouver.html#project-film" data-track="project_photo">
-        <div class="work-image"><picture><source srcset="/images/projects/holt-renfrew/holt_440_60.webp" type="image/webp"><img src="/images/projects/holt-renfrew/Stile_di_Leo_Holt_Renfrew_Poster.jpg" width="512" height="910" loading="lazy" decoding="async" alt="Original project film frame showing hand-applied decorative wall finishes inside Holt Renfrew, Vancouver"></picture></div>
-        <div class="work-copy"><p class="kicker">Project film · Commercial interiors · Vancouver</p><h3>Holt Renfrew · Limewash</h3><p>Hand-applied decorative wall finishes across eight units within a Holt Renfrew luxury retail environment in Vancouver. Original project footage shows the finish within the completed interior.</p><p>The specialty finish formed part of a wider construction project; no direct appointment by Holt Renfrew or retailer endorsement is implied.</p><span class="btn btn-ghost">View project film</span></div>
-      </a>
-    </section>
+
 
     <div class="applications-band">
       <section class="section" id="applications" aria-labelledby="applications-title">
