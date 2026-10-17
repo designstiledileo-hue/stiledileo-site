@@ -21,8 +21,10 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-P7VJ8MQNKS');
+    if (/^(www\.)?stiledileo\.com$/i.test(window.location.hostname)) {
+      gtag('js', new Date());
+      gtag('config', 'G-P7VJ8MQNKS');
+    }
   </script>
   <script src="/scripts/analytics.js" defer></script>
   <script type="application/ld+json">

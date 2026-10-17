@@ -42,8 +42,10 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-P7VJ8MQNKS');
+    if (/^(www\.)?stiledileo\.com$/i.test(window.location.hostname)) {
+      gtag('js', new Date());
+      gtag('config', 'G-P7VJ8MQNKS');
+    }
   </script>
   <script src="/scripts/analytics.js" defer></script>
 
@@ -2451,7 +2453,7 @@
         <p class="hero-copy">Hand-finished Venetian plaster and decorative wall finishes for homes and commercial interiors across Metro Vancouver.</p>
         <div class="hero-mobile-frame"><a class="hero-retail-preview" href="/holt-renfrew-limewash-vancouver.html" data-track="project_photo"><picture><source type="image/webp" srcset="/images/projects/holt-renfrew/holt-renfrew-finished-interior-600.webp 600w, /images/projects/holt-renfrew/holt-renfrew-finished-interior-1200.webp 1200w" sizes="90px"><img src="/images/projects/holt-renfrew/holt-renfrew-finished-interior.jpg" width="1200" height="2127" loading="eager" decoding="async" class="" alt="Hand-applied decorative wall finish at Holt Renfrew Vancouver beside clothing displays and an upholstered bench"></picture><span class="hero-retail-preview-copy"><small>Featured commercial project</small><strong>Holt Renfrew</strong><span>Vancouver · 8 units<br>View the project →</span></span></a></div>
         <div class="btn-row">
-          <a href="#contact" class="btn btn-primary">Get Free Visualization</a>
+          <a href="#estimate" class="btn btn-primary" data-track="send_photo">Send Project Photo</a>
           <a href="#trade" class="btn btn-secondary">For GCs &amp; Designers</a>
         </div>
         <div class="hero-mobile-links">
@@ -2906,8 +2908,8 @@
 
           <article class="process-card reveal delay-2">
             <span class="process-index">02</span>
-            <h3 class="process-title">Get visualization</h3>
-            <p class="process-text">Receive a design direction tailored to your space, lighting, and finish preferences before build decisions are made.</p>
+            <h3 class="process-title">Review the direction</h3>
+            <p class="process-text">We review your project details and discuss finish options, preparation, and whether a sample or visualization would help.</p>
           </article>
 
           <article class="process-card reveal delay-3">
@@ -2970,6 +2972,7 @@
         <section class="estimate-step is-active" data-step="0">
           <h2 class="estimate-step-title" id="estimate-title" tabindex="-1">Send your project photo</h2>
           <p class="estimate-step-text">Step 1 of 2. Share a photo for a manual review of your surface and finish direction.</p>
+          <p class="estimate-note">No photo yet? <a href="mailto:designstiledileo@gmail.com?subject=Project%20Enquiry">Email your project details</a> or <a href="tel:+16047732298">call Leo</a> to discuss the surface, approximate dimensions and location.</p>
           <p class="estimate-note" id="estimate-advisor-note" hidden>Your Finish Advisor notes are editable in step 2. Please attach your photo here if it is not already selected. Nothing is submitted until you choose Send Project Photo.</p>
           <label class="estimate-upload" for="estimate-photo">
             <input type="file" id="estimate-photo" name="wall_photo" accept="image/*,.heic,.heif" required aria-describedby="estimate-file-label estimate-photo-error">

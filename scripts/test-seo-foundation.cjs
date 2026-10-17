@@ -107,7 +107,7 @@ test('newly measured article queues one page config and de-duplicates accepted l
       addEventListener: (name, callback) => handlers.set(name, callback),
       createElement: () => { throw new Error('article analytics must not add the Advisor'); }
     },
-    location: { pathname: '/feature-wall-tv-wall-vancouver.html', search: '' },
+    location: { hostname: 'stiledileo.com', pathname: '/feature-wall-tv-wall-vancouver.html', search: '' },
     sessionStorage: { getItem: name => storage.get(name), setItem: (name, value) => storage.set(name, value) },
     URL, URLSearchParams, WeakSet, Set, Date
   };

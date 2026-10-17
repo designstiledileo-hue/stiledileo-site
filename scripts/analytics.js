@@ -1,5 +1,7 @@
 (function () {
-  const measurementReady = () => typeof window.gtag === "function";
+  // Local checks and deploy previews must not become customer traffic or Ads leads.
+  const productionHost = /^(www\.)?stiledileo\.com$/i.test(window.location.hostname);
+  const measurementReady = () => productionHost && typeof window.gtag === "function";
   const pagePath = window.location.pathname || "/";
   const pageTitle = document.title || "";
   const sentFormStarts = new WeakSet();

@@ -464,13 +464,18 @@
       footer{padding:50px 24px 28px}
       .foot-wrap{flex-direction:column;align-items:flex-start}
     }
+    .journal-planning{margin-top:56px;padding-top:30px;border-top:1px solid rgba(207,174,85,.18)}
+    .journal-planning h2{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:300;color:var(--text)}
+    .journal-planning p{color:var(--muted);font-size:14px;line-height:1.8}
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P7VJ8MQNKS"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-P7VJ8MQNKS');
+    if (/^(www\.)?stiledileo\.com$/i.test(window.location.hostname)) {
+      gtag('js', new Date());
+      gtag('config', 'G-P7VJ8MQNKS');
+    }
   </script>
   <script src="/scripts/analytics.js" defer></script>
 </head>
@@ -1002,6 +1007,11 @@
         </article>
 
       </div>
+      <section class="journal-planning" aria-labelledby="planning-guides">
+        <h2 id="planning-guides">Before You Choose a Finish</h2>
+        <p>Compare the <a href="/venetian-plaster-pros-and-cons-vancouver.html">pros and cons of Venetian plaster</a> when weighing appearance, preparation and project scope.</p>
+        <p>For a fireplace-led project, explore <a href="/venetian-plaster-fireplace-ideas-vancouver.html">Venetian plaster fireplace ideas</a>, then follow the completed project links to see actual work.</p>
+      </section>
     </div>
   </section>
 

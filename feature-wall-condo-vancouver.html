@@ -18,8 +18,10 @@ body{background:#0f0d0b;color:#e8e8e8;font-family:'Montserrat',sans-serif;margin
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-P7VJ8MQNKS');
+    if (/^(www\.)?stiledileo\.com$/i.test(window.location.hostname)) {
+      gtag('js', new Date());
+      gtag('config', 'G-P7VJ8MQNKS');
+    }
   </script>
   <script src="/scripts/analytics.js" defer></script>
   <link rel="stylesheet" href="/styles/site-navigation.css">
