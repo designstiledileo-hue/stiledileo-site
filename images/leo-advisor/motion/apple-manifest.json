@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "status": "LOCAL_REVIEW_ONLY",
+  "codec": "HEVC with alpha (hvc1)",
+  "source": "Existing approved VP9 alpha runtime files; originals unchanged",
+  "conversion": "ffmpeg -c:v libvpx-vp9 -i SOURCE.webm -an -c:v hevc_videotoolbox -allow_sw 1 -alpha_quality 1 -q:v 65 -pix_fmt bgra -tag:v hvc1 -movflags +faststart OUTPUT.mov",
+  "native_iphone_validation": "NOT_TESTED",
+  "assets": [
+    {"state":"peek","filename":"leo-peek.mov","width":512,"height":682,"fps":24,"frames":62,"bytes":1262161,"sha256":"085d984dbd51ff2c7a1148e04971a945b1cfee528faa221c31376a1f0c35d209","source_sha256":"6ea68a6f46134b823e1ffb5dde4052b3bd25bce203bebb5b840ec6b852cf1f29"},
+    {"state":"react","filename":"leo-react.mov","width":512,"height":640,"fps":24,"frames":53,"bytes":901868,"sha256":"1fe9edc6c19bbc77c88f52988f24655c2ea5590ef087df6d648071bf7c3cbc54","source_sha256":"800953ce5bd3b69faf93448521026f13e45a016dd5b4d437c7b3fde61ae190c3"},
+    {"state":"inspect","filename":"leo-inspect.mov","width":512,"height":640,"fps":24,"frames":48,"bytes":714404,"sha256":"a0dbb5e2908e65d5f574b49e70041c500ae0beb7d04f77747334d1d38c308ec1","source_sha256":"f01bbdc0b98d4d625843fb874f76f7e0fd760f2e3993410afcf9ae01fc1d1392"},
+    {"state":"hide","filename":"leo-hide.mov","width":512,"height":640,"fps":24,"frames":65,"bytes":617256,"sha256":"eeefce73070fb74070d09a21a7d29be4d60f8ed7841814719360431dc7b11d31","source_sha256":"8f33a4042c2df434a07ad48ea808ca67a3869de153db9d0ebd761de2906a8814"}
+  ]
+}
