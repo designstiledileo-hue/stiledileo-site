@@ -330,6 +330,30 @@
 
 # Preserve historical service URLs through relevant canonical replacements.
 [[redirects]]
+  from = "/fireplace-wall-ideas-vancouver"
+  to = "/venetian-plaster-fireplace-ideas-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fireplace-wall-ideas-vancouver.html"
+  to = "/venetian-plaster-fireplace-ideas-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fireplace-wall-design-vancouver"
+  to = "/fireplace-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fireplace-wall-design-vancouver.html"
+  to = "/fireplace-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/marble-look-fireplace-wall-vancouver"
   to = "/fireplace-wall-vancouver.html"
   status = 301
