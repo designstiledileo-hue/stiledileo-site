@@ -17,6 +17,7 @@
     "/feature-wall-vancouver.html": "feature_wall",
     "/microcement-vancouver.html": "microcement",
     "/venetian-plaster-surrey.html": "venetian_plaster",
+    "/venetian-plaster-abbotsford.html": "venetian_plaster",
     "/venetian-plaster-langley.html": "venetian_plaster",
     "/venetian-plaster-north-vancouver.html": "venetian_plaster",
     "/venetian-plaster-vancouver.html": "venetian_plaster",
