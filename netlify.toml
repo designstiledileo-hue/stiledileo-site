@@ -153,6 +153,12 @@
   force = true
 
 [[redirects]]
+  from = "/venetian-plaster-abbotsford"
+  to = "/venetian-plaster-abbotsford.html"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/venetian-plaster-burnaby"
   to = "/venetian-plaster-burnaby.html"
   status = 301
