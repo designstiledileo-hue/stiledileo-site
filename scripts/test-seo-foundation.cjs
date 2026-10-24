@@ -11,7 +11,7 @@ const pages = fs.readdirSync(root).filter(name => name.endsWith('.html') && !['c
 const scripts = html => Array.from(html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi), m => ({ attrs: m[1], code: m[2] }));
 const srcOf = script => script.attrs.match(/\bsrc\s*=\s*["']([^"']+)["']/i)?.[1];
 
-test('marketing inventory remains 51 pages', () => assert.equal(pages.length, 51));
+test('marketing inventory contains 52 pages after the approved Abbotsford pilot', () => assert.equal(pages.length, 52));
 
 for (const file of pages) {
   test(`${file}: one Google tag, one initializer and one shared tracker`, () => {
