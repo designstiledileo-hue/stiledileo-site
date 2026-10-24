@@ -10,8 +10,8 @@ const bootstrap = file => Array.from(fs.readFileSync(path.join(root,file),'utf8'
   .map(match => match[2]).find(code => /gtag\(\s*['"]config['"]\s*,\s*['"]G-P7VJ8MQNKS/.test(code));
 const tracked = files.filter(file => bootstrap(file));
 
-test('all 52 measured page bootstraps initialize production once and leave local/preview hosts unmeasured', () => {
-  assert.equal(tracked.length,52);
+test('all 53 measured page bootstraps initialize production once and leave local/preview hosts unmeasured', () => {
+  assert.equal(tracked.length,53);
   for (const file of tracked) {
     for (const hostname of ['stiledileo.com','www.stiledileo.com','localhost','127.0.0.1','main--designbyleo.netlify.app','stiledileo.com.example.net']) {
       const sandbox = {location:{hostname},Date};
