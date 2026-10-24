@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
+const { checkReference, cssUrls, decodeHtmlAttribute, srcsetUrls } = require('./seo-reference-utils.cjs');
 const { XMLParser } = (() => {
   return { XMLParser: null };
 })();
@@ -10,6 +11,8 @@ const site = 'https://stiledileo.com';
 const htmlFiles = fs.readdirSync(root).filter((file) => file.endsWith('.html')).sort();
 const fail = [];
 const warn = [];
+const unsupported = new Set();
+const checkedCdnSources = new Set();
 
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const attr = (tag, name) => {
@@ -64,37 +67,61 @@ for (const file of htmlFiles) {
 
   for (const match of html.matchAll(/(?:href|src)=["']([^"']+)["']/gi)) {
     const raw = match[1];
-    if (/^(https?:|mailto:|tel:|data:|javascript:|#)/i.test(raw)) continue;
-    const clean = raw.split('#')[0].split('?')[0];
-    if (!clean || clean === '/') continue;
-    if (clean.startsWith('/')) {
-      const target = path.join(root, clean.slice(1));
-      if (!fs.existsSync(target)) fail.push(`${file}: broken local reference ${raw}`);
-      else {
-        const parts = clean.slice(1).split('/');
-        let cursor = root;
-        for (const part of parts) {
-          const names = fs.readdirSync(cursor);
-          if (!names.includes(part)) fail.push(`${file}: local reference case mismatch ${raw}`);
-          cursor = path.join(cursor, part);
-        }
-      }
-      if (!/\.(html|xml|txt|js|png|PNG|jpe?g|webp|svg|mp4|pdf|ico)$/i.test(clean) && !clean.startsWith('/admin')) {
-        const htmlTarget = path.join(root, `${clean.slice(1)}.html`);
-        if (fs.existsSync(htmlTarget)) fail.push(`${file}: internal link points to redirecting clean URL ${raw}`);
-      }
-    }
+    validateReference(raw);
   }
 
   for (const img of html.matchAll(/<img\b[^>]*>/gi)) {
     const tag = img[0];
     const src = attr(tag, 'src');
+    if (src) validateReference(src, true);
     if (!src || /^(https?:|data:)/i.test(src)) continue;
     if (!tag.match(/\salt=/i)) fail.push(`${file}: image missing alt ${src}`);
     if (!tag.match(/\swidth=/i) || !tag.match(/\sheight=/i)) warn.push(`${file}: image missing width/height ${src}`);
   }
+
+  for (const media of html.matchAll(/<(?:img|source|link)\b[^>]*>/gi)) {
+    for (const attribute of ['srcset', 'imagesrcset']) {
+      for (const source of srcsetUrls(attr(media[0], attribute))) validateReference(source, true);
+    }
+  }
+  // Inline background images use the same source checks as visible img/srcset media.
+  for (const style of html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)) {
+    for (const source of cssUrls(style[1])) validateReference(source, true, true);
+  }
+  for (const style of html.matchAll(/\sstyle=(["'])([\s\S]*?)\1/gi)) {
+    for (const source of cssUrls(decodeHtmlAttribute(style[2]))) validateReference(source, true, true);
+  }
+
+  function validateReference(raw, image = false, htmlDecoded = false) {
+    const result = checkReference(raw, { root, file, site, htmlDecoded });
+    const context = result.cdn ? 'Image CDN source' : 'local reference';
+    const addFailure = message => {
+      const issue = `${file}: ${message} ${raw}`;
+      if (!fail.includes(issue)) fail.push(issue);
+    };
+    if (result.kind === 'invalid') addFailure(`invalid ${context} (${result.message})`);
+    if (result.kind === 'unsupported') unsupported.add(`${file}: ${result.message} ${raw}`);
+    if (result.kind === 'remote' && (result.cdn || image)) {
+      unsupported.add(`${file}: remote image availability not checked offline ${result.url}`);
+    }
+    if (result.kind !== 'local') return;
+    if (result.cdn) checkedCdnSources.add(`${file}:${raw}`);
+    if (result.status === 'missing') addFailure(`broken ${context} (source ${result.pathname})`);
+    else if (result.status === 'case-mismatch') addFailure(`${context} case mismatch (actual ${result.actualPath})`);
+    else if ((result.cdn || image) && !result.isFile) addFailure(`${context} is not an image file`);
+    const clean = result.pathname;
+    if (!result.cdn && !image && !path.extname(clean) && clean !== '/' && !clean.startsWith('/admin')) {
+      const htmlTarget = path.join(root, `${clean.slice(1)}.html`);
+      if (fs.existsSync(htmlTarget)) addFailure('internal link points to redirecting clean URL');
+    }
+  }
 }
 
+console.log(`Image source checks: ${checkedCdnSources.size} local Image CDN reference(s) resolved to source paths.`);
+if (unsupported.size) {
+  console.log(`Unsupported checks: ${unsupported.size} image reference(s) need separate runtime verification (not counted as passes).`);
+  for (const issue of unsupported) console.log(`- ${issue}`);
+}
 if (fail.length) {
   console.error(`SEO validation failed: ${fail.length} issue(s)`);
   for (const issue of fail) console.error(`- ${issue}`);
