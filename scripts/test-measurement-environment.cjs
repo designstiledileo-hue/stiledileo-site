@@ -44,3 +44,40 @@ test('a local or preview contact action cannot send GA4 events or Ads conversion
     assert.equal(sandbox.StileAnalytics.getInquiryContext().initial_landing_path,'/feature-wall-tv-wall-vancouver.html');
   }
 });
+
+test('Abbotsford photo intent retains same-tab landing attribution and never becomes a lead click', () => {
+  const storage = new Map();
+  const load = pathname => {
+    const handlers = new Map();
+    const sandbox = {
+      location:{hostname:'stiledileo.com',pathname,search:pathname.includes('abbotsford')?'?utm_source=offline-regression':''},
+      document:{
+        title:'Abbotsford test',referrer:'',addEventListener:(type,handler)=>handlers.set(type,handler),
+        createElement:()=>({}),head:{append:()=>{}}
+      },
+      sessionStorage:{getItem:key=>storage.get(key),setItem:(key,value)=>storage.set(key,value)},
+      URL,URLSearchParams,WeakSet,Set,Date
+    };
+    sandbox.window = sandbox;
+    const context = vm.createContext(sandbox);
+    vm.runInContext(bootstrap('venetian-plaster-abbotsford.html'),context);
+    vm.runInContext(fs.readFileSync(path.join(root,'scripts/analytics.js'),'utf8'),context);
+    return {sandbox,handlers};
+  };
+  const entry = load('/venetian-plaster-abbotsford.html');
+  const button = {
+    dataset:{track:'send_photo'},textContent:'Send a Project Photo',
+    getAttribute:name=>name==='href'?'/#estimate':null,
+    closest:()=>null
+  };
+  entry.handlers.get('click')({target:{closest:()=>button}});
+  const events = entry.sandbox.dataLayer.map(args=>Array.from(args)).filter(args=>args[0]==='event');
+  assert.equal(events.length,1);
+  assert.equal(events[0][1],'project_photo_click');
+  assert.equal(events[0][2].service,'venetian_plaster');
+  assert(!events.some(args=>['generate_lead','conversion','estimate_click'].includes(args[1])));
+  const home = load('/');
+  assert.equal(home.sandbox.StileAnalytics.getInquiryContext().initial_landing_path,'/venetian-plaster-abbotsford.html');
+  assert.equal(home.sandbox.StileAnalytics.getInquiryContext().utm_source,'offline-regression');
+  assert.equal(home.sandbox.StileAnalytics.getInquiryContext().service,'venetian_plaster');
+});
