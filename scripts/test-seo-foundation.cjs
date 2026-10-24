@@ -13,6 +13,79 @@ const srcOf = script => script.attrs.match(/\bsrc\s*=\s*["']([^"']+)["']/i)?.[1]
 
 test('marketing inventory contains 52 pages after the approved Abbotsford pilot', () => assert.equal(pages.length, 52));
 
+test('Abbotsford preserves approved public copy and has one canonical sitemap entry', () => {
+  const html = read('venetian-plaster-abbotsford.html');
+  const approved = read('SEO/ABBOTSFORD-SERVICE-AREA-BRIEF-v1.0.md')
+    .split('<!-- PUBLIC COPY START -->')[1].split('<!-- PUBLIC COPY END -->')[0];
+  const normalize = text => text.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/\s+/g, ' ').trim();
+  const expected = approved.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/^#{1,3} /gm, '').replace(/^\d\. /gm, '').replace(/\*/g, '');
+  const actual = html.match(/<main\b[^>]*>([\s\S]*?)<\/main>/)[1]
+    .replace(/<\/(?:h[1-3]|p|figcaption|li)>/g, ' ').replace(/<[^>]*>/g, '');
+  assert.equal(normalize(actual), normalize(expected));
+  const canonical = 'https://stiledileo.com/venetian-plaster-abbotsford.html';
+  const urls = [...read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+  assert.equal(urls.filter(url => url === canonical).length, 1);
+  assert(html.includes(`<meta property="og:url" content="${canonical}">`));
+  assert.equal((html.match(/href="\/#estimate"/g) || []).length, 3);
+  assert(!html.includes('<form'));
+  for (const schema of scripts(html).filter(s => /application\/ld\+json/.test(s.attrs))) {
+    const data = JSON.parse(schema.code);
+    assert.equal(data['@graph'].find(item => item['@type'] === 'Service').areaServed.name, 'Abbotsford, British Columbia');
+    assert(!/"(?:address|geo|aggregateRating|review|offers)"\s*:/.test(schema.code));
+  }
+});
+
+test('Abbotsford uses one explicit permanent alias without altering its html destination', () => {
+  const from = '/venetian-plaster-abbotsford';
+  const blocks = read('netlify.toml').split('[[redirects]]').slice(1);
+  const matching = blocks.filter(block => block.match(/^\s*from\s*=\s*"([^"]+)"/m)?.[1] === from);
+  assert.equal(matching.length, 1);
+  assert.match(matching[0], /^\s*to\s*=\s*"\/venetian-plaster-abbotsford\.html"\s*$/m);
+  assert.match(matching[0], /^\s*status\s*=\s*301\s*$/m);
+  assert.match(matching[0], /^\s*force\s*=\s*true\s*$/m);
+  assert(!/^\s*query\s*=/m.test(matching[0]), 'no query restriction or replacement');
+  assert(!blocks.some(block => block.match(/^\s*from\s*=\s*"([^"]+)"/m)?.[1] === from + '.html'));
+});
+
+test('function-served sitemap static inventory matches every canonical XML entry exactly once', () => {
+  const source = read('netlify/functions/opinly-sitemap.mts');
+  const dataEnd = source.indexOf('function e(');
+  assert(dataEnd > 0, 'static inventory must precede sitemap rendering');
+  const paths = vm.runInNewContext(source.slice(0, dataEnd) + '\nJSON.stringify(existing);');
+  const generatedUrls = JSON.parse(paths).map(p => 'https://stiledileo.com' + p);
+  const xmlUrls = [...read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+  assert.equal(generatedUrls.length, 52);
+  assert.equal(new Set(generatedUrls).size, 52);
+  assert.deepEqual(generatedUrls.sort(), xmlUrls.sort());
+  assert.equal(generatedUrls.filter(url => url.endsWith('/venetian-plaster-abbotsford.html')).length, 1);
+  assert(!generatedUrls.some(url => /\/(?:car|thank-you)\.html$/.test(url)));
+});
+
+test('Abbotsford project media retain true locations, source case and loading priorities', () => {
+  const html = read('venetian-plaster-abbotsford.html');
+  const images = [...html.matchAll(/<img\b[^>]*>/g)].map(m => m[0]);
+  assert.equal(images.length, 3);
+  assert.match(images[0], /loading="eager"/);
+  assert.match(images[0], /fetchpriority="high"/);
+  assert.match(images[0], /Brookswood, Langley/);
+  assert.match(images[2], /West Vancouver/);
+  for (const image of images.slice(1)) assert.match(image, /loading="lazy"/);
+  const expected = [
+    '/images/projects/brookswood-fireplace/stile-di-leo-brookswood-marmorino-fireplace-after-hero-01.jpg',
+    '/images/projects/brookswood-fireplace/stile-di-leo-brookswood-marmorino-fireplace-before-01.jpg',
+    '/images/projects/west-vancouver-fireplace/stile-di-leo-west-vancouver-marmorino-fireplace-after-front-01.jpg'
+  ];
+  assert.deepEqual(images.map(image => new URL(image.match(/src="([^"]+)"/)[1].replaceAll('&amp;', '&'), 'https://stiledileo.com').searchParams.get('url')), expected);
+  for (const source of expected) {
+    let cursor = root;
+    for (const part of source.split('/').filter(Boolean)) {
+      assert(fs.readdirSync(cursor).includes(part), source);
+      cursor = path.join(cursor, part);
+    }
+  }
+});
+
 for (const file of pages) {
   test(`${file}: one Google tag, one initializer and one shared tracker`, () => {
     const html = read(file);
