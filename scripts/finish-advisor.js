@@ -18,7 +18,13 @@
   const visual = phase => root.dispatchEvent(new CustomEvent('stile:advisor-visual', { detail: phase }));
   if (document.getElementById('floating-quote')) root.classList.add('sa-has-photo-cta');
   const dialog = make('dialog'); dialog.id = 'stile-advisor-dialog'; dialog.setAttribute('aria-labelledby', 'sa-title');
-  const launcher = button('Ask Leo', 'sa-launcher', () => { dialog.showModal(); visual('open'); track('finish_advisor_open'); input.focus(); resize(); });
+  const launcher = button('Ask Leo', 'sa-launcher', () => {
+    dialog.showModal(); resize();
+    // Opening on a phone shows the conversation first. The visitor chooses when
+    // to type; an unsolicited keyboard must not swallow the character or controls.
+    if(matchMedia('(max-width:767px)').matches)closeButton.focus({preventScroll:true});else input.focus();
+    visual('open'); track('finish_advisor_open');
+  });
   launcher.setAttribute('aria-haspopup', 'dialog'); launcher.setAttribute('aria-controls', dialog.id);
   const close = () => { dialog.close(); visual('close'); launcher.focus(); };
   const header = make('div', 'sa-header'), titleRow = make('div', 'sa-title-row');
