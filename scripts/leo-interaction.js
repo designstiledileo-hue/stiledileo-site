@@ -17,7 +17,7 @@
       inspect: { width:230, bottom:0 },
       hide: { width:230, bottom:-87*230/860 }
     };
-    const cached = new Map(), videos = new Set();
+    const cached = new Map(), videos = new Set(), opaqueFormats = new Set();
     // iOS browsers need the Apple alpha derivative, not the VP9-only path.
     // A format hint never replaces the decoded-alpha check below.
     const apple = /iPhone|iPad|iPod/.test(navigator.userAgent)
@@ -36,42 +36,45 @@
       videos.forEach(v => { v.pause(); v.onended = null; if (v.dataset.alphaVerified) v.onerror = null; v.getAnimations().forEach(a => a.cancel()); });
       active = null;
     }
-    function prepare(state) {
-      if (cached.has(state)) return cached.get(state);
-      const load = format => new Promise((resolve,reject) => {
-        if (!allowed() || !supportsVideo) { reject(Error('static fallback')); return; }
-        const v = document.createElement('video'); videos.add(v);
-        v.className = 'sa-leo-motion'; v.muted = true; v.playsInline = true;
-        v.loop = false; v.controls = false; v.tabIndex = -1; v.setAttribute('aria-hidden','true');
-        v.preload = 'auto';
-        const timeout = setTimeout(() => fail(),4000);
-        function fail() {
-          clearTimeout(timeout); v.onloadeddata = null; v.onerror = null;
-          v.pause(); v.removeAttribute('src'); v.load(); reject(Error('motion unavailable'));
-        }
-        v.onerror = fail;
-        v.onloadeddata = () => {
-          try {
-            // Verify real decoded alpha on this browser, not codec/container tags.
-            const canvas = document.createElement('canvas'); canvas.width = canvas.height = 16;
-            const ctx = canvas.getContext('2d',{willReadFrequently:true});
-            ctx.drawImage(v,0,0,16,16);
-            const bytes = ctx.getImageData(0,0,16,16).data;
-            const alpha = []; for (let i=3;i<bytes.length;i+=4) alpha.push(bytes[i]);
-            if (Math.min(...alpha) > 8 || Math.max(...alpha) < 200) { fail(); return; }
-            clearTimeout(timeout); v.onloadeddata = null; v.onerror = null;
-            v.dataset.alphaVerified = 'true'; resolve(v);
-          } catch (_) { fail(); }
+    function discard(state, v) {
+      if (cached.get(state) === v) cached.delete(state);
+      v.pause(); v.onended = v.onerror = null; v.removeAttribute('src'); v.load(); v.remove(); videos.delete(v);
+    }
+    async function prepare(state, attempted = []) {
+      if (!allowed()) throw Error('static fallback');
+      const existing = cached.get(state);
+      if (existing && !attempted.includes(existing.dataset.format)) return existing;
+      const format = formats.find(f => !opaqueFormats.has(f) && !attempted.includes(f));
+      if (!format) throw Error('transparent motion unavailable');
+      const v = document.createElement('video'); videos.add(v);
+      v.className = 'sa-leo-motion'; v.muted = v.defaultMuted = true; v.playsInline = true;
+      v.setAttribute('muted',''); v.setAttribute('playsinline','');
+      v.loop = false; v.controls = false; v.tabIndex = -1; v.setAttribute('aria-hidden','true');
+      v.preload = 'metadata'; v.dataset.format = format;
+      v.src = `/images/leo-advisor/motion/leo-${state}.${format}`;
+      cached.set(state,v); return v;
+    }
+    function alpha(v) {
+      const canvas = document.createElement('canvas'); canvas.width = canvas.height = 32;
+      const ctx = canvas.getContext('2d',{willReadFrequently:true}); ctx.drawImage(v,0,0,32,32);
+      const bytes = ctx.getImageData(0,0,32,32).data; let clear = 0, subject = 0;
+      for (let i=3;i<bytes.length;i+=4) { if(bytes[i]<8)clear++; if(bytes[i]>200)subject++; }
+      return clear > 20 && subject > 20;
+    }
+    function decodedFrame(v, token) {
+      return new Promise(resolve => {
+        let frame, raf, timeout, settled = false;
+        const finish = ok => { if(settled)return; settled=true;clearTimeout(timeout);cancelAnimationFrame(raf);if(frame!==undefined)v.cancelVideoFrameCallback?.(frame);pendingFrames.delete(cancel);resolve(ok); };
+        const cancel = () => finish(false); pendingFrames.add(cancel);
+        const check = () => {
+          if(token!==revision || !allowed())return finish(false);
+          if(v.readyState>=2 && v.currentTime>0)return finish(true);
+          raf=requestAnimationFrame(check);
         };
-        v.src = `/images/leo-advisor/motion/leo-${state}.${format}`;
+        timeout=setTimeout(cancel,6000);
+        if(v.requestVideoFrameCallback)frame=v.requestVideoFrameCallback(()=>finish(token===revision&&allowed()));
+        else raf=requestAnimationFrame(check);
       });
-      const promise = (async () => {
-        for (const format of formats) {
-          try { return await load(format); } catch (_) { if (!allowed()) break; }
-        }
-        throw Error('transparent motion unavailable');
-      })();
-      cached.set(state,promise); return promise;
     }
     function visibleFrame(v, token) {
       // A compositor-submitted frame, followed by a paint opportunity. play(),
@@ -98,8 +101,9 @@
           } catch (_) { finish(false); }
         };
         timeout = setTimeout(cancel,1500);
-        if (!v.requestVideoFrameCallback) return finish(false);
-        frame = v.requestVideoFrameCallback(() => { raf=requestAnimationFrame(() => { raf=requestAnimationFrame(check); }); });
+        const paint = () => { raf=requestAnimationFrame(() => { raf=requestAnimationFrame(check); }); };
+        if (v.requestVideoFrameCallback) frame = v.requestVideoFrameCallback(paint);
+        else paint();
       });
     }
     async function exit(done, token) {
@@ -110,9 +114,10 @@
       } catch (_) { return; }
       if (token === revision && !dead) done();
     }
-    async function render(state, token, done, retreat = false, shown = () => {}) {
+    async function render(state, token, done, retreat = false, shown = () => {}, attempted = []) {
+      let v;
       try {
-        const v = await prepare(state);
+        v = await prepare(state,attempted);
         if (token !== revision || !allowed()) return;
         if (retreat && active) {
           await active.animate([{opacity:1},{opacity:0}],{duration:80,fill:'forwards'}).finished;
@@ -126,8 +131,20 @@
         v.currentTime = 0; viewport.append(v); host.replaceChildren(viewport,boundary);
         host.dataset.pose = state; host.dataset.renderer = 'motion'; active = v;
         // Keep the element transparent until playback succeeds. No broken flash.
-        host.style.opacity = '0'; await v.play();
+        host.style.opacity = '0';
+        v.onended = () => {
+          v.onended = null;
+          if (token !== revision) return;
+          if (state === 'inspect') render('hide',token,done,true);
+          else exit(done,token);
+        };
+        // Attach + muted inline play first. iOS need not decode a detached,
+        // paused preload. Alpha is checked before any pixels are revealed.
+        await v.play();
+        if (!await decodedFrame(v,token)) throw Error('no decoded frame');
         if (token !== revision || !allowed()) return;
+        if (!alpha(v)) { opaqueFormats.add(v.dataset.format); throw Error('opaque media'); }
+        v.dataset.alphaVerified='true';
         host.style.opacity = '1';
         v.onerror = () => { if (token === revision) done(); };
         await v.animate([{opacity:0,translate:'0 16px'},{opacity:1,translate:'0 0'}],
@@ -135,15 +152,13 @@
         if (token !== revision || !allowed()) return;
         if (!await visibleFrame(v,token)) { if (token === revision) done(); return; }
         if (token !== revision) return;
-        shown();
-        v.onended = () => {
-          v.onended = null;
-          if (token !== revision) return;
-          if (state === 'inspect') render('hide',token,done,true);
-          else exit(done,token);
-        };
+        // A blink during a scroll is not a completed introduction.
+        if(state==='peek')await new Promise(resolve=>setTimeout(resolve,850));
+        if(token===revision&&allowed()&&!v.paused)shown();
       } catch (_) {
         if (token !== revision || !allowed()) return;
+        if(v){attempted.push(v.dataset.format);discard(state,v);}
+        if(v && formats.some(f=>!opaqueFormats.has(f)&&!attempted.includes(f)))return render(state,token,done,retreat,shown,attempted);
         if (retreat) { exit(done,token); return; }
         // Unsupported/failed alpha playback leaves only the functional launcher.
         done();
@@ -163,7 +178,7 @@
       completionDriven:true,
       motionGeometry:true,
       load(done) {
-        if (!allowed()) return;
+        if (!allowed() || ready) return;
         const load = () => {
           if (!allowed()) return;
           ready = true; done();
@@ -251,7 +266,7 @@
         if (placement('PEEK')) {
           cancelDeferredFirst();
           // The normal renderer still owns visible-pixel acknowledgement/session use.
-          start('PEEK', 'first');
+          if(!start('PEEK', 'first'))deferFirstUntilScroll();
         }
       }, 320);
     }
@@ -278,6 +293,8 @@
     function placement(kind, retainPosition = false) {
       if (reduced.matches || document.visibilityState !== 'visible' || !document.hasFocus() || conflictingUI()) return null;
       const mobile = innerWidth < 768;
+      const view = window.visualViewport;
+      const bounds = {left:view?.offsetLeft||0,top:view?.offsetTop||0,width:view?.width||innerWidth,height:view?.height||innerHeight};
       const besidePanel = panel.open;
       const anchor = (besidePanel ? panel : launcher).getBoundingClientRect();
       const width = mobile ? 135 : 230, scale = width/230, height = Math.ceil((adapter.motionGeometry ? 295 : 300)*scale);
@@ -306,7 +323,7 @@
       }
       const inView = obstacles.filter(r => r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < innerHeight && r.right > 0 && r.left < innerWidth);
       const safeBox = box => {
-        if (box.left < 16 || box.top < 16 || box.left + width > innerWidth - 16 || box.top + height > innerHeight) return false;
+        if (box.left < bounds.left+16 || box.top < bounds.top+16 || box.left + width > bounds.left+bounds.width-16 || box.top + height > bounds.top+bounds.height) return false;
         if(chat && (box.left<chat.left+12 || box.top<chat.top+12 || box.left+width>chat.right-12 || box.top+height>chat.bottom-8))return false;
         const top = box.top + (adapter.motionGeometry ? 0 : kind === 'PEEK' ? 88 : 22)*scale;
         return !inView.some(r => r.right > box.left - 8 && r.left < box.left + width + 8 && r.bottom > top - 4 && r.top < box.top + 283*scale + 8);
@@ -325,9 +342,14 @@
       // Mobile uses launcher-adjacent space or an empty area of the chat viewport;
       // message text and controls remain protected. No room means no character.
       if (mobile && !besidePanel) { xs.push(anchor.left-width-12); ys.push(anchor.top,anchor.bottom-height,innerHeight-height-16); }
-      inView.forEach(r => { xs.push(r.left - width - 8, r.right + 8); });
+      inView.forEach(r => {
+        xs.push(r.left - width - 8, r.right + 8);
+        // Use the real edges of nearby content, not only a coarse 48px grid.
+        // This finds narrow safe gaps without enlarging the launcher search area.
+        for(const y of [r.top-height-8,r.bottom+8])if(Math.abs(y-preferred.top)<=96)ys.push(y);
+      });
       const candidates = [...new Set(xs)].filter(x => Math.abs(x - preferred.left) <= width * 2)
-        .flatMap(left => ys.map(top => ({ left, top, width, height })))
+        .flatMap(left => [...new Set(ys)].map(top => ({ left, top, width, height })))
         .sort((a,b) => Math.hypot(a.left-preferred.left,a.top-preferred.top)-Math.hypot(b.left-preferred.left,b.top-preferred.top));
       return candidates.find(safeBox) || null;
     }
@@ -355,13 +377,17 @@
         if (token !== epoch || destroyed || tracked) return;
         if (!placement(kind,true)) { hide(); if(slotName)scheduleAutonomous(slotName,4000); return; }
         tracked = true;
+        if(kind==='REACT'){lastReact=Date.now();write(reactKey,String(lastReact));}
         if (slotName) {
           if (!write(autonomous[slotName].key,'true')) { interrupt(); return; }
           meaningful();
           try { window.StileAnalytics?.track('leo_peek_shown'); } catch (_) { /* Optional measurement. */ }
         }
       };
-      const finished = () => { if(token!==epoch||destroyed)return; hide(); if(slotName&&!tracked)scheduleAutonomous(slotName,4000); };
+      const finished = () => {
+        if(token!==epoch||destroyed)return; hide();
+        if(slotName&&!tracked){if(slotName==='first'&&deferredFirst.used)deferFirstUntilScroll();else scheduleAutonomous(slotName,4000);}
+      };
       visualState = kind;
       if (safe(method, host, continuing, finished, shown) !== true) { hide(); return false; }
       // Production adapter confirms a composited frame. Test/custom adapters must
@@ -408,10 +434,14 @@
         meaningful();
         if (photoPending) return;
         hide();
-        if (Date.now()-lastReact>=25000 && start('REACT')) { lastReact=Date.now(); write(reactKey,String(lastReact)); }
+        if (Date.now()-lastReact>=25000) start('REACT');
       } else if (event.detail === 'close') {
         meaningful(); const participating=visualState!=='HIDDEN'; hide();
         if(participating)start('HIDE');
+      } else if(event.detail==='settled') {
+        photoPending=false; meaningful();
+        // A fast server reply must not cut the photo reaction off mid-frame.
+        if(visualState!=='INSPECT'&&visualState!=='HIDE')hide();
       } else { photoPending=false; meaningful(); hide(); }
     });
     function inputActivity() { typingUntil=Date.now()+60000; meaningful(); if(visualState!=='INSPECT')hide(); }
@@ -425,7 +455,11 @@
     on(document,'visibilitychange',() => { if(document.visibilityState==='visible')resumeAutonomous(); });
     on(window, 'resize', environmentChanged);
     on(window, 'scroll', environmentChanged);
-    on(reduced, 'change', environmentChanged);
+    on(reduced, 'change', () => {
+      environmentChanged();
+      if(!reduced.matches){if(available())resumeAutonomous();else safe('load',resumeAutonomous);}
+    });
+    if(window.visualViewport){on(window.visualViewport,'resize',environmentChanged);on(window.visualViewport,'scroll',environmentChanged);}
     const observer = new MutationObserver(() => {
       if (!root.isConnected) controller.destroy(); else environmentChanged();
     });
