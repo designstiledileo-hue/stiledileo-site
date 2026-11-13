@@ -12,17 +12,25 @@ const visible=()=>{const h=document.querySelector('.sa-leo-visual:not([hidden])'
  for(const width of [428,390,375]){
   const height=width===428?926:width===390?844:812;
   const c=await b.newContext({viewport:{width,height},isMobile:true,hasTouch:true,deviceScaleFactor:1,recordVideo:{dir:out+'/recordings',size:{width,height}}});
-  const p=await c.newPage(),errors=[],requests=[],poses=[];let release,sent=false;
+  const p=await c.newPage(),errors=[],requests=[],poses=[];let sent=false;
   p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>{if(r.url().includes('/motion/'))requests.push(r.url());});
   await c.route('**/*',r=>r.request().url().startsWith(base)||/^https:\/\/fonts\.(googleapis|gstatic)\.com\//.test(r.request().url())?r.continue():r.fulfill({status:204,body:''}));
-  await p.route('**/api/finish-advisor',async r=>{sent=!!r.request().postDataJSON().image;await new Promise(resolve=>release=resolve);await r.fulfill({contentType:'application/json',body:JSON.stringify({reply:'Local test reply: your project details remain editable.',links:[]})}).catch(()=>{});});
+  // A static local server has no Netlify Image CDN. Serve each referenced local
+  // source image for review instead of recording broken CDN placeholders.
+  await c.route('**/.netlify/images?**',r=>{
+   const source=new URL(r.request().url()).searchParams.get('url')||'';
+   const root=path.resolve(__dirname,'..'),file=path.resolve(root,'.'+source);
+   if(!source.startsWith('/images/')||!file.startsWith(root+path.sep)||!fs.existsSync(file))return r.continue();
+   return r.fulfill({path:file});
+  });
+  await p.route('**/api/finish-advisor',async r=>{sent=!!r.request().postDataJSON().image;await new Promise(resolve=>setTimeout(resolve,150));await r.fulfill({contentType:'application/json',body:JSON.stringify({reply:'Local test reply: your project details remain editable.',links:[]})}).catch(()=>{});});
   await p.goto(base,{waitUntil:'domcontentloaded'});await p.locator('.sa-launcher').waitFor();await p.evaluate(()=>document.fonts.ready);
   await p.waitForTimeout(4200);await p.screenshot({path:path.join(out,width+'-top.png')});
   let peek=await p.evaluate(visible),stops=[];
   // Browser scroll input is simulated. No forced Leo state, storage or placement.
-  for(let n=0;n<90&&!peek;n++){
+  for(let n=0;n<200&&!peek;n++){
    const before=await p.evaluate(()=>scrollY);
-   await p.evaluate(()=>scrollBy({top:120,behavior:'instant'}));await p.waitForTimeout(650);
+   await p.evaluate(()=>scrollBy({top:100,behavior:'instant'}));await p.waitForTimeout(n%6===5?650:80);
    if(await p.locator('.sa-leo-visual:not([hidden])').count())await p.waitForFunction(visible,null,{timeout:5000}).catch(()=>{});
    peek=await p.evaluate(visible);stops.push(await p.evaluate(pose=>({y:scrollY,pose,focus:document.hasFocus(),state:StileLeo.init(document.querySelector('#stile-advisor')).visualState,seen:sessionStorage.getItem('stile_leo_intro_seen'),video:document.querySelector('.sa-leo-visual video')?.currentTime}),peek));
    if(n%10===0)console.log('SCROLL',width,stops.at(-1));
@@ -47,11 +55,11 @@ const visible=()=>{const h=document.querySelector('.sa-leo-visual:not([hidden])'
   assert.equal(await p.evaluate(visible),null);await p.locator('#stile-advisor textarea').fill('Local test project');await p.locator('.sa-send').click();
   await p.waitForTimeout(650);assert(sent);const inspect=await p.evaluate(visible);
   if(inspect==='inspect'){await capture('inspect');await p.waitForFunction(()=>document.querySelector('.sa-leo-visual:not([hidden])')?.dataset.pose==='hide');await capture('hide');}
-  await p.waitForFunction(()=>!document.querySelector('.sa-leo-visual:not([hidden])'));release();await p.waitForFunction(()=>!document.querySelector('.sa-send').disabled);
+  await p.waitForFunction(()=>!document.querySelector('.sa-leo-visual:not([hidden])'));await p.waitForFunction(()=>!document.querySelector('.sa-send').disabled);
   await p.locator('.sa-handoff').click();await p.locator('#estimate-modal.is-open').waitFor();assert.equal(await p.locator('#estimate-form [name=lead_source]').inputValue(),'finish_advisor');assert.equal(await p.locator('#estimate-photo').evaluate(e=>e.files.length),1);
   assert.deepEqual(errors,[]);assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
   const video=await p.video().path();await c.close();fs.copyFileSync(video,path.join(out,'WEBKIT_'+width+'_REVIEW.webm'));
-  const row={width,height,stops,poses,requests,inspect:inspect==='inspect'?'VISIBLE':'SAFELY_SUPPRESSED',handoff:'PASS',errors};results.push(row);console.log('PASS WebKit '+width,JSON.stringify({peekY:poses[0].y,inspect:row.inspect}));
+  const row={width,height,stops,poses,requests,photoReplyDelayMs:150,inspect:inspect==='inspect'?'VISIBLE':'SUPPRESSED_AFTER_FAST_REPLY',handoff:'PASS',errors};results.push(row);console.log('PASS WebKit '+width,JSON.stringify({peekY:poses[0].y,inspect:row.inspect}));
   fs.writeFileSync(path.join(out,'qa.json'),JSON.stringify({checks:results,nativeIPhone:'NOT_TESTED',provider:'MOCKED'},null,2));
  }
  const c=await b.newContext({viewport:{width:428,height:926},isMobile:true,reducedMotion:'reduce'}),p=await c.newPage(),downloads=[];
