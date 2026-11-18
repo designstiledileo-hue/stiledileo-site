@@ -87,19 +87,18 @@ test('Abbotsford project media retain true locations, source case and loading pr
 });
 
 for (const file of pages) {
-  test(`${file}: one Google tag, one initializer and one shared tracker`, () => {
+  test(`${file}: one synchronous measurement gate before one deferred shared tracker`, () => {
     const html = read(file);
     const tags = scripts(html);
-    const loaders = tags.filter(s => srcOf(s)?.includes('www.googletagmanager.com/gtag/js?id=G-P7VJ8MQNKS'));
+    const gates = tags.filter(s => srcOf(s) === '/scripts/measurement-bootstrap.js');
     const trackers = tags.filter(s => srcOf(s) === '/scripts/analytics.js');
-    assert.equal(loaders.length, 1, 'one GA4 loader');
+    assert.equal(gates.length, 1, 'one shared gate');
     assert.equal(trackers.length, 1, 'one shared tracker');
-    assert.match(loaders[0].attrs, /\basync\b/);
+    assert(!/\b(?:async|defer|type)\b/.test(gates[0].attrs), 'gate executes before the parser continues');
     assert.match(trackers[0].attrs, /\bdefer\b/);
-    const initializers = tags.filter(s => /gtag\(\s*['"]config['"]\s*,\s*['"]G-P7VJ8MQNKS['"]/.test(s.code));
-    assert.equal(initializers.length, 1, 'one GA4 config; no double page_view');
-    assert.match(initializers[0].code, /dataLayer\s*=\s*window\.dataLayer\s*\|\|\s*\[\]/);
-    assert(html.indexOf(initializers[0].code) < html.indexOf('src="/scripts/analytics.js"'));
+    assert(!tags.some(s => srcOf(s)?.includes('googletagmanager.com')), 'Google loader is gated dynamically');
+    assert(!tags.some(s => /\bgtag\s*\(/.test(s.code)), 'no inline measurement bypass');
+    assert(html.indexOf('src="/scripts/measurement-bootstrap.js"') < html.indexOf('src="/scripts/analytics.js"'));
     assert(html.indexOf('src="/scripts/analytics.js"') < html.indexOf('</head>'));
   });
 
@@ -162,12 +161,8 @@ test('internal design and SEO notes are absent from public copy', () => {
   }
 });
 
-test('technical and QR pages retain noindex; business tracking still requires accepted lead', () => {
+test('technical and QR pages retain noindex', () => {
   for (const file of ['car.html', 'thank-you.html']) assert.match(read(file), /name="robots" content="noindex, follow"/);
-  const tracker = read('scripts/analytics.js');
-  assert(tracker.includes('if (!submissionId || sentLeadIds.has(submissionId) || !measurementReady()) return;'));
-  assert(tracker.includes('track("generate_lead"'));
-  assert(tracker.includes('transaction_id: submissionId'));
 });
 
 test('newly measured article queues one page config and de-duplicates accepted lead events offline', () => {
@@ -178,16 +173,16 @@ test('newly measured article queues one page config and de-duplicates accepted l
       title: 'TV Feature Wall Vancouver',
       referrer: '',
       addEventListener: (name, callback) => handlers.set(name, callback),
-      createElement: () => { throw new Error('article analytics must not add the Advisor'); }
+      createElement: tag => { assert.equal(tag, 'script'); return {}; },
+      head: { appendChild: () => {} }
     },
-    location: { hostname: 'stiledileo.com', pathname: '/feature-wall-tv-wall-vancouver.html', search: '' },
+    location: new URL('https://stiledileo.com/feature-wall-tv-wall-vancouver.html'),
     sessionStorage: { getItem: name => storage.get(name), setItem: (name, value) => storage.set(name, value) },
     URL, URLSearchParams, WeakSet, Set, Date
   };
   sandbox.window = sandbox;
   const context = vm.createContext(sandbox);
-  const bootstrap = scripts(read('feature-wall-tv-wall-vancouver.html')).find(s => /function gtag/.test(s.code));
-  vm.runInContext(bootstrap.code, context);
+  vm.runInContext(read('scripts/measurement-bootstrap.js'), context);
   vm.runInContext(read('scripts/analytics.js'), context);
   const events = () => sandbox.dataLayer.map(args => Array.from(args));
   assert.equal(events().filter(args => args[0] === 'config' && args[1] === 'G-P7VJ8MQNKS').length, 1);
@@ -203,8 +198,8 @@ test('newly measured article queues one page config and de-duplicates accepted l
   assert.equal(events().filter(args => args[1] === 'generate_lead').length, 0);
   sandbox.StileAnalytics.trackLeadSuccess({});
   assert.equal(events().filter(args => args[1] === 'generate_lead').length, 0, 'no lead without accepted submission id');
-  sandbox.StileAnalytics.trackLeadSuccess({ transaction_id: 'offline-regression-only' });
-  sandbox.StileAnalytics.trackLeadSuccess({ transaction_id: 'offline-regression-only' });
+  sandbox.StileAnalytics.trackLeadSuccess({ accepted: true, transaction_id: 'offline-regression-only' });
+  sandbox.StileAnalytics.trackLeadSuccess({ accepted: true, transaction_id: 'offline-regression-only' });
   assert.equal(events().filter(args => args[1] === 'generate_lead').length, 1);
   assert.equal(events().filter(args => args[1] === 'conversion').length, 1);
 });
