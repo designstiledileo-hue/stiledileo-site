@@ -38,15 +38,7 @@
   }
   </script>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P7VJ8MQNKS"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    if (/^(www\.)?stiledileo\.com$/i.test(window.location.hostname)) {
-      gtag('js', new Date());
-      gtag('config', 'G-P7VJ8MQNKS');
-    }
-  </script>
+  <script src="/scripts/measurement-bootstrap.js"></script>
   <script src="/scripts/analytics.js" defer></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2947,7 +2939,7 @@
 
   <a href="#estimate" class="floating-quote" id="floating-quote" data-photo-intake data-track="send_photo" aria-controls="estimate-modal" aria-haspopup="dialog">Send Project Photo</a>
 
-  <div class="estimate-modal" id="estimate-modal" aria-hidden="true" inert>
+  <div class="estimate-modal" id="estimate-modal" data-opinly-no-capture aria-hidden="true" inert>
     <div class="estimate-card" role="dialog" aria-modal="true" aria-labelledby="estimate-title" tabindex="-1">
       <button type="button" class="estimate-close" id="estimate-close" aria-label="Close photo review">×</button>
       <div class="estimate-progress" aria-hidden="true">
@@ -2955,7 +2947,7 @@
         <span></span>
       </div>
 
-      <form class="estimate-flow" id="estimate-form" name="instant-estimate" method="POST" data-netlify="true" netlify netlify-honeypot="company" enctype="multipart/form-data" novalidate>
+      <form class="estimate-flow" id="estimate-form" data-opinly-no-capture name="instant-estimate" method="POST" data-netlify="true" netlify netlify-honeypot="company" enctype="multipart/form-data" novalidate>
         <input type="hidden" name="form-name" value="instant-estimate">
         <p hidden><label>Company <input name="company"></label></p>
         <input type="hidden" name="project_type" id="estimate-project-type" value="general">
@@ -2966,6 +2958,10 @@
         <input type="hidden" name="utm_content">
         <input type="hidden" name="initial_landing_path">
         <input type="hidden" name="first_referrer">
+        <input type="hidden" name="cta_origin_id">
+        <input type="hidden" name="cta_origin_path">
+        <input type="hidden" name="cta_latest_id">
+        <input type="hidden" name="cta_latest_path">
         <input type="hidden" name="lead_source" value="website">
         <input type="hidden" name="submission_id">
 
@@ -3344,6 +3340,7 @@
         element.inert = true;
       });
       showEstimateStep(estimateStep);
+      try { window.StileAnalytics?.trackFormOpen(trigger instanceof HTMLElement ? trigger : undefined); } catch (error) { /* Measurement cannot block the form. */ }
     };
 
     const closeEstimate = () => {
@@ -3435,7 +3432,7 @@
         return;
       }
       const context = window.StileAnalytics && typeof window.StileAnalytics.getInquiryContext === "function" ? window.StileAnalytics.getInquiryContext() : {};
-      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "initial_landing_path", "first_referrer"].forEach((key) => {
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "initial_landing_path", "first_referrer", "cta_origin_id", "cta_origin_path", "cta_latest_id", "cta_latest_path"].forEach((key) => {
         estimateForm.elements.namedItem(key).value = context[key] || "";
       });
       estimateForm.elements.namedItem("project_type").value = context.service || "general";
@@ -3447,6 +3444,7 @@
       estimateSubmit.disabled = true;
       estimateSubmit.textContent = "Sending…";
       estimateForm.setAttribute("aria-busy", "true");
+      try { window.StileAnalytics?.track("contact_form_submit_attempt", { cta_location: "estimate_modal", service: context.service || "general", transaction_id: submissionId.value }); } catch (error) { /* An attempt is not an accepted request. */ }
       const controller = new AbortController();
       const timeout = window.setTimeout(() => controller.abort(), 30000);
       try {
@@ -3462,7 +3460,7 @@
         if (estimateModal.classList.contains("is-open")) estimateSuccess.focus();
         // Analytics must never turn an accepted request into a retryable failure.
         try {
-          if (window.StileAnalytics) window.StileAnalytics.trackLeadSuccess({ cta_location: "estimate_modal", service: context.service || "general", transaction_id: submissionId.value });
+          if (window.StileAnalytics) window.StileAnalytics.trackLeadSuccess({ accepted: true, cta_location: "estimate_modal", service: context.service || "general", transaction_id: submissionId.value });
         } catch (analyticsError) { /* Receipt remains successful if measurement is unavailable. */ }
       } catch (error) {
         estimateFailure.hidden = false;
