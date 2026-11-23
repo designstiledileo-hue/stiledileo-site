@@ -31,7 +31,16 @@ window.controller=StileLeo.init(document.querySelector('#stile-advisor'),adapter
   t=await setup();await run(t,3021);assert.equal(await t.count('PEEK'),1);await done(t,'independent new tab context eligible');
   t=await setup();await open(t);await run(t,1020);await close(t);await run(t,59000);assert.equal(await t.count('PEEK'),0);await run(t,1021);assert.equal(await marker(t,'stile_leo_idle_seen'),'true');await done(t,'close resets idle deadline');
   t=await setup();await open(t);await run(t,71000);assert.equal(await t.count('PEEK'),0);await close(t);await run(t,61021);assert.equal(await marker(t,'stile_leo_idle_seen'),'true');await done(t,'no idle inside open Advisor; fresh interaction resets bounded retry');
-  t=await setup();await open(t);await run(t,30);await close(t);await open(t);assert.equal(await t.count('REACT'),1);await run(t,24969);await close(t);await open(t);assert.equal(await t.count('REACT'),1);await run(t,1);await close(t);await open(t);assert.equal(await t.count('REACT'),2);assert.equal(await t.p.locator('.sa-leo-visual').count(),1);await done(t,'exact 25s cooldown and rapid open-close-open');
+  t=await setup();await open(t);assert.equal(await marker(t,'stile_leo_last_react'),null);await run(t,19);assert.equal(await marker(t,'stile_leo_last_react'),null);await run(t,1);assert.notEqual(await marker(t,'stile_leo_last_react'),null);await run(t,10);await close(t);await open(t);assert.equal(await t.count('REACT'),1);await run(t,24989);await close(t);await open(t);assert.equal(await t.count('REACT'),1);await run(t,1);await close(t);await open(t);assert.equal(await t.count('REACT'),2);assert.equal(await t.p.locator('.sa-leo-visual').count(),1);await done(t,'exact 25s cooldown begins at shown acknowledgement, not render start; rapid open-close-open');
+  for(const failure of ['unshown','rejected']){
+   t=await setup();await t.p.evaluate(failure=>{window.defer=true;window.reject=failure==='rejected';},failure);await open(t);assert.equal(await t.count('REACT'),1);assert.equal(await marker(t,'stile_leo_last_react'),null);
+   await close(t);await t.p.evaluate(()=>{window.defer=false;window.reject=false;});await open(t);assert.equal(await t.count('REACT'),2);assert.equal(await marker(t,'stile_leo_last_react'),null);await run(t,21);assert.notEqual(await marker(t,'stile_leo_last_react'),null);await done(t,failure+' REACT does not consume cooldown; immediate deliberate retry can become visible');
+  }
+  t=await setup();await open(t);await run(t,1020);
+  const photo=t=>t.p.evaluate(()=>document.querySelector('#stile-advisor').dispatchEvent(new CustomEvent('stile:advisor-visual',{detail:'photo-sent'})));
+  const settled=t=>t.p.evaluate(()=>document.querySelector('#stile-advisor').dispatchEvent(new CustomEvent('stile:advisor-visual',{detail:'settled'})));
+  await photo(t);await run(t,10);await settled(t);assert.equal(await t.p.evaluate(()=>controller.visualState),'INSPECT');await run(t,20);assert.equal(await t.p.evaluate(()=>controller.visualState),'INSPECT');await run(t,1000);assert.equal(await t.p.evaluate(()=>controller.visualState),'HIDDEN');
+  await photo(t);await run(t,30);await close(t);assert.equal(await t.p.evaluate(()=>controller.visualState),'HIDE');await settled(t);assert.equal(await t.p.evaluate(()=>controller.visualState),'HIDE');await run(t,1000);assert.equal(await t.p.evaluate(()=>controller.visualState),'HIDDEN');await done(t,'fast photo settlement preserves pending INSPECT and active HIDE until normal completion');
   t=await setup();await t.p.locator('.sa-launcher').hover();assert.equal(await t.count('REACT'),0);await done(t,'hover never plays REACT');
   for(const event of ['open','close-inspect','hidden','destroy','reinit']){
    t=await setup();await t.p.evaluate(()=>window.defer=true);
@@ -76,7 +85,12 @@ window.controller=StileLeo.init(document.querySelector('#stile-advisor'),adapter
    if(event==='destroy'||event==='reinit')await t.p.evaluate(reinit=>{controller.destroy();if(reinit)controller=StileLeo.init(document.querySelector('#stile-advisor'),adapter);},event==='reinit');
    await run(t,500);assert.equal(await t.count('PEEK'),0);assert.equal(await marker(t),null);await done(t,'pending deferred callback cancelled by '+event);
   }
-  t=await setup({width:390});await block(t);await run(t,3100);await t.p.locator('#block').evaluate(e=>e.remove());await t.p.evaluate(()=>{window.reject=true;window.defer=true;});await scroll(t,120);await run(t,500);assert.equal(await t.count('PEEK'),1);await scroll(t,300);await run(t,12000);assert.equal(await t.count('PEEK'),1);assert.equal(await marker(t),null);await done(t,'failed deferred media never consumes first or retries on stale scroll');
+  for(const failure of ['unshown','rejected']){
+   t=await setup({width:390});await block(t);await run(t,3100);await t.p.locator('#block').evaluate(e=>e.remove());await t.p.evaluate(failure=>{window.reject=failure==='rejected';window.defer=true;},failure);await scroll(t,120);await run(t,500);assert.equal(await t.count('PEEK'),1);assert.equal(await marker(t),null);
+   if(failure==='unshown')await t.p.evaluate(()=>callbacks.filter(x=>x.kind==='PEEK').at(-1).done());
+   await run(t,12000);assert.equal(await t.count('PEEK'),1);assert.equal(await marker(t),null);
+   await t.p.evaluate(()=>{window.reject=false;window.defer=false;});await scroll(t,300);await run(t,319);assert.equal(await t.count('PEEK'),1);await run(t,1);assert.equal(await t.count('PEEK'),2);assert.equal(await marker(t),null);await run(t,21);assert.equal(await marker(t),'true');await done(t,failure+' deferred media keeps first unseen; no timer polling; next settled scroll retries successfully');
+  }
   fs.writeFileSync(process.env.LEO_CONTROLLER_OUTPUT||'/private/tmp/leo-v11-controller-qa.json',JSON.stringify({status:'PASS',scope:'instrumented frame acknowledgement; separate real-media QA required',checks:results},null,2));
  }finally{await b.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
