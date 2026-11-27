@@ -29,23 +29,23 @@ img{width:100%;height:auto;margin:30px 0;display:block;object-fit:cover}
   <script src="/scripts/measurement-bootstrap.js"></script>
   <script src="/scripts/analytics.js" defer></script>
   <link rel="stylesheet" href="/styles/site-navigation.css">
+  <script src="/scripts/home-navigation.js" defer></script>
 </head>
-<body>
-  <header class="stile-site-header">
-    <div class="stile-site-header__inner">
-      <a class="stile-site-header__brand" href="/">Stile di Leo</a>
-      <nav class="stile-site-header__links" aria-label="Main navigation">
-        <a href="/venetian-plaster-vancouver.html">Venetian plaster</a>
-        <a href="/fireplace-wall-vancouver.html">Fireplaces</a>
-        <a href="/projects.html">Projects</a>
-        <a href="/venetian-plaster-cost-vancouver.html">Pricing</a>
-      </nav>
-      <div class="stile-site-header__actions">
-        <a href="tel:+16047732298" aria-label="Call Stile di Leo at +1 604 773 2298">Call Leo</a>
-        <a class="stile-site-header__photo" href="/#estimate">Send a Project Photo</a>
-      </div>
+<body class="mineral-site">
+  <!-- mineral-header -->
+  <header class="stile-chrome stile-global-header" id="site-nav" data-tone="reading">
+    <div class="stile-width stile-header-inner">
+      <a class="stile-brand" href="/" aria-label="Stile di Leo home">Stile di <em>Leo</em></a>
+      <nav class="stile-links" aria-label="Main navigation"><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a></nav>
+      <a class="stile-primary" href="/#estimate" data-track="estimate">Request an Estimate</a>
+      <details class="stile-menu">
+        <summary>Menu</summary>
+        <nav class="stile-menu-links" aria-label="Mobile navigation" data-leo-blocking-overlay><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a><a href="/furniture.html">Furniture</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a></nav>
+      </details>
     </div>
+    <nav class="stile-context" aria-label="Related pages"><a href="/venetian-plaster-vancouver.html">Venetian plaster</a> <a href="/fireplace-wall-vancouver.html">Fireplaces</a> <a href="/venetian-plaster-cost-vancouver.html">Pricing</a></nav>
   </header>
+  <!-- /mineral-header -->
 
 <div class="container">
 <p class="kicker">Vancouver Condo Interiors</p>
@@ -109,7 +109,7 @@ If the project begins with the entrance or foyer rather than the main living wal
 </ul>
 <h2>Choosing a Finish in Your Condo's Light</h2>
 <p>Large windows and side lighting can make texture and sheen more noticeable. Compare a sample near the intended wall in daylight and with your evening lighting. Include a full-room photograph with your enquiry so the finish can be considered alongside your floor, cabinetry and furniture.</p>
-<p><a href="/#estimate">Send photos of your condo wall</a>, approximate dimensions, your city and any known access restrictions. For broader finish choices, explore our <a href="/venetian-plaster-vancouver.html">Venetian plaster installation service</a>.</p>
+<p><a href="/#estimate-photo" data-track="send_photo">Send photos of your condo wall</a>, approximate dimensions, your city and any known access restrictions. For broader finish choices, explore our <a href="/venetian-plaster-vancouver.html">Venetian plaster installation service</a>.</p>
 <h2>Cost Expectations for Condo Projects</h2>
 <p>
 Condo projects are not always cheaper than house projects. Access, elevators, protection, detailing, and working within a smaller finished environment can all affect scope. For broader pricing guidance, see <a href="/venetian-plaster-cost-vancouver.html">Venetian Plaster Cost Vancouver</a>.
@@ -134,8 +134,19 @@ Condo projects are not always cheaper than house projects. Access, elevators, pr
 <div class="cta">
   <h2>Request a Consultation</h2>
   <p>Planning a condo renovation or feature wall in Vancouver? We can help shape the right Venetian plaster finish for your layout, lighting, and overall interior style.</p>
-  <a href="/#contact">Request a Consultation</a>
+  <a href="/#estimate" data-track="estimate">Request a Consultation</a>
 </div>
 </div>
+
+  <!-- mineral-footer -->
+  <footer class="stile-chrome stile-global-footer" data-tone="reading">
+    <div class="stile-width stile-footer-inner">
+      <div><a class="stile-brand" href="/">Stile di <em>Leo</em></a><p>Architectural surface finishes<br>Metro Vancouver, British Columbia</p></div>
+      <nav class="stile-footer-links" aria-label="Explore"><a href="/#services">Services</a><a href="/projects.html">Projects</a><a href="/#textures">Materials</a><a href="/#trade">For Trade</a><a href="/blog.html">Journal</a><a href="/furniture.html">Furniture Concepts</a></nav>
+      <nav class="stile-footer-links" aria-label="Contact"><a href="/#estimate" data-track="estimate">Request an Estimate</a><a href="/#estimate-photo" data-track="send_photo">Send a Project Photo</a><a href="/#estimate-commercial" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a><a href="mailto:designstiledileo@gmail.com">Email Stile di Leo</a></nav>
+    </div>
+    <p class="stile-width stile-copyright">© 2026 Stile di Leo</p>
+  </footer>
+  <!-- /mineral-footer -->
 </body>
 </html>

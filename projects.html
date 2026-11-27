@@ -95,18 +95,24 @@
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.work-image img{transition:none}}
     #commercial-retail{scroll-margin-top:32px}#commercial-retail .work-image{max-width:440px}
   </style>
+  <link rel="stylesheet" href="/styles/site-navigation.css">
+  <script src="/scripts/home-navigation.js" defer></script>
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="/">Stile di Leo</a>
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="/projects.html" aria-current="page">Work</a>
-      <a href="#commercial-retail">Commercial</a>
-      <a href="#applications">Applications</a>
-      <a href="/#contact">Contact</a>
-    </nav>
-    <a class="btn btn-ghost" href="/#contact" data-track="send_photo">Send Photos</a>
+<body class="mineral-site">
+  <!-- mineral-header -->
+  <header class="stile-chrome stile-global-header" id="site-nav" data-tone="work">
+    <div class="stile-width stile-header-inner">
+      <a class="stile-brand" href="/" aria-label="Stile di Leo home">Stile di <em>Leo</em></a>
+      <nav class="stile-links" aria-label="Main navigation"><a href="/#services">Services</a> <a href="/projects.html" aria-current="page">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a></nav>
+      <a class="stile-primary" href="/#estimate" data-track="estimate">Request an Estimate</a>
+      <details class="stile-menu">
+        <summary>Menu</summary>
+        <nav class="stile-menu-links" aria-label="Mobile navigation" data-leo-blocking-overlay><a href="/#services">Services</a> <a href="/projects.html" aria-current="page">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a><a href="/furniture.html">Furniture</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a></nav>
+      </details>
+    </div>
+    <nav class="stile-context" aria-label="Related pages"><a href="#commercial-retail">Commercial</a> <a href="#applications">Applications</a></nav>
   </header>
+  <!-- /mineral-header -->
   <main>
     <section class="hero">
       <p class="kicker">Work</p>
@@ -192,9 +198,18 @@
       <p class="kicker">Your space, your finish direction</p>
       <h2>What surface are you considering?</h2>
       <p>Share a photo or drawing, approximate dimensions and your location. Stile di Leo can review the decorative finish scope and discuss the next steps.</p>
-      <div class="cta-actions"><a class="btn" href="/#contact" data-track="send_photo">Discuss Your Project</a><a class="btn btn-ghost" href="tel:+16047732298">Call +1 (604) 773-2298</a></div>
+      <div class="cta-actions"><a class="btn stile-action" href="/#estimate" data-track="estimate">Request an Estimate</a><a class="btn btn-ghost" href="tel:+16047732298">Call +1 (604) 773-2298</a></div>
     </section>
   </main>
-  <footer><div class="footer-inner"><p>© 2026 Stile di Leo. Decorative finishes for Vancouver interiors.</p><nav class="footer-links" aria-label="Footer navigation"><a href="/">Home</a><a href="/projects.html">Work</a><a href="/#contact">Contact</a></nav></div></footer>
+  <!-- mineral-footer -->
+  <footer class="stile-chrome stile-global-footer" data-tone="work">
+    <div class="stile-width stile-footer-inner">
+      <div><a class="stile-brand" href="/">Stile di <em>Leo</em></a><p>Architectural surface finishes<br>Metro Vancouver, British Columbia</p></div>
+      <nav class="stile-footer-links" aria-label="Explore"><a href="/#services">Services</a><a href="/projects.html">Projects</a><a href="/#textures">Materials</a><a href="/#trade">For Trade</a><a href="/blog.html">Journal</a><a href="/furniture.html">Furniture Concepts</a></nav>
+      <nav class="stile-footer-links" aria-label="Contact"><a href="/#estimate" data-track="estimate">Request an Estimate</a><a href="/#estimate-photo" data-track="send_photo">Send a Project Photo</a><a href="/#estimate-commercial" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a><a href="mailto:designstiledileo@gmail.com">Email Stile di Leo</a></nav>
+    </div>
+    <p class="stile-width stile-copyright">© 2026 Stile di Leo</p>
+  </footer>
+  <!-- /mineral-footer -->
 </body>
 </html>

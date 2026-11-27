@@ -7,7 +7,13 @@ const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname, '..');
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
-const pages = fs.readdirSync(root).filter(name => name.endsWith('.html') && !['car.html', 'thank-you.html'].includes(name));
+const deliberateNoindex = new Map([
+  ['car.html', 'noindex, follow'],
+  ['thank-you.html', 'noindex, follow'],
+  ['furniture.html', 'noindex, follow'],
+  ['furniture-thank-you.html', 'noindex, nofollow']
+]);
+const pages = fs.readdirSync(root).filter(name => name.endsWith('.html') && !deliberateNoindex.has(name));
 const scripts = html => Array.from(html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi), m => ({ attrs: m[1], code: m[2] }));
 const srcOf = script => script.attrs.match(/\bsrc\s*=\s*["']([^"']+)["']/i)?.[1];
 
@@ -27,7 +33,9 @@ test('Abbotsford preserves approved public copy and has one canonical sitemap en
   const urls = [...read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
   assert.equal(urls.filter(url => url === canonical).length, 1);
   assert(html.includes(`<meta property="og:url" content="${canonical}">`));
-  assert.equal((html.match(/href="\/#estimate"/g) || []).length, 3);
+  const main = html.match(/<main\b[^>]*>[\s\S]*?<\/main>/)[0];
+  assert.equal((main.match(/href="\/#estimate-photo"/g) || []).length, 2);
+  assert.match(html, /class="stile-primary" href="\/#estimate"[^>]*>Request an Estimate<\/a>/);
   assert(!html.includes('<form'));
   for (const schema of scripts(html).filter(s => /application\/ld\+json/.test(s.attrs))) {
     const data = JSON.parse(schema.code);
@@ -59,7 +67,7 @@ test('function-served sitemap static inventory matches every canonical XML entry
   assert.equal(new Set(generatedUrls).size, 52);
   assert.deepEqual(generatedUrls.sort(), xmlUrls.sort());
   assert.equal(generatedUrls.filter(url => url.endsWith('/venetian-plaster-abbotsford.html')).length, 1);
-  assert(!generatedUrls.some(url => /\/(?:car|thank-you)\.html$/.test(url)));
+  assert(generatedUrls.every(url => !deliberateNoindex.has(new URL(url).pathname.slice(1))));
 });
 
 test('Abbotsford project media retain true locations, source case and loading priorities', () => {
@@ -137,11 +145,19 @@ test('retired fireplace URLs have explicit permanent, single-hop replacements', 
   }
 });
 
-test('article CTA opens the existing photo intake; blog navigation has no missing About anchor', () => {
-  assert.match(read('is-venetian-plaster-worth-it-vancouver.html'), /href="\/#estimate">Send a Project Photo<\/a>/);
-  assert.match(read('index.html'), /window\.location\.hash === "#estimate"\) openEstimate\(\)/);
+test('article CTA opens the explicit photo intake; blog navigation has no missing About anchor', () => {
+  assert.match(read('is-venetian-plaster-worth-it-vancouver.html'), /href="\/#estimate-photo"[^>]*>Send a Project Photo<\/a>/);
+  const homepage = read('index.html');
+  assert(scripts(homepage).some(script => srcOf(script) === '/scripts/home-estimate.js'));
+  assert.match(read('scripts/home-estimate.js'), /\['#estimate','estimate'\]/);
+  assert.match(read('scripts/home-estimate.js'), /\['#estimate-photo','photo'\]/);
   assert.match(read('blog.html'), /href="\/venetian-plaster-vancouver.html">Services<\/a>/);
-  for (const file of pages) assert(!/href=["']\/?#(?:visualization|about)["']/.test(read(file)), file);
+  for (const file of pages) {
+    for (const [, home, anchor] of read(file).matchAll(/href=["'](\/?)#(visualization|about)["']/g)) {
+      const target = home ? homepage : read(file);
+      assert(new RegExp(`\\bid=["']${anchor}["']`).test(target), `${file}: unresolvable #${anchor}`);
+    }
+  }
 });
 
 test('bathroom referrals and microcement service agree on supported dry-only scope', () => {
@@ -161,8 +177,11 @@ test('internal design and SEO notes are absent from public copy', () => {
   }
 });
 
-test('technical and QR pages retain noindex', () => {
-  for (const file of ['car.html', 'thank-you.html']) assert.match(read(file), /name="robots" content="noindex, follow"/);
+test('technical, QR and furniture concept pages retain deliberate noindex directives', () => {
+  for (const [file, directive] of deliberateNoindex) {
+    const robots = read(file).match(/<meta\s+name="robots"\s+content="([^"]+)"\s*\/?\s*>/i)?.[1];
+    assert.equal(robots, directive, file);
+  }
 });
 
 test('newly measured article queues one page config and de-duplicates accepted lead events offline', () => {

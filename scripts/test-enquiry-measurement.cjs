@@ -1,4 +1,4 @@
-// Actual tracker and actual inline submission callback, with offline DOM/network stubs.
+// Actual tracker and actual homepage submission callback, with offline DOM/network stubs.
 const {test} = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -6,6 +6,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const root = path.resolve(__dirname,'..');
 const tracker = fs.readFileSync(path.join(root,'scripts/analytics.js'),'utf8');
+const estimate = fs.readFileSync(path.join(root,'scripts/home-estimate.js'),'utf8');
 const html = fs.readFileSync(path.join(root,'index.html'),'utf8');
 const noop = () => {};
 const day = 24 * 60 * 60 * 1000;
@@ -210,39 +211,60 @@ test('arbitrary client fields, unsafe paths and non-opaque contact IDs are never
   assert.equal(env.events().filter(e=>e[1]==='generate_lead').length,1);
 });
 
+test('homepage service, project and commercial clicks remain separate from successful enquiries',()=>{
+  const env=load({pathname:'/'});
+  const link=(href,track,extra={})=>Object.assign(button({text:'Public link',href}),{dataset:{track,...extra}});
+  click(env,link('/commercial-limewash-vancouver.html','service_navigation'));
+  click(env,link('/holt-renfrew-limewash-vancouver.html','project_view'));
+  click(env,link('mailto:private@example.test?subject=Draft','commercial_enquiry'));
+  click(env,link('#estimate','estimate',{estimateType:'commercial',ctaId:'home_trade_estimate'}));
+  assert.deepEqual(env.events().map(e=>e[1]),['service_navigation','project_view','email_click','commercial_enquiry','estimate_click','commercial_enquiry']);
+  assert.equal(env.events()[0][2].service,'limewash');
+  assert.equal(env.events()[1][2].link_url,'/holt-renfrew-limewash-vancouver.html');
+  assert.equal(env.events()[3][2].lead_method,'email');
+  assert.equal(env.events()[5][2].lead_method,'form');
+  assert.equal(env.events()[5][2].cta_id,'home_trade_estimate');
+  assert.doesNotMatch(JSON.stringify(env.events()),/private@example|subject=Draft/);
+});
+
 async function actualSubmission(status,storage=new Map(),settings={}){
   // A numeric status models Fetch's HTTP contract; Error models a transport failure.
   if(typeof status==='boolean')status=status?200:500;
   const env=load({pathname:'/',storage}),f=env.form,fields=new Map();
   for(const key of ['submission_id','project_type','wall_photo_filename','utm_source','utm_medium','utm_campaign','utm_content','initial_landing_path','first_referrer','cta_origin_id','cta_origin_path','cta_latest_id','cta_latest_path'])fields.set(key,{value:''});
-  let handler,posts=0,successHookCalls=0;
+  let handler,posts=0,successHookCalls=0,payload;
   const element=()=>({hidden:false,classList:{add:noop,remove:noop,contains:()=>true},setAttribute:noop,removeAttribute:noop,focus:noop});
   const photo=Object.hasOwn(settings,'photo')?settings.photo:{name:'fixture.png',type:'image/png',size:1024};
-  Object.assign(f,{addEventListener:(_,fn)=>handler=fn,elements:{namedItem:key=>fields.get(key)},setAttribute:noop,removeAttribute:noop});
+  const nodes=Object.fromEntries(['title','form-controls','name','email','phone','photo','details','project-type','success','failure','advisor-note','name-error','contact-error','photo-error','close','file-label'].map(key=>[key,{...element(),id:`estimate-${key}`,addEventListener:noop}]));
+  Object.assign(nodes.name,{value:settings.visitorName??'Fixture Visitor'});
+  Object.assign(nodes.email,{value:settings.email??'fixture@example.test',validity:{valid:settings.emailValid??true}});
+  Object.assign(nodes.phone,{value:settings.phone??''});
+  Object.assign(nodes.photo,{files:photo?[photo]:[]});
+  Object.assign(nodes['project-type'],{value:'general',options:[{value:'general'},{value:'venetian_plaster'}]});
+  nodes.success.hidden=true;
+  const submit={disabled:false,textContent:'Send Enquiry'};
+  const modal={...element(),querySelector:element,addEventListener:noop};
+  const formAttrs=new Map();
+  Object.assign(f,{dataset:{},querySelector:()=>submit,addEventListener:(_,fn)=>handler=fn,elements:{namedItem:key=>fields.get(key)},setAttribute:(key,val)=>formAttrs.set(key,val),removeAttribute:key=>formAttrs.delete(key)});
+  const find=env.sandbox.document.getElementById;
+  env.sandbox.document.getElementById=id=>id==='estimate-modal'?modal:(nodes[id.replace(/^estimate-/,'')]||find(id));
   Object.assign(env.sandbox,{
-    estimateForm:f,estimatePending:false,estimateAccepted:false,estimateFailure:element(),estimatePhotoError:element(),showEstimateStep:noop,
-    estimatePhoto:{files:photo?[photo]:[],setAttribute:noop,focus:noop},estimatePhoneInput:{value:settings.phone??'',setAttribute:noop,focus:noop},estimateEmailInput:{value:settings.email??'fixture@example.test',validity:{valid:settings.emailValid??true},setAttribute:noop,focus:noop},estimateContactError:element(),
-    estimateSubmit:{disabled:false,textContent:''},estimateModal:{querySelector:()=>element(),classList:{contains:()=>true}},estimateCard:element(),estimateSteps:[element(),element()],estimateSuccess:element(),
-    crypto:{randomUUID:()=> 'opaque-offline-fixture'},FormData:class{constructor(){}},AbortController:class{constructor(){this.signal={}}abort(){}},
-    fetch:async()=>{posts++;if(settings.fetchGate)await settings.fetchGate;if(status instanceof Error)throw status;return {ok:status>=200&&status<300,status};},setTimeout:()=>1,clearTimeout:noop
+    addEventListener:noop,crypto:{randomUUID:()=> 'opaque-offline-fixture'},
+    FormData:class extends Map{constructor(){super([['form-name','instant-estimate'],['project_type','general'],...photo?[['wall_photo',photo]]:[]]);}},
+    AbortController:class{constructor(){this.signal={}}abort(){}},
+    fetch:async(_,options)=>{posts++;payload=options.body;if(settings.fetchGate)await settings.fetchGate;if(status instanceof Error)throw status;return {ok:status>=200&&status<300,status,headers:{get:key=>key==='X-Stile-Estimate-Receipt'&&!settings.noReceipt?'http_accepted':null}};},
+    setTimeout:()=>1,clearTimeout:noop
   });
-  env.sandbox.estimateSuccess.hidden=true;
   if(settings.successHookThrows)env.sandbox.StileAnalytics.trackLeadSuccess=()=>{successHookCalls++;throw Error('offline measurement failure fixture');};
-  const validationStart=html.indexOf('    const showPhotoError = (message) => {');
-  const validationEnd=html.indexOf('    const openEstimate = (trigger) => {',validationStart);
-  assert(validationStart>0&&validationEnd>validationStart,'actual inline photo validation is present');
-  vm.runInContext(html.slice(validationStart,validationEnd),env.context);
-  const start=html.indexOf('    estimateForm.addEventListener("submit", async (event) => {');
-  const end=html.indexOf('\n    });\n    if (window.location.hash',start)+ '\n    });'.length;
-  assert(start>0&&end>start,'actual inline submission handler is present');
-  vm.runInContext(html.slice(start,end),env.context);
+  assert(/<script src="\/scripts\/home-estimate\.js" defer><\/script>/.test(html),'homepage includes the real submission script');
+  vm.runInContext(estimate,env.context);
   if(settings.autoSubmit!==false)await handler({preventDefault:noop});
-  return {env,posts,fields,handler,getPosts:()=>posts,getSuccessHookCalls:()=>successHookCalls};
+  return {env,posts,fields,handler,nodes,submit,formAttrs,payload,getPosts:()=>posts,getSuccessHookCalls:()=>successHookCalls};
 }
 
 test('actual photo and contact validation failures cannot emit an attempt, POST or acceptance',async()=>{
   const cases=[
-    {name:'missing photo',photo:null},
+    {name:'missing name',visitorName:'  '},
     {name:'non-image photo',photo:{name:'fixture.txt',type:'text/plain',size:1024}},
     {name:'oversized photo',photo:{name:'fixture.png',type:'image/png',size:8*1024*1024}},
     {name:'missing contact',phone:'  ',email:'  '},
@@ -252,41 +274,40 @@ test('actual photo and contact validation failures cannot emit an attempt, POST 
     {name:'long phone',phone:'1234567890123456'}
   ];
   for(const settings of cases){
-    const {env,posts,fields}=await actualSubmission(200,new Map(),settings);
+    const {env,posts,fields,nodes,formAttrs}=await actualSubmission(200,new Map(),settings);
     assert.equal(posts,0,settings.name);
     assert.equal(env.events().filter(e=>['contact_form_submit_attempt','generate_lead','conversion'].includes(e[1])).length,0,settings.name);
-    assert.equal(env.sandbox.estimateAccepted,false,settings.name);
-    assert.equal(env.sandbox.estimatePending,false,settings.name);
+    assert.equal(nodes.success.hidden,true,settings.name);
+    assert.equal(formAttrs.has('aria-busy'),false,settings.name);
     assert.equal(fields.get('submission_id').value,'','validation failure does not allocate a submitted inquiry ID');
-    assert(env.sandbox.estimatePhotoError.textContent||env.sandbox.estimateContactError.textContent,'validation failure explains the required correction');
+    assert(nodes['name-error'].textContent||nodes['photo-error'].textContent||nodes['contact-error'].textContent,'validation failure explains the required correction');
   }
 });
 
 test('a second actual submit while the HTTP request is pending cannot make a second POST',async()=>{
   let resolveFetch;
   const fetchGate=new Promise(resolve=>{resolveFetch=resolve;});
-  const {env,handler,getPosts}=await actualSubmission(200,new Map(),{fetchGate,autoSubmit:false});
+  const {env,handler,getPosts,formAttrs,submit,nodes}=await actualSubmission(200,new Map(),{fetchGate,autoSubmit:false});
   const first=handler({preventDefault:noop});
-  assert.equal(env.sandbox.estimatePending,true);
-  assert.equal(env.sandbox.estimateSubmit.disabled,true);
+  assert.equal(formAttrs.get('aria-busy'),'true');
+  assert.equal(submit.disabled,true);
   await handler({preventDefault:noop});
   assert.equal(getPosts(),1);
   assert.equal(env.events().filter(e=>e[1]==='contact_form_submit_attempt').length,1);
   assert.equal(env.events().filter(e=>e[1]==='generate_lead').length,0,'pending response is not HTTP acceptance');
   resolveFetch();await first;
   assert.equal(getPosts(),1);
-  assert.equal(env.sandbox.estimateAccepted,true);
+  assert.equal(nodes.success.hidden,false);
   assert.equal(env.events().filter(e=>e[1]==='generate_lead').length,1);
 });
 
 test('a throwing measurement hook after HTTP acceptance cannot make the form retryable',async()=>{
-  const {env,handler,getPosts,getSuccessHookCalls}=await actualSubmission(200,new Map(),{successHookThrows:true});
+  const {env,handler,getPosts,getSuccessHookCalls,nodes,formAttrs,submit}=await actualSubmission(200,new Map(),{successHookThrows:true});
   assert.equal(getSuccessHookCalls(),1,'fixture exercises the throwing hook');
-  assert.equal(env.sandbox.estimateAccepted,true);
-  assert.equal(env.sandbox.estimatePending,false);
-  assert.equal(env.sandbox.estimateSuccess.hidden,false);
-  assert.equal(env.sandbox.estimateFailure.hidden,true);
-  assert.equal(env.sandbox.estimateSubmit.disabled,true);
+  assert.equal(formAttrs.has('aria-busy'),false);
+  assert.equal(nodes.success.hidden,false);
+  assert.equal(nodes.failure.hidden,true);
+  assert.equal(submit.disabled,true);
   await handler({preventDefault:noop});
   assert.equal(getPosts(),1);
   assert.equal(getSuccessHookCalls(),1);
@@ -301,21 +322,22 @@ test('photo intake modal and form retain their third-party capture opt-out attri
   }
 });
 
-test('actual inline handler records attempt but no lead for rejected HTTP response',async()=>{
-  for(const status of [400,500,new Error('offline transport fixture')]){
-    const {env,posts}=await actualSubmission(status);
+test('actual handler records attempt but no lead for rejection or an unconfirmed 200',async()=>{
+  for(const status of [200,400,500,new Error('offline transport fixture')]){
+    const {env,posts,nodes}=await actualSubmission(status,new Map(),{noReceipt:true});
     assert.equal(posts,1);assert.equal(env.events().filter(e=>e[1]==='contact_form_submit_attempt').length,1);
     assert.equal(env.events().filter(e=>['generate_lead','conversion'].includes(e[1])).length,0);
-    assert.equal(env.sandbox.estimateAccepted,false);
+    assert.equal(nodes.success.hidden,true);
   }
 });
 
-test('actual inline handler emits accepted lead once; accepted retry is not a second POST',async()=>{
-  const {env,posts,handler,getPosts}=await actualSubmission(202);
+test('actual handler emits accepted photo-free lead once; accepted retry is not a second POST',async()=>{
+  const {env,posts,handler,getPosts,nodes,payload}=await actualSubmission(204,new Map(),{photo:null});
   assert.equal(posts,1);assert.equal(env.events().filter(e=>e[1]==='generate_lead').length,1);
   assert.equal(env.events().filter(e=>e[1]==='conversion').length,1);
   assert.equal(env.events().find(e=>e[1]==='generate_lead')[2].receipt_state,'http_accepted');
-  assert.equal(env.sandbox.estimateAccepted,true);
+  assert.equal(nodes.success.hidden,false);
+  assert.equal(payload.has('wall_photo'),false);
   await handler({preventDefault:noop});
   assert.equal(env.events().filter(e=>e[1]==='contact_form_submit_attempt').length,1);
   assert.equal(getPosts(),1);
@@ -325,11 +347,11 @@ test('actual inline handler emits accepted lead once; accepted retry is not a se
 test('actual accepted form copies safe original/latest CTA fields to its receipt payload',async()=>{
   const storage=new Map(),entry=load({storage});click(entry,button());
   const expected=entry.events()[0][2].cta_id;
-  const {fields}=await actualSubmission(true,storage);
-  assert.equal(fields.get('cta_origin_id').value,expected);
-  assert.equal(fields.get('cta_origin_path').value,'/venetian-plaster-vancouver.html');
-  assert.equal(fields.get('initial_landing_path').value,'/venetian-plaster-vancouver.html');
-  assert.equal(fields.get('cta_latest_id').value,expected);
+  const {payload}=await actualSubmission(true,storage);
+  assert.equal(payload.get('cta_origin_id'),expected);
+  assert.equal(payload.get('cta_origin_path'),'/venetian-plaster-vancouver.html');
+  assert.equal(payload.get('initial_landing_path'),'/venetian-plaster-vancouver.html');
+  assert.equal(payload.get('cta_latest_id'),expected);
   for(const name of ['cta_origin_id','cta_origin_path','cta_latest_id','cta_latest_path']) {
     assert(html.includes(`type="hidden" name="${name}"`),'Netlify static form registers '+name);
   }

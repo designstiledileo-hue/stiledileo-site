@@ -23,23 +23,23 @@
   <script src="/scripts/measurement-bootstrap.js"></script>
   <script src="/scripts/analytics.js" defer></script>
   <link rel="stylesheet" href="/styles/site-navigation.css">
+  <script src="/scripts/home-navigation.js" defer></script>
 </head>
-<body>
-  <header class="stile-site-header">
-    <div class="stile-site-header__inner">
-      <a class="stile-site-header__brand" href="/">Stile di Leo</a>
-      <nav class="stile-site-header__links" aria-label="Main navigation">
-        <a href="/venetian-plaster-vancouver.html">Venetian plaster</a>
-        <a href="/fireplace-wall-vancouver.html">Fireplaces</a>
-        <a href="/projects.html">Projects</a>
-        <a href="/venetian-plaster-cost-vancouver.html">Pricing</a>
-      </nav>
-      <div class="stile-site-header__actions">
-        <a href="tel:+16047732298" aria-label="Call Stile di Leo at +1 604 773 2298">Call Leo</a>
-        <a class="stile-site-header__photo" href="/#estimate">Send a Project Photo</a>
-      </div>
+<body class="mineral-site">
+  <!-- mineral-header -->
+  <header class="stile-chrome stile-global-header" id="site-nav" data-tone="reading">
+    <div class="stile-width stile-header-inner">
+      <a class="stile-brand" href="/" aria-label="Stile di Leo home">Stile di <em>Leo</em></a>
+      <nav class="stile-links" aria-label="Main navigation"><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a></nav>
+      <a class="stile-primary" href="/#estimate" data-track="estimate">Request an Estimate</a>
+      <details class="stile-menu">
+        <summary>Menu</summary>
+        <nav class="stile-menu-links" aria-label="Mobile navigation" data-leo-blocking-overlay><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a><a href="/furniture.html">Furniture</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a></nav>
+      </details>
     </div>
+    <nav class="stile-context" aria-label="Related pages"><a href="/venetian-plaster-vancouver.html">Venetian plaster</a> <a href="/fireplace-wall-vancouver.html">Fireplaces</a> <a href="/venetian-plaster-cost-vancouver.html">Pricing</a></nav>
   </header>
+  <!-- /mineral-header -->
 
   <div class="wrap">
     <a href="/blog.html">&larr; Back to Blog</a>
@@ -83,7 +83,18 @@
       <li><a href="/venetian-plaster-cost-vancouver.html">Venetian Plaster Cost Vancouver</a></li>
     </ul>
 
-    <p>Looking to create a custom wall in Vancouver? <a href="/#contact">Request a consultation</a>.</p>
+    <p>Looking to create a custom wall in Vancouver? <a href="/#estimate" data-track="estimate">Request a consultation</a>.</p>
   </div>
+
+  <!-- mineral-footer -->
+  <footer class="stile-chrome stile-global-footer" data-tone="reading">
+    <div class="stile-width stile-footer-inner">
+      <div><a class="stile-brand" href="/">Stile di <em>Leo</em></a><p>Architectural surface finishes<br>Metro Vancouver, British Columbia</p></div>
+      <nav class="stile-footer-links" aria-label="Explore"><a href="/#services">Services</a><a href="/projects.html">Projects</a><a href="/#textures">Materials</a><a href="/#trade">For Trade</a><a href="/blog.html">Journal</a><a href="/furniture.html">Furniture Concepts</a></nav>
+      <nav class="stile-footer-links" aria-label="Contact"><a href="/#estimate" data-track="estimate">Request an Estimate</a><a href="/#estimate-photo" data-track="send_photo">Send a Project Photo</a><a href="/#estimate-commercial" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a><a href="mailto:designstiledileo@gmail.com">Email Stile di Leo</a></nav>
+    </div>
+    <p class="stile-width stile-copyright">© 2026 Stile di Leo</p>
+  </footer>
+  <!-- /mineral-footer -->
 </body>
 </html>

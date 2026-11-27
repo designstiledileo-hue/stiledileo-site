@@ -38,7 +38,10 @@ for (const url of sitemapUrls) {
 }
 if (sitemapUrls.length !== sitemapSet.size) fail.push('sitemap.xml contains duplicate <loc> entries');
 
-const intentionalNoindex = new Set(['thank-you.html', 'compare-homepages.html', 'index-v2.html', 'car.html']);
+const intentionalNoindex = new Set([
+  'thank-you.html', 'compare-homepages.html', 'index-v2.html', 'car.html', 'furniture.html', 'furniture-thank-you.html'
+]);
+const noncanonicalConfirmation = 'furniture-thank-you.html';
 
 for (const file of htmlFiles) {
   const html = read(file);
@@ -53,10 +56,15 @@ for (const file of htmlFiles) {
 
   if (indexable && !title) fail.push(`${file}: missing <title>`);
   if (indexable && (descriptions.length !== 1 || !strip(descriptions[0] || ''))) fail.push(`${file}: must have exactly one non-empty meta description`);
-  if (canonicals.length !== 1) fail.push(`${file}: must have exactly one canonical`);
-  else if (canonicals[0] !== expected) fail.push(`${file}: canonical mismatch (${canonicals[0]} !== ${expected})`);
+  if (canonicals.length === 1) {
+    if (canonicals[0] !== expected) fail.push(`${file}: canonical mismatch (${canonicals[0]} !== ${expected})`);
+  } else if (file !== noncanonicalConfirmation || canonicals.length !== 0) {
+    fail.push(`${file}: must have exactly one canonical`);
+  }
   if (ogUrls.length && (ogUrls.length !== 1 || ogUrls[0] !== (canonicals[0] || expected))) fail.push(`${file}: og:url does not match canonical`);
   if (indexable && robots.some((value) => /noindex|none|unavailable_after/i.test(value))) fail.push(`${file}: indexable page has blocking robots meta`);
+  if (!indexable && !robots.some((value) => /\bnoindex\b/i.test(value))) fail.push(`${file}: intentionally excluded page must retain noindex`);
+  if (!indexable && sitemapSet.has(expected)) fail.push(`${file}: intentionally excluded page must not appear in sitemap.xml`);
   if (h1s.length !== 1) fail.push(`${file}: expected one H1, found ${h1s.length}`);
   if (indexable && file !== 'index.html' && !sitemapSet.has(expected)) fail.push(`${file}: canonical URL missing from sitemap.xml`);
 
