@@ -174,17 +174,25 @@
       .footer-inner{display:block;padding:28px 18px}
     }
   </style>
+  <link rel="stylesheet" href="/styles/site-navigation.css">
+  <script src="/scripts/home-navigation.js" defer></script>
 </head>
 
-<body>
-  <header class="topbar">
-    <a class="brand" href="/">Stile di Leo</a>
-    <nav aria-label="Primary navigation">
-      <a href="/projects.html">Work</a>
-      <a href="/venetian-plaster-vancouver.html">Venetian Plaster</a>
-      <a href="/#contact">Contact</a>
-    </nav>
+<body class="mineral-site">
+  <!-- mineral-header -->
+  <header class="stile-chrome stile-global-header" id="site-nav" data-tone="work">
+    <div class="stile-width stile-header-inner">
+      <a class="stile-brand" href="/" aria-label="Stile di Leo home">Stile di <em>Leo</em></a>
+      <nav class="stile-links" aria-label="Main navigation"><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a></nav>
+      <a class="stile-primary" href="/#estimate" data-track="estimate">Request an Estimate</a>
+      <details class="stile-menu">
+        <summary>Menu</summary>
+        <nav class="stile-menu-links" aria-label="Mobile navigation" data-leo-blocking-overlay><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a><a href="/furniture.html">Furniture</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a></nav>
+      </details>
+    </div>
+    <nav class="stile-context" aria-label="Related pages"><a href="/venetian-plaster-vancouver.html">Venetian Plaster</a></nav>
   </header>
+  <!-- /mineral-header -->
 
   <main>
     <section class="hero">
@@ -193,7 +201,7 @@
         <h1>Custom Plaster Range Hood Finishes in Vancouver</h1>
         <p>Hand-applied decorative plaster for suitable prepared custom kitchen hood surrounds—developed around the hood form, cabinetry, stone, colour palette, and the wider room.</p>
         <div class="actions">
-          <a href="/#estimate" class="btn" data-track="send_photo">Send Your Hood / Kitchen Photo</a>
+          <a href="/#estimate-photo" class="btn" data-track="send_photo">Send Your Hood / Kitchen Photo</a>
           <a href="#scope" class="btn secondary">See How the Scope Works</a>
         </div>
       </div>
@@ -272,7 +280,7 @@
             <li>Review of finish details and prepared surfaces</li>
             <li>Coordination around the project sequence</li>
           </ul>
-          <a href="/#contact" class="btn" data-track="estimate">Discuss a Designer / Builder Project</a>
+          <a href="/#estimate" class="btn stile-action" data-track="estimate">Request an Estimate</a>
         </div>
       </div>
     </section>
@@ -330,15 +338,19 @@
     <section class="cta">
       <h2>Start with your hood or kitchen photo</h2>
       <p>Send clear photos or drawings, your project location, and a short note about the finish direction. Stile di Leo will review the decorative plaster scope and next steps.</p>
-      <a href="/#estimate" class="btn" data-track="send_photo">Send Your Hood / Kitchen Photo</a>
+      <a href="/#estimate-photo" class="btn" data-track="send_photo">Send Your Hood / Kitchen Photo</a>
     </section>
   </main>
 
-  <footer>
-    <div class="footer-inner">
-      <span>Stile di Leo / Decorative Finishes / Metro Vancouver</span>
-      <span><a href="tel:+16047732298">+1 (604) 773-2298</a> &nbsp;·&nbsp; <a href="mailto:designstiledileo@gmail.com">designstiledileo@gmail.com</a></span>
+  <!-- mineral-footer -->
+  <footer class="stile-chrome stile-global-footer" data-tone="work">
+    <div class="stile-width stile-footer-inner">
+      <div><a class="stile-brand" href="/">Stile di <em>Leo</em></a><p>Architectural surface finishes<br>Metro Vancouver, British Columbia</p></div>
+      <nav class="stile-footer-links" aria-label="Explore"><a href="/#services">Services</a><a href="/projects.html">Projects</a><a href="/#textures">Materials</a><a href="/#trade">For Trade</a><a href="/blog.html">Journal</a><a href="/furniture.html">Furniture Concepts</a></nav>
+      <nav class="stile-footer-links" aria-label="Contact"><a href="/#estimate" data-track="estimate">Request an Estimate</a><a href="/#estimate-photo" data-track="send_photo">Send a Project Photo</a><a href="/#estimate-commercial" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a><a href="mailto:designstiledileo@gmail.com">Email Stile di Leo</a></nav>
     </div>
+    <p class="stile-width stile-copyright">© 2026 Stile di Leo</p>
   </footer>
+  <!-- /mineral-footer -->
 </body>
 </html>

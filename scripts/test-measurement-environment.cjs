@@ -61,10 +61,13 @@ function assertSuppressed(view) {
   assert.deepEqual(view.commands(), [], 'no js, config, page_view or conversion commands');
 }
 
-test('all 53 measured heads use the same synchronous gate before their deferred tracker', () => {
+test('all 54 measured heads including furniture use the same synchronous gate before their deferred tracker', () => {
   const files = fs.readdirSync(root).filter(file => file.endsWith('.html'));
   const measured = files.filter(file => read(file).includes('src="/scripts/analytics.js"'));
-  assert.equal(measured.length, 53);
+  const sitemapPages = [...read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)]
+    .map(([, url]) => new URL(url).pathname.slice(1) || 'index.html');
+  assert.equal(measured.length, 54);
+  assert.deepEqual(measured.sort(), [...sitemapPages, 'car.html', 'furniture.html'].sort());
   for (const file of measured) {
     const head = read(file).split('</head>')[0];
     const scripts = [...head.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];

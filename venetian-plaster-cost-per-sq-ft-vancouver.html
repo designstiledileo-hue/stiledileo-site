@@ -47,19 +47,24 @@
   </style>
   <script src="/scripts/measurement-bootstrap.js"></script>
   <script src="/scripts/analytics.js" defer></script>
+  <link rel="stylesheet" href="/styles/site-navigation.css">
+  <script src="/scripts/home-navigation.js" defer></script>
 </head>
-<body>
-  <nav class="nav" aria-label="Primary navigation">
-    <div class="nav-inner">
-      <a class="brand" href="/">Stile di Leo</a>
-      <ul class="nav-links">
-        <li><a href="/venetian-plaster-vancouver.html">Venetian Plaster</a></li>
-        <li><a href="/feature-wall-vancouver.html">Feature Walls</a></li>
-        <li><a href="/fireplace-wall-vancouver.html">Fireplace Walls</a></li>
-        <li><a href="/blog.html">Blog</a></li>
-      </ul>
+<body class="mineral-site">
+  <!-- mineral-header -->
+  <header class="stile-chrome stile-global-header" id="site-nav" data-tone="reading">
+    <div class="stile-width stile-header-inner">
+      <a class="stile-brand" href="/" aria-label="Stile di Leo home">Stile di <em>Leo</em></a>
+      <nav class="stile-links" aria-label="Main navigation"><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a></nav>
+      <a class="stile-primary" href="/#estimate" data-track="estimate">Request an Estimate</a>
+      <details class="stile-menu">
+        <summary>Menu</summary>
+        <nav class="stile-menu-links" aria-label="Mobile navigation" data-leo-blocking-overlay><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a><a href="/furniture.html">Furniture</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a></nav>
+      </details>
     </div>
-  </nav>
+    <nav class="stile-context" aria-label="Related pages"><a href="/venetian-plaster-vancouver.html">Venetian Plaster</a> <a href="/feature-wall-vancouver.html">Feature Walls</a> <a href="/fireplace-wall-vancouver.html">Fireplace Walls</a></nav>
+  </header>
+  <!-- /mineral-header -->
 
   <section class="hero">
     <div class="hero-inner">
@@ -161,7 +166,7 @@
     <section class="cta">
       <h2>See your wall with Venetian plaster</h2>
       <p>Send a photo and get a realistic planning range, finish direction, and next steps for your space.</p>
-      <a href="/#estimate" class="btn">Get Estimate from Your Wall</a>
+      <a href="/#estimate" class="btn stile-action" data-track="estimate">Request an Estimate</a>
     </section>
 
     <section class="related">
@@ -176,8 +181,15 @@
     </section>
   </main>
 
-  <footer class="footer">
-    Stile di Leo - Decorative walls and Venetian plaster for Vancouver interiors
+  <!-- mineral-footer -->
+  <footer class="stile-chrome stile-global-footer" data-tone="reading">
+    <div class="stile-width stile-footer-inner">
+      <div><a class="stile-brand" href="/">Stile di <em>Leo</em></a><p>Architectural surface finishes<br>Metro Vancouver, British Columbia</p></div>
+      <nav class="stile-footer-links" aria-label="Explore"><a href="/#services">Services</a><a href="/projects.html">Projects</a><a href="/#textures">Materials</a><a href="/#trade">For Trade</a><a href="/blog.html">Journal</a><a href="/furniture.html">Furniture Concepts</a></nav>
+      <nav class="stile-footer-links" aria-label="Contact"><a href="/#estimate" data-track="estimate">Request an Estimate</a><a href="/#estimate-photo" data-track="send_photo">Send a Project Photo</a><a href="/#estimate-commercial" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a><a href="mailto:designstiledileo@gmail.com">Email Stile di Leo</a></nav>
+    </div>
+    <p class="stile-width stile-copyright">© 2026 Stile di Leo</p>
   </footer>
+  <!-- /mineral-footer -->
 </body>
 </html>

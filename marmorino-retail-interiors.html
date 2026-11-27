@@ -116,16 +116,24 @@
       .footer-inner{padding:26px 18px;overflow-wrap:anywhere}
     }
   </style>
+  <link rel="stylesheet" href="/styles/site-navigation.css">
+  <script src="/scripts/home-navigation.js" defer></script>
 </head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="/">Stile di Leo</a>
-    <nav aria-label="Primary navigation">
-      <a class="nav-projects" href="/projects.html">Work</a>
-      <a href="/marmorino-vancouver.html">Marmorino</a>
-      <a href="/#contact">Contact</a>
-    </nav>
+<body class="mineral-site">
+  <!-- mineral-header -->
+  <header class="stile-chrome stile-global-header" id="site-nav" data-tone="work">
+    <div class="stile-width stile-header-inner">
+      <a class="stile-brand" href="/" aria-label="Stile di Leo home">Stile di <em>Leo</em></a>
+      <nav class="stile-links" aria-label="Main navigation"><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a></nav>
+      <a class="stile-primary" href="/#estimate-commercial" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a>
+      <details class="stile-menu">
+        <summary>Menu</summary>
+        <nav class="stile-menu-links" aria-label="Mobile navigation" data-leo-blocking-overlay><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a><a href="/furniture.html">Furniture</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a></nav>
+      </details>
+    </div>
+    <nav class="stile-context" aria-label="Related pages"><a href="/marmorino-vancouver.html">Marmorino</a></nav>
   </header>
+  <!-- /mineral-header -->
   <main>
     <section class="hero" aria-labelledby="page-title">
       <p class="eyebrow">Commercial Interiors</p>
@@ -135,7 +143,7 @@
           <p class="support">Soft mineral movement, seamless curved surfaces and warm architectural lighting.</p>
           <p class="intro">A quiet backdrop for the things a space is designed to display. Marmorino can bring depth and hand-finished character to retail interiors while letting the merchandise and architecture lead.</p>
           <div class="actions">
-            <a href="/#contact" class="btn" data-track="estimate">Discuss a Commercial Project</a>
+            <a href="/#estimate-commercial" class="btn stile-action" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a>
             <a href="/marmorino-vancouver.html" class="btn secondary">Explore Marmorino</a>
           </div>
         </div>
@@ -188,7 +196,7 @@
 
     <section class="section" id="commercial">
       <div class="b2b">
-        <div><p class="eyebrow">Design + trade collaboration</p><h2>For designers, builders &amp; retail projects.</h2><p>Stile di Leo collaborates on specialty decorative-finish scope for appropriate commercial interiors in Metro Vancouver. Bring drawings, material selections or a finish direction to discuss with the project team.</p><p>The collaboration can include retail designers, architects, builders, renovation contractors, millwork companies and boutique operators.</p><a href="/#contact" class="btn" data-track="estimate">Discuss a Retail / Commercial Project</a></div>
+        <div><p class="eyebrow">Design + trade collaboration</p><h2>For designers, builders &amp; retail projects.</h2><p>Stile di Leo collaborates on specialty decorative-finish scope for appropriate commercial interiors in Metro Vancouver. Bring drawings, material selections or a finish direction to discuss with the project team.</p><p>The collaboration can include retail designers, architects, builders, renovation contractors, millwork companies and boutique operators.</p><a href="/#estimate-commercial" class="btn stile-action" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a></div>
         <div><h3>From sample to surface</h3><ul><li>Finish direction and colour / texture development</li><li>Project-specific samples and sample approval</li><li>Coordination with millwork and adjacent finishes</li><li>Surface-readiness review and application sequencing</li><li>Site execution of the agreed decorative finish</li></ul></div>
       </div>
     </section>
@@ -231,9 +239,18 @@
     <section class="cta">
       <h2>Planning a retail or commercial interior?</h2>
       <p>Discuss the finish direction with Stile di Leo. Share the project location, drawings or photos, and the materials you are considering.</p>
-      <a href="/#contact" class="btn" data-track="estimate">Discuss a Commercial Project</a>
+      <a href="/#estimate-commercial" class="btn stile-action" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a>
     </section>
   </main>
-  <footer><div class="footer-inner"><span>Stile di Leo / Decorative Finishes / Metro Vancouver</span><span><a href="tel:+16047732298">+1 (604) 773-2298</a> &nbsp;·&nbsp; <a href="mailto:designstiledileo@gmail.com">designstiledileo@gmail.com</a></span></div></footer>
+  <!-- mineral-footer -->
+  <footer class="stile-chrome stile-global-footer" data-tone="work">
+    <div class="stile-width stile-footer-inner">
+      <div><a class="stile-brand" href="/">Stile di <em>Leo</em></a><p>Architectural surface finishes<br>Metro Vancouver, British Columbia</p></div>
+      <nav class="stile-footer-links" aria-label="Explore"><a href="/#services">Services</a><a href="/projects.html">Projects</a><a href="/#textures">Materials</a><a href="/#trade">For Trade</a><a href="/blog.html">Journal</a><a href="/furniture.html">Furniture Concepts</a></nav>
+      <nav class="stile-footer-links" aria-label="Contact"><a href="/#estimate" data-track="estimate">Request an Estimate</a><a href="/#estimate-photo" data-track="send_photo">Send a Project Photo</a><a href="/#estimate-commercial" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a><a href="mailto:designstiledileo@gmail.com">Email Stile di Leo</a></nav>
+    </div>
+    <p class="stile-width stile-copyright">© 2026 Stile di Leo</p>
+  </footer>
+  <!-- /mineral-footer -->
 </body>
 </html>

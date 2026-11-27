@@ -61,7 +61,7 @@
       catch (_) { status.textContent = 'Session storage is unavailable. Please copy your project notes before continuing.'; direct.hidden = false; dialog.showModal(); }
     }
   }); handoff.hidden = history.length === 0;
-  const direct = make('a', 'sa-links', 'Continue to the photo form without saved notes'); direct.href = '/#estimate'; direct.dataset.track = 'none'; direct.hidden = true;
+  const direct = make('a', 'sa-links', 'Continue to the photo form without saved notes'); direct.href = '/#estimate-photo'; direct.dataset.track = 'none'; direct.hidden = true;
   composer.append(photo, input, controls, file, status, handoff, direct, make('p', 'sa-small', 'Sending shares your text and selected photo with OpenAI. Avoid personal or sensitive information. Photos stay out of browser storage; attach again if you change pages.'));
   dialog.append(header, scroll, composer); root.append(launcher, dialog); document.body.append(root);
   // The existing inquiry can open before this asynchronously loaded widget arrives.

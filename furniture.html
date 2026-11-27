@@ -19,8 +19,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P7VJ8MQNKS"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}if(/^(www\.)?stiledileo\.com$/i.test(window.location.hostname)){gtag("js",new Date());gtag("config","G-P7VJ8MQNKS")}</script>
+  <script src="/scripts/measurement-bootstrap.js"></script>
   <script src="/scripts/analytics.js" defer></script>
   <style>
     :root{--bg:#0f0d0b;--panel:#17130f;--text:#eee6da;--muted:#b8a99a;--gold:#c8a878;--stroke:rgba(236,225,210,.14)}
@@ -66,21 +65,24 @@
     @media(max-width:540px){.shell,.nav-inner{width:calc(100% - 36px)}.hero h1{font-size:56px}.hero .intro{font-size:15px}.section h2{font-size:50px}.art{min-height:325px}.duo img{min-height:280px}.two{grid-template-columns:1fr}.footer-inner{flex-direction:column}.btn{width:100%}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
   </style>
+  <link rel="stylesheet" href="/styles/site-navigation.css">
+  <script src="/scripts/home-navigation.js" defer></script>
 </head>
-<body>
-  <nav class="nav" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a class="logo" href="/" aria-label="Stile di Leo home">Stile di <em>Leo</em></a>
-      <div class="nav-links">
-        <a href="/projects.html">Work</a>
-        <a href="/venetian-plaster-vancouver.html">Finishes</a>
-        <a href="/#commercial">Commercial</a>
-        <a href="/furniture.html" aria-current="page">Furniture</a>
-        <a href="/blog.html">Blog</a>
-      </div>
-      <a class="nav-cta" href="#inquiry">Enquire About Furniture</a>
+<body class="mineral-site">
+  <!-- mineral-header -->
+  <header class="stile-chrome stile-global-header" id="site-nav" data-tone="work">
+    <div class="stile-width stile-header-inner">
+      <a class="stile-brand" href="/" aria-label="Stile di Leo home">Stile di <em>Leo</em></a>
+      <nav class="stile-links" aria-label="Main navigation"><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a></nav>
+      <a class="stile-primary" href="#inquiry" data-track="none">Enquire About Furniture</a>
+      <details class="stile-menu">
+        <summary>Menu</summary>
+        <nav class="stile-menu-links" aria-label="Mobile navigation" data-leo-blocking-overlay><a href="/#services">Services</a> <a href="/projects.html">Projects</a> <a href="/#textures">Materials</a> <a href="/#trade">For Trade</a> <a href="/blog.html">Journal</a> <a href="/#contact">Contact</a><a href="/furniture.html">Furniture</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a></nav>
+      </details>
     </div>
-  </nav>
+    <nav class="stile-context" aria-label="Related pages"><a href="/venetian-plaster-vancouver.html">Finishes</a> <a href="/#commercial">Commercial</a></nav>
+  </header>
+  <!-- /mineral-header -->
   <main>
     <section class="hero">
       <div class="shell hero-grid">
@@ -155,6 +157,15 @@
       </div>
     </section>
   </main>
-  <footer class="footer"><div class="shell footer-inner"><span>© 2026 Stile di Leo · Metro Vancouver</span><span><a href="/projects.html">Architectural finishes</a> · <a href="/">Home</a></span></div></footer>
+  <!-- mineral-footer -->
+  <footer class="stile-chrome stile-global-footer" data-tone="work">
+    <div class="stile-width stile-footer-inner">
+      <div><a class="stile-brand" href="/">Stile di <em>Leo</em></a><p>Architectural surface finishes<br>Metro Vancouver, British Columbia</p></div>
+      <nav class="stile-footer-links" aria-label="Explore"><a href="/#services">Services</a><a href="/projects.html">Projects</a><a href="/#textures">Materials</a><a href="/#trade">For Trade</a><a href="/blog.html">Journal</a><a href="/furniture.html">Furniture Concepts</a></nav>
+      <nav class="stile-footer-links" aria-label="Contact"><a href="/#estimate" data-track="estimate">Request an Estimate</a><a href="/#estimate-photo" data-track="send_photo">Send a Project Photo</a><a href="/#estimate-commercial" data-track="estimate" data-estimate-type="commercial">Discuss a Commercial Project</a><a href="tel:+16047732298">Call +1 (604) 773-2298</a><a href="mailto:designstiledileo@gmail.com">Email Stile di Leo</a></nav>
+    </div>
+    <p class="stile-width stile-copyright">© 2026 Stile di Leo</p>
+  </footer>
+  <!-- /mineral-footer -->
 </body>
 </html>

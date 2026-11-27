@@ -41,6 +41,8 @@
     "/venetian-plaster-vancouver.html": "venetian_plaster",
     "/marmorino-vancouver.html": "marmorino",
     "/marmorino-retail-interiors.html": "marmorino",
+    "/commercial-limewash-vancouver.html": "limewash",
+    "/holt-renfrew-limewash-vancouver.html": "limewash",
     "/plaster-range-hood-vancouver.html": "range_hood",
     "/west-vancouver-fireplace-transformation.html": "fireplace",
     "/brookswood-langley-fireplace-transformation.html": "fireplace",
@@ -48,6 +50,7 @@
     "/car.html": "general",
     "/car": "general"
   };
+  const measuredServices = new Set([...Object.values(serviceByPath), "commercial", "limewash", "sculptural"]);
 
   const campaignByPath = {
     "/car.html": "car_qr",
@@ -152,7 +155,7 @@
   const allowed = new Set(["service", "campaign", "lead_method", "cta_location", "link_url", "engagement_event", "transaction_id", "cta_id", "receipt_state"]);
   const safeParams = extra => Object.fromEntries(Object.entries(extra || {}).filter(([key, value]) => {
     if (!allowed.has(key) || typeof value !== "string" || value.length > 180) return false;
-    if (key === "service") return Object.values(serviceByPath).includes(value);
+    if (key === "service") return measuredServices.has(value);
     if (key === "lead_method") return ["form", "phone", "email", "sms", "whatsapp"].includes(value);
     if (key === "transaction_id") return validId(value);
     if (key === "cta_id") return validCtaId(value);
@@ -184,6 +187,7 @@
     if (href.startsWith("sms:")) return "sms_click";
     if (/wa\.me|whatsapp/i.test(href)) return "whatsapp_click";
     if (href.startsWith("mailto:")) return "email_click";
+    if (["service_navigation", "project_view"].includes(dataTrack) && validPath(href.split("?")[0])) return dataTrack;
 
     if (dataTrack === "send_photo" || dataTrack === "project_photo" || /send .*photo|fireplace photo|project photo/.test(text)) {
       return "project_photo_click";
@@ -214,8 +218,16 @@
     if (eventName === "sms_click") params.lead_method = "sms";
     if (eventName === "whatsapp_click") params.lead_method = "whatsapp";
     if (eventName === "email_click") params.lead_method = "email";
+    if (["service_navigation", "project_view"].includes(eventName)) params.service = serviceByPath[params.link_url];
 
     track(eventName, params);
+    if ((eventName === "email_click" && link.dataset.track === "commercial_enquiry") ||
+        (eventName === "estimate_click" && (link.dataset.estimateType === "commercial" || href.endsWith("#estimate-commercial")))) {
+      track("commercial_enquiry", {
+        service: "commercial", cta_id: params.cta_id, cta_location: params.cta_location,
+        lead_method: eventName === "email_click" ? "email" : "form"
+      });
+    }
 
     if (pageCampaign()) {
       track("car_campaign_engagement", Object.assign({}, params, {
