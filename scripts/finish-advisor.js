@@ -63,7 +63,9 @@
   }); handoff.hidden = history.length === 0;
   const direct = make('a', 'sa-links', 'Continue to the photo form without saved notes'); direct.href = '/#estimate-photo'; direct.dataset.track = 'none'; direct.hidden = true;
   composer.append(photo, input, controls, file, status, handoff, direct, make('p', 'sa-small', 'Sending shares your text and selected photo with OpenAI. Avoid personal or sensitive information. Photos stay out of browser storage; attach again if you change pages.'));
-  dialog.append(header, scroll, composer); root.append(launcher, dialog); document.body.append(root);
+  const launcherAnchor = make('div', 'sa-launcher-anchor');
+  launcherAnchor.append(launcher);
+  dialog.append(header, scroll, composer); root.append(launcherAnchor, dialog); document.body.append(root);
   // The existing inquiry can open before this asynchronously loaded widget arrives.
   const estimateModal = document.getElementById('estimate-modal');
   if (estimateModal) {
@@ -134,12 +136,25 @@
     } catch (_) { status.textContent = 'This photo could not be prepared. Please choose another JPEG, PNG or WebP.'; file.value = ''; }
     finally { bitmap?.close(); processing = false; update(); }
   });
-  // Optional enhancement loads independently after the working Advisor exists.
-  if (window.StileLeo) window.StileLeo.init(root);
-  else if (!document.getElementById('stile-leo-script')) {
-    const script = document.createElement('script'); script.id = 'stile-leo-script';
-    script.src = '/scripts/leo-interaction.js'; script.async = true;
-    script.onload = () => window.StileLeo?.init(root);
-    document.head.append(script);
+  // Only decorative motion waits until after page load and the first paints.
+  // Advisor controls and the estimate handoff above are already interactive.
+  let motionDismissed = false;
+  root.addEventListener('stile:advisor-visual', event => {
+    if (event.detail === 'open') motionDismissed = true;
+  });
+  const shouldLoadMotion = () => root.isConnected && !root.inert && !dialog.open && !motionDismissed
+    && document.visibilityState === 'visible' && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function loadMotion() {
+    if (!shouldLoadMotion()) return;
+    if (window.StileLeo) window.StileLeo.init(root);
+    else if (!document.getElementById('stile-leo-script')) {
+      const script = document.createElement('script'); script.id = 'stile-leo-script';
+      script.src = '/scripts/leo-interaction.js'; script.async = true;
+      script.onload = () => { if (shouldLoadMotion()) window.StileLeo?.init(root); };
+      document.head.append(script);
+    }
   }
+  const afterLoad = () => setTimeout(() => requestAnimationFrame(() => requestAnimationFrame(loadMotion)), 750);
+  if (document.readyState === 'complete') afterLoad();
+  else window.addEventListener('load', afterLoad, { once: true });
 })();

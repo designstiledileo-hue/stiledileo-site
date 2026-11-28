@@ -1,2 +1,2 @@
-// Stable QA entry point; V1.1 supersedes the old 9s/mobile-suppression contract.
-require('./qa-leo-v11.cjs');
+// Stable QA entry point for the current, button-anchored interaction.
+require('./qa-leo-anchored.cjs');
