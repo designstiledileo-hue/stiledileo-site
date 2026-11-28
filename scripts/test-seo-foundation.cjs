@@ -156,15 +156,20 @@ test('retired fireplace URLs have explicit permanent, single-hop replacements', 
     status: Number(block.match(/^\s*status\s*=\s*(\d+)/m)?.[1]),
     force: /^\s*force\s*=\s*true\s*$/m.test(block)
   }));
+  const sitemap = read('sitemap.xml');
   for (const [old, current] of [
     ['fireplace-wall-ideas-vancouver', '/venetian-plaster-fireplace-ideas-vancouver.html'],
-    ['fireplace-wall-design-vancouver', '/fireplace-wall-vancouver.html']
+    ['fireplace-wall-design-vancouver', '/fireplace-wall-vancouver.html'],
+    ['marble-fireplace-wall-vancouver', '/fireplace-wall-vancouver.html'],
+    ['black-fireplace-wall-vancouver', '/black-venetian-plaster-wall-vancouver.html']
   ]) {
     for (const suffix of ['', '.html']) {
       const from = `/${old}${suffix}`;
       assert.deepEqual(rules.filter(rule => rule.from === from), [{ from, to: current, status: 301, force: true }]);
       assert(fs.existsSync(path.join(root, current)));
       assert(!rules.some(rule => rule.from === current));
+      assert(!sitemap.includes(`<loc>https://stiledileo.com${from}</loc>`));
+      assert(sitemap.includes(`<loc>https://stiledileo.com${current}</loc>`));
     }
   }
 });
