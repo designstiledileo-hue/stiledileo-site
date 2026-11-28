@@ -30,6 +30,15 @@ test('one config update regenerates rating, star fill, count, verified date and 
     block.indexOf('Stile di Leo Business Profile') < block.indexOf('google-review-g.svg'));
 });
 
+test('the trust strip links to the single reputation section directly before services', () => {
+  const home = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.equal((home.match(/\bid="client-reputation"/g) || []).length, 1);
+  const trustThroughServices = home.slice(home.indexOf('<div class="proof shell"'), home.indexOf('id="services"'));
+  assert.match(trustThroughServices, /href="#client-reputation">Client reviews/);
+  assert.match(trustThroughServices, /Serving Metro Vancouver<\/p>\s*<\/div>\s*<section [^>]*id="client-reputation"/);
+  assert.match(trustThroughServices, /<!-- END REPUTATION -->\s*<\/div>\s*<\/section>\s*<section [^>]*$/);
+});
+
 test('invalid ratings, invalid dates and non-Google destinations cannot be published by the renderer', () => {
   for (const patch of [
     {rating:5.1}, {rating:4.74}, {reviewCount:0}, {verifiedOn:'2026-02-30'},
