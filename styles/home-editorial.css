@@ -78,9 +78,13 @@ section[id], article[id], div[id], main[id] { scroll-margin-top: 28px; }
 .proof p { display: grid; place-content: center; }
 .proof-reputation { display: grid; align-items: stretch; justify-items: center; min-height: 74px; }
 .proof .proof-reputation a { justify-content: center; width: 100%; text-align: center; padding: 6px 8px; font-size: .73rem; font-weight: 600; }
-.client-experiences { display: grid; grid-template-columns: 1.25fr .75fr; align-items: end; gap: 18px clamp(24px, 7vw, 100px); padding-block: clamp(40px, 6.4vw, 90px); }
+.client-experiences {
+  display: grid; grid-template-columns: 1.25fr .75fr; align-items: center;
+  gap: 12px clamp(20px, 4vw, 56px); padding-block: clamp(20px, 2.5vw, 36px);
+  border-block-end: 1px solid var(--line);
+}
 .client-experiences .section-head { margin: 0; }
-.client-experiences h2 { font-size: clamp(2.3rem, 4vw, 4.5rem); }
+.client-experiences .section-head h2 { font-size: clamp(2rem, 3.4vw, 3.5rem); }
 .client-experiences-copy { min-width: 0; }
 .reputation-rating { display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 1rem; font-size: .82rem; }
 .reputation-rating strong { color: var(--ink); font: 600 2.7rem/1 var(--serif); font-variant-numeric: tabular-nums; }
@@ -89,7 +93,7 @@ section[id], article[id], div[id], main[id] { scroll-margin-top: 28px; }
 .reputation-count { margin-top: .46rem; font-size: .86rem; font-weight: 600; }
 .reputation-source, .reputation-date { font-size: .78rem; }
 .reputation-source { margin-top: .4rem; }
-.reputation-actions { margin-top: .9rem; border-top: 1px solid var(--line); padding-top: .45rem; }
+.reputation-actions { margin-top: .55rem; border-top: 1px solid var(--line); padding-top: .35rem; }
 .reputation-profile { color: var(--accent); gap: .65rem; text-align: start; }
 .reputation-mark { display: grid; place-items: center; flex: 0 0 54px; width: 54px; height: 54px; background: #fff; border-radius: var(--stile-radius-small); }
 .reputation-mark img { width: 18px; height: 18px; }
@@ -310,7 +314,7 @@ section[id], article[id], div[id], main[id] { scroll-margin-top: 28px; }
   .hero-editorial .hero-media img { aspect-ratio: 1.345; object-position: center; }
   .hero-editorial .hero-media figcaption { gap: 0 12px; }
   .hero-editorial .hero-project-caption > span { display: block; margin-left: 0; }
-  .client-experiences { grid-template-columns: minmax(0, 1fr); gap: 13px; }
+  .client-experiences { grid-template-columns: minmax(0, 1fr); gap: 10px; padding-block: 18px 20px; }
 }
 @media (max-width: 480px) {
   /* Keep the opening caption and trust copy out of the fixed Ask Leo corner. */
