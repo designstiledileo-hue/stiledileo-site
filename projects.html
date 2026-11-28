@@ -79,6 +79,11 @@
     .work-pair .work-link:nth-child(2){margin-top:86px}
     .work-pair .work-image img{aspect-ratio:3/4;object-fit:cover;object-position:center}
     .work-pair .work-copy{padding-top:26px}
+    .commercial-work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,4.4vw,52px)}
+    .commercial-work-grid .work-link,.commercial-work-grid .work-copy{display:flex;flex-direction:column;min-width:0}
+    .commercial-work-grid .work-copy{flex:1;align-items:flex-start;padding-bottom:0}
+    .commercial-work-grid .work-copy .btn{margin-top:auto}
+    .commercial-work-grid .work-image img{aspect-ratio:4/3;object-fit:cover;object-position:center}
     .work-sculpture{margin-top:52px;grid-template-columns:.9fr 1fr}.work-sculpture .work-image{order:1}.work-sculpture .work-copy{order:0}
     .applications-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel)}
     .application-lead{display:block}.application-lead .work-image{border-radius:18px}
@@ -93,7 +98,8 @@
     @media(max-width:860px){.topbar{flex-wrap:wrap;padding:18px}.nav{order:2;width:100%;justify-content:space-between;gap:12px}.hero,.section{padding:48px 18px}.hero{padding-bottom:0}.section-intro,.work-lead,.work-pair,.application-lead .application-copy{grid-template-columns:1fr;gap:24px}.work-lead .work-image{max-width:none}.work-pair{margin-top:36px}.work-pair .work-link:nth-child(2){margin-top:16px}.work-copy{max-width:none}.work-sculpture{margin-top:24px}.work-sculpture .work-image{order:0}.work-sculpture .work-copy{order:1}.finish-grid{grid-template-columns:1fr;gap:0;padding-top:10px}.finish-card+.finish-card{border-top:1px solid var(--line)}.application-lead .application-copy{gap:0;padding-bottom:30px}.cta{margin:48px 18px;padding:32px 22px}.footer-inner{flex-direction:column;gap:6px}}
     @media(max-width:420px){h1{font-size:54px}.lead{font-size:16px}.hero-actions .btn{width:100%}.nav{font-size:10px;letter-spacing:.04em}.topbar>.btn{padding:10px 14px;font-size:10px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.work-image img{transition:none}}
-    #commercial-retail{scroll-margin-top:32px}#commercial-retail .work-image{max-width:440px}
+    @media(max-width:860px){.commercial-work-grid{grid-template-columns:minmax(0,1fr)}}
+    #commercial-retail{scroll-margin-top:32px}
   </style>
   <link rel="stylesheet" href="/styles/site-navigation.css">
   <script src="/scripts/home-navigation.js" defer></script>
@@ -130,10 +136,22 @@
         <div><p class="kicker">Commercial interiors</p><h2 id="commercial-retail-title">Commercial &amp; Retail Projects</h2></div>
         <p>Documented specialty decorative finish work within commercial and retail interiors in Metro Vancouver.</p>
       </div>
-      <a class="work-link work-lead" href="/holt-renfrew-limewash-vancouver.html" data-track="project_photo">
-        <div class="work-image"><picture><source type="image/webp" srcset="/images/projects/holt-renfrew/holt-renfrew-finished-interior-600.webp 600w, /images/projects/holt-renfrew/holt-renfrew-finished-interior-1200.webp 1200w" sizes="(max-width: 860px) calc(100vw - 36px), 440px"><img src="/images/projects/holt-renfrew/holt-renfrew-finished-interior.jpg" width="1200" height="2127" loading="lazy" decoding="async" class="" alt="Hand-applied decorative wall finish at Holt Renfrew Vancouver beside clothing displays and an upholstered bench"></picture></div>
-        <div class="work-copy"><p class="kicker">Commercial interiors · Vancouver · 8 units</p><h3>Holt Renfrew · Limewash</h3><p>Hand-applied decorative wall finishes across eight units within a Holt Renfrew luxury retail environment in Vancouver. Original project photography and film document the wall finish in its retail setting.</p><p>The specialty finish formed part of a wider construction project; no direct appointment by Holt Renfrew or retailer endorsement is implied.</p><span class="btn btn-ghost">View project &amp; photographs</span></div>
-      </a>
+      <div class="commercial-work-grid">
+        <a class="work-link" href="/holt-renfrew-limewash-vancouver.html" data-track="project_photo">
+          <div class="work-image"><picture><source type="image/webp" srcset="/images/projects/holt-renfrew/holt-renfrew-finished-interior-600.webp 600w, /images/projects/holt-renfrew/holt-renfrew-finished-interior-1200.webp 1200w" sizes="(max-width: 860px) calc(100vw - 36px), (max-width: 1180px) 46vw, 540px"><img src="/images/projects/holt-renfrew/holt-renfrew-finished-interior.jpg" width="1200" height="2127" loading="lazy" fetchpriority="low" decoding="async" alt="Hand-applied decorative wall finish at Holt Renfrew Vancouver beside clothing displays and an upholstered bench"></picture></div>
+          <div class="work-copy"><p class="kicker">Commercial interiors · Vancouver · 8 units</p><h3>Holt Renfrew · Limewash</h3><p>Hand-applied decorative wall finishes across eight units within a Holt Renfrew luxury retail environment in Vancouver. Original project photography and film document the wall finish in its retail setting.</p><p>The specialty finish formed part of a wider construction project; no direct appointment by Holt Renfrew or retailer endorsement is implied.</p><span class="btn btn-ghost">View project &amp; photographs</span></div>
+        </a>
+        <a class="work-link" id="aesop-richmond-centre-card" href="/aesop-richmond-centre.html" data-track="project_photo">
+          <div class="work-image"><img src="/images/projects/aesop-richmond-centre/room-480.webp" srcset="/images/projects/aesop-richmond-centre/room-480.webp 480w, /images/projects/aesop-richmond-centre/room-768.webp 768w, /images/projects/aesop-richmond-centre/room-960.webp 960w" sizes="(max-width: 860px) calc(100vw - 36px), (max-width: 1180px) 46vw, 540px" width="480" height="640" alt="Marmo Antico walls with three rectangular openings at Aesop Richmond Centre" loading="lazy" fetchpriority="low" decoding="async"></div>
+          <div class="work-copy">
+            <p class="kicker">Commercial interiors · Richmond, BC · 2026</p>
+            <h3>Aesop — Richmond Centre</h3>
+            <p>Stile di Leo applied Marmo Antico decorative plaster as a specialist finish within the retail fit-out.</p>
+            <p>Photographed prior to final retail fit-out.</p>
+            <span class="btn btn-ghost">View case study</span>
+          </div>
+        </a>
+      </div>
       <p class="related">For general contractors and designers: <a href="/#trade">send drawings &amp; commercial project details →</a></p>
     </section>
 

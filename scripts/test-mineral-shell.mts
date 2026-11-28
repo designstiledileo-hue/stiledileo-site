@@ -8,7 +8,7 @@ const mainPages = readdirSync(new URL('../', import.meta.url)).filter(file =>
   file.endsWith('.html') && !['car.html','thank-you.html','furniture-thank-you.html'].includes(file));
 
 test('marketing templates share one native menu, style, footer and route-appropriate enquiry link', () => {
-  assert.equal(mainPages.length, 53);
+  assert.equal(mainPages.length, 54);
   for (const file of mainPages) {
     const markup = read(file);
     for (const token of ['<!-- mineral-header -->','<!-- mineral-footer -->','href="/styles/site-navigation.css"','src="/scripts/home-navigation.js"']) {
