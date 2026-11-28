@@ -17,7 +17,30 @@ const pages = fs.readdirSync(root).filter(name => name.endsWith('.html') && !del
 const scripts = html => Array.from(html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi), m => ({ attrs: m[1], code: m[2] }));
 const srcOf = script => script.attrs.match(/\bsrc\s*=\s*["']([^"']+)["']/i)?.[1];
 
-test('marketing inventory contains 52 pages after the approved Abbotsford pilot', () => assert.equal(pages.length, 52));
+test('marketing inventory contains 53 pages including the Aesop Richmond Centre case study', () => assert.equal(pages.length, 53));
+
+test('Aesop Richmond Centre has one canonical route and relevant entry points', () => {
+  const route = '/aesop-richmond-centre.html';
+  const alias = route.replace(/\.html$/, '');
+  const blocks = read('netlify.toml').split('[[redirects]]').slice(1);
+  const rule = blocks.filter(block => block.match(/^\s*from\s*=\s*"([^"]+)"/m)?.[1] === alias);
+  assert.equal(rule.length, 1);
+  assert.equal(rule[0].match(/^\s*to\s*=\s*"([^"]+)"/m)?.[1], route);
+  assert.match(rule[0], /^\s*status\s*=\s*301\s*$/m);
+  assert.match(rule[0], /^\s*force\s*=\s*true\s*$/m);
+  assert(!blocks.some(block => block.match(/^\s*from\s*=\s*"([^"]+)"/m)?.[1] === route));
+  for (const file of ['index.html', 'projects.html', 'marmorino-retail-interiors.html', 'marmorino-vancouver.html', 'venetian-plaster-richmond.html']) {
+    assert(read(file).includes(`href="${route}"`), `${file}: link the canonical case study`);
+  }
+  const home = read('index.html');
+  const homeCommercial = home.slice(home.indexOf('class="commercial-projects"'), home.indexOf('id="featured"'));
+  const portfolio = read('projects.html');
+  const portfolioCommercial = portfolio.slice(portfolio.indexOf('class="commercial-work-grid"'), portfolio.indexOf('id="work-title"'));
+  for (const [section,card] of [[homeCommercial, /<article class="commercial-project /g], [portfolioCommercial, /<a class="work-link"/g]]) {
+    assert.equal((section.match(card) || []).length, 2, 'same card treatment for both commercial projects');
+    assert(section.includes('href="/holt-renfrew-limewash-vancouver.html"') && section.includes(`href="${route}"`));
+  }
+});
 
 test('Abbotsford preserves approved public copy and has one canonical sitemap entry', () => {
   const html = read('venetian-plaster-abbotsford.html');
@@ -63,10 +86,11 @@ test('function-served sitemap static inventory matches every canonical XML entry
   const paths = vm.runInNewContext(source.slice(0, dataEnd) + '\nJSON.stringify(existing);');
   const generatedUrls = JSON.parse(paths).map(p => 'https://stiledileo.com' + p);
   const xmlUrls = [...read('sitemap.xml').matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
-  assert.equal(generatedUrls.length, 52);
-  assert.equal(new Set(generatedUrls).size, 52);
+  assert.equal(generatedUrls.length, 53);
+  assert.equal(new Set(generatedUrls).size, 53);
   assert.deepEqual(generatedUrls.sort(), xmlUrls.sort());
   assert.equal(generatedUrls.filter(url => url.endsWith('/venetian-plaster-abbotsford.html')).length, 1);
+  assert.equal(generatedUrls.filter(url => url.endsWith('/aesop-richmond-centre.html')).length, 1);
   assert(generatedUrls.every(url => !deliberateNoindex.has(new URL(url).pathname.slice(1))));
 });
 
