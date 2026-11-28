@@ -380,6 +380,30 @@
   force = true
 
 [[redirects]]
+  from = "/marble-fireplace-wall-vancouver"
+  to = "/fireplace-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/marble-fireplace-wall-vancouver.html"
+  to = "/fireplace-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/black-fireplace-wall-vancouver"
+  to = "/black-venetian-plaster-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/black-fireplace-wall-vancouver.html"
+  to = "/black-venetian-plaster-wall-vancouver.html"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/luxury-wall-finishes-vancouver"
   to = "/venetian-plaster-vancouver.html"
   status = 301
